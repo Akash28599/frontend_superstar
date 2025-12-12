@@ -45,13 +45,13 @@ const OurProducts = () => {
   }
 
   const [
-    product1, // Top left - Coco Pods
-    product2, // Top right - Moons & Stars
-    product3, // Bottom left close to Coco
-    product4, // Bottom right close to Coco
-    product5, // Far bottom left
-    product6, // Far bottom right (but lower than product5)
-    product7, // Far bottom left (but lower than product6)
+    product1,
+    product2, 
+    product3, 
+    product4, 
+    product5, 
+    product6, 
+    product7, 
   ] = allProducts;
 
   const imgUrl = (it) =>
@@ -93,7 +93,7 @@ const OurProducts = () => {
 
   // SVG dimensions and positions
   const SVG_WIDTH = containerWidth;
-  const SVG_HEIGHT = 1400;
+  const SVG_HEIGHT = 1000;
   
   const centerX = containerWidth / 2;
   
@@ -105,11 +105,10 @@ const OurProducts = () => {
     product3: { x: containerWidth * 0.1, y: 650 },
     product4: { x: containerWidth * 0.7, y: 650 },
     product5: { x: containerWidth * 0.15, y: 1000 },
-    product6: { x: containerWidth * 0.65, y: 1200 },
-    product7: { x: containerWidth * 0.23, y: 1400 },
+    product6: { },
+    product7: {  },
   };
 
-  // Create curved path from product1 to product2
   const createTopCurve = () => {
     const start = positions.product1;
     const end = positions.product2;
@@ -117,29 +116,23 @@ const OurProducts = () => {
     return `M ${start.x} ${start.y} Q ${centerX} ${controlY} ${end.x} ${end.y}`;
   };
 
-  // Create zigzag path: product1 → Coco center → product4 → product5 → product6 → product7
   const createZigzagPath = () => {
-    // Path from product1 through coco center to product4 (RIGHT SIDE, SKIPPING product3)
     const product1ToCoco = `M ${positions.product1.x} ${positions.product1.y} 
                            Q ${positions.product1.x} ${positions.coco.y - 50} 
                            ${positions.coco.x} ${positions.coco.y}`;
     
-    // From coco center to product4 (on the RIGHT, skipping over product3)
     const cocoToProduct4 = `M ${positions.coco.x} ${positions.coco.y} 
                            Q ${positions.coco.x + 100} ${(positions.coco.y + positions.product4.y) / 2} 
                            ${positions.product4.x} ${positions.product4.y}`;
     
-    // From product4 to product5 (curve down to left)
     const product4ToProduct5 = `M ${positions.product4.x} ${positions.product4.y} 
                                Q ${positions.product4.x - 200} ${(positions.product4.y + positions.product5.y) / 2} 
                                ${positions.product5.x} ${positions.product5.y}`;
     
-    // From product5 to product6 (curve to right, going down)
     const product5ToProduct6 = `M ${positions.product5.x} ${positions.product5.y} 
                                Q ${(positions.product5.x + positions.product6.x) / 2} ${positions.product5.y + 100} 
                                ${positions.product6.x} ${positions.product6.y}`;
     
-    // From product6 to product7 (back to left, going down)
     const product6ToProduct7 = `M ${positions.product6.x} ${positions.product6.y} 
                                Q ${(positions.product6.x + positions.product7.x) / 2} ${positions.product6.y + 100} 
                                ${positions.product7.x} ${positions.product7.y}`;
@@ -158,7 +151,6 @@ const OurProducts = () => {
         minHeight: "100vh",
       }}
     >
-      {/* SVG Paths for connections */}
       <svg
         width="100%"
         height={SVG_HEIGHT}
@@ -257,14 +249,14 @@ const OurProducts = () => {
             <div style={{ 
               position: "absolute",
               right: "5%",
-              top: "170px",
+              top: "150px",
               width: "45%",
               display: "flex",
               alignItems: "center",
               gap: "30px",
               justifyContent: "flex-end",
             }}>
-              <div style={{ textAlign: "right" }}>
+              <div style={{ textAlign: "right" ,position:"relative",left:"6.5%"}}>
                 <h2
                   style={{
                     ...productTitleStyle,
@@ -279,7 +271,7 @@ const OurProducts = () => {
                   {product2.title_description?.description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
                 </p>
               </div>
-              <div style={{ flexShrink: 0 }}>
+              <div style={{ flexShrink: 0,position:"relative",left:"5%" }}>
                 <img
                   src={imgUrl(product2)}
                   alt={product2.title_description?.title || "Moons & Stars"}
@@ -457,90 +449,7 @@ const OurProducts = () => {
           )}
 
           {/* Product 6 - Far bottom right */}
-          {product6 && (
-            <div style={{ 
-              position: "absolute",
-              right: "6%",
-              top: "1100px",
-              width: "40%",
-              display: "flex",
-              alignItems: "center",
-              gap: "20px",
-              justifyContent: "flex-end",
-            }}>
-             
-              <div style={{ flexShrink: 0 }}>
-                <img
-                  src={imgUrl(product6)}
-                  alt={product6.title_description?.title || "Product 6"}
-                  style={{
-                    maxWidth: 250,
-                    width: "100%",
-                    height: "auto",
-                    objectFit: "contain",
-                    pointerEvents: "none",
-                  }}
-                />
-              </div>
-               <div style={{ textAlign: "right",position:'relative',right:"50px" }}>
-                <h3
-                  style={{
-                    ...productTitleStyle,
-                    fontSize: 24,
-                    color: "#333",
-                    marginBottom: 6,
-                  }}
-                >
-                  {product6.title_description?.title || "Product 6"}
-                </h3>
-                <p style={{ ...paragraphStyle, margin: "0", fontSize: 14, maxWidth: 240 }}>
-                  {product6.title_description?.description || "Cereal description goes here."}
-                </p>
-              </div>
-            </div>
-          )}
-
-          {/* Product 7 - Far bottom left */}
-          {product7 && (
-            <div style={{ 
-              position: "absolute",
-              left: "15%",
-              top: "1300px",
-              width: "40%",
-              display: "flex",
-              alignItems: "center",
-              gap: "20px",
-            }}>
-              <div style={{ flexShrink: 0 }}>
-                <img
-                  src={imgUrl(product7)}
-                  alt={product7.title_description?.title || "Product 7"}
-                  style={{
-                    maxWidth: 250,
-                    width: "100%",
-                    height: "auto",
-                    objectFit: "contain",
-                    pointerEvents: "none",
-                  }}
-                />
-              </div>
-              <div style={{ textAlign: "left",position:'relative',top:"110px" }}>
-                <h3
-                  style={{
-                    ...productTitleStyle,
-                    fontSize: 24,
-                    color: "#333",
-                    marginBottom: 6,
-                  }}
-                >
-                  {product7.title_description?.title || "Product 7"}
-                </h3>
-                <p style={{ ...paragraphStyle, margin: "0", fontSize: 14, maxWidth: 240 }}>
-                  {product7.title_description?.description || "Cereal description goes here."}
-                </p>
-              </div>
-            </div>
-          )}
+          
         </div>
       </div>
     </section>
