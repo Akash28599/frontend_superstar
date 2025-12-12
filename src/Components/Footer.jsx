@@ -90,7 +90,7 @@ const FooterLayout = () => {
             <Grid>
               More Info
               <List sx={{ fontSize: "18px", lineHeight: "217%" }}>
-                <ListItem>Terms and Conditions</ListItem>
+                <ListItem>Contact:+234 801 234</ListItem>
                 <ListItem>Privacy Policy</ListItem>
                 <ListItem>Sitemap</ListItem>
               </List>

@@ -106,7 +106,7 @@ const OurProducts = () => {
     product4: { x: containerWidth * 0.7, y: 650 },
     product5: { x: containerWidth * 0.15, y: 1000 },
     product6: { x: containerWidth * 0.65, y: 1200 },
-    product7: { x: containerWidth * 0.03, y: 1400 },
+    product7: { x: containerWidth * 0.23, y: 1400 },
   };
 
   // Create curved path from product1 to product2

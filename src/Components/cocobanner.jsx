@@ -46,12 +46,12 @@ export default function CocoBanner() {
           alt="character"
           style={{
             position: "absolute",
-            bottom: "180px",
+            bottom: "170px",
             left: "80px",
             zIndex: 100,
             pointerEvents: "none",
-            maxWidth: "640px",
-            height: "auto"
+            maxWidth: "570px",
+            height: "700px"
           }}
         />
       )}
@@ -60,7 +60,7 @@ export default function CocoBanner() {
       <Box
         sx={{
           position: "absolute",
-          top: "500px",
+          top: "520px",
           left: "58%",
           transform: "translateX(-50%)",
           display: "flex",
