@@ -148,7 +148,7 @@ const HomeBanner = () => {
     opacity: 0.95,
   };
 
-  // base button style (kept exactly as original layout-wise)
+  // Base button style
   const buttonStyle = {
     backgroundColor: 'white',
     color: '#F60945',
@@ -163,16 +163,9 @@ const HomeBanner = () => {
     gap: '1rem',
     cursor: 'pointer',
     boxShadow: '0 15px 40px rgba(0,0,0,0.3)',
-    // removed transition/transform to avoid any animation
     marginLeft: '200px',
     position: 'relative',
-  };
-
-  // hover overrides — ONLY change background and text color (no transform, no size changes)
-  const buttonHoverStyle = {
-    backgroundColor: '#FCD34D',
-    color: 'black',
-    // intentionally do NOT redefine padding, display, gap, margin, etc.
+    transition: 'background-color 0.3s ease, color 0.3s ease', // Add smooth transition
   };
 
   const contentStyle = {
@@ -211,7 +204,7 @@ const HomeBanner = () => {
     width: 'auto',
     objectFit: 'cover',
     transform: 'translateY(90px)',
-    pointerEvents: 'none', // decorative image shouldn't block pointer events
+    pointerEvents: 'none',
   };
 
   const Cloud = ({ top, left, right, bottom, size, zIndex = 2 }) =>
@@ -228,7 +221,7 @@ const HomeBanner = () => {
           width: size,
           height: 'auto',
           zIndex,
-          pointerEvents: 'none', // make cloud decorative only
+          pointerEvents: 'none',
         }}
       />
     ) : null;
@@ -279,12 +272,12 @@ const HomeBanner = () => {
             <h1 style={titleStyle}>{title}</h1>
             <p style={descStyle}>{description}</p>
 
-            {/* === DROP-IN FIXED BUTTON: merges base + hover styles so layout doesn't get lost on hover === */}
+            {/* CORRECTED BUTTON WITH HOVER */}
             <button
               style={{
                 ...buttonStyle,
-                ...(isHovered ? buttonHoverStyle : {}),
-                zIndex: 1003, // ensure highest interactive element
+                backgroundColor: isHovered ? '#FCD34D' : 'white',
+                color: isHovered ? 'black' : '#F60945',
               }}
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}

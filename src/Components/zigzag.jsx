@@ -38,53 +38,21 @@ const OurProducts = () => {
 
   if (loading) return <div style={{ padding: 40 }}>Loading...</div>;
 
-  const fallback = products[0] || null;
+  // Get 7 products for the layout
+  const allProducts = [];
+  for (let i = 0; i < 7; i++) {
+    allProducts.push(products[i] || products[0] || null);
+  }
 
-  const top = products[0] ? [products[0]] : fallback ? [fallback] : [];
-  const leftOfCoco = products[1] || fallback;
-  const rightOfCoco = products[2] || fallback;
-  let remaining = products.slice(3);
-
-  const MAX_ROWS = 10;
-  const usedRows = (top.length > 0 ? 1 : 0) + 1;
-  const maxRemainingRows = Math.max(0, MAX_ROWS - usedRows);
-  remaining = remaining.slice(0, maxRemainingRows);
-
-  const ROW_SPACING = 220;
-  const ROW_COUNT = MAX_ROWS;
-  const leftX = Math.round(containerWidth * 0.38);
-  const rightX = Math.round(containerWidth * 0.72);
-  const midX = containerWidth / 2;
-  const startY = 400;
-  const rowYs = Array.from(
-    { length: ROW_COUNT },
-    (_, i) => startY + i * ROW_SPACING
-  );
-
-  const buildZigZagPath = () => {
-    if (!rowYs.length) return "";
-    let d = `M ${leftX} ${rowYs[0].toFixed(0)}`;
-    const cpOffsetX = Math.max(260, containerWidth * 0.28);
-    const cpVerticalFactor = 0.42;
-
-    for (let i = 1; i < rowYs.length; i++) {
-      const prevY = rowYs[i - 1];
-      const y = rowYs[i];
-      const goingToRight = i % 2 === 1;
-      const cp1x = midX + (goingToRight ? -cpOffsetX : cpOffsetX);
-      const cp1y = prevY + ROW_SPACING * cpVerticalFactor;
-      const cp2x = midX + (goingToRight ? -cpOffsetX * 0.25 : cpOffsetX * 0.25);
-      const cp2y = y - ROW_SPACING * cpVerticalFactor;
-      const targetX = goingToRight ? rightX : leftX;
-      d += ` C ${Math.round(cp1x)} ${Math.round(cp1y)} ${Math.round(
-        cp2x
-      )} ${Math.round(cp2y)} ${Math.round(targetX)} ${Math.round(y)}`;
-    }
-    return d;
-  };
-
-  const SVG_H = rowYs[rowYs.length - 1] + 420;
-  const pathD = buildZigZagPath();
+  const [
+    product1, // Top left - Coco Pods
+    product2, // Top right - Moons & Stars
+    product3, // Bottom left close to Coco
+    product4, // Bottom right close to Coco
+    product5, // Far bottom left
+    product6, // Far bottom right (but lower than product5)
+    product7, // Far bottom left (but lower than product6)
+  ] = allProducts;
 
   const imgUrl = (it) =>
     it?.image?.url ||
@@ -100,24 +68,83 @@ const OurProducts = () => {
     lineHeight: 1.05,
     margin: 0,
   };
+  
   const sectionHeadingWrapper = {
     maxWidth: 1400,
-    margin: "0 auto 28px",
+    margin: "0 auto 40px",
     padding: "0 28px",
     textAlign: "center",
   };
+  
   const paragraphStyle = {
-    fontSize: 18,
-    lineHeight: 1.7,
+    fontSize: 16,
+    lineHeight: 1.6,
     color: "#4b4b4b",
-    marginTop: 12,
-    maxWidth: 360,
+    marginTop: 10,
+    maxWidth: 320,
   };
+  
   const productTitleStyle = {
     fontFamily: "'Baloo 2', system-ui, sans-serif",
     fontWeight: 800,
     lineHeight: 1.1,
     margin: 0,
+  };
+
+  // SVG dimensions and positions
+  const SVG_WIDTH = containerWidth;
+  const SVG_HEIGHT = 1400;
+  
+  const centerX = containerWidth / 2;
+  
+  // Updated positions - product3 is on left, product4 is on right
+  const positions = {
+    product1: { x: containerWidth * 0.15, y: 200 },
+    product2: { x: containerWidth * 0.85, y: 200 },
+    coco: { x: centerX, y: 500 },
+    product3: { x: containerWidth * 0.1, y: 650 },
+    product4: { x: containerWidth * 0.7, y: 650 },
+    product5: { x: containerWidth * 0.15, y: 1000 },
+    product6: { x: containerWidth * 0.65, y: 1200 },
+    product7: { x: containerWidth * 0.03, y: 1400 },
+  };
+
+  // Create curved path from product1 to product2
+  const createTopCurve = () => {
+    const start = positions.product1;
+    const end = positions.product2;
+    const controlY = start.y - 80;
+    return `M ${start.x} ${start.y} Q ${centerX} ${controlY} ${end.x} ${end.y}`;
+  };
+
+  // Create zigzag path: product1 → Coco center → product4 → product5 → product6 → product7
+  const createZigzagPath = () => {
+    // Path from product1 through coco center to product4 (RIGHT SIDE, SKIPPING product3)
+    const product1ToCoco = `M ${positions.product1.x} ${positions.product1.y} 
+                           Q ${positions.product1.x} ${positions.coco.y - 50} 
+                           ${positions.coco.x} ${positions.coco.y}`;
+    
+    // From coco center to product4 (on the RIGHT, skipping over product3)
+    const cocoToProduct4 = `M ${positions.coco.x} ${positions.coco.y} 
+                           Q ${positions.coco.x + 100} ${(positions.coco.y + positions.product4.y) / 2} 
+                           ${positions.product4.x} ${positions.product4.y}`;
+    
+    // From product4 to product5 (curve down to left)
+    const product4ToProduct5 = `M ${positions.product4.x} ${positions.product4.y} 
+                               Q ${positions.product4.x - 200} ${(positions.product4.y + positions.product5.y) / 2} 
+                               ${positions.product5.x} ${positions.product5.y}`;
+    
+    // From product5 to product6 (curve to right, going down)
+    const product5ToProduct6 = `M ${positions.product5.x} ${positions.product5.y} 
+                               Q ${(positions.product5.x + positions.product6.x) / 2} ${positions.product5.y + 100} 
+                               ${positions.product6.x} ${positions.product6.y}`;
+    
+    // From product6 to product7 (back to left, going down)
+    const product6ToProduct7 = `M ${positions.product6.x} ${positions.product6.y} 
+                               Q ${(positions.product6.x + positions.product7.x) / 2} ${positions.product6.y + 100} 
+                               ${positions.product7.x} ${positions.product7.y}`;
+    
+    return `${product1ToCoco} ${cocoToProduct4} ${product4ToProduct5} ${product5ToProduct6} ${product6ToProduct7}`;
   };
 
   return (
@@ -127,15 +154,16 @@ const OurProducts = () => {
         position: "relative",
         background: "#fff",
         overflow: "hidden",
-        padding: "2rem 0 4rem",
+        padding: "2rem 0 20rem",
+        minHeight: "100vh",
       }}
     >
-      {/* dashed path */}
+      {/* SVG Paths for connections */}
       <svg
         width="100%"
-        height={SVG_H}
-        viewBox={`0 0 ${containerWidth} ${SVG_H}`}
-        preserveAspectRatio="xMinYMin slice"
+        height={SVG_HEIGHT}
+        viewBox={`0 0 ${SVG_WIDTH} ${SVG_HEIGHT}`}
+        preserveAspectRatio="xMidYMin slice"
         style={{
           position: "absolute",
           top: 0,
@@ -144,14 +172,24 @@ const OurProducts = () => {
           zIndex: 0,
         }}
       >
+        {/* Top curved line connecting product1 and product2 */}
         <path
-          d={pathD}
+          d={createTopCurve()}
           fill="none"
           stroke="#d6d6d6"
-          strokeWidth={4}
+          strokeWidth={3}
           strokeDasharray="8 10"
           strokeLinecap="round"
-          strokeLinejoin="round"
+        />
+        
+        {/* Main zigzag line: product1 → Coco center → product4 → product5 → product6 → product7 */}
+        <path
+          d={createZigzagPath()}
+          fill="none"
+          stroke="#d6d6d6"
+          strokeWidth={3}
+          strokeDasharray="8 10"
+          strokeLinecap="round"
         />
       </svg>
 
@@ -162,29 +200,33 @@ const OurProducts = () => {
           position: "relative",
           zIndex: 1,
           padding: "0 28px",
+          height: SVG_HEIGHT,
         }}
       >
-        {/* heading */}
+        {/* Section Heading */}
         <div style={sectionHeadingWrapper}>
-          <h1 style={{ ...headingStyle, fontSize: 40 }}>Our products</h1>
+          <h1 style={{ ...headingStyle, fontSize: 42 }}>Our products</h1>
         </div>
 
-        {/* TOP ROW: image left, text tight on the right */}
-        {top.length > 0 && top[0] && (
-          <div style={{ marginBottom: ROW_SPACING - 40 }}>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 14, // controls distance between image and text
-              }}
-            >
+        {/* TOP ROW: Products 1 & 2 */}
+        <div>
+          {/* Product 1 - Top Left - TEXT ON RIGHT OF IMAGE */}
+          {product1 && (
+            <div style={{ 
+              position: "absolute",
+              left: "5%",
+              top: "100px",
+              width: "45%",
+              display: "flex",
+              alignItems: "center",
+              gap: "30px",
+            }}>
               <div style={{ flexShrink: 0 }}>
                 <img
-                  src={imgUrl(top[0])}
-                  alt={top[0].title_description?.title || "product"}
+                  src={imgUrl(product1)}
+                  alt={product1.title_description?.title || "Coco Pods"}
                   style={{
-                    maxWidth: 420,
+                    maxWidth: 250,
                     width: "100%",
                     height: "auto",
                     objectFit: "contain",
@@ -192,187 +234,314 @@ const OurProducts = () => {
                   }}
                 />
               </div>
-              <div style={{ maxWidth: 420 ,
-                transform: "translateX(80px)" ,
-                transform:"translateY(50px)"
-              }}>
+              <div style={{ textAlign: "left",position:'relative',top:"40px" }}>
                 <h2
                   style={{
                     ...productTitleStyle,
-                    fontSize: 42,
+                    fontSize: 34,
+                    color: "#333",
+                    marginBottom: 10,
+                  }}
+                >
+                  {product1.title_description?.title || "Coco Pods"}
+                </h2>
+                <p style={{ ...paragraphStyle, margin: "0" }}>
+                  {product1.title_description?.description || "Coco Pods are delicious, crunchy, cocoa-flavored cereal bites made from high-quality grains."}
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* Product 2 - Top Right - TEXT ON LEFT OF IMAGE */}
+          {product2 && (
+            <div style={{ 
+              position: "absolute",
+              right: "5%",
+              top: "170px",
+              width: "45%",
+              display: "flex",
+              alignItems: "center",
+              gap: "30px",
+              justifyContent: "flex-end",
+            }}>
+              <div style={{ textAlign: "right" }}>
+                <h2
+                  style={{
+                    ...productTitleStyle,
+                    fontSize: 34,
+                    color: "#333",
+                    marginBottom: 10,
+                  }}
+                >
+                  {product2.title_description?.title || "Moons & Stars"}
+                </h2>
+                <p style={{ ...paragraphStyle, margin: "0" }}>
+                  {product2.title_description?.description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
+                </p>
+              </div>
+              <div style={{ flexShrink: 0 }}>
+                <img
+                  src={imgUrl(product2)}
+                  alt={product2.title_description?.title || "Moons & Stars"}
+                  style={{
+                    maxWidth: 240,
+                    width: "100%",
+                    height: "auto",
+                    objectFit: "contain",
+                    pointerEvents: "none",
+                  }}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* COCO - Center - Zigzag line passes through center of this image */}
+        <div style={{ 
+          position: "absolute",
+          left: "50%",
+          top: "320px",
+          transform: "translateX(-50%)",
+          width: "40%",
+          textAlign: "center",
+          zIndex: 2,
+        }}>
+          {coco && (
+            <div>
+              <img
+                src={imgUrl(coco)}
+                alt="Coco"
+                style={{
+                  maxHeight: 400,
+                  width: "100%",
+                  height: "auto",
+                  objectFit: "contain",
+                  pointerEvents: "none",
+                }}
+              />
+            </div>
+          )}
+        </div>
+
+        {/* MIDDLE ROW: Products 3 & 4 */}
+        <div>
+          {/* Product 3 - Bottom Left - This product is NOT touched by the main zigzag line */}
+          {product3 && (
+            <div style={{ 
+              position: "absolute",
+              left: "5%",
+              top: "550px",
+              width: "45%",
+              display: "flex",
+              alignItems: "center",
+              gap: "25px",
+            }}>
+              <div style={{ flexShrink: 0 }}>
+                <img
+                  src={imgUrl(product3)}
+                  alt={product3.title_description?.title || "Product 3"}
+                  style={{
+                    maxWidth: 250,
+                    width: "100%",
+                    height: "auto",
+                    objectFit: "contain",
+                    pointerEvents: "none",
+                  }}
+                />
+              </div>
+              <div style={{ textAlign: "left",position:'relative',bottom:"80px",right:"80px" }}>
+                <h3
+                  style={{
+                    ...productTitleStyle,
+                    fontSize: 28,
                     color: "#333",
                     marginBottom: 8,
                   }}
                 >
-                  {top[0].title_description?.title || "Product"}
-                </h2>
-                <p style={paragraphStyle}>
-                  {top[0].title_description?.description || ""}
+                  {product3.title_description?.title || "Corn Flakes"}
+                </h3>
+                <p style={{ ...paragraphStyle, margin: "0" }}>
+                  {product3.title_description?.description || "Delicious corn flakes description."}
                 </p>
               </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {/* MIDDLE GROUP */}
-        {(leftOfCoco || coco || rightOfCoco) && (
-          <div style={{ marginBottom: ROW_SPACING - 10, marginTop: 40 }}>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "minmax(0, 1.2fr) 340px minmax(0, 1.2fr)",
-                gap: 40,
-                alignItems: "center",
-              }}
-            >
-              {/* Left block */}
-              <div style={{ display: "flex", gap: 28, alignItems: "flex-end" }}>
-                <div style={{ transform: "translate(40px,-190px)"}}>
-                  <h2
-                    style={{
-                      ...productTitleStyle,
-                      fontSize: 40,
-                      color: "#333",
-                      marginBottom: 12,
-                    }}
-                  >
-                    {leftOfCoco?.title_description?.title || ""}
-                  </h2>
-                  <p style={paragraphStyle}>
-                    {leftOfCoco?.title_description?.description || ""}
-                  </p>
-                </div>
+          {/* Product 4 - Bottom Right - Zigzag line goes to this product AFTER passing through Coco */}
+          {product4 && (
+            <div style={{ 
+              position: "absolute",
+              right: "5%",
+              top: "550px",
+              width: "45%",
+              display: "flex",
+              alignItems: "center",
+              gap: "25px",
+              justifyContent: "flex-end",
+            }}>
+              
+              <div style={{ flexShrink: 0,position:'relative',left:"120px" }}>
                 <img
-                  src={imgUrl(leftOfCoco)}
-                  alt={leftOfCoco?.title_description?.title || "left"}
+                  src={imgUrl(product4)}
+                  alt={product4.title_description?.title || "Product 4"}
                   style={{
-                    maxHeight: 340,
-                    width: "auto",
+                    maxWidth: 250,
+                    width: "100%",
+                    height: "auto",
                     objectFit: "contain",
                     pointerEvents: "none",
                   }}
                 />
               </div>
-
-              {/* Coco center */}
-              <div
-                style={{
-                  textAlign: "center",
-                  position: "relative",
-                  zIndex: 2,
-                }}
-              >
-                {coco && (
-                  <img
-                    src={imgUrl(coco)}
-                    alt="coco"
-                    style={{
-                      maxHeight: 520,
-                      width: "auto",
-                      objectFit: "contain",
-                      marginBottom: -40,
-                      pointerEvents: "none",
-                    }}
-                  />
-                )}
-              </div>
-
-              {/* Right block */}
-              <div
-                style={{
-                  display: "flex",
-                  gap: 28,
-                  alignItems: "flex-end",
-                  justifyContent: "flex-end",
-                }}
-              >
-                <img
-                  src={imgUrl(rightOfCoco)}
-                  alt={rightOfCoco?.title_description?.title || "right"}
+              <div style={{ textAlign: "right" ,position:'relative',top:"60px",left:"60px"}}>
+                <h3
                   style={{
-                    maxHeight: 340,
-                    width: "auto",
-                    objectFit: "contain",
-                    pointerEvents: "none",
-                  }}
-                />
-                <div style={{ textAlign: "right" }}>
-                  <h2
-                    style={{
-                      ...productTitleStyle,
-                      fontSize: 40,
-                      color: "#333",
-                      marginBottom: 12,
-                    }}
-                  >
-                    {rightOfCoco?.title_description?.title || ""}
-                  </h2>
-                  <p
-                    style={{
-                      ...paragraphStyle,
-                      marginLeft: "auto",
-                    }}
-                  >
-                    {rightOfCoco?.title_description?.description || ""}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* REMAINING ROWS */}
-        {remaining.map((product, idx) => {
-          const globalRowIndex = 2 + idx;
-          const isImageLeft = globalRowIndex % 2 === 0;
-          return (
-            <div key={product.id || idx} style={{ marginBottom: ROW_SPACING - 40 }}>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "minmax(0, 1.1fr) minmax(0, 1.1fr)",
-                  gap: 48,
-                  alignItems: "center",
-                }}
-              >
-                <div style={{ textAlign: "center", order: isImageLeft ? 0 : 1 }}>
-                  <img
-                    src={imgUrl(product) || imgUrl(fallback)}
-                    alt={product.title_description?.title || "product"}
-                    style={{
-                      maxWidth: 420,
-                      width: "100%",
-                      height: "auto",
-                      objectFit: "contain",
-                      pointerEvents: "none",
-                    }}
-                  />
-                </div>
-
-                <div
-                  style={{
-                    paddingTop: 4,
-                    direction: "ltr",
-                    order: isImageLeft ? 1 : 0,
+                    ...productTitleStyle,
+                    fontSize: 28,
+                    color: "#333",
+                    marginBottom: 8,
                   }}
                 >
-                  <h3
-                    style={{
-                      ...productTitleStyle,
-                      fontSize: 34,
-                      color: "#333",
-                    }}
-                  >
-                    {product.title_description?.title || ""}
-                  </h3>
-                  <p style={paragraphStyle}>
-                    {product.title_description?.description || ""}
-                  </p>
-                </div>
+                  {product4.title_description?.title || "Frosties"}
+                </h3>
+                <p style={{ ...paragraphStyle, margin: "0" }}>
+                  {product4.title_description?.description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
+                </p>
               </div>
             </div>
-          );
-        })}
+          )}
+        </div>
+
+        {/* BOTTOM PRODUCTS: 5, 6, 7 */}
+        <div>
+          {/* Product 5 - Far bottom left */}
+          {product5 && (
+            <div style={{ 
+              position: "absolute",
+              left: "10%",
+              top: "900px",
+              width: "40%",
+              display: "flex",
+              alignItems: "center",
+              gap: "20px",
+            }}>
+              <div style={{ flexShrink: 0 }}>
+                <img
+                  src={imgUrl(product5)}
+                  alt={product5.title_description?.title || "Product 5"}
+                  style={{
+                    maxWidth: 250,
+                    width: "100%",
+                    height: "auto",
+                    objectFit: "contain",
+                    pointerEvents: "none",
+                  }}
+                />
+              </div>
+              <div style={{ textAlign: "left",position:'relative',bottom:"20px" }}>
+                <h3
+                  style={{
+                    ...productTitleStyle,
+                    fontSize: 24,
+                    color: "#333",
+                    marginBottom: 6,
+                  }}
+                >
+                  {product5.title_description?.title || "Product 5"}
+                </h3>
+                <p style={{ ...paragraphStyle, margin: "0", fontSize: 14, maxWidth: 240 }}>
+                  {product5.title_description?.description || "Cereal description goes here."}
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* Product 6 - Far bottom right */}
+          {product6 && (
+            <div style={{ 
+              position: "absolute",
+              right: "6%",
+              top: "1100px",
+              width: "40%",
+              display: "flex",
+              alignItems: "center",
+              gap: "20px",
+              justifyContent: "flex-end",
+            }}>
+             
+              <div style={{ flexShrink: 0 }}>
+                <img
+                  src={imgUrl(product6)}
+                  alt={product6.title_description?.title || "Product 6"}
+                  style={{
+                    maxWidth: 250,
+                    width: "100%",
+                    height: "auto",
+                    objectFit: "contain",
+                    pointerEvents: "none",
+                  }}
+                />
+              </div>
+               <div style={{ textAlign: "right",position:'relative',right:"50px" }}>
+                <h3
+                  style={{
+                    ...productTitleStyle,
+                    fontSize: 24,
+                    color: "#333",
+                    marginBottom: 6,
+                  }}
+                >
+                  {product6.title_description?.title || "Product 6"}
+                </h3>
+                <p style={{ ...paragraphStyle, margin: "0", fontSize: 14, maxWidth: 240 }}>
+                  {product6.title_description?.description || "Cereal description goes here."}
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* Product 7 - Far bottom left */}
+          {product7 && (
+            <div style={{ 
+              position: "absolute",
+              left: "15%",
+              top: "1300px",
+              width: "40%",
+              display: "flex",
+              alignItems: "center",
+              gap: "20px",
+            }}>
+              <div style={{ flexShrink: 0 }}>
+                <img
+                  src={imgUrl(product7)}
+                  alt={product7.title_description?.title || "Product 7"}
+                  style={{
+                    maxWidth: 250,
+                    width: "100%",
+                    height: "auto",
+                    objectFit: "contain",
+                    pointerEvents: "none",
+                  }}
+                />
+              </div>
+              <div style={{ textAlign: "left",position:'relative',top:"110px" }}>
+                <h3
+                  style={{
+                    ...productTitleStyle,
+                    fontSize: 24,
+                    color: "#333",
+                    marginBottom: 6,
+                  }}
+                >
+                  {product7.title_description?.title || "Product 7"}
+                </h3>
+                <p style={{ ...paragraphStyle, margin: "0", fontSize: 14, maxWidth: 240 }}>
+                  {product7.title_description?.description || "Cereal description goes here."}
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );
