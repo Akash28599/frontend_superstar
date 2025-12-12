@@ -438,7 +438,7 @@ const OurProducts = () => {
                   }}
                 />
               </div>
-              <div style={{ textAlign: "left",position:'relative',bottom:"20px" }}>
+              <div style={{ textAlign: "left",position:'relative',bottom:"50px" }}>
                 <h3
                   style={{
                     ...productTitleStyle,
