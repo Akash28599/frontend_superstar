@@ -199,6 +199,8 @@ const HomeBanner = () => {
     alignItems: 'center',
     maxWidth: '600px',
     zIndex: 1001,
+    position:'relative',
+    top:"10%"
   };
 
   const heroImageWrapper = {
