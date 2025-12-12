@@ -11,12 +11,21 @@ const HomeBanner = () => {
     fetch('https://correct-prize-f0a5924469.strapiapp.com/api/homebanners?populate=*')
       .then(res => res.json())
       .then(data => {
-        if (data.data && data.data[0]) {
-          setBanner(data.data[0]);
-        }
+        const items = Array.isArray(data.data) ? data.data : [];
 
-        if (data.data && data.data[1] && data.data[1].image) {
-          const img = data.data[1].image;
+        // pick banner: first item that has a non-empty title (robust to changed order)
+        const bannerItem = items.find(item => item.title && item.title.trim().length > 0) || items[0] || null;
+        setBanner(bannerItem || null);
+
+        // pick cloud image: item that likely has image but no title (like your cloud1 record),
+        // fallback to any item that has an image
+        const cloudItem =
+          items.find(item => (!item.title || item.title === null) && item.image) ||
+          items.find(item => item.image) ||
+          null;
+
+        if (cloudItem && cloudItem.image) {
+          const img = cloudItem.image;
           const url =
             img.formats?.medium?.url ||
             img.formats?.small?.url ||
@@ -140,12 +149,14 @@ const HomeBanner = () => {
   };
 
   const descStyle = {
-    fontSize: '1.4rem',
+    fontSize: '1.1rem',
     color: 'white',
     marginBottom: '3rem',
     lineHeight: '1.4',
     maxWidth: '520px',
     opacity: 0.95,
+    position:'relative',
+    top:"50px"
   };
 
   // Base button style
@@ -154,7 +165,7 @@ const HomeBanner = () => {
     color: '#F60945',
     padding: '1.1rem 3rem',
     borderRadius: '50px',
-    fontSize: '1.3rem',
+    fontSize: '1.1rem',
     fontWeight: '700',
     border: 'none',
     display: 'flex',
@@ -164,8 +175,9 @@ const HomeBanner = () => {
     cursor: 'pointer',
     boxShadow: '0 15px 40px rgba(0,0,0,0.3)',
     marginLeft: '200px',
+    marginTop:"40px",
     position: 'relative',
-    transition: 'background-color 0.3s ease, color 0.3s ease', // Add smooth transition
+    transition: 'background-color 0.3s ease, color 0.3s ease',
   };
 
   const contentStyle = {
@@ -173,10 +185,11 @@ const HomeBanner = () => {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: '50px',
+    gap: '100px',
     maxWidth: '1400px',
     margin: '0 auto',
     padding: '0 40px',
+    marginLeft:"10%"
   };
 
   const leftSectionStyle = {
@@ -227,7 +240,7 @@ const HomeBanner = () => {
     ) : null;
 
   const handlePlayClick = () => {
-    console.log('Play Now clicked');
+    console.log('Adventure starts here clicked');
     // wire up navigation/modal here if needed
   };
 
@@ -255,24 +268,28 @@ const HomeBanner = () => {
       <div style={contentStyle}>
         <div style={leftSectionStyle}>
           <div style={textContainerStyle}>
+            {/* Yellow badge now comes from API title */}
             <div style={kelloggsStyle}>
               <h3
                 style={{
-                  fontSize: '1.6rem',
-                  fontWeight: 'bold',
+                  fontSize: '1.2rem',
+                  fontWeight: '700',
                   color: '#F60945',
                   margin: 0,
                   letterSpacing: '1px',
                 }}
               >
-                Welcome to the Superstar Universe
+                {title}
               </h3>
             </div>
 
-            <h1 style={titleStyle}>{title}</h1>
+            {/* Big headline - also using API title for now (you can change this to a different field if desired) */}
+           
+
+            {/* Description from API */}
             <p style={descStyle}>{description}</p>
 
-            {/* CORRECTED BUTTON WITH HOVER */}
+            {/* Button text changed to "Adventure starts here" */}
             <button
               style={{
                 ...buttonStyle,
@@ -282,7 +299,7 @@ const HomeBanner = () => {
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
               onClick={handlePlayClick}
-              aria-label="Play Now"
+              aria-label="Adventure starts here"
             >
               <svg
                 style={{ width: '28px', height: '28px' }}
@@ -291,7 +308,7 @@ const HomeBanner = () => {
               >
                 <polygon points="5,3 19,12 5,21 5,3" />
               </svg>
-              Play Now
+              Adventure starts here
             </button>
           </div>
         </div>
@@ -305,7 +322,7 @@ const HomeBanner = () => {
                 style={heroImageStyle}
               />
 
-              <Cloud top="430px" right="9%" size="140px" zIndex={901} />
+              <Cloud top="430px" right="9%" size="120px" zIndex={901} />
               <Cloud top="380px" left="48%" size="90px" zIndex={902} />
             </div>
           )}
