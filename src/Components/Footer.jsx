@@ -112,7 +112,7 @@ const FooterLayout = () => {
           sx={{
             width: "100%",
             display: "flex",
-            justifyContent: "flex-start",
+            justifyContent: "center",
             gap: 1,
             p: "0 20% 2% 20%",
           }}

@@ -35,91 +35,142 @@ export default function CocoBanner() {
       {/* Wave */}
       <img
         src={waveImage}
-        style={{ width: "100%", display: "block", position: "relative" }}
+        style={{ width: "100%", display: "block", position: "relative"}}
         alt="wave"
       />
 
-      {/* Character - MOVED TO LEFT SIDE */}
+      {/* CHARACTER IMAGE - LEFT SIDE */}
       {charImg && (
         <img
           src={charImg}
           alt="character"
           style={{
             position: "absolute",
-            bottom: "150px",
-            left: "80px",        // Changed from default right positioning
-            zIndex: 2,
+            bottom: "180px",
+            left: "80px",
+            zIndex: 100,
             pointerEvents: "none",
-            maxWidth: "400px",   // Added to control size
-            height: "auto",
-            zindex:100
+            maxWidth: "640px",
+            height: "auto"
           }}
         />
       )}
 
-      {/* Cloud 1 - MOVED TO LEFT SIDE */}
-      <img
-        src={cloudImg}
-        alt="cloud"
-        style={{
-          position: "absolute",
-          top: "220px",
-          left: "200px",       // Changed from right: "180px"
-          zIndex: 1,
-          pointerEvents: "none",
-          width: "120px",      // Added size control
-          height: "auto"
-        }}
-      />
-
-      {/* Cloud 2 - MOVED TO LEFT SIDE */}
-      <img
-        src={cloudImg}
-        alt="cloud"
-        style={{
-          position: "absolute",
-          bottom: "110px",
-          left: "60px",        // Changed from left: "30px" to more spaced
-          zIndex: 1,
-          pointerEvents: "none",
-          width: "100px",      // Added size control
-          height: "auto"
-        }}
-      />
-
-      {/* TEXT BOX - MOVED TO RIGHT SIDE for balance */}
+      {/* MAIN CONTENT - CENTER TEXT + RIGHT CLOUD */}
       <Box
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 3,
           position: "absolute",
-          top: "390px",
-          right: "330px",      // Changed from left: "330px" to right side
-          textAlign: "center",
-          color: "white",
-          textWrap: "wrap",
+          top: "500px",
+          left: "58%",
+          transform: "translateX(-50%)",
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          gap: 2,
           zIndex: 2,
-          maxWidth: "500px"    // Added to prevent text overflow
+          maxWidth: "1200px",
+          width: "90%"
         }}
       >
-        <Typography
-          variant="h3"
-          sx={{ fontWeight: 800, mb: 2, maxWidth: 500 }}
-        >
-          {title}
-        </Typography>
+        {/* SMALLER LEFT SPACER */}
+        <Box sx={{ flex: 0.5, minWidth: "100px" }} />
 
-        <Typography
-          variant="body1"
-          dangerouslySetInnerHTML={{ __html: description }}
+        {/* STYLISH 2-LINE HEADING */}
+        <Box
           sx={{
-            opacity: 0.95,
-            fontWeight: 400,
-            maxWidth: 500,
-            lineHeight: "30px",
+            flex: 4,
+            display: "flex",
+            flexDirection: "column",
+            gap: 1,
+            textAlign: "center",
+            color: "white",
+            maxWidth: "1000px",
+            width: "100%"
           }}
-        />
+        >
+          
+
+          {/* STYLISH 2-LINE "Built for kids, Loved by parents" */}
+          <Box sx={{ 
+            display: "flex", 
+            flexDirection: "column", 
+            alignItems: "center", 
+            gap: "0.2rem",
+            position: "relative"
+          }}>
+            <Typography
+              variant="h5"
+              sx={{
+                fontWeight: 1700,
+                color: "white",
+                fontSize: "4.5rem",
+                lineHeight: "1.1",
+                letterSpacing: "0.5px",
+                mb: 0,
+                position: "relative",
+                zIndex: 3,
+                textShadow: "2px 2px 4px rgba(0,0,0,0.3)"
+              }}
+            >
+              Built for kids,Loved
+            </Typography>
+            
+            <Typography
+              variant="h4"
+              sx={{
+                fontWeight: 1700,  // Extra bold
+                color: "white !important",
+                fontSize: "4.5rem",
+                lineHeight: "1.1",
+                letterSpacing: "-0.5px",
+                mb: 0,
+                position: "relative",
+                zIndex: 3,
+                textShadow: "3px 3px 6px rgba(0,0,0,0.4)",
+                mt: "-10px"  // Overlap effect
+              }}
+            >
+               by parents
+            </Typography>
+          </Box>
+
+          {/* DESCRIPTION */}
+          <Typography
+            variant="body1"
+            dangerouslySetInnerHTML={{ __html: description }}
+            sx={{
+              opacity: 0.95,
+              fontWeight: 500,
+              lineHeight: "30px",
+              color: "white !important",
+              maxWidth: "none",
+              mt: 3
+            }}
+          />
+        </Box>
+
+        {/* RIGHT CLOUD */}
+        <Box
+          sx={{
+            flex: 0.8,
+            display: "flex",
+            justifyContent: "flex-end",
+            minWidth: "250px",
+            position:'relative',
+            right:"80px",
+            bottom:"190px"
+          }}
+        >
+          <img
+            src={cloudImg}
+            alt="cloud icon"
+            style={{
+              width: "160px",
+              height: "auto",
+              pointerEvents: "none"
+            }}
+          />
+        </Box>
       </Box>
     </Box>
   );

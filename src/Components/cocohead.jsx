@@ -106,7 +106,7 @@ const CocoHeads = () => {
                 style={{
                   fontSize: '1.3rem',
                   fontWeight: 800,
-                  color: '#F60945',
+                  color: 'black',
                   margin: '0 0 0.4rem 0',
                 }}
               >

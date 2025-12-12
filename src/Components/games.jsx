@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-/**
- * PrintableGames
- * Fetches /api/games?populate=* and renders cards with thumbnail + Download action.
- */
 export default function PrintableGames() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [downloadingId, setDownloadingId] = useState(null);
+  const [showMoreHovered, setShowMoreHovered] = useState(false);
 
   useEffect(() => {
     const url =
@@ -25,26 +22,22 @@ export default function PrintableGames() {
       });
   }, []);
 
-  // Download helper: fetches the file and triggers a download with filename
   async function downloadPrintable(item) {
     const printable = item.printable && item.printable[0];
     if (!printable || !printable.url) return;
 
     try {
       setDownloadingId(item.id);
-      // Attempt to fetch as blob and force download
       const res = await fetch(printable.url);
       if (!res.ok) throw new Error("Network error while downloading file");
       const blob = await res.blob();
       const blobUrl = window.URL.createObjectURL(blob);
 
-      // Derive filename
       const filename =
         printable.name ||
         printable.hash ||
         `printable-${item.id}${printable.ext || ".pdf"}`;
 
-      // create temporary link
       const a = document.createElement("a");
       a.href = blobUrl;
       a.download = filename;
@@ -53,7 +46,6 @@ export default function PrintableGames() {
       a.remove();
       window.URL.revokeObjectURL(blobUrl);
     } catch (err) {
-      // fallback: open file in new tab
       console.error("Download failed, opening in new tab:", err);
       window.open(printable.url, "_blank", "noopener");
     } finally {
@@ -108,21 +100,6 @@ export default function PrintableGames() {
           >
             Printable games
           </h2>
-          <p
-            style={{
-              marginTop: "1rem",
-              color: "#555",
-              maxWidth: 900,
-              lineHeight: 1.6,
-              fontSize: "1.05rem",
-              marginLeft: "auto",
-              marginRight: "auto",
-            }}
-          >
-            Download fun, printable activity sheets for kids — mazes, word
-            searches, sudoku and more. Click <strong>Download</strong> to save the
-            printable PDF to your device.
-          </p>
         </div>
 
         {/* Grid */}
@@ -132,6 +109,7 @@ export default function PrintableGames() {
             gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
             gap: 20,
             alignItems: "stretch",
+            marginBottom: "3rem" // Added space for See More button
           }}
         >
           {items.map((item) => {
@@ -256,6 +234,43 @@ export default function PrintableGames() {
               </div>
             );
           })}
+        </div>
+
+        {/* SEE MORE BUTTON */}
+        <div style={{ textAlign: "center", marginTop: "2rem" }}>
+          <button
+            onMouseEnter={() => setShowMoreHovered(true)}
+            onMouseLeave={() => setShowMoreHovered(false)}
+            style={{
+                   background: showMoreHovered ? "#FCD34D" : "transparent",
+              border: "none",
+              color: "#f21f4d",
+              fontSize: "1.4rem",
+              fontWeight: 700,
+              cursor: "pointer",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "12px",
+              padding: "12px 24px",
+              borderRadius: "50px",
+              fontFamily: "'Baloo 2', system-ui, sans-serif",
+              transition: "all 0.3s ease",
+              boxShadow: showMoreHovered ? "0 8px 25px rgba(252, 211, 77, 0.4)" : "none"
+            }}
+          >
+            <svg
+              style={{ 
+                width: "24px", 
+                height: "24px",
+                transition: "all 0.3s ease"
+              }}
+              fill={showMoreHovered ? "#f21f4d" : "currentColor"}
+              viewBox="0 0 24 24"
+            >
+              <polygon points="5,3 19,12 5,21 5,3" />
+            </svg>
+            See more
+          </button>
         </div>
       </div>
     </section>

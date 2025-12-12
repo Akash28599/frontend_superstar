@@ -27,7 +27,8 @@ const Navbar = () => {
     left: '60%',
     transform: 'translateX(-50%)',
     background: 'white',
-    padding: '8px 24px',
+     padding: '12px 24px',  // ← INCREASED from '8px 24px'
+  height: '50px',        // ← ADD THIS LINE
     borderRadius: '30px',
     boxShadow: '0 6px 25px rgba(0,0,0,0.08)',
     display: 'flex',

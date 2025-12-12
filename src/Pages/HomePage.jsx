@@ -25,7 +25,6 @@ export default function HomePage() {
 
                 {/* Other components */}
                 <CocoHeads />
-                <TrendingStories />
                  <CocoBanner/>
                 <OurProducts />
                 <PrintableGames />
