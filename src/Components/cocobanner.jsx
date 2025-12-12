@@ -47,7 +47,7 @@ export default function CocoBanner() {
           style={{
             position: "absolute",
             bottom: "170px",
-            left: "80px",
+            left: "0px",
             zIndex: 1000,
             pointerEvents: "none",
             maxWidth: "670px",
