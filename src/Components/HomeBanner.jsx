@@ -7,16 +7,6 @@ const HomeBanner = () => {
   const [cloudImage, setCloudImage] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1400);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-    
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   useEffect(() => {
     fetch('https://correct-prize-f0a5924469.strapiapp.com/api/homebanners?populate=*')
@@ -84,47 +74,19 @@ const HomeBanner = () => {
     marginLeft: '12px',
   };
 
-  // Responsive adjustments
-  const isSmallScreen = windowWidth < 1024;
-  const isMediumScreen = windowWidth >= 1024 && windowWidth < 1400;
-  
-  // Responsive font sizes
-  const responsiveH1Size = isSmallScreen ? '60px' : isMediumScreen ? '75px' : '90px';
-  const responsiveDescSize = isSmallScreen ? '1.1rem' : isMediumScreen ? '1.2rem' : '1.3rem';
-  const responsiveLogoLeft = isSmallScreen ? '4%' : '6%';
-  const responsiveLogoWidth = isSmallScreen ? '7rem' : '9rem';
-  const responsiveLogoHeight = isSmallScreen ? '9rem' : '11rem';
-  const responsivePaddingLeft = isSmallScreen ? '8%' : '13%';
-
   return (
     <div style={containerStyle}>
       <Navbar />
 
       {logoImage && (
-        <div style={{
-          ...logoContainerStyle,
-          left: responsiveLogoLeft,
-          width: responsiveLogoWidth,
-          height: responsiveLogoHeight,
-        }}>
-          <img 
-            src={logoImage} 
-            alt="Logo" 
-            style={{
-              ...logoStyle,
-              width: isSmallScreen ? '60%' : '70%'
-            }} 
-          />
+        <div style={logoContainerStyle}>
+          <img src={logoImage} alt="Logo" style={logoStyle} />
         </div>
       )}
 
       <div style={contentStyle}>
         {/* LEFT SECTION */}
-        <div style={{
-          ...leftSectionStyle,
-          flex: isSmallScreen ? '0 0 100%' : '0 0 600px',
-          marginTop: isSmallScreen ? '10%' : '5%',
-        }}>
+        <div style={leftSectionStyle}>
           <div style={textContainerStyle}>
             <div style={badgeContainerStyle}>
               <div style={badgeStyle}>
@@ -132,31 +94,15 @@ const HomeBanner = () => {
               </div>
             </div>
             
-            <div style={{
-              ...textColumnStyle,
-              paddingLeft: responsivePaddingLeft,
-            }}>
-              <h1 style={{
-                ...h1Style,
-                fontSize: responsiveH1Size,
-                lineHeight: isSmallScreen ? '1' : '0.9',
-                marginBottom: isSmallScreen ? '1rem' : '1.2rem',
-              }}>{banner.title}</h1>
-              
-              <p style={{
-                ...descStyle,
-                fontSize: responsiveDescSize,
-                marginBottom: isSmallScreen ? '2rem' : '2.5rem',
-                paddingLeft: isSmallScreen ? '0' : '2%',
-              }}>{banner.description}</p>
+            <div style={textColumnStyle}>
+              <h1 style={h1Style}>{banner.title}</h1>
+              <p style={descStyle}>{banner.description}</p>
 
               <button
                 style={{
                   ...buttonStyle,
                   backgroundColor: isHovered ? '#FCD34D' : '#fff',
                   color: '#F60945',
-                  fontSize: isSmallScreen ? '1.2rem' : '1.4rem',
-                  padding: isSmallScreen ? '0.6rem 1.5rem' : '0.75rem 2rem',
                 }}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
@@ -172,28 +118,113 @@ const HomeBanner = () => {
           </div>
         </div>
 
-        {/* RIGHT SECTION - Hide on small screens */}
-        {!isSmallScreen && (
-          <div style={imageWrapperStyle}>
-            {heroImage && (
-              <>
-                <img src={heroImage} alt="Hero" style={{
-                  ...heroImageStyle,
-                  right: isMediumScreen ? '30%' : '40%',
-                  transform: isMediumScreen ? 'translateY(9%) scale(1.1)' : 'translateY(9%) scale(1.2)',
-                }} />
-                <Cloud top="30%" right="9%" size="20%" zIndex={3} />
-                <Cloud top="8%" left="-6%" size="17%" zIndex={4} />
-              </>
-            )}
-          </div>
-        )}
+        {/* RIGHT SECTION */}
+        <div style={imageWrapperStyle}>
+          {heroImage && (
+            <>
+              <img src={heroImage} alt="Hero" style={heroImageStyle} />
+              <Cloud top="30%" right="9%" size="20%" zIndex={3} />
+              <Cloud top="8%" left="-6%" size="17%" zIndex={4} />
+            </>
+          )}
+        </div>
       </div>
+      
+      {/* Add media query styles */}
+      <style jsx="true">{`
+        @media (max-width: 1400px) {
+          .logo-container {
+            left: 4% !important;
+            width: 140px !important;
+            height: 170px !important;
+          }
+          
+          .logo-container img {
+            width: 80px !important;
+            height: 120px !important;
+          }
+          
+          .h1-title {
+            font-size: 75px !important;
+            margin-left: 0 !important;
+          }
+          
+          .text-column {
+            padding-left: 10% !important;
+          }
+          
+          .hero-image {
+            right: 30% !important;
+            transform: translateY(9%) scale(1.1) !important;
+          }
+        }
+        
+        @media (max-width: 1200px) {
+          .logo-container {
+            left: 3% !important;
+            width: 120px !important;
+            height: 150px !important;
+          }
+          
+          .logo-container img {
+            width: 70px !important;
+            height: 110px !important;
+          }
+          
+          .h1-title {
+            font-size: 65px !important;
+          }
+          
+          .description {
+            font-size: 1.1rem !important;
+            max-width: 450px !important;
+          }
+          
+          .text-column {
+            padding-left: 8% !important;
+          }
+          
+          .hero-image {
+            right: 25% !important;
+          }
+        }
+        
+        @media (max-width: 1024px) {
+          .logo-container {
+            left: 2% !important;
+            width: 100px !important;
+            height: 130px !important;
+          }
+          
+          .logo-container img {
+            width: 60px !important;
+            height: 90px !important;
+          }
+          
+          .h1-title {
+            font-size: 55px !important;
+          }
+          
+          .description {
+            font-size: 1rem !important;
+            max-width: 400px !important;
+          }
+          
+          .text-column {
+            padding-left: 6% !important;
+          }
+          
+          .hero-image {
+            right: 20% !important;
+            transform: translateY(9%) scale(1) !important;
+          }
+        }
+      `}</style>
     </div>
   );
 };
 
-/* ===================== STYLES ===================== */
+/* ===================== ORIGINAL STYLES (keep as is) ===================== */
 
 const containerStyle = {
   position: 'relative',
@@ -215,6 +246,7 @@ const loadingStyle = {
 const logoContainerStyle = {
   position: 'absolute',
   top: '0%',
+  left: '6%',
   width: '9rem',
   height: '11rem',
   backgroundColor: 'rgba(255,255,255,0.95)',
@@ -223,11 +255,14 @@ const logoContainerStyle = {
   alignItems: 'center',
   justifyContent: 'center',
   zIndex: 10,
+  className: 'logo-container', // Added class for media queries
 };
 
 const logoStyle = {
-  width: '70%',
-  height: 'auto',
+  width: '90px',
+  height: '140px',
+  objectFit: 'contain',
+  borderRadius: '16px',
 };
 
 const contentStyle = {
@@ -236,7 +271,7 @@ const contentStyle = {
   padding: '0 5%',
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'space-between',
+  justifyContent: 'center',
   gap: '50px',
 };
 
@@ -244,17 +279,20 @@ const leftSectionStyle = {
   flex: '0 0 600px',
   zIndex: 5,
   marginTop: '5%',
+  paddingLeft: '0',
 };
 
 const textContainerStyle = {
   display: 'flex',
   flexDirection: 'column',
   width: '100%',
+  paddingLeft: '12%',
 };
 
 const badgeContainerStyle = {
   marginBottom: '0.5rem',
   width: '100%',
+  marginLeft: '0',
 };
 
 const badgeStyle = {
@@ -262,6 +300,7 @@ const badgeStyle = {
   padding: '0.75rem 1.5rem',
   borderRadius: '26px',
   display: 'inline-block',
+  marginRight: '10%',
 };
 
 const badgeTextStyle = {
@@ -279,6 +318,9 @@ const textColumnStyle = {
   flexDirection: 'column',
   alignItems: 'flex-start',
   maxWidth: '520px',
+  marginLeft: '0',
+  paddingLeft: '13%',
+  className: 'text-column', // Added class for media queries
 };
 
 const h1Style = {
@@ -291,7 +333,10 @@ const h1Style = {
   color: '#fff',
   alignSelf: 'flex-start',
   width: '100%',
+  textIndent: '100',
+  paddingLeft: '0',
   textAlign: 'left',
+  className: 'h1-title', // Added class for media queries
 };
 
 const descStyle = {
@@ -300,11 +345,13 @@ const descStyle = {
   fontFamily: "'Kellogg's Sans', sans-serif",
   fontWeight: 500,
   fontSize: '1.3rem',
-  lineHeight: '1.4',
+  lineHeight: '1.2',
   letterSpacing: '0%',
   marginBottom: '2.5rem',
   alignSelf: 'flex-start',
   textAlign: 'left',
+  paddingLeft: '2%',
+  className: 'description', // Added class for media queries
 };
 
 const buttonStyle = {
@@ -342,6 +389,7 @@ const heroImageStyle = {
   position: 'relative',
   right: '40%',
   transform: 'translateY(9%) scale(1.2)',
+  className: 'hero-image', // Added class for media queries
 };
 
 export default HomeBanner;
