@@ -137,15 +137,10 @@ const HomeBanner = () => {
           .content-container {
             max-width: 1440px;
             margin: 0 auto;
-            gap: 50px;
           }
           
-          .logo-container {
-            left: 6%;
-          }
-          
-          .text-column {
-            padding-left: 13%;
+          .left-section {
+            margin-top: 5%;
           }
           
           .h1-title {
@@ -162,12 +157,14 @@ const HomeBanner = () => {
         @media (min-width: 1920px) {
           .content-container {
             max-width: 1600px;
-            gap: 80px;
-            padding: 0 7%;
+          }
+          
+          .left-section {
+            margin-top: 6%;
           }
           
           .logo-container {
-            left: 9%;
+            left: 7%;
             width: 10rem;
             height: 12rem;
           }
@@ -177,16 +174,12 @@ const HomeBanner = () => {
             height: 155px;
           }
           
-          .text-container {
-            padding-left: 15%;
+          .h1-title {
+            font-size: 100px;
           }
           
           .text-column {
-            padding-left: 15%;
-          }
-          
-          .h1-title {
-            font-size: 100px;
+            padding-left: 14%;
           }
           
           .description {
@@ -198,55 +191,29 @@ const HomeBanner = () => {
             right: 25%;
             transform: translateY(10%) scale(1.2);
           }
-          
-          .badge {
-            margin-right: 15%;
-          }
         }
         
         /* 1600px to 1919px */
         @media (min-width: 1600px) and (max-width: 1919px) {
           .content-container {
-            max-width: 1500px;
-            gap: 60px;
-            padding: 0 6%;
+            max-width: 1400px;
+          }
+          
+          .left-section {
+            margin-top: 5.5%;
           }
           
           .logo-container {
-            left: 7%;
-            width: 9.5rem;
-            height: 11.5rem;
-          }
-          
-          .logo-container img {
-            width: 95px;
-            height: 148px;
-          }
-          
-          .text-container {
-            padding-left: 14%;
-          }
-          
-          .text-column {
-            padding-left: 14%;
+            left: 6.5%;
           }
           
           .h1-title {
             font-size: 95px;
           }
           
-          .description {
-            font-size: 1.35rem;
-            max-width: 550px;
-          }
-          
           .hero-image {
-            right: 30%;
+            right: 28%;
             transform: translateY(10%) scale(1.15);
-          }
-          
-          .badge {
-            margin-right: 12%;
           }
         }
         
@@ -254,12 +221,14 @@ const HomeBanner = () => {
         @media (min-width: 1200px) and (max-width: 1599px) {
           .content-container {
             max-width: 1200px;
-            gap: 40px;
-            padding: 0 4%;
+          }
+          
+          .left-section {
+            margin-top: 4.5%;
           }
           
           .logo-container {
-            left: 5%;
+            left: 5.5%;
             width: 8rem;
             height: 10rem;
           }
@@ -269,16 +238,12 @@ const HomeBanner = () => {
             height: 125px;
           }
           
-          .text-container {
-            padding-left: 11%;
+          .h1-title {
+            font-size: 80px;
           }
           
           .text-column {
-            padding-left: 11%;
-          }
-          
-          .h1-title {
-            font-size: 80px;
+            padding-left: 12%;
           }
           
           .description {
@@ -287,25 +252,23 @@ const HomeBanner = () => {
           }
           
           .hero-image {
-            right: 35%;
+            right: 32%;
             transform: translateY(10%) scale(1);
-          }
-          
-          .badge {
-            margin-right: 8%;
           }
         }
         
         /* 1024px to 1199px (Small laptops) */
         @media (min-width: 1024px) and (max-width: 1199px) {
           .content-container {
-            max-width: 1024px;
-            gap: 30px;
-            padding: 0 3%;
+            max-width: 1100px;
+          }
+          
+          .left-section {
+            margin-top: 4%;
           }
           
           .logo-container {
-            left: 4%;
+            left: 5%;
             width: 7rem;
             height: 9rem;
           }
@@ -315,16 +278,12 @@ const HomeBanner = () => {
             height: 110px;
           }
           
-          .text-container {
-            padding-left: 10%;
+          .h1-title {
+            font-size: 70px;
           }
           
           .text-column {
-            padding-left: 10%;
-          }
-          
-          .h1-title {
-            font-size: 70px;
+            padding-left: 11%;
           }
           
           .description {
@@ -333,22 +292,8 @@ const HomeBanner = () => {
           }
           
           .hero-image {
-            right: 40%;
+            right: 35%;
             transform: translateY(10%) scale(0.95);
-          }
-          
-          .badge {
-            margin-right: 5%;
-            padding: 0.7rem 1.4rem;
-          }
-          
-          .badge h3 {
-            font-size: 1.1rem;
-          }
-          
-          button {
-            font-size: 1.3rem;
-            padding: 0.8rem 1.9rem;
           }
         }
         
@@ -356,12 +301,15 @@ const HomeBanner = () => {
         @media (min-width: 800px) and (max-width: 1023px) {
           .content-container {
             max-width: 900px;
-            gap: 20px;
-            padding: 0 2%;
+            gap: 30px;
+          }
+          
+          .left-section {
+            margin-top: 3%;
           }
           
           .logo-container {
-            left: 3%;
+            left: 4%;
             width: 6rem;
             height: 8rem;
             border-radius: 0 0 20px 20px;
@@ -373,16 +321,12 @@ const HomeBanner = () => {
             border-radius: 12px;
           }
           
-          .text-container {
-            padding-left: 8%;
+          .h1-title {
+            font-size: 60px;
           }
           
           .text-column {
-            padding-left: 8%;
-          }
-          
-          .h1-title {
-            font-size: 60px;
+            padding-left: 10%;
           }
           
           .description {
@@ -391,13 +335,12 @@ const HomeBanner = () => {
           }
           
           .hero-image {
-            right: 45%;
+            right: 40%;
             transform: translateY(10%) scale(0.85);
           }
           
           .badge {
             padding: 0.6rem 1.2rem;
-            margin-right: 3%;
           }
           
           .badge h3 {
@@ -410,42 +353,31 @@ const HomeBanner = () => {
           }
         }
         
-        /* Special fix for screens between 1300px-1400px where overlap happens */
-        @media (min-width: 1300px) and (max-width: 1400px) {
-          .logo-container {
-            left: 5.5%;
-          }
-          
-          .text-container {
-            padding-left: 12%;
-          }
-          
-          .text-column {
-            padding-left: 12%;
+        /* SPECIAL FIXES FOR SPECIFIC SCREEN SIZES */
+        
+        /* For your other laptop (adjust these values based on its resolution) */
+        @media (min-width: 1280px) and (max-width: 1366px) {
+          .left-section {
+            margin-top: 6% !important; /* More down for your other laptop */
           }
           
           .hero-image {
-            right: 38%;
-            transform: translateY(10%) scale(1.05);
+            right: 38% !important;
+            transform: translateY(10%) scale(1.05) !important;
           }
         }
         
-        /* Special fix for screens between 1100px-1200px */
-        @media (min-width: 1100px) and (max-width: 1199px) {
-          .logo-container {
-            left: 4.5%;
+        /* For 1367px to 1439px */
+        @media (min-width: 1367px) and (max-width: 1439px) {
+          .left-section {
+            margin-top: 5.5% !important;
           }
-          
-          .text-container {
-            padding-left: 10.5%;
-          }
-          
-          .text-column {
-            padding-left: 10.5%;
-          }
-          
-          .hero-image {
-            right: 42%;
+        }
+        
+        /* For 1441px to 1500px */
+        @media (min-width: 1441px) and (max-width: 1500px) {
+          .left-section {
+            margin-top: 5.2% !important;
           }
         }
       `}</style>
@@ -512,6 +444,7 @@ const leftSectionStyle = {
   zIndex: 5,
   marginTop: '5%',
   paddingLeft: '0',
+  className: 'left-section',
 };
 
 const textContainerStyle = {
@@ -519,7 +452,6 @@ const textContainerStyle = {
   flexDirection: 'column',
   width: '100%',
   paddingLeft: '12%',
-  className: 'text-container',
 };
 
 const badgeContainerStyle = {
