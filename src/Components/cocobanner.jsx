@@ -48,7 +48,7 @@ const CocoBanner = () => {
     };
     
     if (screenWidth >= 1440) return { // Medium desktop 
-      charBottom: '22%', charLeft: '16%',
+      charBottom: '22%', charLeft: '14%',
       cloudTop: '38%', cloudRight: '13%',
       textTop: '45%', textLeft: '25%',
       titleSize: '4.8rem', descSize: '1.9rem'
