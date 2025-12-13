@@ -7,9 +7,8 @@ const HomeBanner = () => {
   const [cloudImage, setCloudImage] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth); // ✅ DYNAMIC WIDTH
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
-  // ✅ RESPONSIVE WIDTH LISTENER
   useEffect(() => {
     const handleResize = () => setScreenWidth(window.innerWidth);
     window.addEventListener('resize', handleResize);
@@ -54,13 +53,12 @@ const HomeBanner = () => {
     banner.image?.formats?.medium?.url ||
     banner.image?.url;
 
-  // ✅ DYNAMIC CLOUD POSITIONS BASED ON SCREEN WIDTH
   const getCloudPositions = () => {
     if (screenWidth >= 1920) return { cloud1Right: '7%', cloud1Size: '10%' };
     if (screenWidth >= 1440) return { cloud1Right: '10%', cloud1Size: '10%' };
-    if (screenWidth >= 1200) return { cloud1Right: '10%', cloud1Size: '10%' };
-    if (screenWidth >= 1024) return { cloud1Right: '15%', cloud1Size: '9%' };
-    return { cloud1Right: '7%', cloud1Size: '10%' }; // Your current good position for small lap
+    if (screenWidth >= 1200) return { cloud1Right: '12%', cloud1Size: '9%' };
+    if (screenWidth >= 1024) return { cloud1Right: '15%', cloud1Size: '8%' };
+    return { cloud1Right: '7%', cloud1Size: '10%' };
   };
 
   const cloudPositions = getCloudPositions();
@@ -93,35 +91,93 @@ const HomeBanner = () => {
     marginLeft: '12px',
   };
 
+  // ✅ PERFECT ASUS EXPERTBOOK STYLES
+  const dynamicLeftSectionStyle = {
+    flex: screenWidth >= 1440 ? '0 0 550px' : '0 0 480px',
+    zIndex: 5,
+    marginTop: screenWidth >= 1440 ? '10%' : '9%',  // ✅ MOVED DOWN
+    paddingLeft: '0',
+    paddingBottom: '1.5rem',
+    maxWidth: screenWidth >= 1440 ? '550px' : '480px',
+    className: 'left-section',
+  };
+
+  const dynamicContentStyle = {
+    height: '100vh',           // ✅ EXACT viewport height
+    margin: '0 auto',
+    padding: screenWidth >= 1440 ? '0 3%' : '0 1.5%',
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: screenWidth >= 1440 ? 'center' : 'flex-start',
+    gap: screenWidth >= 1440 ? '35px' : '20px',
+    maxWidth: '100%',
+    overflow: 'hidden',
+    className: 'content-container',
+  };
+
+  const dynamicHeroImageStyle = {
+    width: 'auto',
+    height: '100%',
+    maxWidth: screenWidth >= 1440 ? '97vw' : '92vw',    // ✅ BIGGER
+    maxHeight: screenWidth >= 1440 ? '97vh' : '92vh',
+    objectFit: 'contain',
+    position: 'relative',
+    right: screenWidth >= 1440 ? '55%' : '40%',
+    transform: screenWidth >= 1440 ? 'translateY(32%) scale(1.4)' : 'translateY(18%) scale(1.4)',
+    className: 'hero-image',
+  };
+
   return (
     <div style={containerStyle}>
       <Navbar />
 
       {logoImage && (
-        <div style={logoContainerStyle}>
+        <div style={{
+          ...logoContainerStyle,
+          left: screenWidth >= 1440 ? '6%' : '4%'
+        }}>
           <img src={logoImage} alt="Logo" style={logoStyle} />
         </div>
       )}
 
-      <div style={contentStyle}>
-        {/* LEFT SECTION - Text Content */}
-        <div style={leftSectionStyle}>
-          <div style={textContainerStyle}>
+      <div style={dynamicContentStyle}>
+        {/* LEFT SECTION */}
+        <div style={dynamicLeftSectionStyle}>
+          <div style={{
+            ...textContainerStyle,
+            paddingLeft: screenWidth >= 1440 ? '12%' : '10%'
+          }}>
             <div style={badgeContainerStyle}>
               <div style={badgeStyle}>
-                <h3 style={badgeTextStyle}>{banner.topheading}</h3>
+                <h3 style={{
+                  ...badgeTextStyle,
+                  fontSize: screenWidth >= 1440 ? '1.2rem' : '1rem'
+                }}>{banner.topheading}</h3>
               </div>
             </div>
             
-            <div style={textColumnStyle}>
-              <h1 style={h1Style}>{banner.title}</h1>
-              <p style={descStyle}>{banner.description}</p>
+            <div style={{
+              ...textColumnStyle,
+              paddingLeft: screenWidth >= 1440 ? '13%' : '10%',
+              maxWidth: screenWidth >= 1440 ? '520px' : '450px'
+            }}>
+              <h1 style={{
+                ...h1Style,
+                fontSize: screenWidth >= 1440 ? '90px' : '75px'
+              }}>{banner.title}</h1>
+              <p style={{
+                ...descStyle,
+                fontSize: screenWidth >= 1440 ? '1.3rem' : '1.1rem',
+                maxWidth: screenWidth >= 1440 ? '520px' : '450px'
+              }}>{banner.description}</p>
 
               <button
                 style={{
                   ...buttonStyle,
                   backgroundColor: isHovered ? '#FCD34D' : '#fff',
                   color: '#F60945',
+                  fontSize: screenWidth >= 1440 ? '1.4rem' : '1.2rem',
+                  padding: screenWidth >= 1440 ? '0.75rem 2.5rem' : '0.6rem 2rem'
                 }}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
@@ -137,12 +193,15 @@ const HomeBanner = () => {
           </div>
         </div>
 
-        {/* RIGHT SECTION - Hero Image */}
-        <div style={imageWrapperStyle}>
+        {/* RIGHT SECTION */}
+        <div style={{
+          ...imageWrapperStyle,
+          width: screenWidth >= 1440 ? '50%' : '45%',
+          maxWidth: screenWidth >= 1440 ? 'none' : '600px'
+        }}>
           {heroImage && (
             <>
-              <img src={heroImage} alt="Hero" style={heroImageStyle} />
-              {/* ✅ DYNAMIC CLOUD POSITIONS */}
+              <img src={heroImage} alt="Hero" style={dynamicHeroImageStyle} />
               <Cloud top="36%" right={cloudPositions.cloud1Right} size={cloudPositions.cloud1Size} zIndex={3} />
               <Cloud top="18%" left="50%" size="7%" zIndex={4} />
             </>
@@ -151,108 +210,67 @@ const HomeBanner = () => {
       </div>
       
       <style jsx="true">{`
-        /* ALL YOUR EXISTING MEDIA QUERIES - UNCHANGED */
         @media (min-width: 1440px) {
           .content-container { max-width: 1440px; margin: 0 auto; }
-          .left-section { margin-top: 5%; }
+          .left-section { margin-top: 10%; }
           .h1-title { font-size: 90px; }
-          .hero-image { right: 35%; transform: translateY(10%) scale(1.1); }
+          .hero-image { right: 55%; transform: translateY(32%) scale(1.4); }
         }
         
-        @media (min-width: 1920px) {
-          .content-container { max-width: 1600px; }
-          .left-section { margin-top: 6%; }
-          .logo-container { left: 7%; width: 10rem; height: 12rem; }
-          .logo-container img { width: 100px; height: 155px; }
-          .h1-title { font-size: 100px; }
-          .text-column { padding-left: 14%; }
-          .description { font-size: 1.4rem; max-width: 580px; }
-          .hero-image { right: 25%; transform: translateY(10%) scale(1.2); }
-        }
-        
-        @media (min-width: 1600px) and (max-width: 1919px) {
-          .content-container { max-width: 1400px; }
-          .left-section { margin-top: 5.5%; }
-          .logo-container { left: 6.5%; }
-          .h1-title { font-size: 95px; }
-          .hero-image { right: 28%; transform: translateY(10%) scale(1.15); }
-        }
-        
-        @media (min-width: 1200px) and (max-width: 1599px) {
-          .content-container { max-width: 1200px; }
-          .left-section { margin-top: 4.5%; }
-          .logo-container { left: 5.5%; width: 8rem; height: 10rem; }
-          .logo-container img { width: 80px; height: 125px; }
-          .h1-title { font-size: 80px; }
-          .text-column { padding-left: 12%; }
-          .description { font-size: 1.2rem; max-width: 480px; }
-          .hero-image { right: 32%; transform: translateY(10%) scale(2); }
-        }
-        
-        @media (min-width: 1024px) and (max-width: 1199px) {
-          .content-container { max-width: 1100px; }
-          .left-section { margin-top: 4%; }
-          .logo-container { left: 5%; width: 7rem; height: 9rem; }
-          .logo-container img { width: 70px; height: 110px; }
-          .h1-title { font-size: 70px; }
-          .text-column { padding-left: 11%; }
-          .description { font-size: 1.1rem; max-width: 440px; }
-          .hero-image { right: 35%; transform: translateY(10%) scale(2.95); }
-        }
-        
-        @media (min-width: 800px) and (max-width: 1023px) {
-          .content-container { max-width: 900px; gap: 30px; }
-          .left-section { margin-top: 3%; }
-          .logo-container { left: 4%; width: 6rem; height: 8rem; border-radius: 0 0 20px 20px; }
-          .logo-container img { width: 60px; height: 95px; border-radius: 12px; }
-          .h1-title { font-size: 60px; }
-          .text-column { padding-left: 10%; }
-          .description { font-size: 1rem; max-width: 380px; }
-          .hero-image { right: 40%; transform: translateY(10%) scale(2.85); }
-          .badge { padding: 0.6rem 1.2rem; }
-          .badge h3 { font-size: 1rem; }
-          button { font-size: 1.2rem; padding: 0.7rem 1.8rem; }
-        }
-        
-        @media (min-width: 1280px) and (max-width: 1366px) {
-          .left-section { margin-top: 6% !important; }
-          .hero-image { right: 38% !important; transform: translateY(10%) scale(2.05) !important; }
-        }
-        
-        @media (min-width: 1367px) and (max-width: 1439px) {
-          .left-section { margin-top: 5.5% !important; }
-        }
-        
-        @media (min-width: 1441px) and (max-width: 1500px) {
-          .left-section { margin-top: 5.2% !important; }
-        }
-
-        @media (max-height: 850px) {
+        @media (max-width: 1439px) {
           .content-container {
-            padding: 2% 5% !important;
-            align-items: flex-start !important;
-            min-height: auto !important;
-            height: auto !important;
+            padding: 0 1.5% !important;
+            gap: 20px !important;
+            height: 100vh !important;
+            overflow: hidden !important;
           }
-          .left-section { margin-top: 4% !important; padding-bottom: 2rem !important; }
-          .text-column { margin-bottom: 1rem !important; }
-          .description { margin-bottom: 1.5rem !important; }
-          button { margin-bottom: 1rem !important; }
-          .hero-image { height: 80vh !important; transform: translateY(5%) scale(1) !important; }
+          .left-section {
+            margin-top: 9% !important;
+            flex: 0 0 480px !important;
+            max-width: 480px !important;
+            padding-bottom: 1rem !important;
+          }
+          .text-column {
+            padding-left: 10% !important;
+            max-width: 450px !important;
+          }
+          .h1-title { font-size: 75px !important; }
+          .description { 
+            font-size: 1.1rem !important; 
+            max-width: 450px !important; 
+          }
+          .logo-container { left: 4% !important; }
+          .hero-image { 
+            max-width: 92vw !important;
+            max-height: 92vh !important;
+            right: 40% !important;
+            transform: translateY(18%) scale(1.4) !important;
+          }
+          .image-wrapper {
+            width: 45% !important;
+            max-width: 600px !important;
+          }
+        }
+        
+        @media (max-height: 850px) {
+          .content-container { padding: 2% 1.5% !important; align-items: flex-start !important; }
+          .left-section { margin-top: 7% !important; padding-bottom: 1rem !important; }
+          .hero-image { height: 85vh !important; transform: translateY(15%) scale(1.3) !important; }
         }
       `}</style>
     </div>
   );
 };
 
-// ALL YOUR EXISTING STYLES - UNCHANGED
+// ✅ ALL STYLES - PERFECT FOR BOTH LAPTOPS
 const containerStyle = {
   position: 'relative',
-  minHeight: '100vh',
+  height: '113vh',
   backgroundColor: '#F60945',
   overflow: 'hidden',
-  width: '100%',
-  height: 'auto',
+  width: '100vw',
+  margin: 0,
+  padding: 0,
   display: 'flex',
   flexDirection: 'column',
 };
@@ -287,28 +305,6 @@ const logoStyle = {
   height: '140px',
   objectFit: 'contain',
   borderRadius: '16px',
-};
-
-const contentStyle = {
-  height: 'auto',
-  margin: '0 auto',
-  padding: '0 5%',
-  display: 'flex',
-  alignItems: 'flex-start',
-  justifyContent: 'center',
-  gap: '50px',
-  maxWidth: '1440px',
-  className: 'content-container',
-  paddingBottom: '5%',
-};
-
-const leftSectionStyle = {
-  flex: '0 0 600px',
-  zIndex: 5,
-  marginTop: '9%',
-  paddingLeft: '0',
-  paddingBottom: '3rem',
-  className: 'left-section',
 };
 
 const textContainerStyle = {
@@ -406,18 +402,7 @@ const imageWrapperStyle = {
   justifyContent: 'center',
   alignItems: 'flex-start',
   transform: 'none',
-};
-
-const heroImageStyle = {
-  width: 'auto',
-  height: '100%',
-  maxWidth: '97vw',
-  maxHeight: '97vh',
-  objectFit: 'contain',
-  position: 'relative',
-  right: '55%',
-  transform: 'translateY(32%) scale(1.4)',
-  className: 'hero-image',
+  className: 'image-wrapper',
 };
 
 export default HomeBanner;
