@@ -148,7 +148,7 @@ const HomeBanner = () => {
           }
           
           .hero-image {
-            right: 35%;
+            right: 32%; /* Changed from 35% */
             transform: translateY(10%) scale(1.1);
           }
         }
@@ -355,14 +355,14 @@ const HomeBanner = () => {
         
         /* SPECIAL FIXES FOR SPECIFIC SCREEN SIZES */
         
-        /* For your other laptop (adjust these values based on its resolution) */
+        /* For your other laptop (1280-1366px) - keeps it looking good */
         @media (min-width: 1280px) and (max-width: 1366px) {
           .left-section {
-            margin-top: 6% !important; /* More down for your other laptop */
+            margin-top: 6% !important;
           }
           
           .hero-image {
-            right: 38% !important;
+            right: 34% !important; /* Slightly more than base 32% for your laptop */
             transform: translateY(10%) scale(1.05) !important;
           }
         }
@@ -371,6 +371,10 @@ const HomeBanner = () => {
         @media (min-width: 1367px) and (max-width: 1439px) {
           .left-section {
             margin-top: 5.5% !important;
+          }
+          
+          .hero-image {
+            right: 32% !important;
           }
         }
         
@@ -551,8 +555,8 @@ const heroImageStyle = {
   maxHeight: '97vh',
   objectFit: 'contain',
   position: 'relative',
-  right: '35%',
-  transform: 'translateY(10%) scale(1.1)',
+  right: '33%',  // ✅ Changed from 35% to 32%
+  transform: 'translateY(0%) scale(1.1)',
   className: 'hero-image',
 };
 
