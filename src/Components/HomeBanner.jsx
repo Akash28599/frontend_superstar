@@ -130,93 +130,173 @@ const HomeBanner = () => {
         </div>
       </div>
       
-      {/* Add media query styles */}
+      {/* Proportional scaling for all laptops */}
       <style jsx="true">{`
-        @media (max-width: 1400px) {
+        /* Base scaling for different screen sizes */
+        @media (min-width: 1920px) {
+          /* 4K screens - keep original size */
+        }
+        
+        @media (max-width: 1919px) and (min-width: 1600px) {
+          /* Large laptops - 95% scale */
           .logo-container {
-            left: 4% !important;
-            width: 140px !important;
-            height: 170px !important;
+            left: 5.7% !important; /* 6% * 0.95 */
+            width: 8.55rem !important; /* 9rem * 0.95 */
+            height: 10.45rem !important; /* 11rem * 0.95 */
           }
           
           .logo-container img {
-            width: 80px !important;
-            height: 120px !important;
+            width: 85.5px !important; /* 90px * 0.95 */
+            height: 133px !important; /* 140px * 0.95 */
           }
           
           .h1-title {
-            font-size: 75px !important;
-            margin-left: 0 !important;
+            font-size: 85.5px !important; /* 90px * 0.95 */
           }
           
           .text-column {
-            padding-left: 10% !important;
-          }
-          
-          .hero-image {
-            right: 30% !important;
-            transform: translateY(9%) scale(1.1) !important;
-          }
-        }
-        
-        @media (max-width: 1200px) {
-          .logo-container {
-            left: 3% !important;
-            width: 120px !important;
-            height: 150px !important;
-          }
-          
-          .logo-container img {
-            width: 70px !important;
-            height: 110px !important;
-          }
-          
-          .h1-title {
-            font-size: 65px !important;
+            padding-left: 12.35% !important; /* 13% * 0.95 */
           }
           
           .description {
-            font-size: 1.1rem !important;
-            max-width: 450px !important;
-          }
-          
-          .text-column {
-            padding-left: 8% !important;
+            font-size: 1.235rem !important; /* 1.3rem * 0.95 */
           }
           
           .hero-image {
-            right: 25% !important;
+            right: 38% !important; /* 40% * 0.95 */
+            transform: translateY(9%) scale(1.14) !important; /* 1.2 * 0.95 */
           }
         }
         
-        @media (max-width: 1024px) {
+        @media (max-width: 1599px) and (min-width: 1400px) {
+          /* Medium laptops - 90% scale */
           .logo-container {
-            left: 2% !important;
-            width: 100px !important;
-            height: 130px !important;
+            left: 5.4% !important; /* 6% * 0.9 */
+            width: 8.1rem !important; /* 9rem * 0.9 */
+            height: 9.9rem !important; /* 11rem * 0.9 */
           }
           
           .logo-container img {
-            width: 60px !important;
-            height: 90px !important;
+            width: 81px !important; /* 90px * 0.9 */
+            height: 126px !important; /* 140px * 0.9 */
           }
           
           .h1-title {
-            font-size: 55px !important;
-          }
-          
-          .description {
-            font-size: 1rem !important;
-            max-width: 400px !important;
+            font-size: 81px !important; /* 90px * 0.9 */
           }
           
           .text-column {
-            padding-left: 6% !important;
+            padding-left: 11.7% !important; /* 13% * 0.9 */
+          }
+          
+          .description {
+            font-size: 1.17rem !important; /* 1.3rem * 0.9 */
           }
           
           .hero-image {
-            right: 20% !important;
-            transform: translateY(9%) scale(1) !important;
+            right: 36% !important; /* 40% * 0.9 */
+            transform: translateY(9%) scale(1.08) !important; /* 1.2 * 0.9 */
+          }
+        }
+        
+        @media (max-width: 1399px) and (min-width: 1200px) {
+          /* Small laptops - 85% scale */
+          .logo-container {
+            left: 5.1% !important; /* 6% * 0.85 */
+            width: 7.65rem !important; /* 9rem * 0.85 */
+            height: 9.35rem !important; /* 11rem * 0.85 */
+          }
+          
+          .logo-container img {
+            width: 76.5px !important; /* 90px * 0.85 */
+            height: 119px !important; /* 140px * 0.85 */
+          }
+          
+          .h1-title {
+            font-size: 76.5px !important; /* 90px * 0.85 */
+          }
+          
+          .text-column {
+            padding-left: 11.05% !important; /* 13% * 0.85 */
+          }
+          
+          .description {
+            font-size: 1.105rem !important; /* 1.3rem * 0.85 */
+            max-width: 442px !important; /* 520px * 0.85 */
+          }
+          
+          .hero-image {
+            right: 34% !important; /* 40% * 0.85 */
+            transform: translateY(9%) scale(1.02) !important; /* 1.2 * 0.85 */
+          }
+        }
+        
+        @media (max-width: 1199px) and (min-width: 1024px) {
+          /* Very small laptops - 80% scale */
+          .logo-container {
+            left: 4.8% !important; /* 6% * 0.8 */
+            width: 7.2rem !important; /* 9rem * 0.8 */
+            height: 8.8rem !important; /* 11rem * 0.8 */
+          }
+          
+          .logo-container img {
+            width: 72px !important; /* 90px * 0.8 */
+            height: 112px !important; /* 140px * 0.8 */
+          }
+          
+          .h1-title {
+            font-size: 72px !important; /* 90px * 0.8 */
+          }
+          
+          .text-column {
+            padding-left: 10.4% !important; /* 13% * 0.8 */
+          }
+          
+          .description {
+            font-size: 1.04rem !important; /* 1.3rem * 0.8 */
+            max-width: 416px !important; /* 520px * 0.8 */
+          }
+          
+          .hero-image {
+            right: 32% !important; /* 40% * 0.8 */
+            transform: translateY(9%) scale(0.96) !important; /* 1.2 * 0.8 */
+          }
+        }
+        
+        /* Ensure button scales proportionally */
+        .play-button {
+          font-size: calc(1.4rem * var(--scale-factor, 1)) !important;
+          padding: calc(0.75rem * var(--scale-factor, 1)) calc(2rem * var(--scale-factor, 1)) !important;
+        }
+        
+        /* Dynamic scaling with viewport width */
+        @media (max-width: 1800px) {
+          :root {
+            --scale-factor: calc(100vw / 1920);
+          }
+          
+          .logo-container {
+            left: calc(6% * var(--scale-factor)) !important;
+            width: calc(9rem * var(--scale-factor)) !important;
+            height: calc(11rem * var(--scale-factor)) !important;
+          }
+          
+          .h1-title {
+            font-size: calc(90px * var(--scale-factor)) !important;
+          }
+          
+          .description {
+            font-size: calc(1.3rem * var(--scale-factor)) !important;
+            max-width: calc(520px * var(--scale-factor)) !important;
+          }
+          
+          .text-column {
+            padding-left: calc(13% * var(--scale-factor)) !important;
+          }
+          
+          .hero-image {
+            right: calc(40% * var(--scale-factor)) !important;
+            transform: translateY(9%) scale(calc(1.2 * var(--scale-factor))) !important;
           }
         }
       `}</style>
@@ -224,7 +304,7 @@ const HomeBanner = () => {
   );
 };
 
-/* ===================== ORIGINAL STYLES (keep as is) ===================== */
+/* ===================== ORIGINAL STYLES ===================== */
 
 const containerStyle = {
   position: 'relative',
@@ -255,7 +335,7 @@ const logoContainerStyle = {
   alignItems: 'center',
   justifyContent: 'center',
   zIndex: 10,
-  className: 'logo-container', // Added class for media queries
+  className: 'logo-container',
 };
 
 const logoStyle = {
@@ -320,7 +400,7 @@ const textColumnStyle = {
   maxWidth: '520px',
   marginLeft: '0',
   paddingLeft: '13%',
-  className: 'text-column', // Added class for media queries
+  className: 'text-column',
 };
 
 const h1Style = {
@@ -333,10 +413,8 @@ const h1Style = {
   color: '#fff',
   alignSelf: 'flex-start',
   width: '100%',
-  textIndent: '100',
-  paddingLeft: '0',
   textAlign: 'left',
-  className: 'h1-title', // Added class for media queries
+  className: 'h1-title',
 };
 
 const descStyle = {
@@ -351,7 +429,7 @@ const descStyle = {
   alignSelf: 'flex-start',
   textAlign: 'left',
   paddingLeft: '2%',
-  className: 'description', // Added class for media queries
+  className: 'description',
 };
 
 const buttonStyle = {
@@ -368,6 +446,7 @@ const buttonStyle = {
   cursor: 'pointer',
   transition: 'all 0.3s ease',
   alignSelf: 'flex-start',
+  className: 'play-button',
 };
 
 const imageWrapperStyle = {
@@ -389,7 +468,7 @@ const heroImageStyle = {
   position: 'relative',
   right: '40%',
   transform: 'translateY(9%) scale(1.2)',
-  className: 'hero-image', // Added class for media queries
+  className: 'hero-image',
 };
 
 export default HomeBanner;
