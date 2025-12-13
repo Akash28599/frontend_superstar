@@ -107,7 +107,7 @@ const HomeBanner = () => {
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
               >
-                Play Noww
+                Play Now
                 <div style={iconCircleStyle}>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff">
                     <polygon points="8,5 8,19 19,12" />
@@ -137,6 +137,15 @@ const HomeBanner = () => {
           .content-container {
             max-width: 1440px;
             margin: 0 auto;
+            gap: 50px;
+          }
+          
+          .logo-container {
+            left: 6%;
+          }
+          
+          .text-column {
+            padding-left: 13%;
           }
           
           .h1-title {
@@ -153,10 +162,12 @@ const HomeBanner = () => {
         @media (min-width: 1920px) {
           .content-container {
             max-width: 1600px;
+            gap: 80px;
+            padding: 0 7%;
           }
           
           .logo-container {
-            left: 7%;
+            left: 9%;
             width: 10rem;
             height: 12rem;
           }
@@ -166,12 +177,16 @@ const HomeBanner = () => {
             height: 155px;
           }
           
-          .h1-title {
-            font-size: 100px;
+          .text-container {
+            padding-left: 15%;
           }
           
           .text-column {
-            padding-left: 14%;
+            padding-left: 15%;
+          }
+          
+          .h1-title {
+            font-size: 100px;
           }
           
           .description {
@@ -183,25 +198,55 @@ const HomeBanner = () => {
             right: 25%;
             transform: translateY(10%) scale(1.2);
           }
+          
+          .badge {
+            margin-right: 15%;
+          }
         }
         
         /* 1600px to 1919px */
         @media (min-width: 1600px) and (max-width: 1919px) {
           .content-container {
-            max-width: 1400px;
+            max-width: 1500px;
+            gap: 60px;
+            padding: 0 6%;
           }
           
           .logo-container {
-            left: 6.5%;
+            left: 7%;
+            width: 9.5rem;
+            height: 11.5rem;
+          }
+          
+          .logo-container img {
+            width: 95px;
+            height: 148px;
+          }
+          
+          .text-container {
+            padding-left: 14%;
+          }
+          
+          .text-column {
+            padding-left: 14%;
           }
           
           .h1-title {
             font-size: 95px;
           }
           
+          .description {
+            font-size: 1.35rem;
+            max-width: 550px;
+          }
+          
           .hero-image {
-            right: 28%;
+            right: 30%;
             transform: translateY(10%) scale(1.15);
+          }
+          
+          .badge {
+            margin-right: 12%;
           }
         }
         
@@ -209,10 +254,12 @@ const HomeBanner = () => {
         @media (min-width: 1200px) and (max-width: 1599px) {
           .content-container {
             max-width: 1200px;
+            gap: 40px;
+            padding: 0 4%;
           }
           
           .logo-container {
-            left: 5.5%;
+            left: 5%;
             width: 8rem;
             height: 10rem;
           }
@@ -222,12 +269,16 @@ const HomeBanner = () => {
             height: 125px;
           }
           
-          .h1-title {
-            font-size: 80px;
+          .text-container {
+            padding-left: 11%;
           }
           
           .text-column {
-            padding-left: 12%;
+            padding-left: 11%;
+          }
+          
+          .h1-title {
+            font-size: 80px;
           }
           
           .description {
@@ -236,19 +287,25 @@ const HomeBanner = () => {
           }
           
           .hero-image {
-            right: 32%;
+            right: 35%;
             transform: translateY(10%) scale(1);
+          }
+          
+          .badge {
+            margin-right: 8%;
           }
         }
         
         /* 1024px to 1199px (Small laptops) */
         @media (min-width: 1024px) and (max-width: 1199px) {
           .content-container {
-            max-width: 1100px;
+            max-width: 1024px;
+            gap: 30px;
+            padding: 0 3%;
           }
           
           .logo-container {
-            left: 5%;
+            left: 4%;
             width: 7rem;
             height: 9rem;
           }
@@ -258,12 +315,16 @@ const HomeBanner = () => {
             height: 110px;
           }
           
-          .h1-title {
-            font-size: 70px;
+          .text-container {
+            padding-left: 10%;
           }
           
           .text-column {
-            padding-left: 11%;
+            padding-left: 10%;
+          }
+          
+          .h1-title {
+            font-size: 70px;
           }
           
           .description {
@@ -272,8 +333,22 @@ const HomeBanner = () => {
           }
           
           .hero-image {
-            right: 35%;
+            right: 40%;
             transform: translateY(10%) scale(0.95);
+          }
+          
+          .badge {
+            margin-right: 5%;
+            padding: 0.7rem 1.4rem;
+          }
+          
+          .badge h3 {
+            font-size: 1.1rem;
+          }
+          
+          button {
+            font-size: 1.3rem;
+            padding: 0.8rem 1.9rem;
           }
         }
         
@@ -281,11 +356,12 @@ const HomeBanner = () => {
         @media (min-width: 800px) and (max-width: 1023px) {
           .content-container {
             max-width: 900px;
-            gap: 30px;
+            gap: 20px;
+            padding: 0 2%;
           }
           
           .logo-container {
-            left: 4%;
+            left: 3%;
             width: 6rem;
             height: 8rem;
             border-radius: 0 0 20px 20px;
@@ -297,12 +373,16 @@ const HomeBanner = () => {
             border-radius: 12px;
           }
           
-          .h1-title {
-            font-size: 60px;
+          .text-container {
+            padding-left: 8%;
           }
           
           .text-column {
-            padding-left: 10%;
+            padding-left: 8%;
+          }
+          
+          .h1-title {
+            font-size: 60px;
           }
           
           .description {
@@ -311,12 +391,13 @@ const HomeBanner = () => {
           }
           
           .hero-image {
-            right: 40%;
+            right: 45%;
             transform: translateY(10%) scale(0.85);
           }
           
           .badge {
             padding: 0.6rem 1.2rem;
+            margin-right: 3%;
           }
           
           .badge h3 {
@@ -326,6 +407,45 @@ const HomeBanner = () => {
           button {
             font-size: 1.2rem;
             padding: 0.7rem 1.8rem;
+          }
+        }
+        
+        /* Special fix for screens between 1300px-1400px where overlap happens */
+        @media (min-width: 1300px) and (max-width: 1400px) {
+          .logo-container {
+            left: 5.5%;
+          }
+          
+          .text-container {
+            padding-left: 12%;
+          }
+          
+          .text-column {
+            padding-left: 12%;
+          }
+          
+          .hero-image {
+            right: 38%;
+            transform: translateY(10%) scale(1.05);
+          }
+        }
+        
+        /* Special fix for screens between 1100px-1200px */
+        @media (min-width: 1100px) and (max-width: 1199px) {
+          .logo-container {
+            left: 4.5%;
+          }
+          
+          .text-container {
+            padding-left: 10.5%;
+          }
+          
+          .text-column {
+            padding-left: 10.5%;
+          }
+          
+          .hero-image {
+            right: 42%;
           }
         }
       `}</style>
@@ -399,6 +519,7 @@ const textContainerStyle = {
   flexDirection: 'column',
   width: '100%',
   paddingLeft: '12%',
+  className: 'text-container',
 };
 
 const badgeContainerStyle = {
@@ -498,8 +619,8 @@ const heroImageStyle = {
   maxHeight: '97vh',
   objectFit: 'contain',
   position: 'relative',
-  right: '39%',
-  transform: 'translateY(10%) scale(1.2)',
+  right: '35%',
+  transform: 'translateY(10%) scale(1.1)',
   className: 'hero-image',
 };
 
