@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import '../fonts.css';
 
 export default function PrintableGames() {
   const [items, setItems] = useState([]);
@@ -56,10 +57,22 @@ export default function PrintableGames() {
   if (loading) {
     return (
       <section style={{ padding: "4rem 2rem", textAlign: "center" }}>
-        <h2 style={{ fontSize: "2.4rem", marginBottom: ".5rem" }}>
+        <h2 style={{ 
+          fontSize: "2.4rem", 
+          marginBottom: ".5rem",
+          fontFamily: "'Kellogg's Sans', sans-serif",
+          fontWeight: 700,
+          color: "red"
+        }}>
           Printable games
         </h2>
-        <p style={{ maxWidth: 880, margin: "0 auto 2rem", color: "#666" }}>
+        <p style={{ 
+          maxWidth: 880, 
+          margin: "0 auto 2rem", 
+          color: "#666",
+          fontFamily: "'Kellogg's Sans', sans-serif",
+          fontWeight: 400
+        }}>
           Loading printable games — please wait.
         </p>
       </section>
@@ -91,11 +104,13 @@ export default function PrintableGames() {
         >
           <h2
             style={{
-              fontSize: "3rem",
+              fontSize: "3.4rem",
               margin: 0,
-              fontWeight: 800,
+           
               color: "red",
-              fontFamily: "'Baloo 2', system-ui, sans-serif",
+              fontFamily: "'Kellogg's Sans', sans-serif",
+                 fontWeight: "medium",
+              letterSpacing: "0%",
             }}
           >
             Printable games
@@ -109,7 +124,7 @@ export default function PrintableGames() {
             gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
             gap: 20,
             alignItems: "stretch",
-            marginBottom: "3rem" // Added space for See More button
+            marginBottom: "3rem"
           }}
         >
           {items.map((item) => {
@@ -170,6 +185,8 @@ export default function PrintableGames() {
                         justifyContent: "center",
                         color: "#aaa",
                         background: "#fafafa",
+                        fontFamily: "'Kellogg's Sans', sans-serif",
+                        fontWeight: 400,
                       }}
                     >
                       No image
@@ -186,6 +203,7 @@ export default function PrintableGames() {
                     width: "100%",
                     marginTop: 18,
                     padding: "0 8px 8px",
+                    gap:'2px'
                   }}
                 >
                   <div style={{ textAlign: "left" }}>
@@ -196,12 +214,12 @@ export default function PrintableGames() {
                         fontWeight: 800,
                         marginBottom: 6,
                         textTransform: "capitalize",
+                        fontFamily: "'Kellogg's Sans', sans-serif",
+                        letterSpacing: "0%",
+                        paddingLeft:'12%'
                       }}
                     >
                       Download
-                    </div>
-                    <div style={{ color: "#888", fontSize: 14 }}>
-                      {hasPdf ? printable.name : "Not available"}
                     </div>
                   </div>
 
@@ -242,7 +260,7 @@ export default function PrintableGames() {
             onMouseEnter={() => setShowMoreHovered(true)}
             onMouseLeave={() => setShowMoreHovered(false)}
             style={{
-                   background: showMoreHovered ? "#FCD34D" : "transparent",
+              background: showMoreHovered ? "#FCD34D" : "transparent",
               border: "none",
               color: "#f21f4d",
               fontSize: "1.4rem",
@@ -253,9 +271,10 @@ export default function PrintableGames() {
               gap: "12px",
               padding: "12px 24px",
               borderRadius: "50px",
-              fontFamily: "'Baloo 2', system-ui, sans-serif",
+              fontFamily: "'Kellogg's Sans', sans-serif",
               transition: "all 0.3s ease",
-              boxShadow: showMoreHovered ? "0 8px 25px rgba(252, 211, 77, 0.4)" : "none"
+              boxShadow: showMoreHovered ? "0 8px 25px rgba(252, 211, 77, 0.4)" : "none",
+              letterSpacing: "0%",
             }}
           >
             <svg

@@ -1,22 +1,21 @@
-// CocoBanner.jsx
-import { Box, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import cloudImg from "../cloud1.png";
 import waveImage from "../cocobanner.png";
+import '../fonts.css';
 
-export default function CocoBanner() {
+const CocoBanner = () => {
   const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const fetchBanner = async () => {
     try {
-      const res = await fetch(
-        "https://correct-prize-f0a5924469.strapiapp.com/api/cocobanners?populate=*"
-      );
+      const res = await fetch('https://correct-prize-f0a5924469.strapiapp.com/api/cocobanners?populate=*');
       const resData = await res.json();
-      console.log(resData.data[0]);
-      setData(resData.data[0]);
-    } catch (err) {
-      console.error("Failed fetching CocoBanner:", err);
+      setData(resData.data ? resData.data[0] : null);
+    } catch (error) {
+      console.error('Error fetching banner:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -24,154 +23,107 @@ export default function CocoBanner() {
     fetchBanner();
   }, []);
 
-  if (!data) return null;
+  if (loading) return <div>Loading...</div>;
+  if (!data) return <div>No data available</div>;
 
   const title = data.title;
   const description = data.description;
-  const charImg = data.image?.url || null;
+  const charImg = data.image?.url ?? null;
 
   return (
-    <Box sx={{ position: "relative", width: "100%", height: "auto" }}>
-      {/* Wave */}
-      <img
-        src={waveImage}
-        style={{ width: "100%", display: "block", position: "relative"}}
-        alt="wave"
+    <div style={{ position: "relative", width: "100%", height: "auto" }}>
+      
+      {/* wave background */}
+      <img 
+        src={waveImage} 
+        alt="wave background" 
+        style={{ width: "100%", display: "block", position: "relative" }} 
       />
 
-      {/* CHARACTER IMAGE - LEFT SIDE */}
+      {/* character image */}
       {charImg && (
-        <img
-          src={charImg}
-          alt="character"
-          style={{
-            position: "absolute",
-            bottom: "170px",
-            left: "0px",
-            zIndex: 1000,
+        <img 
+          src={charImg} 
+          alt="character" 
+          style={{ 
+            position: "absolute", 
+            bottom: "19%", 
+            left: "14%", 
+            transform: "translateX(-50%)", 
+            zIndex: 2, 
             pointerEvents: "none",
-            maxWidth: "670px",
-            height: "700px"
+            maxWidth: "100%",
+            height: "auto"
           }}
         />
       )}
 
-      {/* MAIN CONTENT - CENTER TEXT + RIGHT CLOUD */}
-      <Box
-        sx={{
-          position: "absolute",
-          top: "520px",
-          left: "58%",
-          transform: "translateX(-50%)",
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          gap: 2,
+      {/* title cloud */}
+      {cloudImg && (
+        <img 
+          src={cloudImg} 
+          alt="cloud" 
+          style={{ 
+            position: "absolute", 
+            top: "35%", 
+            right: "11%", 
+            zIndex: 1, 
+            pointerEvents: "none",
+            maxWidth: "100%",
+            height: "auto"
+          }}
+        />
+      )}
+
+      {/* spoon cloud */}
+
+      {/* Text content */}
+      <div 
+        style={{ 
+          display: "flex", 
+          flexDirection: "column", 
+          gap: "12px", 
+          position: "absolute", 
+          top: "42%", 
+          left: "22%",  
+          textAlign: "center", 
+          color: "white", 
           zIndex: 2,
-          maxWidth: "1200px",
-          width: "90%"
+          maxWidth: "80%"
         }}
       >
-        {/* SMALLER LEFT SPACER */}
-        <Box sx={{ flex: 0.5, minWidth: "100px" }} />
-
-        {/* STYLISH 2-LINE HEADING */}
-        <Box
-          sx={{
-            flex: 4,
-            display: "flex",
-            flexDirection: "column",
-            gap: 1,
-            textAlign: "center",
-            color: "white",
-            maxWidth: "1000px",
-            width: "100%"
+        <h1 
+          style={{ 
+            fontFamily: "'Kellogg's Sans', sans-serif",
+            fontWeight: 650,
+            marginBottom: "16px", 
+            maxWidth: "72%",
+            fontSize: "5.3rem",
+            lineHeight: 1.2,
+            letterSpacing: "0%",
           }}
         >
-          
+          {title}
+        </h1>
 
-          {/* STYLISH 2-LINE "Built for kids, Loved by parents" */}
-          <Box sx={{ 
-            display: "flex", 
-            flexDirection: "column", 
-            alignItems: "center", 
-            gap: "0.2rem",
-            position: "relative"
-          }}>
-            <Typography
-              variant="h5"
-              sx={{
-                fontWeight: 1700,
-                color: "white",
-                fontSize: "4.5rem",
-                lineHeight: "1.1",
-                letterSpacing: "0.5px",
-                mb: 0,
-                position: "relative",
-                zIndex: 3,
-                textShadow: "2px 2px 4px rgba(0,0,0,0.3)"
-              }}
-            >
-              Built for kids,Loved
-            </Typography>
-            
-            <Typography
-              variant="h4"
-              sx={{
-                fontWeight: 1700,  // Extra bold
-                color: "white !important",
-                fontSize: "4.5rem",
-                lineHeight: "1.1",
-                letterSpacing: "-0.5px",
-                mb: 0,
-                position: "relative",
-                zIndex: 3,
-                textShadow: "3px 3px 6px rgba(0,0,0,0.4)",
-                mt: "-10px"  // Overlap effect
-              }}
-            >
-               by parents
-            </Typography>
-          </Box>
-
-          {/* DESCRIPTION */}
-          <Typography
-            variant="body1"
-            dangerouslySetInnerHTML={{ __html: description }}
-            sx={{
-              opacity: 0.95,
-              fontWeight: 500,
-              lineHeight: "30px",
-              color: "white !important",
-              maxWidth: "none",
-              mt: 3
-            }}
-          />
-        </Box>
-
-        {/* RIGHT CLOUD */}
-        <Box
-          sx={{
-            flex: 0.8,
-            display: "flex",
-            justifyContent: "flex-end",
-            minWidth: "250px",
+        <div 
+          dangerouslySetInnerHTML={{ __html: description }}
+          style={{ 
+             fontStyle: 'italic', 
+            opacity: 0.9, 
+            maxWidth: "75%", 
             position:'relative',
-            right:"80px",
-            bottom:"190px"
+            lineHeight: "1.2",
+            fontSize: "2.1rem",
+            letterSpacing: "0%",
+            right:"3%",
+            bottom:'3%'
+            
           }}
-        >
-          <img
-            src={cloudImg}
-            alt="cloud icon"
-            style={{
-              width: "160px",
-              height: "auto",
-              pointerEvents: "none"
-            }}
-          />
-        </Box>
-      </Box>
-    </Box>
+        />
+      </div>
+    </div>
   );
-}
+};
+
+export default CocoBanner;

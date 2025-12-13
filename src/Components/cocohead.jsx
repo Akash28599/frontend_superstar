@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 const CocoHeads = () => {
   const [items, setItems] = useState([]);
   const [head, setHead] = useState(null);
+  const [starImage, setStarImage] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -12,9 +13,24 @@ const CocoHeads = () => {
         const data = json.data || [];
         // pick first item with thumbnail as head
         const headItem = data.find(d => d.thumbnail);
+        
+        // find star image (item without icon_description)
+        const starItem = data.find(d => !d.icon_description && d.icons);
+        
         // remaining items that look like icons (has icon_description)
         const iconItems = data.filter(d => d.icon_description && d.icon_description.title);
+        
         setHead(headItem || null);
+        
+        // Get star image URL
+        if (starItem?.icons) {
+          const starUrl = 
+            starItem.icons.formats?.small?.url ||
+            starItem.icons.formats?.thumbnail?.url ||
+            starItem.icons.url;
+          setStarImage(starUrl);
+        }
+        
         setItems(iconItems);
         setLoading(false);
       })
@@ -30,20 +46,49 @@ const CocoHeads = () => {
         justifyContent: 'center',
         padding: '3rem 0',
         backgroundColor: 'white',
+        position: 'relative', // For absolute positioning of star
       }}
     >
+      {/* Star image - positioned absolutely outside yellow div */}
+      {starImage && (
+        <div
+          style={{
+            position: 'absolute',
+            left: '-5%', // Adjust left position as needed
+            top: '17%', // Center vertically
+            transform: 'translateY(-50%)',
+            pointerEvents: 'none',
+            zIndex: 2,
+          }}
+        >
+          <img
+            src={starImage}
+            alt="Stars"
+            style={{
+              width: '322px', // Original width from API
+              height: '543px', // Original height from API
+              objectFit: 'contain',
+              display: 'block',
+            }}
+          />
+        </div>
+      )}
+
       {/* Yellow main container */}
       <div
         style={{
-          width: '70%',
+          width: '980px', // Fixed width
           backgroundColor: '#FBCA05',
           borderRadius: '32px',
-          padding: '3rem 3rem 3rem 220px', // left padding to make room for floating head
+          padding: '0.3rem 0.1rem 2.2rem 140px',
           display: 'flex',
           alignItems: 'flex-start',
           position: 'relative',
           overflow: 'visible',
-          gap: '3rem',
+          gap: '1rem',
+          minHeight: '234px', // Fixed height
+          height: '274px', // Fixed height
+          left:'4%'
         }}
       >
         {/* Left: Coco head (floating) */}
@@ -51,8 +96,8 @@ const CocoHeads = () => {
           <div
             style={{
               position: 'absolute',
-              left: '-80px',
-              top: '-60px',
+              left: '-30px',
+              top: '-40px',
               pointerEvents: 'none',
             }}
           >
@@ -60,8 +105,8 @@ const CocoHeads = () => {
               src={head.thumbnail.url}
               alt="Coco head"
               style={{
-                width: '460px',
-                height: '420px',
+                width: '416.5469970703125px', // Exact width
+                height: '351.79876708984375px', // Exact height
                 objectFit: 'contain',
                 display: 'block',
               }}
@@ -73,17 +118,15 @@ const CocoHeads = () => {
         <div
           style={{
             display: 'flex',
-            
-      
             gap: '1rem',
-            alignItems: 'flex-start', // keep tops aligned
+            alignItems: 'flex-start',
             width: '100%',
             boxSizing: 'border-box',
-            marginLeft:"23%"
+            marginLeft: '23%'
           }}
         >
           {items.map(item => {
-            // normalize icon url (some records use different fields)
+            // normalize icon url
             const iconUrl =
               item.icons?.url ||
               item.icon?.url ||
@@ -102,8 +145,8 @@ const CocoHeads = () => {
                   flexDirection: 'column',
                   alignItems: 'center',
                   textAlign: 'center',
-                  width: '220px', // fixed width for every card
-                  minHeight: '220px', // enforce same vertical space
+                  width: '220px',
+                  minHeight: '220px',
                   boxSizing: 'border-box',
                   padding: '0.6rem',
                 }}
@@ -114,8 +157,8 @@ const CocoHeads = () => {
                     src={iconUrl}
                     alt={item.icon_description?.title || 'icon'}
                     style={{
-                      width: '80px',
-                      height: '80px',
+                      width: '75px', // Updated width
+                      height: '62px', // Updated height
                       objectFit: 'contain',
                       marginBottom: '1rem',
                       display: 'block',
@@ -124,8 +167,8 @@ const CocoHeads = () => {
                 ) : (
                   <div
                     style={{
-                      width: '80px',
-                      height: '80px',
+                      width: '75px',
+                      height: '62px',
                       borderRadius: '12px',
                       backgroundColor: 'rgba(0,0,0,0.06)',
                       marginBottom: '1rem',
@@ -133,18 +176,21 @@ const CocoHeads = () => {
                   />
                 )}
 
-                {/* TITLE: keep minHeight so descriptions align */}
+                {/* TITLE */}
                 <h3
                   style={{
-                    fontSize: '1.3rem',
-                    fontWeight: 800,
-                    color: 'black',
+                    fontFamily: "'Kellogg's Sans', sans-serif",
+                    fontWeight: 700, // Regular
+                    fontSize: '20px',
+                    lineHeight: '19px',
+                    letterSpacing: '0%',
+                    textAlign: 'center',
+                    color: '#2A2F2F', // Heading color
                     margin: '0 0 0.6rem 0',
-                    minHeight: '52px', // <-- critical: ensures titles consume same vertical space
+                    minHeight: '52px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    textAlign: 'center',
                     padding: '0 0.4rem',
                   }}
                 >
@@ -154,10 +200,12 @@ const CocoHeads = () => {
                 {/* DESCRIPTION */}
                 <p
                   style={{
+                    fontFamily: "'Kellogg's Sans', sans-serif", // Same font for description
+                    fontWeight: 400, // Regular
                     fontSize: '0.95rem',
-                    color: '#3b2a00',
-                    margin: 0,
                     lineHeight: 1.4,
+                    color: '#2A2F2F', // Description color
+                    margin: 0,
                   }}
                 >
                   {desc}

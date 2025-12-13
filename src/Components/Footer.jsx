@@ -34,7 +34,7 @@ const FooterLayout = () => {
   return (
     <Box>
       <Box sx={{ background: "#F60945" }}>
-        <Box sx={{ p: 10, display: "flex", justifyContent: "space-between" }}>
+        <Box sx={{ p: 10, display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
           {/* LOGO */}
           {settings?.logo?.url ? (
             <img
@@ -70,107 +70,154 @@ const FooterLayout = () => {
           <Grid
             container
             sx={{
-              mr: 10,
               fontWeight: 400,
               fontSize: "28.58px",
               lineHeight: "217%",
               color: "#fff",
+              flex: 1,
+              maxWidth: "70%",
             }}
-            spacing={10}
+            spacing={15}
           >
-            <Grid>
-              Company
-              <List sx={{ fontSize: "18px", lineHeight: "217%" }}>
-                <ListItem>About Us</ListItem>
-                <ListItem>Our Blog</ListItem>
-                <ListItem>Collaboration</ListItem>
-              </List>
+            {/* COMPANY SECTION */}
+            <Grid item xs={4}>
+              <Box sx={{ 
+                display: 'flex', 
+                flexDirection: 'column',
+                height: '100%'
+              }}>
+                <Box sx={{ 
+                  mb: 1 // Consistent margin for all headings
+                }}>
+                  Company
+                </Box>
+                <List sx={{ 
+                  fontSize: "18px", 
+                  lineHeight: "217%", 
+                  p: 0, // Remove padding
+                  m: 0 // Remove margin
+                }}>
+                  <ListItem sx={{ pl: 0, py: 0.5 }}>About Us</ListItem>
+                  <ListItem sx={{ pl: 0, py: 0.5 }}>Our Blog</ListItem>
+                  <ListItem sx={{ pl: 0, py: 0.5 }}>Collaboration</ListItem>
+                </List>
+              </Box>
             </Grid>
 
-            <Grid>
-              More Info
-              <List sx={{ fontSize: "18px", lineHeight: "217%" }}>
-                <ListItem>Contact:+234 801 234</ListItem>
-                <ListItem>Privacy Policy</ListItem>
-                <ListItem>Sitemap</ListItem>
-              </List>
+            {/* MORE INFO SECTION */}
+            <Grid item xs={4}>
+              <Box sx={{ 
+                display: 'flex', 
+                flexDirection: 'column',
+                height: '100%'
+              }}>
+                <Box sx={{ 
+                  mb: 1 // Same margin as Company
+                }}>
+                  More Info
+                </Box>
+                <List sx={{ 
+                  fontSize: "18px", 
+                  lineHeight: "217%", 
+                  p: 0,
+                  m: 0
+                }}>
+                  <ListItem sx={{ pl: 0, py: 0.5 }}>Contact:+234 801 234</ListItem>
+                  <ListItem sx={{ pl: 0, py: 0.5 }}>Privacy Policy</ListItem>
+                  <ListItem sx={{ pl: 0, py: 0.5 }}>Sitemap</ListItem>
+                </List>
+              </Box>
             </Grid>
 
-            <Grid>
-              Location
-              <List sx={{ fontSize: "18px", lineHeight: "217%" }}>
-                <ListItem>{settings?.contactemail ?? "—"}</ListItem>
-                <ListItem>{addressLines[0] ?? "—"}</ListItem>
-                <ListItem>{addressLines[1] ?? ""}</ListItem>
-              </List>
+            {/* LOCATION SECTION */}
+            <Grid item xs={4}>
+              <Box sx={{ 
+                display: 'flex', 
+                flexDirection: 'column',
+                height: '100%'
+              }}>
+                <Box sx={{ 
+                  mb: 1 // Same margin as others
+                }}>
+                  Location
+                </Box>
+                <List sx={{ 
+                  fontSize: "18px", 
+                  lineHeight: "217%", 
+                  p: 0,
+                  m: 0
+                }}>
+                  <ListItem sx={{ pl: 0, py: 0.5 }}>{settings?.contactemail ?? "—"}</ListItem>
+                  <ListItem sx={{ pl: 0, py: 0.5 }}>{addressLines[0] ?? "—"}</ListItem>
+                  <ListItem sx={{ pl: 0, py: 0.5 }}>{addressLines[1] ?? ""}</ListItem>
+                </List>
+                
+                {/* SOCIAL ICONS */}
+                <Box
+                  sx={{
+                    display: "flex",
+                    gap: 1,
+                    mt: 3, // Consistent margin from list items
+                  }}
+                >
+                  <IconButton
+                    sx={{
+                      borderRadius: 2,
+                      background: "#fff",
+                      "&:hover": { background: "#e2e2e2" },
+                    }}
+                    onClick={() => openUrl(settings?.facebookurl)}
+                  >
+                    <Facebook sx={{ color: "#111" }} />
+                  </IconButton>
+
+                  <IconButton
+                    sx={{
+                      borderRadius: 2,
+                      background: "#fff",
+                      "&:hover": { background: "#e2e2e2" },
+                    }}
+                    onClick={() => openUrl(settings?.instagramurl)}
+                  >
+                    <Instagram sx={{ color: "#111" }} />
+                  </IconButton>
+
+                  <IconButton
+                    sx={{
+                      borderRadius: 2,
+                      background: "#fff",
+                      "&:hover": { background: "#e2e2e2" },
+                    }}
+                    onClick={() => openUrl(settings?.twitterurl)}
+                  >
+                    <Twitter sx={{ color: "#111" }} />
+                  </IconButton>
+
+                  <IconButton
+                    sx={{
+                      borderRadius: 2,
+                      background: "#fff",
+                      "&:hover": { background: "#e2e2e2" },
+                    }}
+                    onClick={() => openUrl(settings?.youtubeurl)}
+                  >
+                    <YouTube sx={{ color: "#111" }} />
+                  </IconButton>
+
+                  <IconButton
+                    sx={{
+                      borderRadius: 2,
+                      background: "#fff",
+                      "&:hover": { background: "#e2e2e2" },
+                    }}
+                    onClick={() => openUrl(settings?.tiktokurl)}
+                  >
+                    <BiLogoTiktok style={{ color: "#111" }} />
+                  </IconButton>
+                </Box>
+              </Box>
             </Grid>
           </Grid>
-        </Box>
-
-        {/* SOCIAL ICONS */}
-        <Box
-          sx={{
-            width: "100%",
-            display: "flex",
-            justifyContent: "center",
-            gap: 1,
-            p: "0 20% 2% 20%",
-          }}
-        >
-          <IconButton
-            sx={{
-              borderRadius: 2,
-              background: "#fff",
-              "&:hover": { background: "#e2e2e2" },
-            }}
-            onClick={() => openUrl(settings?.facebookurl)}
-          >
-            <Facebook sx={{ color: "#111" }} />
-          </IconButton>
-
-          <IconButton
-            sx={{
-              borderRadius: 2,
-              background: "#fff",
-              "&:hover": { background: "#e2e2e2" },
-            }}
-            onClick={() => openUrl(settings?.instagramurl)}
-          >
-            <Instagram sx={{ color: "#111" }} />
-          </IconButton>
-
-          <IconButton
-            sx={{
-              borderRadius: 2,
-              background: "#fff",
-              "&:hover": { background: "#e2e2e2" },
-            }}
-            onClick={() => openUrl(settings?.twitterurl)}
-          >
-            <Twitter sx={{ color: "#111" }} />
-          </IconButton>
-
-          <IconButton
-            sx={{
-              borderRadius: 2,
-              background: "#fff",
-              "&:hover": { background: "#e2e2e2" },
-            }}
-            onClick={() => openUrl(settings?.youtubeurl)}
-          >
-            <YouTube sx={{ color: "#111" }} />
-          </IconButton>
-
-          <IconButton
-            sx={{
-              borderRadius: 2,
-              background: "#fff",
-              "&:hover": { background: "#e2e2e2" },
-            }}
-            onClick={() => openUrl(settings?.tiktokurl)}
-          >
-            <BiLogoTiktok style={{ color: "#111" }} />
-          </IconButton>
         </Box>
       </Box>
 
