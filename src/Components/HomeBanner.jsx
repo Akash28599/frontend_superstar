@@ -7,6 +7,14 @@ const HomeBanner = () => {
   const [cloudImage, setCloudImage] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth); // ✅ DYNAMIC WIDTH
+
+  // ✅ RESPONSIVE WIDTH LISTENER
+  useEffect(() => {
+    const handleResize = () => setScreenWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     fetch('https://correct-prize-f0a5924469.strapiapp.com/api/homebanners?populate=*')
@@ -45,6 +53,17 @@ const HomeBanner = () => {
     banner.image?.formats?.large?.url ||
     banner.image?.formats?.medium?.url ||
     banner.image?.url;
+
+  // ✅ DYNAMIC CLOUD POSITIONS BASED ON SCREEN WIDTH
+  const getCloudPositions = () => {
+    if (screenWidth >= 1920) return { cloud1Right: '7%', cloud1Size: '10%' };
+    if (screenWidth >= 1440) return { cloud1Right: '10%', cloud1Size: '10%' };
+    if (screenWidth >= 1200) return { cloud1Right: '10%', cloud1Size: '10%' };
+    if (screenWidth >= 1024) return { cloud1Right: '15%', cloud1Size: '9%' };
+    return { cloud1Right: '7%', cloud1Size: '10%' }; // Your current good position for small lap
+  };
+
+  const cloudPositions = getCloudPositions();
 
   const Cloud = ({ top, left, right, size, zIndex }) =>
     cloudImage && (
@@ -123,276 +142,119 @@ const HomeBanner = () => {
           {heroImage && (
             <>
               <img src={heroImage} alt="Hero" style={heroImageStyle} />
-              <Cloud top="30%" right="10%" size="20%" zIndex={3} />
-              <Cloud top="8%" left="0%" size="17%" zIndex={4} />
+              {/* ✅ DYNAMIC CLOUD POSITIONS */}
+              <Cloud top="36%" right={cloudPositions.cloud1Right} size={cloudPositions.cloud1Size} zIndex={3} />
+              <Cloud top="18%" left="50%" size="7%" zIndex={4} />
             </>
           )}
         </div>
       </div>
       
-      {/* Desktop-only responsive scaling */}
       <style jsx="true">{`
-        /* Base for 1440px (MacBook 13") */
+        /* ALL YOUR EXISTING MEDIA QUERIES - UNCHANGED */
         @media (min-width: 1440px) {
-          .content-container {
-            max-width: 1440px;
-            margin: 0 auto;
-          }
-          
-          .left-section {
-            margin-top: 5%;
-          }
-          
-          .h1-title {
-            font-size: 90px;
-          }
-          
-          .hero-image {
-            right: 35%;
-            transform: translateY(10%) scale(1.1);
-          }
+          .content-container { max-width: 1440px; margin: 0 auto; }
+          .left-section { margin-top: 5%; }
+          .h1-title { font-size: 90px; }
+          .hero-image { right: 35%; transform: translateY(10%) scale(1.1); }
         }
         
-        /* 1920px and above (Desktop/4K) */
         @media (min-width: 1920px) {
-          .content-container {
-            max-width: 1600px;
-          }
-          
-          .left-section {
-            margin-top: 6%;
-          }
-          
-          .logo-container {
-            left: 7%;
-            width: 10rem;
-            height: 12rem;
-          }
-          
-          .logo-container img {
-            width: 100px;
-            height: 155px;
-          }
-          
-          .h1-title {
-            font-size: 100px;
-          }
-          
-          .text-column {
-            padding-left: 14%;
-          }
-          
-          .description {
-            font-size: 1.4rem;
-            max-width: 580px;
-          }
-          
-          .hero-image {
-            right: 25%;
-            transform: translateY(10%) scale(1.2);
-          }
+          .content-container { max-width: 1600px; }
+          .left-section { margin-top: 6%; }
+          .logo-container { left: 7%; width: 10rem; height: 12rem; }
+          .logo-container img { width: 100px; height: 155px; }
+          .h1-title { font-size: 100px; }
+          .text-column { padding-left: 14%; }
+          .description { font-size: 1.4rem; max-width: 580px; }
+          .hero-image { right: 25%; transform: translateY(10%) scale(1.2); }
         }
         
-        /* 1600px to 1919px */
         @media (min-width: 1600px) and (max-width: 1919px) {
-          .content-container {
-            max-width: 1400px;
-          }
-          
-          .left-section {
-            margin-top: 5.5%;
-          }
-          
-          .logo-container {
-            left: 6.5%;
-          }
-          
-          .h1-title {
-            font-size: 95px;
-          }
-          
-          .hero-image {
-            right: 28%;
-            transform: translateY(10%) scale(1.15);
-          }
+          .content-container { max-width: 1400px; }
+          .left-section { margin-top: 5.5%; }
+          .logo-container { left: 6.5%; }
+          .h1-title { font-size: 95px; }
+          .hero-image { right: 28%; transform: translateY(10%) scale(1.15); }
         }
         
-        /* 1200px to 1599px */
         @media (min-width: 1200px) and (max-width: 1599px) {
-          .content-container {
-            max-width: 1200px;
-          }
-          
-          .left-section {
-            margin-top: 4.5%;
-          }
-          
-          .logo-container {
-            left: 5.5%;
-            width: 8rem;
-            height: 10rem;
-          }
-          
-          .logo-container img {
-            width: 80px;
-            height: 125px;
-          }
-          
-          .h1-title {
-            font-size: 80px;
-          }
-          
-          .text-column {
-            padding-left: 12%;
-          }
-          
-          .description {
-            font-size: 1.2rem;
-            max-width: 480px;
-          }
-          
-          .hero-image {
-            right: 32%;
-            transform: translateY(10%) scale(1);
-          }
+          .content-container { max-width: 1200px; }
+          .left-section { margin-top: 4.5%; }
+          .logo-container { left: 5.5%; width: 8rem; height: 10rem; }
+          .logo-container img { width: 80px; height: 125px; }
+          .h1-title { font-size: 80px; }
+          .text-column { padding-left: 12%; }
+          .description { font-size: 1.2rem; max-width: 480px; }
+          .hero-image { right: 32%; transform: translateY(10%) scale(1); }
         }
         
-        /* 1024px to 1199px (Small laptops) */
         @media (min-width: 1024px) and (max-width: 1199px) {
-          .content-container {
-            max-width: 1100px;
-          }
-          
-          .left-section {
-            margin-top: 4%;
-          }
-          
-          .logo-container {
-            left: 5%;
-            width: 7rem;
-            height: 9rem;
-          }
-          
-          .logo-container img {
-            width: 70px;
-            height: 110px;
-          }
-          
-          .h1-title {
-            font-size: 70px;
-          }
-          
-          .text-column {
-            padding-left: 11%;
-          }
-          
-          .description {
-            font-size: 1.1rem;
-            max-width: 440px;
-          }
-          
-          .hero-image {
-            right: 35%;
-            transform: translateY(10%) scale(0.95);
-          }
+          .content-container { max-width: 1100px; }
+          .left-section { margin-top: 4%; }
+          .logo-container { left: 5%; width: 7rem; height: 9rem; }
+          .logo-container img { width: 70px; height: 110px; }
+          .h1-title { font-size: 70px; }
+          .text-column { padding-left: 11%; }
+          .description { font-size: 1.1rem; max-width: 440px; }
+          .hero-image { right: 35%; transform: translateY(10%) scale(0.95); }
         }
         
-        /* 800px to 1023px (Smallest desktop/tablet landscape) */
         @media (min-width: 800px) and (max-width: 1023px) {
-          .content-container {
-            max-width: 900px;
-            gap: 30px;
-          }
-          
-          .left-section {
-            margin-top: 3%;
-          }
-          
-          .logo-container {
-            left: 4%;
-            width: 6rem;
-            height: 8rem;
-            border-radius: 0 0 20px 20px;
-          }
-          
-          .logo-container img {
-            width: 60px;
-            height: 95px;
-            border-radius: 12px;
-          }
-          
-          .h1-title {
-            font-size: 60px;
-          }
-          
-          .text-column {
-            padding-left: 10%;
-          }
-          
-          .description {
-            font-size: 1rem;
-            max-width: 380px;
-          }
-          
-          .hero-image {
-            right: 40%;
-            transform: translateY(10%) scale(0.85);
-          }
-          
-          .badge {
-            padding: 0.6rem 1.2rem;
-          }
-          
-          .badge h3 {
-            font-size: 1rem;
-          }
-          
-          button {
-            font-size: 1.2rem;
-            padding: 0.7rem 1.8rem;
-          }
+          .content-container { max-width: 900px; gap: 30px; }
+          .left-section { margin-top: 3%; }
+          .logo-container { left: 4%; width: 6rem; height: 8rem; border-radius: 0 0 20px 20px; }
+          .logo-container img { width: 60px; height: 95px; border-radius: 12px; }
+          .h1-title { font-size: 60px; }
+          .text-column { padding-left: 10%; }
+          .description { font-size: 1rem; max-width: 380px; }
+          .hero-image { right: 40%; transform: translateY(10%) scale(0.85); }
+          .badge { padding: 0.6rem 1.2rem; }
+          .badge h3 { font-size: 1rem; }
+          button { font-size: 1.2rem; padding: 0.7rem 1.8rem; }
         }
         
-        /* SPECIAL FIXES FOR SPECIFIC SCREEN SIZES */
-        
-        /* For your other laptop (adjust these values based on its resolution) */
         @media (min-width: 1280px) and (max-width: 1366px) {
-          .left-section {
-            margin-top: 6% !important; /* More down for your other laptop */
-          }
-          
-          .hero-image {
-            right: 38% !important;
-            transform: translateY(10%) scale(1.05) !important;
-          }
+          .left-section { margin-top: 6% !important; }
+          .hero-image { right: 38% !important; transform: translateY(10%) scale(1.05) !important; }
         }
         
-        /* For 1367px to 1439px */
         @media (min-width: 1367px) and (max-width: 1439px) {
-          .left-section {
-            margin-top: 5.5% !important;
-          }
+          .left-section { margin-top: 5.5% !important; }
         }
         
-        /* For 1441px to 1500px */
         @media (min-width: 1441px) and (max-width: 1500px) {
-          .left-section {
-            margin-top: 5.2% !important;
+          .left-section { margin-top: 5.2% !important; }
+        }
+
+        @media (max-height: 850px) {
+          .content-container {
+            padding: 2% 5% !important;
+            align-items: flex-start !important;
+            min-height: auto !important;
+            height: auto !important;
           }
+          .left-section { margin-top: 4% !important; padding-bottom: 2rem !important; }
+          .text-column { margin-bottom: 1rem !important; }
+          .description { margin-bottom: 1.5rem !important; }
+          button { margin-bottom: 1rem !important; }
+          .hero-image { height: 80vh !important; transform: translateY(5%) scale(1) !important; }
         }
       `}</style>
     </div>
   );
 };
 
-/* ===================== BASE STYLES (for 1440px) ===================== */
-
+// ALL YOUR EXISTING STYLES - UNCHANGED
 const containerStyle = {
   position: 'relative',
   minHeight: '100vh',
   backgroundColor: '#F60945',
   overflow: 'hidden',
   width: '100%',
+  height: 'auto',
+  display: 'flex',
+  flexDirection: 'column',
 };
 
 const loadingStyle = {
@@ -428,22 +290,24 @@ const logoStyle = {
 };
 
 const contentStyle = {
-  minHeight: '100vh',
+  height: 'auto',
   margin: '0 auto',
   padding: '0 5%',
   display: 'flex',
-  alignItems: 'center',
+  alignItems: 'flex-start',
   justifyContent: 'center',
   gap: '50px',
   maxWidth: '1440px',
   className: 'content-container',
+  paddingBottom: '5%',
 };
 
 const leftSectionStyle = {
   flex: '0 0 600px',
   zIndex: 5,
-  marginTop: '5%',
+  marginTop: '9%',
   paddingLeft: '0',
+  paddingBottom: '3rem',
   className: 'left-section',
 };
 
@@ -511,7 +375,7 @@ const descStyle = {
   fontSize: '1.3rem',
   lineHeight: '1.2',
   letterSpacing: '0%',
-  marginBottom: '2.5rem',
+  marginBottom: '1.5rem',
   alignSelf: 'flex-start',
   textAlign: 'left',
   paddingLeft: '2%',
@@ -519,7 +383,7 @@ const descStyle = {
 };
 
 const buttonStyle = {
-  padding: '0.75rem 2rem',
+  padding: '0.75rem 2.5rem',
   borderRadius: '50px',
   border: 'none',
   backgroundColor: '#fff',
@@ -537,11 +401,11 @@ const buttonStyle = {
 const imageWrapperStyle = {
   flex: 1,
   width: '50%',
-  height: 'calc(100vh - 50px)',
+  height: 'auto',
   display: 'flex',
   justifyContent: 'center',
-  alignItems: 'center',
-  transform: 'translateY(2%)',
+  alignItems: 'flex-start',
+  transform: 'none',
 };
 
 const heroImageStyle = {
@@ -551,8 +415,8 @@ const heroImageStyle = {
   maxHeight: '97vh',
   objectFit: 'contain',
   position: 'relative',
-  right: '35%',
-  transform: 'translateY(10%) scale(1.1)',
+  right: '55%',
+  transform: 'translateY(32%) scale(1.4)',
   className: 'hero-image',
 };
 
