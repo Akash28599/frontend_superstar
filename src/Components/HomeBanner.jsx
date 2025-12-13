@@ -125,7 +125,7 @@ const HomeBanner = () => {
     position: 'relative',
     right: screenWidth >= 1440 ? '45%' : '40%',
     top: screenWidth >= 1440 ? '4%' : '0%',              // ✅ TOP UP: -5% → 0%
-    transform: screenWidth >= 1440 ? 'none' : 'translateY(18%) scale(1.4)',
+    transform: screenWidth >= 1440 ? 'none' : 'translateY(10%) scale(1.4)',
     className: 'hero-image',
   };
 
