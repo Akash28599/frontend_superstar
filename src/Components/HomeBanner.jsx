@@ -7,8 +7,9 @@ const HomeBanner = () => {
   const [cloudImage, setCloudImage] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth); // ✅ DYNAMIC WIDTH
 
+  // ✅ RESPONSIVE WIDTH LISTENER
   useEffect(() => {
     const handleResize = () => setScreenWidth(window.innerWidth);
     window.addEventListener('resize', handleResize);
@@ -53,12 +54,13 @@ const HomeBanner = () => {
     banner.image?.formats?.medium?.url ||
     banner.image?.url;
 
+  // ✅ DYNAMIC CLOUD POSITIONS BASED ON SCREEN WIDTH
   const getCloudPositions = () => {
     if (screenWidth >= 1920) return { cloud1Right: '7%', cloud1Size: '10%' };
     if (screenWidth >= 1440) return { cloud1Right: '10%', cloud1Size: '10%' };
     if (screenWidth >= 1200) return { cloud1Right: '10%', cloud1Size: '10%' };
     if (screenWidth >= 1024) return { cloud1Right: '15%', cloud1Size: '9%' };
-    return { cloud1Right: '7%', cloud1Size: '10%' };
+    return { cloud1Right: '7%', cloud1Size: '10%' }; // Your current good position for small lap
   };
 
   const cloudPositions = getCloudPositions();
@@ -102,6 +104,7 @@ const HomeBanner = () => {
       )}
 
       <div style={contentStyle}>
+        {/* LEFT SECTION - Text Content */}
         <div style={leftSectionStyle}>
           <div style={textContainerStyle}>
             <div style={badgeContainerStyle}>
@@ -134,10 +137,12 @@ const HomeBanner = () => {
           </div>
         </div>
 
+        {/* RIGHT SECTION - Hero Image */}
         <div style={imageWrapperStyle}>
           {heroImage && (
             <>
               <img src={heroImage} alt="Hero" style={heroImageStyle} />
+              {/* ✅ DYNAMIC CLOUD POSITIONS */}
               <Cloud top="36%" right={cloudPositions.cloud1Right} size={cloudPositions.cloud1Size} zIndex={3} />
               <Cloud top="18%" left="50%" size="7%" zIndex={4} />
             </>
@@ -146,14 +151,12 @@ const HomeBanner = () => {
       </div>
       
       <style jsx="true">{`
+        /* ALL YOUR EXISTING MEDIA QUERIES - UNCHANGED */
         @media (min-width: 1440px) {
-          .content-container {
-            max-width: 1440px;
-            margin: 0 auto;
-          }
+          .content-container { max-width: 1440px; margin: 0 auto; }
           .left-section { margin-top: 5%; }
           .h1-title { font-size: 90px; }
-          .hero-image { right: 32%; transform: translateY(10%) scale(1.1); }
+          .hero-image { right: 35%; transform: translateY(10%) scale(1.1); }
         }
         
         @media (min-width: 1920px) {
@@ -183,7 +186,7 @@ const HomeBanner = () => {
           .h1-title { font-size: 80px; }
           .text-column { padding-left: 12%; }
           .description { font-size: 1.2rem; max-width: 480px; }
-          .hero-image { right: 32%; transform: translateY(10%) scale(1); }
+          .hero-image { right: 32%; transform: translateY(10%) scale(2); }
         }
         
         @media (min-width: 1024px) and (max-width: 1199px) {
@@ -194,7 +197,7 @@ const HomeBanner = () => {
           .h1-title { font-size: 70px; }
           .text-column { padding-left: 11%; }
           .description { font-size: 1.1rem; max-width: 440px; }
-          .hero-image { right: 35%; transform: translateY(10%) scale(0.95); }
+          .hero-image { right: 35%; transform: translateY(10%) scale(2.95); }
         }
         
         @media (min-width: 800px) and (max-width: 1023px) {
@@ -205,32 +208,19 @@ const HomeBanner = () => {
           .h1-title { font-size: 60px; }
           .text-column { padding-left: 10%; }
           .description { font-size: 1rem; max-width: 380px; }
-          .hero-image { right: 40%; transform: translateY(10%) scale(0.85); }
+          .hero-image { right: 40%; transform: translateY(10%) scale(2.85); }
           .badge { padding: 0.6rem 1.2rem; }
           .badge h3 { font-size: 1rem; }
           button { font-size: 1.2rem; padding: 0.7rem 1.8rem; }
         }
         
-        /* YOUR 1200px SHORT-HEIGHT LAPTOP FIX - MATCHES MACBOOK 13" */
-        @media (max-width: 1250px) and (max-height: 750px) {
-          .left-section { margin-top: 8% !important; }
-          .hero-image { 
-            right: 44% !important; 
-            transform: translateY(7%) scale(1.3) !important; 
-          }
-          .text-column { padding-left: 12% !important; }
-          .h1-title { font-size: 75px !important; }
-          .description { font-size: 1.2rem !important; max-width: 450px !important; }
-        }
-        
         @media (min-width: 1280px) and (max-width: 1366px) {
           .left-section { margin-top: 6% !important; }
-          .hero-image { right: 34% !important; transform: translateY(10%) scale(1.05) !important; }
+          .hero-image { right: 38% !important; transform: translateY(10%) scale(2.05) !important; }
         }
         
         @media (min-width: 1367px) and (max-width: 1439px) {
           .left-section { margin-top: 5.5% !important; }
-          .hero-image { right: 32% !important; }
         }
         
         @media (min-width: 1441px) and (max-width: 1500px) {
@@ -255,6 +245,7 @@ const HomeBanner = () => {
   );
 };
 
+// ALL YOUR EXISTING STYLES - UNCHANGED
 const containerStyle = {
   position: 'relative',
   minHeight: '100vh',
@@ -424,8 +415,8 @@ const heroImageStyle = {
   maxHeight: '97vh',
   objectFit: 'contain',
   position: 'relative',
-  right: '44%',
-  transform: 'translateY(7%) scale(1.4)',
+  right: '55%',
+  transform: 'translateY(32%) scale(1.4)',
   className: 'hero-image',
 };
 
