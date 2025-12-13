@@ -98,7 +98,7 @@ const CocoBanner = () => {
             fontWeight: 650,
             marginBottom: "16px", 
             maxWidth: "72%",
-            fontSize: "5.3rem",
+            fontSize: "5.6rem",
             lineHeight: 1.2,
             letterSpacing: "0%",
           }}

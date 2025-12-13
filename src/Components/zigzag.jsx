@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import '../fonts.css';
 
 const OurProducts = () => {
   const [products, setProducts] = useState([]);
@@ -62,11 +63,12 @@ const OurProducts = () => {
     "";
 
   const headingStyle = {
-    fontFamily: "'Baloo 2', system-ui, sans-serif",
+    fontFamily: "'Kellogg's Sans', sans-serif",
     color: "#F60945",
-    fontWeight: 900,
+    fontWeight: "Bold", // Bold
     lineHeight: 1.05,
     margin: 0,
+    letterSpacing: "0%",
   };
   
   const sectionHeadingWrapper = {
@@ -77,18 +79,22 @@ const OurProducts = () => {
   };
   
   const paragraphStyle = {
+    fontFamily: "'Kellogg's Sans', sans-serif",
+    fontWeight: 400,
     fontSize: 16,
     lineHeight: 1.6,
     color: "#4b4b4b",
     marginTop: 10,
     maxWidth: 320,
+    letterSpacing: "0%",
   };
   
   const productTitleStyle = {
-    fontFamily: "'Baloo 2', system-ui, sans-serif",
-    fontWeight: 800,
+    fontFamily: "'Kellogg's Sans', sans-serif",
+    fontWeight: 700, // Bold
     lineHeight: 1.1,
     margin: 0,
+    letterSpacing: "0%",
   };
 
   // SVG dimensions and positions
@@ -197,7 +203,7 @@ const OurProducts = () => {
       >
         {/* Section Heading */}
         <div style={sectionHeadingWrapper}>
-          <h1 style={{ ...headingStyle, fontSize: 42 }}>Our products</h1>
+          <h1 style={{ ...headingStyle, fontSize: 52 }}>Our products</h1>
         </div>
 
         {/* TOP ROW: Products 1 & 2 */}
@@ -441,7 +447,13 @@ const OurProducts = () => {
                 >
                   {product5.title_description?.title || "Product 5"}
                 </h3>
-                <p style={{ ...paragraphStyle, margin: "0", fontSize: 14, maxWidth: 240 }}>
+                <p style={{ 
+                  ...paragraphStyle, 
+                  margin: "0", 
+                  fontSize: 14, 
+                  maxWidth: 240,
+                  fontWeight: 400 
+                }}>
                   {product5.title_description?.description || "Cereal description goes here."}
                 </p>
               </div>
@@ -449,7 +461,6 @@ const OurProducts = () => {
           )}
 
           {/* Product 6 - Far bottom right */}
-          
         </div>
       </div>
     </section>
