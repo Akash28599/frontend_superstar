@@ -53,9 +53,10 @@ const HomeBanner = () => {
     banner.image?.formats?.medium?.url ||
     banner.image?.url;
 
+  // ✅ FIXED: 1st CLOUD MORE RIGHT FOR MACBOOK (13%)
   const getCloudPositions = () => {
     if (screenWidth >= 1920) return { cloud1Right: '7%', cloud1Size: '10%' };
-    if (screenWidth >= 1440) return { cloud1Right: '10%', cloud1Size: '10%' };
+    if (screenWidth >= 1440) return { cloud1Right: '13%', cloud1Size: '10%' };  // ✅ +3% RIGHT
     if (screenWidth >= 1200) return { cloud1Right: '12%', cloud1Size: '9%' };
     if (screenWidth >= 1024) return { cloud1Right: '15%', cloud1Size: '8%' };
     return { cloud1Right: '7%', cloud1Size: '10%' };
@@ -91,11 +92,10 @@ const HomeBanner = () => {
     marginLeft: '12px',
   };
 
-  // ✅ PERFECT ASUS EXPERTBOOK STYLES
   const dynamicLeftSectionStyle = {
     flex: screenWidth >= 1440 ? '0 0 550px' : '0 0 480px',
     zIndex: 5,
-    marginTop: screenWidth >= 1440 ? '10%' : '9%',  // ✅ MOVED DOWN
+    marginTop: screenWidth >= 1440 ? '10%' : '9%',
     paddingLeft: '0',
     paddingBottom: '1.5rem',
     maxWidth: screenWidth >= 1440 ? '550px' : '480px',
@@ -103,7 +103,7 @@ const HomeBanner = () => {
   };
 
   const dynamicContentStyle = {
-    height: '100vh',           // ✅ EXACT viewport height
+    height: screenWidth >= 1440 ? '95vh' : '100vh',     // ✅ SMALLER RED for MacBook
     margin: '0 auto',
     padding: screenWidth >= 1440 ? '0 3%' : '0 1.5%',
     display: 'flex',
@@ -111,19 +111,21 @@ const HomeBanner = () => {
     justifyContent: screenWidth >= 1440 ? 'center' : 'flex-start',
     gap: screenWidth >= 1440 ? '35px' : '20px',
     maxWidth: '100%',
-    overflow: 'hidden',
+    overflow: 'visible',
     className: 'content-container',
   };
 
+  // ✅ HERO TOP UP: 0% (MacBook only)
   const dynamicHeroImageStyle = {
     width: 'auto',
-    height: '100%',
-    maxWidth: screenWidth >= 1440 ? '97vw' : '92vw',    // ✅ BIGGER
-    maxHeight: screenWidth >= 1440 ? '97vh' : '92vh',
+    height: screenWidth >= 1440 ? '115vh' : '100%',
+    maxWidth: screenWidth >= 1440 ? '97vw' : '92vw',
+    maxHeight: screenWidth >= 1440 ? '115vh' : '92vh',
     objectFit: 'contain',
     position: 'relative',
-    right: screenWidth >= 1440 ? '55%' : '40%',
-    transform: screenWidth >= 1440 ? 'translateY(32%) scale(1.4)' : 'translateY(18%) scale(1.4)',
+    right: screenWidth >= 1440 ? '45%' : '40%',
+    top: screenWidth >= 1440 ? '4%' : '0%',              // ✅ TOP UP: -5% → 0%
+    transform: screenWidth >= 1440 ? 'none' : 'translateY(18%) scale(1.4)',
     className: 'hero-image',
   };
 
@@ -141,7 +143,6 @@ const HomeBanner = () => {
       )}
 
       <div style={dynamicContentStyle}>
-        {/* LEFT SECTION */}
         <div style={dynamicLeftSectionStyle}>
           <div style={{
             ...textContainerStyle,
@@ -163,8 +164,13 @@ const HomeBanner = () => {
             }}>
               <h1 style={{
                 ...h1Style,
-                fontSize: screenWidth >= 1440 ? '90px' : '75px'
-              }}>{banner.title}</h1>
+                fontSize: screenWidth >= 1440 ? '82px' : '75px',
+                lineHeight: screenWidth >= 1440 ? '1.05' : '0.9',
+                maxHeight: screenWidth >= 1440 ? '175px' : '140px',
+                overflow: 'hidden'
+              }}>
+                {banner.title}
+              </h1>
               <p style={{
                 ...descStyle,
                 fontSize: screenWidth >= 1440 ? '1.3rem' : '1.1rem',
@@ -193,17 +199,17 @@ const HomeBanner = () => {
           </div>
         </div>
 
-        {/* RIGHT SECTION */}
         <div style={{
           ...imageWrapperStyle,
           width: screenWidth >= 1440 ? '50%' : '45%',
-          maxWidth: screenWidth >= 1440 ? 'none' : '600px'
+          maxWidth: screenWidth >= 1440 ? 'none' : '600px',
+          height: screenWidth >= 1440 ? '125vh' : 'auto'
         }}>
           {heroImage && (
             <>
               <img src={heroImage} alt="Hero" style={dynamicHeroImageStyle} />
               <Cloud top="36%" right={cloudPositions.cloud1Right} size={cloudPositions.cloud1Size} zIndex={3} />
-              <Cloud top="18%" left="50%" size="7%" zIndex={4} />
+              <Cloud top="18%" left="40%" size="7%" zIndex={4} />
             </>
           )}
         </div>
@@ -211,10 +217,29 @@ const HomeBanner = () => {
       
       <style jsx="true">{`
         @media (min-width: 1440px) {
-          .content-container { max-width: 1440px; margin: 0 auto; }
+          .content-container { 
+            height: 95vh !important;       /* ✅ SMALLER RED */
+            max-width: 1440px; 
+            margin: 0 auto; 
+            overflow: visible !important;
+          }
           .left-section { margin-top: 10%; }
-          .h1-title { font-size: 90px; }
-          .hero-image { right: 55%; transform: translateY(32%) scale(1.4); }
+          .h1-title { 
+            font-size: 82px !important;
+            line-height: 1.05 !important;
+            max-height: 175px !important;
+            overflow: hidden !important;
+          }
+          .hero-image { 
+            height: 115vh !important;
+            max-height: 115vh !important;
+            right: 45% !important;
+            top: 0% !important;              /* ✅ TOP UP */
+            transform: none !important;
+          }
+          .image-wrapper {
+            height: 125vh !important;
+          }
         }
         
         @media (max-width: 1439px) {
@@ -262,7 +287,6 @@ const HomeBanner = () => {
   );
 };
 
-// ✅ ALL STYLES - PERFECT FOR BOTH LAPTOPS
 const containerStyle = {
   position: 'relative',
   height: '113vh',
@@ -352,9 +376,9 @@ const textColumnStyle = {
 const h1Style = {
   fontFamily: "'Kellogg's Sans', sans-serif",
   fontWeight: 700,
-  fontSize: '90px',
-  lineHeight: '0.9',
-  letterSpacing: '10%',
+  fontSize: '82px',
+  lineHeight: '1.05',
+  letterSpacing: '8%',
   margin: '0 0 1.2rem 0',
   color: '#fff',
   alignSelf: 'flex-start',
