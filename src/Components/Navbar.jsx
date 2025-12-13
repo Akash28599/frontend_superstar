@@ -27,8 +27,8 @@ const Navbar = () => {
     left: '60%',
     transform: 'translateX(-50%)',
     background: 'white',
-    padding: '12px 24px',  // ← INCREASED from '8px 24px'
-    height: '50px',        // ← ADD THIS LINE
+    padding: '12px 24px',
+    height: '50px',
     borderRadius: '30px',
     boxShadow: '0 6px 25px rgba(0,0,0,0.08)',
     display: 'flex',
@@ -36,34 +36,50 @@ const Navbar = () => {
     gap: '24px',
     zIndex: 1000,
     backdropFilter: 'blur(10px)',
-    width: 'fit-content',     // Keeps navbar only as wide as content
-    maxWidth: '90vw'          // Prevents overflow on small screens
-    // REMOVED: marginLeft: "100px" - this was causing right extension
+    width: 'fit-content',
+    maxWidth: '90vw'
   };
 
+  // Regular (non-active) menu item style - JUST TEXT COLOR
   const navItemStyle = {
-    color: '#4B5563',
-    fontSize: '14px',
-    fontWeight: '500',
+    fontFamily: "'Kellogg's Sans', sans-serif",
+    fontWeight: 400,
+    fontSize: '18px',
+    lineHeight: '100%',
+    letterSpacing: '0%',
+    color: '#807D7E', // Inactive text color
     textDecoration: 'none',
-    padding: '6px 12px',
+    padding: '8px 16px',
     borderRadius: '16px',
     transition: 'all 0.3s ease',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    backgroundColor: 'transparent', // No background
   };
 
+  // Active menu item style - JUST TEXT COLOR (no background)
   const activeItemStyle = {
-    ...navItemStyle,
-    color: '#000000',
-    backgroundColor: '#F3F4F6',
-    fontWeight: '600'
+    fontFamily: "'Kellogg's Sans', sans-serif",
+    fontWeight: 700,
+    fontSize: '18px',
+    lineHeight: '100%',
+    letterSpacing: '0%',
+    color: '#3C4242', // Active text color (NOT background)
+    textDecoration: 'none',
+    padding: '8px 16px',
+    borderRadius: '16px',
+    transition: 'all 0.3s ease',
+    cursor: 'pointer',
+    backgroundColor: 'transparent', // No background
   };
 
   const contactStyle = {
+    fontFamily: "'Kellogg's Sans', sans-serif",
+    fontWeight: 700,
+    fontSize: '18px',
+    lineHeight: '100%',
+    letterSpacing: '0%',
     backgroundColor: '#F60945',
     color: 'white',
-    fontSize: '14px',
-    fontWeight: '600',
     textDecoration: 'none',
     padding: '8px 20px',
     borderRadius: '20px',

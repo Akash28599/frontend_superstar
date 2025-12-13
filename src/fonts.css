@@ -1,0 +1,14 @@
+@font-face {
+  font-family: 'KelloggsSans';
+  src: url('./Kelloggs-Sans.otf') format('opentype');
+  font-weight: medium;
+  font-style: medium;
+}
+
+/* optional bold/italic variations */
+@font-face {
+  font-family: 'KelloggsSans';
+  src: url('./Kelloggs-Sans-Bold.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+}
