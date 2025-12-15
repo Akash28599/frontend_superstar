@@ -312,13 +312,14 @@ export default function PrintableGames() {
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        boxShadow: "0 6px 18px rgba(0,0,0,0.18)",
+                        boxShadow: hasPdf ? '2px 3px 0px #F60945, 0 6px 18px rgba(0,0,0,0.18)' : "none", // ✅ Added box shadow
                         background: hasPdf ? "linear-gradient(180deg,#ffb366,#ff8a2b)" : "#eee",
                         color: "#fff",
                         fontSize: isEdge 
                           ? (screenWidth >= 1440 ? 16 : 14) // ✅ Smaller font for Edge
                           : (screenWidth >= 1440 ? 18 : 16),
                         flexShrink: 0,
+                        position: 'relative',
                       }}
                       title={hasPdf ? "Download printable" : "Printable not available"}
                     >
@@ -331,41 +332,58 @@ export default function PrintableGames() {
           })}
         </div>
 
-        {/* SEE MORE BUTTON */}
+        {/* ✅ UPDATED: SEE MORE BUTTON with text first, then icon, transparent background */}
         <div style={{ textAlign: "center", marginTop: isEdge ? "1.5rem" : "2rem" }}>
           <button
             onMouseEnter={() => setShowMoreHovered(true)}
             onMouseLeave={() => setShowMoreHovered(false)}
             style={{
-              background: showMoreHovered ? "#FCD34D" : "transparent",
+              background: "transparent", // Transparent background
               border: "none",
               color: "#f21f4d",
-              fontSize: isEdge ? "1.3rem" : "1.4rem", // ✅ Smaller font for Edge
+              fontSize: isEdge ? "1.3rem" : "1.4rem",
               fontWeight: 700,
               cursor: "pointer",
               display: "inline-flex",
               alignItems: "center",
-              gap: isEdge ? "10px" : "12px", // ✅ Smaller gap for Edge
-              padding: isEdge ? "10px 20px" : "12px 24px", // ✅ Smaller padding for Edge
+              gap: isEdge ? "10px" : "12px",
+              padding: isEdge ? "10px 20px" : "12px 24px",
               borderRadius: "50px",
               fontFamily: "'Kellogg's Sans', sans-serif",
               transition: "all 0.3s ease",
-              boxShadow: showMoreHovered ? "0 8px 25px rgba(252, 211, 77, 0.4)" : "none",
               letterSpacing: "0%",
+              position: 'relative',
             }}
           >
-            <svg
-              style={{ 
-                width: isEdge ? "22px" : "24px", // ✅ Smaller icon for Edge
-                height: isEdge ? "22px" : "24px",
-                transition: "all 0.3s ease"
-              }}
-              fill={showMoreHovered ? "#f21f4d" : "currentColor"}
-              viewBox="0 0 24 24"
-            >
-              <polygon points="5,3 19,12 5,21 5,3" />
-            </svg>
+            {/* ✅ "See more" text first */}
             See more
+            
+            {/* ✅ Play icon with box shadow */}
+            <div style={{
+              width: isEdge ? "32px" : "36px",
+              height: isEdge ? "32px" : "36px",
+              borderRadius: "50%",
+              background: "linear-gradient(180deg,#ffb366,#ff8a2b)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              boxShadow: '2px 3px 0px #F60945, 0 4px 12px rgba(0,0,0,0.1)',
+              flexShrink: 0,
+              transition: "all 0.3s ease",
+              transform: showMoreHovered ? 'scale(1.05)' : 'scale(1)',
+            }}>
+              <svg
+                style={{ 
+                  width: isEdge ? "14px" : "16px",
+                  height: isEdge ? "14px" : "16px",
+                  transition: "all 0.3s ease"
+                }}
+                fill="#FFFFFF"
+                viewBox="0 0 24 24"
+              >
+                <polygon points="5,3 19,12 5,21 5,3" />
+              </svg>
+            </div>
           </button>
         </div>
       </div>
