@@ -103,22 +103,22 @@ const OurProducts = () => {
   const centerX = containerWidth / 2;
 
   const positions = {
-    product1: { x: containerWidth * 0.15, y: 168 },
+    product1: { x: containerWidth * 0.15, y: 158 },
     product2: { x: containerWidth * 0.85, y: 279 },
-    coco: { x: centerX, y: 620 },
+    coco: { x: centerX, y: 550 },
     product3: { x: containerWidth * 0.18, y: 690 },
-    product4: { x: containerWidth * 0.78, y: 990 },
+    product4: { x: containerWidth * 0.78, y: 970 },
     product5: { x: containerWidth * 0.16, y: 1115 }, // Adjusted y to match ProductRow top=1170
   };
 
   const createTopCurve = () => {
     const { product1, product2 } = positions;
-    const controlY = product1.y - 140;
+    const controlY = product1.y - 230;
     const cp1x = centerX * 0.5;
     const cp2x = centerX * 1.5;
-    return `M ${product1.x} ${product1.y}
-            C ${cp1x} ${controlY},
-              ${cp2x} ${controlY},
+    return `M ${product1.x+3} ${product1.y+11}
+            C ${cp1x+10} ${controlY+10},
+              ${cp2x+10} ${controlY},
               ${product2.x} ${product2.y}`;
   };
 
@@ -285,7 +285,7 @@ const OurProducts = () => {
             style={{
               position: "absolute",
               left: "4%",
-              top: 130,
+              top: 107,
               width: "44%",
               display: "flex",
               flexDirection: "row",
@@ -527,12 +527,12 @@ const OurProducts = () => {
         {/* PRODUCT 5 */}
         <ProductRow
           side="left"
-          top={1140}
+          top={1130}
           imgMaxWidth={220}
           product={product5}
           customTextStyle={{
             position: "relative",
-            top: "-20px",
+            top: "-35px",
             left: "-5%",
           }}
         />
