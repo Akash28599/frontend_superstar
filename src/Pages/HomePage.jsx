@@ -10,7 +10,7 @@ import CocoBanner from "../Components/cocobanner"
 export default function HomePage() {
     return (
         <>
-            {/* OUTER WRAPPER WITH OVERFLOW-X HIDDEN */}
+           
             <div style={{ overflowX: "hidden", width: "100%" }}>
                 
                 {/* Red background ONLY for HomeBanner */}

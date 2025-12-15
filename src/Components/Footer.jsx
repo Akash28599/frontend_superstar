@@ -106,7 +106,7 @@ const FooterLayout = () => {
             {/* COMPANY SECTION */}
             <Grid item xs={12} sm={4} md={4} lg={4}>
               <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-                <Box sx={{ mb: 1, fontSize: screenWidth >= 1440 ? "22px" : "20px" }}>
+                <Box sx={{ mb: 1, fontSize: screenWidth >= 1440 ? "22px" : "20px" ,textAlign: 'left'}}>
                   Company
                 </Box>
                 <List sx={{ 
@@ -125,7 +125,7 @@ const FooterLayout = () => {
             {/* MORE INFO SECTION */}
             <Grid item xs={12} sm={4} md={4} lg={4}>
               <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-                <Box sx={{ mb: 1, fontSize: screenWidth >= 1440 ? "22px" : "20px" }}>
+                <Box sx={{ mb: 1, fontSize: screenWidth >= 1440 ? "22px" : "20px" ,textAlign: 'left'}}>
                   More Info
                 </Box>
                 <List sx={{ 
@@ -144,7 +144,7 @@ const FooterLayout = () => {
             {/* LOCATION SECTION */}
             <Grid item xs={12} sm={4} md={4} lg={4}>
               <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-                <Box sx={{ mb: 1, fontSize: screenWidth >= 1440 ? "22px" : "20px" }}>
+                <Box sx={{ mb: 1, fontSize: screenWidth >= 1440 ? "22px" : "20px",textAlign: 'left' }}>
                   Location
                 </Box>
                 <List sx={{ 
