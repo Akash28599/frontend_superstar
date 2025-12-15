@@ -85,12 +85,14 @@ const HomeBanner = () => {
     width: '36px',
     height: '36px',
     borderRadius: '50%',
-    backgroundColor: isHovered ? '#FCD34D' : '#FCD34D',
+    background: isHovered ? 'linear-gradient(180deg,#ffb366,#ff8a2b)' : 'linear-gradient(180deg,#ffb366,#ff8a2b)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: '12px',
-     boxShadow: '2px 3px 0px #F60945',
+    boxShadow: '2px 3px 0px #F60945, 0 4px 12px rgba(0,0,0,0.1)',
+    transition: 'all 0.3s ease',
+    transform: isHovered ? 'scale(1.05)' : 'scale(1)',
   };
 
   const dynamicLeftSectionStyle = {
@@ -157,7 +159,7 @@ const HomeBanner = () => {
                 }}>{banner.topheading}</h3>
               </div>
             </div>
-            
+
             <div style={{
               ...textColumnStyle,
               paddingLeft: screenWidth >= 1440 ? '13%' : '10%',
@@ -215,7 +217,7 @@ const HomeBanner = () => {
           )}
         </div>
       </div>
-      
+
       <style jsx="true">{`
         @media (min-width: 1440px) {
           .content-container { 
