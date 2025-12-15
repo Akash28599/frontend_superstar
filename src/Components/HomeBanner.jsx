@@ -57,7 +57,7 @@ const HomeBanner = () => {
   const getCloudPositions = () => {
     if (screenWidth >= 1920) return { cloud1Right: '7%', cloud1Size: '10%' };
     if (screenWidth >= 1440) return { cloud1Right: '13%', cloud1Size: '10%' };  // ✅ +3% RIGHT
-    if (screenWidth >= 1200) return { cloud1Right: '12%', cloud1Size: '9%' };
+    if (screenWidth >= 1200) return { cloud1Right: '15%', cloud1Size: '9%' };
     if (screenWidth >= 1024) return { cloud1Right: '15%', cloud1Size: '8%' };
     return { cloud1Right: '7%', cloud1Size: '10%' };
   };
@@ -90,6 +90,7 @@ const HomeBanner = () => {
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: '12px',
+     boxShadow: '2px 3px 0px #F60945',
   };
 
   const dynamicLeftSectionStyle = {
