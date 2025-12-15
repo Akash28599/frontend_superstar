@@ -85,7 +85,7 @@ const HomeBanner = () => {
     width: '36px',
     height: '36px',
     borderRadius: '50%',
-    backgroundColor: isHovered ? '#F60945' : '#FCD34D',
+    backgroundColor: isHovered ? '#FCD34D' : '#FCD34D',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
