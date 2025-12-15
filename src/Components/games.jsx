@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from "react";
 import '../fonts.css';
 
+// ✅ Detect if the browser is Edge
+const isEdgeBrowser = () => {
+  return navigator.userAgent.includes("Edg") || 
+         navigator.userAgent.includes("Edge");
+};
+
 export default function PrintableGames() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [downloadingId, setDownloadingId] = useState(null);
   const [showMoreHovered, setShowMoreHovered] = useState(false);
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth); // ✅ DYNAMIC WIDTH
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const isEdge = isEdgeBrowser(); // ✅ Detect Edge browser
 
-  // ✅ RESPONSIVE WIDTH LISTENER
   useEffect(() => {
     const handleResize = () => setScreenWidth(window.innerWidth);
     window.addEventListener('resize', handleResize);
@@ -30,15 +36,73 @@ export default function PrintableGames() {
       });
   }, []);
 
-  // ✅ DYNAMIC GRID SIZING FOR YOUR LAPTOPS
+  // ✅ Edge-specific adjustments - smaller items for Edge
   const getGridConfig = () => {
-    if (screenWidth >= 1920) return { minWidth: '260px', paddingLeft: '12%', fontSize: '26px' }; // Good laptop
-    if (screenWidth >= 1440) return { minWidth: '240px', paddingLeft: '10%', fontSize: '24px' };
-    if (screenWidth >= 1200) return { minWidth: '220px', paddingLeft: '8%', fontSize: '22px' };  // Your smaller laptop
-    return { minWidth: '200px', paddingLeft: '6%', fontSize: '20px' };
+    if (screenWidth >= 1920) {
+      return { 
+        minWidth: isEdge ? '250px' : '260px', // ✅ Smaller for Edge
+        paddingLeft: isEdge ? '10%' : '12%',
+        fontSize: isEdge ? '24px' : '26px',
+        itemPadding: isEdge ? '10px' : '12px',
+        borderWidth: isEdge ? '5px' : '6px'
+      };
+    }
+    if (screenWidth >= 1440) {
+      return { 
+        minWidth: isEdge ? '230px' : '240px', // ✅ Smaller for Edge
+        paddingLeft: isEdge ? '8%' : '10%',
+        fontSize: isEdge ? '22px' : '24px',
+        itemPadding: isEdge ? '10px' : '12px',
+        borderWidth: isEdge ? '5px' : '6px'
+      };
+    }
+    if (screenWidth >= 1200) {
+      return { 
+        minWidth: isEdge ? '210px' : '220px', // ✅ Smaller for Edge
+        paddingLeft: isEdge ? '6%' : '8%',
+        fontSize: isEdge ? '20px' : '22px',
+        itemPadding: isEdge ? '8px' : '12px',
+        borderWidth: isEdge ? '4px' : '6px'
+      };
+    }
+    return { 
+      minWidth: '200px',
+      paddingLeft: '6%',
+      fontSize: '20px',
+      itemPadding: '12px',
+      borderWidth: '6px'
+    };
   };
 
   const gridConfig = getGridConfig();
+
+  // ✅ More aggressive grid calculation for Edge
+  const getGridStyle = () => {
+    if (screenWidth >= 1200) {
+      // Force exactly 5 columns on larger screens
+      const columns = 5;
+      return {
+        display: 'grid',
+        gridTemplateColumns: `repeat(${columns}, 1fr)`,
+        gap: isEdge ? '18px' : '20px', // ✅ Smaller gap for Edge
+        marginBottom: '3rem',
+        justifyItems: 'stretch',
+        alignItems: 'stretch'
+      };
+    }
+    
+    // Responsive for smaller screens
+    return {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+      gap: '20px',
+      marginBottom: '3rem',
+      justifyItems: 'stretch',
+      alignItems: 'stretch'
+    };
+  };
+
+  const gridStyle = getGridStyle();
 
   async function downloadPrintable(item) {
     const printable = item.printable && item.printable[0];
@@ -97,12 +161,26 @@ export default function PrintableGames() {
   }
 
   return (
-    <section style={{ background: "#fff", padding: "4.5rem 1.5rem", overflow: "hidden" }}>
-      <div style={{ maxWidth: 1400, margin: "0 auto", padding: "0 1rem" }}>
+    <section style={{ 
+      background: "#fff", 
+      padding: isEdge ? "4rem 1rem" : "4.5rem 1.5rem", // ✅ Less padding for Edge
+      overflow: "hidden" 
+    }}>
+      <div style={{ 
+        maxWidth: 1400, 
+        margin: "0 auto", 
+        padding: isEdge ? "0 0.5rem" : "0 1rem", // ✅ Less padding for Edge
+        width: '100%',
+        boxSizing: 'border-box'
+      }}>
         {/* Heading + description (CENTERED) */}
-        <div style={{ marginBottom: "2.25rem", textAlign: "center", display: "block" }}>
+        <div style={{ 
+          marginBottom: isEdge ? "2rem" : "2.25rem", // ✅ Smaller margin for Edge
+          textAlign: "center", 
+          display: "block" 
+        }}>
           <h2 style={{
-              fontSize: "3.4rem",
+              fontSize: isEdge ? "3.2rem" : "3.4rem", // ✅ Smaller font for Edge
               margin: 0,
               color: "red",
               fontFamily: "'Kellogg's Sans', sans-serif",
@@ -113,14 +191,8 @@ export default function PrintableGames() {
           </h2>
         </div>
 
-        {/* ✅ DYNAMIC RESPONSIVE GRID */}
-        <div style={{
-            display: "grid",
-            gridTemplateColumns: `repeat(auto-fill, minmax(${gridConfig.minWidth}, 1fr))`,
-            gap: 20,
-            alignItems: "stretch",
-            marginBottom: "3rem"
-          }}>
+        {/* ✅ Grid with Edge-specific adjustments */}
+        <div style={gridStyle}>
           {items.map((item) => {
             const thumb =
               (item.thumbnail &&
@@ -135,13 +207,18 @@ export default function PrintableGames() {
             return (
               <div key={item.id} style={{
                   background: "#fff",
-                  border: "6px solid #f0f0f0",
+                  border: `${gridConfig.borderWidth} solid #f0f0f0`,
                   borderRadius: 6,
-                  padding: 12,
+                  padding: gridConfig.itemPadding,
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
                   boxShadow: "0 4px 12px rgba(0,0,0,0.06)",
+                  boxSizing: "border-box",
+                  width: '100%',
+                  height: '100%',
+                  minHeight: 0,
+                  overflow: 'hidden'
                 }}>
                 <div style={{
                     background: "#fff",
@@ -149,9 +226,12 @@ export default function PrintableGames() {
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    padding: "10px 8px",
+                    padding: isEdge ? "8px 6px" : "10px 8px", // ✅ Less padding for Edge
                     borderRadius: 4,
-                    minHeight: screenWidth >= 1440 ? 320 : 280, // Responsive height
+                    minHeight: isEdge 
+                      ? (screenWidth >= 1440 ? 300 : 260) // ✅ Smaller height for Edge
+                      : (screenWidth >= 1440 ? 320 : 280),
+                    flexShrink: 0,
                   }}>
                   {thumb ? (
                     <img
@@ -162,12 +242,15 @@ export default function PrintableGames() {
                         height: "100%",
                         objectFit: "contain",
                         display: "block",
+                        maxWidth: '100%',
                       }}
                     />
                   ) : (
                     <div style={{
                         width: "100%",
-                        height: screenWidth >= 1440 ? 280 : 240,
+                        height: isEdge 
+                          ? (screenWidth >= 1440 ? 260 : 220) // ✅ Smaller height for Edge
+                          : (screenWidth >= 1440 ? 280 : 240),
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
@@ -181,39 +264,47 @@ export default function PrintableGames() {
                   )}
                 </div>
 
-                {/* ✅ DYNAMIC DOWNLOAD AREA - PERFECT SPACING */}
+                {/* ✅ Download Area with Edge-specific adjustments */}
                 <div style={{
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between",
                     width: "100%",
-                    marginTop: 18,
-                    padding: `0 ${screenWidth >= 1440 ? '12px' : '8px'} 8px`,
-                    gap: '4px'
+                    marginTop: isEdge ? 14 : 18, // ✅ Smaller margin for Edge
+                    padding: `0 ${isEdge ? '6px' : (screenWidth >= 1440 ? '12px' : '8px')} 8px`,
+                    gap: '4px',
+                    flexShrink: 0,
                   }}>
-                  <div style={{ textAlign: "left", flex: 1 }}>
+                  <div style={{ textAlign: "left", flex: 1, minWidth: 0 }}>
                     <div style={{
                         fontSize: gridConfig.fontSize,
                         color: "#f21f4d",
                         fontWeight: 800,
-                        marginBottom: 6,
+                        marginBottom: isEdge ? 4 : 6, // ✅ Smaller margin for Edge
                         textTransform: "capitalize",
                         fontFamily: "'Kellogg's Sans', sans-serif",
                         letterSpacing: "0%",
                         paddingLeft: gridConfig.paddingLeft,
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
                       }}>
                       Download
                     </div>
                   </div>
 
-                  <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: isEdge ? 8 : 10, flexShrink: 0 }}>
                     <button
                       onClick={() => downloadPrintable(item)}
                       disabled={!hasPdf || downloadingId === item.id}
                       aria-disabled={!hasPdf || downloadingId === item.id}
                       style={{
-                        width: screenWidth >= 1440 ? 56 : 50,
-                        height: screenWidth >= 1440 ? 56 : 50,
+                        width: isEdge 
+                          ? (screenWidth >= 1440 ? 52 : 46) // ✅ Smaller button for Edge
+                          : (screenWidth >= 1440 ? 56 : 50),
+                        height: isEdge 
+                          ? (screenWidth >= 1440 ? 52 : 46) // ✅ Smaller button for Edge
+                          : (screenWidth >= 1440 ? 56 : 50),
                         borderRadius: "50%",
                         border: "none",
                         outline: "none",
@@ -224,7 +315,10 @@ export default function PrintableGames() {
                         boxShadow: "0 6px 18px rgba(0,0,0,0.18)",
                         background: hasPdf ? "linear-gradient(180deg,#ffb366,#ff8a2b)" : "#eee",
                         color: "#fff",
-                        fontSize: screenWidth >= 1440 ? 18 : 16,
+                        fontSize: isEdge 
+                          ? (screenWidth >= 1440 ? 16 : 14) // ✅ Smaller font for Edge
+                          : (screenWidth >= 1440 ? 18 : 16),
+                        flexShrink: 0,
                       }}
                       title={hasPdf ? "Download printable" : "Printable not available"}
                     >
@@ -238,7 +332,7 @@ export default function PrintableGames() {
         </div>
 
         {/* SEE MORE BUTTON */}
-        <div style={{ textAlign: "center", marginTop: "2rem" }}>
+        <div style={{ textAlign: "center", marginTop: isEdge ? "1.5rem" : "2rem" }}>
           <button
             onMouseEnter={() => setShowMoreHovered(true)}
             onMouseLeave={() => setShowMoreHovered(false)}
@@ -246,13 +340,13 @@ export default function PrintableGames() {
               background: showMoreHovered ? "#FCD34D" : "transparent",
               border: "none",
               color: "#f21f4d",
-              fontSize: "1.4rem",
+              fontSize: isEdge ? "1.3rem" : "1.4rem", // ✅ Smaller font for Edge
               fontWeight: 700,
               cursor: "pointer",
               display: "inline-flex",
               alignItems: "center",
-              gap: "12px",
-              padding: "12px 24px",
+              gap: isEdge ? "10px" : "12px", // ✅ Smaller gap for Edge
+              padding: isEdge ? "10px 20px" : "12px 24px", // ✅ Smaller padding for Edge
               borderRadius: "50px",
               fontFamily: "'Kellogg's Sans', sans-serif",
               transition: "all 0.3s ease",
@@ -262,8 +356,8 @@ export default function PrintableGames() {
           >
             <svg
               style={{ 
-                width: "24px", 
-                height: "24px",
+                width: isEdge ? "22px" : "24px", // ✅ Smaller icon for Edge
+                height: isEdge ? "22px" : "24px",
                 transition: "all 0.3s ease"
               }}
               fill={showMoreHovered ? "#f21f4d" : "currentColor"}
