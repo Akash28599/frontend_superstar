@@ -44,7 +44,7 @@ const CocoHeads = () => {
   const getYellowWidth = () => {
     if (screenWidth >= 1920) return '980px';  // Your "good" laptop
     if (screenWidth >= 1440) return '900px';  // Medium desktops
-    if (screenWidth >= 1200) return '820px';  // Your smaller laptop - REDUCED
+    if (screenWidth >= 1200) return '920px';  // Your smaller laptop - REDUCED
     return 'calc(100vw - 4rem)';              // Mobile/tablet
   };
 
@@ -95,12 +95,13 @@ const CocoHeads = () => {
         minHeight: '234px',
         height: screenWidth >= 1440 ? '274px' : '260px',
         left: screenWidth >= 1440 ? '4%' : '2%',
+        marginTop:"10%"
       }}>
         {/* Left: Coco head (floating) */}
         {head?.thumbnail && (
           <div style={{
             position: 'absolute',
-            left: '-30px',
+            left: screenWidth >= 1440 ?'-30px':'-100px',
             top: '-40px',
             pointerEvents: 'none',
           }}>
@@ -108,8 +109,8 @@ const CocoHeads = () => {
               src={head.thumbnail.url} 
               alt="Coco head" 
               style={{ 
-                width: screenWidth >= 1440 ? '416.5469970703125px' : '360px',
-                height: screenWidth >= 1440 ? '354.79876708984375px' : '325px',
+                width: screenWidth >= 1440 ? '416.5469970703125px' : '520px',
+                height: screenWidth >= 1440 ? '354.79876708984375px' : '365px',
                 objectFit: 'contain',
                 display: 'block',
               }} 
@@ -124,7 +125,7 @@ const CocoHeads = () => {
           alignItems: 'flex-start',
           width: '100%',
           boxSizing: 'border-box',
-          marginLeft: screenWidth >= 1440 ? '23%' : '20%',
+          marginLeft: screenWidth >= 1440 ? '23%' : '28%',
         }}>
           {items.map(item => {
             const iconUrl = item.icons?.url || item.icon?.url || item.image?.url || 
