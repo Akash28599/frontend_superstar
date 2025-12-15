@@ -109,7 +109,7 @@ const CocoHeads = () => {
               alt="Coco head" 
               style={{ 
                 width: screenWidth >= 1440 ? '416.5469970703125px' : '360px',
-                height: screenWidth >= 1440 ? '351.79876708984375px' : '305px',
+                height: screenWidth >= 1440 ? '354.79876708984375px' : '325px',
                 objectFit: 'contain',
                 display: 'block',
               }} 

@@ -73,7 +73,7 @@ const OurProducts = () => {
 
   const sectionHeadingWrapper = {
     maxWidth: 1400,
-    margin: "0 auto 80px",
+    margin: "0 auto 40px",
     padding: "0 38px",
     textAlign: "center",
   };
@@ -99,16 +99,16 @@ const OurProducts = () => {
 
   // SVG dimensions and product anchor positions
   const SVG_WIDTH = containerWidth;
-  const SVG_HEIGHT = 1100;
+  const SVG_HEIGHT = 1200; // Increased height for product5
   const centerX = containerWidth / 2;
 
   const positions = {
-    product1: { x: containerWidth * 0.18, y: 190 },
+    product1: { x: containerWidth * 0.15, y: 168 },
     product2: { x: containerWidth * 0.85, y: 279 },
     coco: { x: centerX, y: 620 },
     product3: { x: containerWidth * 0.18, y: 690 },
     product4: { x: containerWidth * 0.78, y: 990 },
-    product5: { x: containerWidth * 0.16, y: 1096 },
+    product5: { x: containerWidth * 0.16, y: 1115 }, // Adjusted y to match ProductRow top=1170
   };
 
   const createTopCurve = () => {
@@ -134,9 +134,10 @@ const OurProducts = () => {
                   ${product4.x + 80} ${(coco.y + product4.y) / 2},
                   ${product4.x} ${product4.y}`;
 
-    const s3 = `C ${product4.x - 140} ${(product4.y + product5.y) / 2},
-                  ${product5.x - 40} ${product5.y - 40},
-                  ${product5.x} ${product5.y}`;
+    // ✅ FIXED s3 - connects properly to product5
+    const s3 = `C ${product4.x - 100} ${product4.y + 80},
+                  ${product5.x + 20} ${product5.y -57},
+                  ${product5.x} ${product5.y+52}`;
 
     return `${s1} ${s2} ${s3}`;
   };
@@ -220,6 +221,10 @@ const OurProducts = () => {
   };
 
   return (
+    <>
+     <div style={sectionHeadingWrapper}>
+          <h1 style={{ ...headingStyle, fontSize: 52 }}>Our products</h1>
+        </div>
     <section
       ref={containerRef}
       style={{
@@ -272,16 +277,14 @@ const OurProducts = () => {
         }}
       >
         {/* Heading */}
-        <div style={sectionHeadingWrapper}>
-          <h1 style={{ ...headingStyle, fontSize: 52 }}>Our products</h1>
-        </div>
+       
 
-        {/* PRODUCT 1 – custom */}
-        {product1 && (
+        {/* PRODUCT 3 at TOP position */}
+        {product3 && (
           <div
             style={{
               position: "absolute",
-              left: "6%",
+              left: "4%",
               top: 130,
               width: "44%",
               display: "flex",
@@ -293,10 +296,10 @@ const OurProducts = () => {
           >
             <div style={{ flexShrink: 0 }}>
               <img
-                src={imgUrl(product1)}
-                alt={product1.title_description?.title}
+                src={imgUrl(product3)}
+                alt={product3.title_description?.title}
                 style={{
-                  maxWidth: 260,
+                  maxWidth: 320,
                   width: "100%",
                   height: "auto",
                   objectFit: "contain",
@@ -309,8 +312,8 @@ const OurProducts = () => {
                 textAlign: "left",
                 maxWidth: 320,
                 position: "absolute",
-                left: "41%",
-                top: "-1%",
+                left: "40%",
+                top: "-10%",
               }}
             >
               <h2
@@ -321,16 +324,16 @@ const OurProducts = () => {
                   marginBottom: 10,
                 }}
               >
-                {product1.title_description?.title}
+                {product3.title_description?.title}
               </h2>
               <p style={{ ...paragraphStyle, margin: 0 }}>
-                {product1.title_description?.description}
+                {product3.title_description?.description}
               </p>
             </div>
           </div>
         )}
 
-        {/* PRODUCT 2 – custom */}
+        {/* PRODUCT 2 */}
         {product2 && (
           <div
             style={{
@@ -412,13 +415,13 @@ const OurProducts = () => {
           )}
         </div>
 
-        {/* PRODUCT 3 – same horizontal spot, text just a bit higher */}
-        {product3 && (
+        {/* PRODUCT 1 at BOTTOM position */}
+        {product1 && (
           <div
             style={{
               position: "absolute",
               left: "6%",
-              top: 740,
+              top: 750,
               width: "44%",
               display: "flex",
               flexDirection: "row",
@@ -432,8 +435,8 @@ const OurProducts = () => {
                 textAlign: "left",
                 maxWidth: 320,
                 position: "relative",
-                top: "-60px",
-                left: "17%",
+                top: "-143px",
+                left: "19%",
               }}
             >
               <h2
@@ -444,19 +447,19 @@ const OurProducts = () => {
                   marginBottom: 10,
                 }}
               >
-                {product3.title_description?.title}
+                {product1.title_description?.title}
               </h2>
               <p style={{ ...paragraphStyle, margin: 0 }}>
-                {product3.title_description?.description}
+                {product1.title_description?.description}
               </p>
             </div>
 
             <div style={{ flexShrink: 0 }}>
               <img
-                src={imgUrl(product3)}
-                alt={product3.title_description?.title}
+                src={imgUrl(product1)}
+                alt={product1.title_description?.title}
                 style={{
-                  maxWidth: 240,
+                  maxWidth: 280,
                   width: "100%",
                   height: "auto",
                   objectFit: "contain",
@@ -472,7 +475,7 @@ const OurProducts = () => {
           <div
             style={{
               position: "absolute",
-              right: "6%",
+              right: "7%",
               top: 720,
               width: "44%",
               display: "flex",
@@ -521,21 +524,21 @@ const OurProducts = () => {
           </div>
         )}
 
-        {/* PRODUCT 5 – manual text positioning via ProductRow */}
+        {/* PRODUCT 5 */}
         <ProductRow
           side="left"
-          top={1050}
+          top={1140}
           imgMaxWidth={220}
           product={product5}
           customTextStyle={{
             position: "relative",
-            top: "-40px",  // adjust as needed
+            top: "-20px",
             left: "-5%",
-             // adjust as needed
           }}
         />
       </div>
     </section>
+    </>
   );
 };
 
