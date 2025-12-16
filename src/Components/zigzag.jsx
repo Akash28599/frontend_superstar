@@ -5,8 +5,12 @@ const OurProducts = () => {
   const [products, setProducts] = useState([]);
   const [coco, setCoco] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth); // ✅ ADDED
   const containerRef = useRef(null);
   const [containerWidth, setContainerWidth] = useState(1400);
+
+  // ✅ MACBOOK DETECTION
+  const isMacBook = screenWidth >= 1440 && screenWidth < 1920;
 
   useEffect(() => {
     let mounted = true;
@@ -27,14 +31,16 @@ const OurProducts = () => {
     };
   }, []);
 
+  // ✅ SCREEN WIDTH TRACKING
   useEffect(() => {
-    const measure = () => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
       const w = containerRef.current?.clientWidth || 1400;
       setContainerWidth(Math.max(900, w));
     };
-    measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   if (loading) return <div style={{ padding: 40 }}>Loading...</div>;
@@ -99,7 +105,7 @@ const OurProducts = () => {
 
   // SVG dimensions and product anchor positions
   const SVG_WIDTH = containerWidth;
-  const SVG_HEIGHT = 1200; // Increased height for product5
+  const SVG_HEIGHT = 1200;
   const centerX = containerWidth / 2;
 
   const positions = {
@@ -108,7 +114,7 @@ const OurProducts = () => {
     coco: { x: centerX, y: 550 },
     product3: { x: containerWidth * 0.18, y: 690 },
     product4: { x: containerWidth * 0.78, y: 970 },
-    product5: { x: containerWidth * 0.16, y: 1115 }, // Adjusted y to match ProductRow top=1170
+    product5: { x: containerWidth * 0.16, y: 1115 },
   };
 
   const createTopCurve = () => {
@@ -134,7 +140,6 @@ const OurProducts = () => {
                   ${product4.x + 80} ${(coco.y + product4.y) / 2},
                   ${product4.x} ${product4.y}`;
 
-    // ✅ FIXED s3 - connects properly to product5
     const s3 = `C ${product4.x - 100} ${product4.y + 80},
                   ${product5.x + 20} ${product5.y -57},
                   ${product5.x} ${product5.y+52}`;
@@ -222,322 +227,319 @@ const OurProducts = () => {
 
   return (
     <>
-     <div style={sectionHeadingWrapper}>
-          <h1 style={{ ...headingStyle, fontSize: 52 }}>Our products</h1>
-        </div>
-    <section
-      ref={containerRef}
-      style={{
-        position: "relative",
-        background: "#fff",
-        overflow: "hidden",
-        padding: "2rem 0 20rem",
-        minHeight: "100vh",
-      }}
-    >
-      <svg
-        width="100%"
-        height={SVG_HEIGHT}
-        viewBox={`0 0 ${SVG_WIDTH} ${SVG_HEIGHT}`}
-        preserveAspectRatio="xMidYMin slice"
+      <div style={sectionHeadingWrapper}>
+        <h1 style={{ ...headingStyle, fontSize: 52 }}>Our products</h1>
+      </div>
+      <section
+        ref={containerRef}
         style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          pointerEvents: "none",
-          zIndex: 0,
-        }}
-      >
-        <path
-          d={createTopCurve()}
-          fill="none"
-          stroke="#d6d6d6"
-          strokeWidth={3}
-          strokeDasharray="6 14"
-          strokeLinecap="round"
-        />
-        <path
-          d={createMainPath()}
-          fill="none"
-          stroke="#d6d6d6"
-          strokeWidth={3}
-          strokeDasharray="6 14"
-          strokeLinecap="round"
-        />
-      </svg>
-
-      <div
-        style={{
-          maxWidth: 1400,
-          margin: "-10px auto",
           position: "relative",
-          zIndex: 1,
-          padding: "0 28px",
-          height: SVG_HEIGHT,
+          background: "#fff",
+          overflow: "hidden",
+          padding: "2rem 0 20rem",
+          minHeight: "100vh",
         }}
       >
-        {/* Heading */}
-       
-
-        {/* PRODUCT 3 at TOP position */}
-        {product3 && (
-          <div
-            style={{
-              position: "absolute",
-              left: "4%",
-              top: 107,
-              width: "44%",
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              alignItems: "center",
-              gap: 28,
-            }}
-          >
-            <div style={{ flexShrink: 0 }}>
-              <img
-                src={imgUrl(product3)}
-                alt={product3.title_description?.title}
-                style={{
-                  maxWidth: 320,
-                  width: "100%",
-                  height: "auto",
-                  objectFit: "contain",
-                  pointerEvents: "none",
-                }}
-              />
-            </div>
-            <div
-              style={{
-                textAlign: "left",
-                maxWidth: 320,
-                position: "absolute",
-                left: "40%",
-                top: "-10%",
-              }}
-            >
-              <h2
-                style={{
-                  ...productTitleStyle,
-                  fontSize: 34,
-                  color: "#333",
-                  marginBottom: 10,
-                }}
-              >
-                {product3.title_description?.title}
-              </h2>
-              <p style={{ ...paragraphStyle, margin: 0 }}>
-                {product3.title_description?.description}
-              </p>
-            </div>
-          </div>
-        )}
-
-        {/* PRODUCT 2 */}
-        {product2 && (
-          <div
-            style={{
-              position: "absolute",
-              right: "6%",
-              top: 240,
-              width: "44%",
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-end",
-              alignItems: "center",
-              gap: 28,
-            }}
-          >
-            <div
-              style={{
-                textAlign: "left",
-                maxWidth: 320,
-                position: "absolute",
-                bottom: "47%",
-                left: "15%",
-              }}
-            >
-              <h2
-                style={{
-                  ...productTitleStyle,
-                  fontSize: 34,
-                  color: "#333",
-                  marginBottom: 10,
-                }}
-              >
-                {product2.title_description?.title}
-              </h2>
-              <p style={{ ...paragraphStyle, margin: 0 }}>
-                {product2.title_description?.description}
-              </p>
-            </div>
-
-            <div style={{ flexShrink: 0 }}>
-              <img
-                src={imgUrl(product2)}
-                alt={product2.title_description?.title}
-                style={{
-                  maxWidth: 240,
-                  width: "100%",
-                  height: "auto",
-                  objectFit: "contain",
-                  pointerEvents: "none",
-                }}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* Coco center */}
-        <div
+        <svg
+          width="100%"
+          height={1200}
+          viewBox={`0 0 ${SVG_WIDTH} ${1200}`}
+          preserveAspectRatio="xMidYMin slice"
           style={{
             position: "absolute",
-            left: "50%",
-            top: 340,
-            transform: "translateX(-50%)",
-            width: 380,
-            textAlign: "center",
-            zIndex: 2,
+            top: 0,
+            left: 0,
+            pointerEvents: "none",
+            zIndex: 0,
           }}
         >
-          {coco && (
-            <img
-              src={imgUrl(coco)}
-              alt="Coco"
-              style={{
-                width: "100%",
-                height: "auto",
-                maxHeight: 420,
-                objectFit: "contain",
-                pointerEvents: "none",
-              }}
-            />
-          )}
-        </div>
+          <path
+            d={createTopCurve()}
+            fill="none"
+            stroke="#d6d6d6"
+            strokeWidth={3}
+            strokeDasharray="6 14"
+            strokeLinecap="round"
+          />
+          <path
+            d={createMainPath()}
+            fill="none"
+            stroke="#d6d6d6"
+            strokeWidth={3}
+            strokeDasharray="6 14"
+            strokeLinecap="round"
+          />
+        </svg>
 
-        {/* PRODUCT 1 at BOTTOM position */}
-        {product1 && (
-          <div
-            style={{
-              position: "absolute",
-              left: "6%",
-              top: 750,
-              width: "44%",
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              alignItems: "center",
-              gap: 28,
-            }}
-          >
-            <div
-              style={{
-                textAlign: "left",
-                maxWidth: 320,
-                position: "relative",
-                top: "-143px",
-                left: "19%",
-              }}
-            >
-              <h2
-                style={{
-                  ...productTitleStyle,
-                  fontSize: 34,
-                  color: "#333",
-                  marginBottom: 10,
-                }}
-              >
-                {product1.title_description?.title}
-              </h2>
-              <p style={{ ...paragraphStyle, margin: 0 }}>
-                {product1.title_description?.description}
-              </p>
-            </div>
-
-            <div style={{ flexShrink: 0 }}>
-              <img
-                src={imgUrl(product1)}
-                alt={product1.title_description?.title}
-                style={{
-                  maxWidth: 280,
-                  width: "100%",
-                  height: "auto",
-                  objectFit: "contain",
-                  pointerEvents: "none",
-                }}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* PRODUCT 4 */}
-        {product4 && (
-          <div
-            style={{
-              position: "absolute",
-              right: "7%",
-              top: 720,
-              width: "44%",
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "flex-end",
-              alignItems: "center",
-              gap: 28,
-            }}
-          >
-            <div
-              style={{
-                textAlign: "right",
-                maxWidth: 320,
-                position: "relative",
-                left: "8.7%",
-              }}
-            >
-              <h2
-                style={{
-                  ...productTitleStyle,
-                  fontSize: 34,
-                  color: "#333",
-                  marginBottom: 10,
-                }}
-              >
-                {product4.title_description?.title}
-              </h2>
-              <p style={{ ...paragraphStyle, margin: 0 }}>
-                {product4.title_description?.description}
-              </p>
-            </div>
-
-            <div style={{ flexShrink: 0 }}>
-              <img
-                src={imgUrl(product4)}
-                alt={product4.title_description?.title}
-                style={{
-                  maxWidth: 240,
-                  width: "100%",
-                  height: "auto",
-                  objectFit: "contain",
-                  pointerEvents: "none",
-                }}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* PRODUCT 5 */}
-        <ProductRow
-          side="left"
-          top={1130}
-          imgMaxWidth={220}
-          product={product5}
-          customTextStyle={{
+        <div
+          style={{
+            maxWidth: 1400,
+            margin: "-10px auto",
             position: "relative",
-            top: "-35px",
-            left: "-5%",
+            zIndex: 1,
+            padding: "0 28px",
+            height: 1200,
           }}
-        />
-      </div>
-    </section>
+        >
+          {/* PRODUCT 3 at TOP position */}
+          {product3 && (
+            <div
+              style={{
+                position: "absolute",
+                left: "4%",
+                top: 107,
+                width: "44%",
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "flex-start",
+                alignItems: "center",
+                gap: 28,
+              }}
+            >
+              <div style={{ flexShrink: 0 }}>
+                <img
+                  src={imgUrl(product3)}
+                  alt={product3.title_description?.title}
+                  style={{
+                    maxWidth: 320,
+                    width: "100%",
+                    height: "auto",
+                    objectFit: "contain",
+                    pointerEvents: "none",
+                  }}
+                />
+              </div>
+              <div
+                style={{
+                  textAlign: "left",
+                  maxWidth: 320,
+                  position: "absolute",
+                  left: "40%",
+                  top: "-10%",
+                }}
+              >
+                <h2
+                  style={{
+                    ...productTitleStyle,
+                    fontSize: 34,
+                    color: "#333",
+                    marginBottom: 10,
+                  }}
+                >
+                  {product3.title_description?.title}
+                </h2>
+                <p style={{ ...paragraphStyle, margin: 0 }}>
+                  {product3.title_description?.description}
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* PRODUCT 2 */}
+          {product2 && (
+            <div
+              style={{
+                position: "absolute",
+                right: "6%",
+                top: 240,
+                width: "44%",
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "flex-end",
+                alignItems: "center",
+                gap: 28,
+              }}
+            >
+              <div
+                style={{
+                  textAlign: "left",
+                  maxWidth: 320,
+                  position: "absolute",
+                  bottom: "47%",
+                  left: isMacBook?"19%":"15%",
+                }}
+              >
+                <h2
+                  style={{
+                    ...productTitleStyle,
+                    fontSize: 34,
+                    color: "#333",
+                    marginBottom: 10,
+                  }}
+                >
+                  {product2.title_description?.title}
+                </h2>
+                <p style={{ ...paragraphStyle, margin: 0 }}>
+                  {product2.title_description?.description}
+                </p>
+              </div>
+
+              <div style={{ flexShrink: 0 }}>
+                <img
+                  src={imgUrl(product2)}
+                  alt={product2.title_description?.title}
+                  style={{
+                    maxWidth: 240,
+                    width: "100%",
+                    height: "auto",
+                    objectFit: "contain",
+                    pointerEvents: "none",
+                  }}
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Coco center */}
+          <div
+            style={{
+              position: "absolute",
+              left: "50%",
+              top: 340,
+              transform: "translateX(-50%)",
+              width: 380,
+              textAlign: "center",
+              zIndex: 2,
+            }}
+          >
+            {coco && (
+              <img
+                src={imgUrl(coco)}
+                alt="Coco"
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  maxHeight: 420,
+                  objectFit: "contain",
+                  pointerEvents: "none",
+                }}
+              />
+            )}
+          </div>
+
+          {/* PRODUCT 1 at BOTTOM position */}
+          {product1 && (
+            <div
+              style={{
+                position: "absolute",
+                left: "6%",
+                top: 750,
+                width: "44%",
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "flex-start",
+                alignItems: "center",
+                gap: 28,
+              }}
+            >
+              <div
+                style={{
+                  textAlign: "left",
+                  maxWidth: 320,
+                  position: "relative",
+                  top: "-143px",
+                  left: "19%",
+                }}
+              >
+                <h2
+                  style={{
+                    ...productTitleStyle,
+                    fontSize: 34,
+                    color: "#333",
+                    marginBottom: 10,
+                  }}
+                >
+                  {product1.title_description?.title}
+                </h2>
+                <p style={{ ...paragraphStyle, margin: 0 }}>
+                  {product1.title_description?.description}
+                </p>
+              </div>
+
+              <div style={{ flexShrink: 0 }}>
+                <img
+                  src={imgUrl(product1)}
+                  alt={product1.title_description?.title}
+                  style={{
+                    maxWidth: 280,
+                    width: "100%",
+                    height: "auto",
+                    objectFit: "contain",
+                    pointerEvents: "none",
+                  }}
+                />
+              </div>
+            </div>
+          )}
+
+          {/* ✅ PRODUCT 4 - MACBOOK ADJUSTMENT */}
+          {product4 && (
+            <div
+              style={{
+                position: "absolute",
+                right: "7%",
+                top: 720,
+                width: "44%",
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "flex-end",
+                alignItems: "center",
+                gap: 28,
+              }}
+            >
+              <div
+                style={{
+                  textAlign: "right",
+                  maxWidth: 320,
+                  position: "relative",
+                  left: isMacBook ? "-2%" : "8.7%", // ✅ MACBOOK: more right
+                }}
+              >
+                <h2
+                  style={{
+                    ...productTitleStyle,
+                    fontSize: 34,
+                    color: "#333",
+                    marginBottom: 10,
+                  }}
+                >
+                  {product4.title_description?.title}
+                </h2>
+                <p style={{ ...paragraphStyle, margin: 0 }}>
+                  {product4.title_description?.description}
+                </p>
+              </div>
+
+              <div style={{ flexShrink: 0 }}>
+                <img
+                  src={imgUrl(product4)}
+                  alt={product4.title_description?.title}
+                  style={{
+                    maxWidth: 240,
+                    width: "100%",
+                    height: "auto",
+                    objectFit: "contain",
+                    pointerEvents: "none",
+                  }}
+                />
+              </div>
+            </div>
+          )}
+
+          {/* ✅ PRODUCT 5 - MACBOOK ADJUSTMENT */}
+          <ProductRow
+            side="left"
+            top={1130}
+            imgMaxWidth={220}
+            product={product5}
+            customTextStyle={{
+              position: "relative",
+              top: isMacBook ? "-10px" : "-35px",  // ✅ MACBOOK: higher up
+              left: isMacBook ? "-3%" : "-5%",     // ✅ MACBOOK: less left
+            }}
+          />
+        </div>
+      </section>
     </>
   );
 };
