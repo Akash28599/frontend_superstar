@@ -5,9 +5,8 @@ const CocoHeads = () => {
   const [head, setHead] = useState(null);
   const [starImage, setStarImage] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth); // ✅ DYNAMIC WIDTH
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
-  // ✅ RESPONSIVE WIDTH LISTENER
   useEffect(() => {
     const handleResize = () => setScreenWidth(window.innerWidth);
     window.addEventListener('resize', handleResize);
@@ -40,12 +39,11 @@ const CocoHeads = () => {
 
   if (loading) return <div>Loading...</div>;
 
-  // ✅ DYNAMIC YELLOW DIV WIDTH BASED ON SCREEN SIZE
   const getYellowWidth = () => {
-    if (screenWidth >= 1920) return '980px';  // Your "good" laptop
-    if (screenWidth >= 1440) return '900px';  // Medium desktops
-    if (screenWidth >= 1200) return '920px';  // Your smaller laptop - REDUCED
-    return 'calc(100vw - 4rem)';              // Mobile/tablet
+    if (screenWidth >= 1920) return '980px';
+    if (screenWidth >= 1440) return '900px';
+    if (screenWidth >= 1200) return '920px';
+    return 'calc(100vw - 4rem)';
   };
 
   const yellowWidth = getYellowWidth();
@@ -58,7 +56,6 @@ const CocoHeads = () => {
       backgroundColor: 'white', 
       position: 'relative',
     }}>
-      {/* Star image - positioned absolutely outside yellow div */}
       {starImage && (
         <div style={{
           position: 'absolute',
@@ -81,23 +78,21 @@ const CocoHeads = () => {
         </div>
       )}
 
-      {/* ✅ DYNAMIC YELLOW MAIN CONTAINER */}
       <div style={{
-        width: yellowWidth,  // ✅ DYNAMIC WIDTH
+        width: yellowWidth,
         backgroundColor: '#FBCA05',
         borderRadius: '32px',
-        padding: screenWidth >= 1440 ? '0.3rem 0.1rem 2.2rem 140px' : '0.3rem 0.1rem 2.2rem 120px',
+        padding: screenWidth >= 1440 ? '0.3rem 0.1rem 2.2rem 140px' : '0.3rem 1.1rem 2.2rem 120px',
         display: 'flex',
         alignItems: 'flex-start',
         position: 'relative',
         overflow: 'visible',
         gap: '1rem',
         minHeight: '234px',
-        height: screenWidth >= 1440 ? '274px' : '260px',
+        height: screenWidth >= 1440 ? '274px' : '270px',
         left: screenWidth >= 1440 ? '4%' : '2%',
         marginTop:"10%"
       }}>
-        {/* Left: Coco head (floating) */}
         {head?.thumbnail && (
           <div style={{
             position: 'absolute',
@@ -118,11 +113,11 @@ const CocoHeads = () => {
           </div>
         )}
 
-        {/* Right: Horizontal list of icons + text */}
         <div style={{
           display: 'flex',
-          gap: '1rem',
-          alignItems: 'flex-start',
+          gap: screenWidth >= 1440 ? '1.5rem' : '1rem',
+          alignItems: 'stretch',
+          justifyContent: 'center',
           width: '100%',
           boxSizing: 'border-box',
           marginLeft: screenWidth >= 1440 ? '23%' : '28%',
@@ -140,63 +135,111 @@ const CocoHeads = () => {
                 alignItems: 'center',
                 textAlign: 'center',
                 width: screenWidth >= 1440 ? '220px' : '190px',
-                minHeight: '220px',
                 boxSizing: 'border-box',
                 padding: '0.6rem',
+                flex: '1 1 0',
+                height: '100%',
+                justifyContent: 'space-between',
               }}>
-                {/* ICON */}
-                {iconUrl ? (
-                  <img 
-                    src={iconUrl} 
-                    alt={item.icon_description?.title || 'icon'} 
-                    style={{ 
-                      width: '75px',
-                      height: '62px',
-                      objectFit: 'contain',
-                      marginBottom: '1rem',
-                      display: 'block',
-                    }} 
-                  />
-                ) : (
-                  <div style={{
-                    width: '75px',
-                    height: '62px',
-                    borderRadius: '12px',
-                    backgroundColor: 'rgba(0,0,0,0.06)',
-                    marginBottom: '1rem',
-                  }} />
-                )}
-
-                {/* TITLE */}
-                <h3 style={{
-                  fontFamily: "'Kellogg's Sans', sans-serif",
-                  fontWeight: 700,
-                  fontSize: screenWidth >= 1440 ? '20px' : '18px',
-                  lineHeight: '19px',
-                  letterSpacing: '0%',
-                  textAlign: 'center',
-                  color: '#2A2F2F',
-                  margin: '0 0 0.6rem 0',
-                  minHeight: '52px',
+                {/* ICON SECTION */}
+                <div style={{
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  padding: '0 0.4rem',
+                  height: '62px',
+                  width: '100%',
+                  marginBottom: '1rem',
                 }}>
-                  {title}
-                </h3>
+                  {iconUrl ? (
+                    <img 
+                      src={iconUrl} 
+                      alt={item.icon_description?.title || 'icon'} 
+                      style={{ 
+                        width: '75px',
+                        height: '62px',
+                        objectFit: 'contain',
+                        display: 'block',
+                      }} 
+                    />
+                  ) : (
+                    <div style={{
+                      width: '75px',
+                      height: '62px',
+                      borderRadius: '12px',
+                      backgroundColor: 'rgba(0,0,0,0.06)',
+                    }} />
+                  )}
+                </div>
 
-                {/* DESCRIPTION */}
-                <p style={{
-                  fontFamily: "'Kellogg's Sans', sans-serif",
-                  fontWeight: 400,
-                  fontSize: screenWidth >= 1440 ? '0.95rem' : '0.85rem',
-                  lineHeight: 1.4,
-                  color: '#2A2F2F',
-                  margin: 0,
+                {/* TITLE SECTION */}
+                <div style={{
+                  width: '100%',
+                  minHeight: '52px',
+                  height: 'auto',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: '0.6rem',
+                  padding: '4px 8px',
                 }}>
-                  {desc}
-                </p>
+                  <h3 style={{
+                    fontFamily: "'Kellogg's Sans', sans-serif",
+                    fontWeight: 700,
+                    fontSize: screenWidth >= 1440 ? '20px' : '18px',
+                    lineHeight: '1.2',
+                    letterSpacing: '0%',
+                    textAlign: 'center',
+                    color: '#2A2F2F',
+                    margin: 0,
+                    padding: 0,
+                    width: '100%',
+                    wordWrap: 'break-word',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    height: '100%',
+                  }}>
+                    {title}
+                  </h3>
+                </div>
+
+                {/* DESCRIPTION SECTION - FIXED ALIGNMENT */}
+                <div style={{
+                  width: '100%',
+                  flex: 1,
+                  display: 'flex',
+                  alignItems: 'center', // Changed from flex-start to center
+                  justifyContent: 'center',
+                  minHeight: '60px',
+                }}>
+                  <div style={{
+                    width: '100%',
+                    height: '100%',
+                    display: 'flex',
+                    alignItems: 'center', // Center vertically
+                    justifyContent: 'center', // Center horizontally
+                    position:'relative',
+                    left:'8%'
+                  }}>
+                    <p style={{
+                      fontFamily: "'Kellogg's Sans', sans-serif",
+                      fontWeight: 400,
+                      fontSize: screenWidth >= 1440 ? '0.95rem' : '0.85rem',
+                      lineHeight: '1.4',
+                      color: '#2A2F2F',
+                      margin: 0,
+                      textAlign: 'left',
+                      width: '100%',
+                      wordWrap: 'break-word',
+                      display: 'flex',
+                      alignItems: 'center', // Add this for better vertical alignment
+                      justifyContent: 'center',
+                      minHeight: '60px',
+                    }}>
+                      {desc}
+                    </p>
+                  </div>
+                </div>
               </div>
             );
           })}

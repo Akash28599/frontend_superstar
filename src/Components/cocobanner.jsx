@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import cloudImg from "../cloud1.png";
 import waveImage from "../cocobanner.png";
-import '../fonts.css';
+
 
 const CocoBanner = () => {
   const [data, setData] = useState(null);
@@ -132,8 +132,7 @@ const CocoBanner = () => {
       >
         <h1 
           style={{ 
-            fontFamily: "'Kellogg's Sans', sans-serif",
-            fontWeight: 650,
+            fontWeight: 700,
             marginBottom: "16px", 
             maxWidth: "72%",
             fontSize: positions.titleSize,
@@ -147,7 +146,9 @@ const CocoBanner = () => {
         <div 
           dangerouslySetInnerHTML={{ __html: description }}
           style={{ 
-             fontStyle: 'italic', 
+            fontFamily: "Kellogg's Sans",
+            fontWeight: 400,
+            fontStyle:"italic",
             opacity: 0.9, 
             maxWidth: "75%", 
             position: 'relative',

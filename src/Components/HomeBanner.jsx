@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
-import '../fonts.css';
+
 
 const HomeBanner = () => {
   const [banner, setBanner] = useState(null);
@@ -14,6 +14,13 @@ const HomeBanner = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+  // Add this somewhere in your app
+ const testFont = new FontFace("Kellogg's Sans Test", "url('../fonts/kelloggssans-light.otf')");
+testFont.load().then(() => {
+  console.log('✅ Font loaded successfully');
+}).catch(error => {
+  console.error('❌ Font failed to load:', error);
+});
 
   useEffect(() => {
     fetch('https://correct-prize-f0a5924469.strapiapp.com/api/homebanners?populate=*')
@@ -98,7 +105,7 @@ const HomeBanner = () => {
   const dynamicLeftSectionStyle = {
     flex: screenWidth >= 1440 ? '0 0 550px' : '0 0 480px',
     zIndex: 5,
-    marginTop: screenWidth >= 1440 ? '10%' : '9%',
+    marginTop: screenWidth >= 1440 ? '10%' : '11%',
     paddingLeft: '0',
     paddingBottom: '1.5rem',
     maxWidth: screenWidth >= 1440 ? '550px' : '480px',
@@ -344,7 +351,7 @@ const textContainerStyle = {
 const badgeContainerStyle = {
   marginBottom: '0.5rem',
   width: '100%',
-  marginLeft: '0',
+  marginLeft: '1.5rem',
 };
 
 const badgeStyle = {
@@ -358,8 +365,8 @@ const badgeStyle = {
 
 const badgeTextStyle = {
   margin: 0,
-  fontFamily: "'Kellogg's Sans', sans-serif",
-  fontWeight: 600,
+  
+  fontWeight: 500,
   fontSize: '1.2rem',
   lineHeight: '100%',
   letterSpacing: '0%',
@@ -377,7 +384,7 @@ const textColumnStyle = {
 };
 
 const h1Style = {
-  fontFamily: "'Kellogg's Sans', sans-serif",
+  fontFamily: "Kellogg's Sans",
   fontWeight: 700,
   fontSize: '82px',
   lineHeight: '1.05',
@@ -411,8 +418,7 @@ const buttonStyle = {
   border: 'none',
   backgroundColor: '#fff',
   color: '#F60945',
-  fontFamily: "'Kellogg's Sans', sans-serif",
-  fontWeight: 600,
+  fontWeight: 500,
   fontSize: '1.4rem',
   display: 'inline-flex',
   alignItems: 'center',

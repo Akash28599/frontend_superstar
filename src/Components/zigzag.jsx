@@ -341,7 +341,7 @@ const OurProducts = () => {
               style={{
                 position: "absolute",
                 right: "6%",
-                top: 240,
+                top: 110,
                 width: "44%",
                 display: "flex",
                 flexDirection: "row",
@@ -355,8 +355,8 @@ const OurProducts = () => {
                   textAlign: "left",
                   maxWidth: 320,
                   position: "absolute",
-                  bottom: "47%",
-                  left: isMacBook?"19%":"15%",
+                  bottom: "60%",
+                  left: isMacBook?"19%":"8%",
                 }}
               >
                 <h2
@@ -379,7 +379,7 @@ const OurProducts = () => {
                   src={imgUrl(product2)}
                   alt={product2.title_description?.title}
                   style={{
-                    maxWidth: 240,
+                    maxWidth: 280,
                     width: "100%",
                     height: "auto",
                     objectFit: "contain",
@@ -437,8 +437,8 @@ const OurProducts = () => {
                   textAlign: "left",
                   maxWidth: 320,
                   position: "relative",
-                  top: "-143px",
-                  left: "19%",
+                  top: "7%",
+                  left: "6%",
                 }}
               >
                 <h2

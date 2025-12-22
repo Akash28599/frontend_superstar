@@ -45,7 +45,7 @@ const FooterLayout = () => {
   };
 
   const addressLines = settings?.address?.split("\n") ?? [];
-
+     console.log("settings",settings)
   return (
     <Box>
       <Box sx={{ background: "#F60945" }}>
@@ -134,7 +134,7 @@ const FooterLayout = () => {
                   p: 0,
                   m: 0
                 }}>
-                  <ListItem sx={{ pl: 0, py: 0.5 }}>Contact:+234 801 234</ListItem>
+                  <ListItem sx={{ pl: 0, py: 0.5 }}>{settings?.contactphone}</ListItem>
                   <ListItem sx={{ pl: 0, py: 0.5 }}>Privacy Policy</ListItem>
                   <ListItem sx={{ pl: 0, py: 0.5 }}>Sitemap</ListItem>
                 </List>
