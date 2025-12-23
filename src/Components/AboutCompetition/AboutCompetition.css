@@ -1,0 +1,17 @@
+.about-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.about-right{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.about-right h1{
+    color: #dd2120;
+}
+.about-right h4{
+   text-align: justify;
+   width: 80%;
+}
