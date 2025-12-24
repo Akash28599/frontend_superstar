@@ -1,10 +1,12 @@
 import React from 'react'
 import './KelloggIcon.css'
-const KelloggIcon = ({IconImage}) => {
+const KelloggIcon = ({ IconImage }) => {
+
+    
     return (
         <div className="brand">
             <img
-                src={IconImage?.url}
+                src={IconImage}
                 alt="icon"
                 className="brand-image"
             />
