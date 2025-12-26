@@ -3,10 +3,10 @@ import "./ScholarshipForm.css";
 import { intArrayBuilder } from "../../Utils/Array";
 import KelloggIcon from "../KelloggIcon/KelloggIcon";
 
-const ScholarshipForm = ({data}) => {
+const ScholarshipForm = ({ data }) => {
     const fileRef = useRef(null);
     const [wordCount, setWordCount] = useState(100)
- 
+
     const handleWordCount = (e) => {
         const text = e.target.value.trim()
         const words = text === "" ? 0 : text.split(/\s+/).length
@@ -18,7 +18,7 @@ const ScholarshipForm = ({data}) => {
             <div className="container">
 
                 {/* LEFT BRAND COLUMN */}
-                <KelloggIcon IconImage={data.IconImage}/>
+                <KelloggIcon IconImage={data.IconImage} />
 
                 {/* FORM + CONTENT */}
                 <div className="content">
@@ -59,12 +59,12 @@ const ScholarshipForm = ({data}) => {
                             <div className="counter">{wordCount} words remaining</div>
                             <textarea rows="12" onChange={(e) => handleWordCount(e)}></textarea>
                         </div>
-                       
+
                         <div class="submit-btn">
                             <button className="submit">
                                 Submit
                             </button>
-                            <img src={data.groupKellogs?.url} alt="group"/>
+                            <img src={data.groupKellogs?.url} alt="group" />
                         </div>
                     </div>
                 </div>

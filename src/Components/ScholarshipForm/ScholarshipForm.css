@@ -7,24 +7,15 @@
     --font: "KelloggsSans", Arial, sans-serif;
 }
 
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    font-family: var(--font);
-}
-
 .scholarship {
     background: var(--red);
     color: var(--white);
-    padding: 64px 40px;
+    padding: 4% 2%;
 }
 
 .container {
     display: flex;
-    gap: 64px;
+    gap: 20px;
     align-items: flex-start;
 }
 
@@ -35,19 +26,20 @@ body {
     flex: 1;
     display: flex;
     justify-items: flex-start;
-    gap: 48px;
+    gap: 40px;
 }
 
 /* FORM */
 .form {
     flex: 0 0 40%;
-
+    width: 50%;
 }
 
 .form h1 {
     width: 80%;
-    font-size: 250;
+    font-size: 46px;
     margin-bottom: 22px;
+    line-height: 45px;
 }
 
 .form input,
@@ -55,16 +47,18 @@ body {
     width: 100%;
     background: transparent;
     border: none;
-    border-bottom: 2px solid var(--white);
-    padding: 8px 4px;
+    border-bottom: 1px solid var(--white);
+    padding: 6px 0px;
     margin-bottom: 32px;
     color: var(--white);
     font-family: var(--font);
     font-size: 16px;
 }
-.form input{
+
+.form input {
     height: 6%;
 }
+
 .form input,
 .form select,
 textarea {
@@ -99,8 +93,8 @@ textarea:focus {
 
 /* RIGHT */
 .right {
-    flex: 1;
     margin-top: 4%;
+    width: 46%;
 }
 
 /* UPLOAD */
@@ -119,16 +113,17 @@ textarea:focus {
 /* ESSAY */
 .essay {
     position: relative;
+
 }
 
 .counter {
     position: absolute;
-    right: 10%;
+    right: 8%;
     background: var(--black);
     color: var(--white);
-    padding: 6px 12px;
+    padding: 7px 12px;
     border-radius: 0 0 12px 12px;
-    font-size: 14px;
+    font-size: 12px;
     transform: translate(-10%, 120%);
 }
 
@@ -138,10 +133,10 @@ textarea {
     background: var(--gray);
     border: none;
     border-radius: 24px;
-    padding: 24px;
+    padding: 34px;
     resize: both;
     font-family: var(--font);
-    min-width: 340px;
+    min-width: 380px;
     min-height: 300px;
 
 }
@@ -174,8 +169,11 @@ textarea {
 
 .submit-btn button {
     margin-top: 5%;
-    width: 60%;
+    font-size: 18px;
+    font-weight: 500;
+    width: 50%;
 }
+
 .submit-btn img {
     margin-top: 5%;
     width: 70%;

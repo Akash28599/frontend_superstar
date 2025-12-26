@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Navbar from '../Components/Navbar'
 import ScholarshipForm from '../Components/ScholarshipForm/ScholarshipForm'
 import AboutCompetition from '../Components/AboutCompetition/AboutCompetition';
+import YoutubeGallery from '../Components/YoutubeVideo/YoutubeGallery';
 
 const ScholarshipPage = () => {
     const [data, setData] = useState({});
@@ -30,8 +31,8 @@ const ScholarshipPage = () => {
             "Fill in the necessary details, Snap and upload 5 packs of your favorite Kellogg’s cereal."
         ],
         shouldShowForm: true,
-        criteria:[
-            'Creativity','Story-telling','Grammar','Vocabulary'
+        criteria: [
+            'Creativity', 'Story-telling', 'Grammar', 'Vocabulary'
         ]
     };
 
@@ -56,6 +57,8 @@ const ScholarshipPage = () => {
             <Navbar />
             {data.shouldShowForm && <ScholarshipForm data={data} />}
             <AboutCompetition data={data} />
+
+            <YoutubeGallery />
         </>
     )
 }
