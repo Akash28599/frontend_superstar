@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Navbar from '../Components/Navbar'
 import ScholarshipForm from '../Components/ScholarshipForm/ScholarshipForm'
 import AboutCompetition from '../Components/AboutCompetition/AboutCompetition';
+import ThankYou from '../Components/ScholarshipForm/ThankYou';
 
 const ScholarshipPage = () => {
     const [data, setData] = useState({});
@@ -56,6 +57,7 @@ const ScholarshipPage = () => {
             <Navbar />
             {data.shouldShowForm && <ScholarshipForm data={data} />}
             <AboutCompetition data={data} />
+            <ThankYou/>
         </>
     )
 }
