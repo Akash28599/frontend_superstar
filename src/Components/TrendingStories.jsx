@@ -17,7 +17,7 @@ export default function TrendingStories() {
     const getStories = async () => {
       try {
         const res = await fetch(
-          "https://correct-prize-f0a5924469.strapiapp.com/api/stories?populate=*"
+          `${process.env.REACT_APP_STRAPI_URL}/api/stories?populate=*`
         );
         const json = await res.json();
         setStoriesData(json);

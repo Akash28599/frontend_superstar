@@ -18,7 +18,7 @@ const FooterLayout = () => {
     const getFooterData = async () => {
       try {
         const res = await fetch(
-          "https://correct-prize-f0a5924469.strapiapp.com/api/sitesettings?populate=*"
+          `${process.env.REACT_APP_STRAPI_URL}/api/sitesettings?populate=*`
         );
         const json = await res.json();
         console.log(json);
@@ -31,15 +31,6 @@ const FooterLayout = () => {
   }, []);
 
   const settings = settingsData?.data?.[0];
-
-  // ✅ DYNAMIC GRID RESPONSIVE FOR DESKTOPS
-  const getGridResponsive = () => {
-    if (screenWidth >= 1920) return 4;  // Your good laptop - original
-    if (screenWidth >= 1440) return 4;   // Medium desktops
-    if (screenWidth >= 1200) return 3;   // Your smaller laptop - FORCE 3 columns
-    return 3; // Minimum for desktops
-  };
-
   const openUrl = (url) => {
     if (url) window.open(url, "_blank");
   };

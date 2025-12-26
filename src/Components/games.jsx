@@ -23,7 +23,7 @@ export default function PrintableGames() {
   }, []);
 
   useEffect(() => {
-    const url = "https://correct-prize-f0a5924469.strapiapp.com/api/games?populate=*";
+    const url = `${process.env.REACT_APP_STRAPI_URL}/api/games?populate=*`;
     fetch(url)
       .then((r) => r.json())
       .then((json) => {
