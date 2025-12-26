@@ -15,6 +15,9 @@ const ScholarshipPage = () => {
         groupKellogs2: {
             url: "/assetss/group2.png"
         },
+        hangingMonkey:{
+            url:'/assetss/hangingMonkey.png'
+        },
         competitionTitle: "About the Competition",
         CompetitionDescription: [
             {
@@ -57,8 +60,8 @@ const ScholarshipPage = () => {
             <Navbar />
             {data.shouldShowForm && <ScholarshipForm data={data} />}
             <AboutCompetition data={data} />
-
             <YoutubeGallery />
+            <br/>
         </>
     )
 }

@@ -43,7 +43,7 @@ const YoutubeGallery = () => {
                             key={i}
                             url={url}
                             onPlay={setActiveVideo}
-                            styleThumb={{ width: '480px', height: '200px', objectFit: 'contain' }}
+                            styleThumb={{ width: '45%', height: '200px', objectFit: 'contain' }}
                         />
                     ))}
                 </div>
@@ -51,10 +51,13 @@ const YoutubeGallery = () => {
             <div>
                 <h1 className='yt-h1'>{`${data.editionWinnerTitle} Edition Winners`}</h1>
                 <div className="yt-winners">
+
                     <div className='yt-winleft'>
                         <YoutubeThumbnail
                             url={data.editionWinners[0]}
                             onPlay={setActiveVideo}
+                            styleThumbImage={{ objectFit: 'cover' }}
+
                         />
                     </div>
                     <div className='yt-winright'>
@@ -64,12 +67,10 @@ const YoutubeGallery = () => {
                                 key={i}
                                 url={url}
                                 onPlay={setActiveVideo}
-                                styleThumb={{ width:'80%',margin: '0 10%' }}
-
+                                styleThumb={{ width: '80%', margin: '0 10%' }}
                             />
                         ))}
                     </div>
-
                 </div>
             </div>
 
