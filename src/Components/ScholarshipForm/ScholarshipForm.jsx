@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import {  useRef, useState } from "react";
 import "./ScholarshipForm.css";
 import { intArrayBuilder } from "../../Utils/Array";
 import KelloggIcon from "../KelloggIcon/KelloggIcon";
@@ -16,7 +16,7 @@ const ScholarshipForm = ({ data }) => {
     return (
         <section className="scholarship">
             <div className="container">
-                <div className="hang-monkey"><img src={data.hangingMonkey.url}/></div>
+                <div className="hang-monkey"><img src={data.hangingMonkey.url} alt=''/></div>
                 {/* LEFT BRAND COLUMN */}
                 <KelloggIcon IconImage={data.IconImage} />
 

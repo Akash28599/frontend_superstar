@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Navbar from '../Components/Navbar'
 import ScholarshipForm from '../Components/ScholarshipForm/ScholarshipForm'
 import AboutCompetition from '../Components/AboutCompetition/AboutCompetition';
@@ -41,7 +41,7 @@ const ScholarshipPage = () => {
     };
 
     useEffect(() => {
-        fetch("https://correct-prize-f0a5924469.strapiapp.com/api/scholarship-page?populate=*")
+        fetch(`${process.env.REACT_APP_STRAPI_URL}/api/scholarship-page?populate=*`)
             .then(res => {
                 if (!res.ok) {
                     throw new Error(`HTTP error! Status: ${res.status}`);
@@ -54,7 +54,7 @@ const ScholarshipPage = () => {
                 console.log(testData.IconImage)
                 setData(testData);
             });
-    }, []);
+    },[]);
 
     return (
         <>

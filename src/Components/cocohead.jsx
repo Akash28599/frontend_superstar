@@ -14,7 +14,7 @@ const CocoHeads = () => {
   }, []);
 
   useEffect(() => {
-    fetch('https://correct-prize-f0a5924469.strapiapp.com/api/coco-heads?populate=*')
+    fetch(`${process.env.REACT_APP_STRAPI_URL}/api/coco-heads?populate=*`)
       .then(res => res.json())
       .then(json => {
         const data = json.data || [];

@@ -5,7 +5,7 @@ const Navbar = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('https://correct-prize-f0a5924469.strapiapp.com/api/navbars?populate=*')
+    fetch(`${process.env.REACT_APP_STRAPI_URL}/api/navbars?populate=*`)
       .then(res => res.json())
       .then(data => {
         if (data.data && data.data[0] && data.data[0].menu) {

@@ -23,7 +23,7 @@ testFont.load().then(() => {
 });
 
   useEffect(() => {
-    fetch('https://correct-prize-f0a5924469.strapiapp.com/api/homebanners?populate=*')
+    fetch(`${process.env.REACT_APP_STRAPI_URL}/api/homebanners?populate=*`)
       .then(res => res.json())
       .then(data => {
         const items = Array.isArray(data.data) ? data.data : [];

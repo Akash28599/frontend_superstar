@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import YoutubeThumbnail from './YoutubeThumbnail'
 import YoutubePopup from './YoutubePopup'
 import './YoutubeGallery.css'
@@ -6,6 +6,7 @@ import './YoutubeGallery.css'
 
 const YoutubeGallery = () => {
     const [activeVideo, setActiveVideo] = useState(null)
+    // const [data, setData] = useState({})
     const data = {
         main: "https://www.youtube.com/watch?v=odO24fa2AqA",
 
@@ -24,6 +25,20 @@ const YoutubeGallery = () => {
         ],
         editionWinnerTitle: 'Second'
     }
+    // useEffect(() => {
+    //     fetch(`${process.env.REACT_APP_STRAPI_URL}/api/youtube-url?populate=*`)
+    //         .then(res => {
+    //             if (!res.ok) {
+    //                 throw new Error(`HTTP error! Status: ${res.status}`);
+    //             }
+    //             return res.json();
+    //         })
+    //         .then(json => setData(ytData))
+    //         .catch(err => {
+    //             console.error("Fetch error:", err);
+    //             setData(ytData);
+    //         });
+    // });
     return (
         <div className='yt-cont'>
             <div>

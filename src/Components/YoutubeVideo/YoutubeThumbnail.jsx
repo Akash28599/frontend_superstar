@@ -15,7 +15,7 @@ const YoutubeThumbnail = ({ url, onPlay, styleIcon, overlayText, shouldBlur = fa
             />
             {shouldBlur && <div className='yt-overlay'></div>}
             <p className='yt-txt'>{overlayText}</p>
-            <span className="yt-play" style={styleIcon}><img src={ytIcon} /></span>
+            <span className="yt-play" style={styleIcon}><img src={ytIcon} alt=''/></span>
         </div>
     )
 }
