@@ -3,6 +3,7 @@ import Navbar from '../Components/Navbar'
 import ScholarshipForm from '../Components/ScholarshipForm/ScholarshipForm'
 import AboutCompetition from '../Components/AboutCompetition/AboutCompetition';
 import YoutubeGallery from '../Components/YoutubeVideo/YoutubeGallery';
+import SubmissionForm from '../Components/SubmissionForm/SubmissionForm';
 
 const ScholarshipPage = () => {
     const [data, setData] = useState({});
@@ -61,6 +62,8 @@ const ScholarshipPage = () => {
             {data.shouldShowForm && <ScholarshipForm data={data} />}
             <AboutCompetition data={data} />
             <YoutubeGallery />
+
+            {data.shouldShowForm &&<SubmissionForm groupKellogs={data.groupKellogs}/>}
             <br/>
         </>
     )

@@ -56,7 +56,7 @@ const YoutubeGallery = () => {
                         <YoutubeThumbnail
                             url={data.editionWinners[0]}
                             onPlay={setActiveVideo}
-                            styleThumbImage={{ objectFit: 'cover' }}
+                            styleThumbImage={{}}
 
                         />
                     </div>
