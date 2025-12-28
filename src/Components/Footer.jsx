@@ -2,6 +2,7 @@ import { Box, Grid, IconButton, List, ListItem } from "@mui/material";
 import { Facebook, Instagram, Twitter, YouTube } from "@mui/icons-material";
 import { BiLogoTiktok } from "react-icons/bi";
 import { useEffect, useState } from "react";
+import { openUrl } from "../Utils/Utilities";
 
 const FooterLayout = () => {
   const [settingsData, setSettingsData] = useState(null);
@@ -31,9 +32,7 @@ const FooterLayout = () => {
   }, []);
 
   const settings = settingsData?.data?.[0];
-  const openUrl = (url) => {
-    if (url) window.open(url, "_blank");
-  };
+
 
   const addressLines = settings?.address?.split("\n") ?? [];
      console.log("settings",settings)

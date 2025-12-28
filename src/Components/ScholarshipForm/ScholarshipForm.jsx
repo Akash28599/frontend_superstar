@@ -18,7 +18,7 @@ const ScholarshipForm = ({ data }) => {
             <div className="container">
                 <div className="hang-monkey"><img src={data.hangingMonkey.url} alt=''/></div>
                 {/* LEFT BRAND COLUMN */}
-                <KelloggIcon IconImage={data.IconImage} />
+                <KelloggIcon IconImage={data.IconImage.url} />
 
                 {/* FORM + CONTENT */}
                 <div className="content">
