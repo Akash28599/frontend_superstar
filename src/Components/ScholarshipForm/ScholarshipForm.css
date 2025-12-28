@@ -130,6 +130,25 @@ textarea:focus {
     margin-bottom: 16px;
 }
 
+.file-tooltip {
+    position: fixed;
+    border: 1.5px solid white;
+    background: #282828;
+    color: #fff;
+    padding: 4px;
+    font-size: 12px;
+    border-radius: 4px;
+    pointer-events: none;
+    z-index: 9999;
+    white-space: nowrap;
+}
+
+
+.upload:hover .file-tooltip {
+    display: block;
+}
+
+
 /* ESSAY */
 .essay {
     position: relative;

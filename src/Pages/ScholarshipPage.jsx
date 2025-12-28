@@ -100,7 +100,7 @@ const ScholarshipPage = () => {
             <AboutCompetition data={data} />
             <YoutubeGallery />
 
-            {data.shouldShowForm && <SubmissionForm groupKellogs={data.groupKellogs} />}
+            {!data.shouldShowForm && <SubmissionForm groupKellogs={data.groupKellogs} />}
             <br />
         </>
     )

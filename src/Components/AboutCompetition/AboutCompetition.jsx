@@ -13,10 +13,15 @@ const AboutCompetition = ({ data }) => {
         <div className='about-container'>
             <div className='about-left'>
                 <div className="about-bg">
-                    <img src={data.bg?.url} className='img1' alt="background" />
-                    {!data?.shouldShowForm && (
-                        <KelloggIcon IconImage={data?.IconImage?.url} />
-                    )}
+                    <div className='bg-img' style={{ position:data?.shouldShowForm?'none':'absolute' }}>
+                        <img src={data.bg?.url} className='img1' alt="background" />
+
+                    </div>
+                    <div className='abt-kg'>
+                        {!data?.shouldShowForm && (
+                            <KelloggIcon IconImage={data?.IconImage?.url} />
+                        )}
+                    </div>
                 </div>
 
                 <img
@@ -38,9 +43,9 @@ const AboutCompetition = ({ data }) => {
                 </div>
 
                 <div className="about-steps">
-                    {data.CompetitionSteps?.map((item, index) => (
+                    {data.competitionSteps?.map((item, index) => (
                         <div className="about-step"
-                            style={{ marginBottom: data.CompetitionSteps.length == index + 1 ? 'none' : '20px' }}
+                            style={{ marginBottom: data.competitionSteps.length == index + 1 ? 'none' : '20px' }}
                             key={index}>
                             <span className="about-step-dot" />
                             <div className="about-step-content">
@@ -53,9 +58,9 @@ const AboutCompetition = ({ data }) => {
                 </div>
                 <div className='abt-follow'>{data.socialLinkText}
                     <div className='abt-social-media'>
-                        <FaInstagram className='abt-social-icon ' onClick={()=>openUrl(data.scholarshipSocialLinks?.instagram)}/>
-                        <FaTwitter className='abt-social-icon '  onClick={()=>openUrl(data.scholarshipSocialLinks?.twitter)}/>
-                        <LuFacebook className='abt-social-icon '  onClick={()=>openUrl(data.scholarshipSocialLinks?.facebook)}/>
+                        <FaInstagram className='abt-social-icon ' onClick={() => openUrl(data.scholarshipSocialLinks?.instagram)} />
+                        <FaTwitter className='abt-social-icon ' onClick={() => openUrl(data.scholarshipSocialLinks?.twitter)} />
+                        <LuFacebook className='abt-social-icon ' onClick={() => openUrl(data.scholarshipSocialLinks?.facebook)} />
                     </div>
                 </div>
 
