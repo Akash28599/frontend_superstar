@@ -43,7 +43,23 @@ const ThankYou = ({ socialLinks }) => {
     const [loading, setLoading] = useState(true);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
-
+const sample ={
+     cocoPopsImage:
+        {
+            url: '/assetss/CocoPops.png'
+        },
+        cocoPopBlur: {
+            url: '/assetss/CocoPops-pack-blurred.png'
+        },
+        title: 'Thank you for your participation',
+        description: "We wish you a healthy family with nutritious and tasty Kellogg's cereals.",
+        leftKelloggImage: {
+            url: '/assetss/CocoPops.png'
+        },
+        cocoMonkey: {
+            url: "/assetss/flying-monkey.png"
+        },
+}
 
     //  ADDED: refs for section & blurred image
     const sectionRef = useRef(null);
@@ -79,6 +95,7 @@ const ThankYou = ({ socialLinks }) => {
             setData(resData.data ? resData.data : null);
 
         } catch (error) {
+            setData(sample)
             console.error('Error  fetching Participation:', error);
         } finally {
             setLoading(false);
