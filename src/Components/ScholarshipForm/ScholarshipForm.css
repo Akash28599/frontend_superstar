@@ -30,13 +30,15 @@
     bottom: -100px;
     z-index: 1;
     width: 10%;
-    height:60%;
+    height: 60%;
 
 }
-.hang-monkey img{
-     width: 100%;
+
+.hang-monkey img {
+    width: 100%;
     height: 100%;
 }
+
 /* LEFT BRAND */
 
 /* CONTENT */
@@ -127,6 +129,25 @@ textarea:focus {
     cursor: pointer;
     margin-bottom: 16px;
 }
+
+.file-tooltip {
+    position: fixed;
+    border: 1.5px solid white;
+    background: #282828;
+    color: #fff;
+    padding: 4px;
+    font-size: 12px;
+    border-radius: 4px;
+    pointer-events: none;
+    z-index: 9999;
+    white-space: nowrap;
+}
+
+
+.upload:hover .file-tooltip {
+    display: block;
+}
+
 
 /* ESSAY */
 .essay {
