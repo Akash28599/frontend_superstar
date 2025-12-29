@@ -59,23 +59,6 @@ const ScholarshipPage = () => {
     //     ]
     // };
 
-    // useEffect(() => {
-    //     fetch(`${process.env.REACT_APP_STRAPI_URL}/api/scholarship-page?populate=*`)
-    //         .then(res => {
-    //             if (!res.ok) {
-    //                 throw new Error(`HTTP error! Status: ${res.status}`);
-    //             }
-    //             return res.json();
-    //         })
-    //         .then(json => setData(json.data || testData))
-    //         .catch(err => {
-    //             console.error("Fetch error:", err);
-    //             console.log(testData.IconImage)
-    //             setData(testData);
-    //         });
-    // }, []);
-
-
     const fetchURLs = async () => {
         try {
             const res = await fetch(`${process.env.REACT_APP_STRAPI_URL}/api/scholarship-page?populate=*`)
