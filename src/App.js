@@ -6,7 +6,7 @@ import ScholarshipPage from './Pages/ScholarshipPage';
 function App() {
   return (
     <div className="App">
-      {/* <HomePage/> */}
+      <HomePage/>
       <ScholarshipPage/>
     </div>
   );
