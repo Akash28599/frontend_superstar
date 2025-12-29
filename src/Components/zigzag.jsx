@@ -15,7 +15,7 @@ const OurProducts = () => {
   useEffect(() => {
     let mounted = true;
     fetch(
-      "https://correct-prize-f0a5924469.strapiapp.com/api/ourproducts?populate=*"
+      `${process.env.REACT_APP_STRAPI_URL}/api/ourproducts?populate=*`
     )
       .then((r) => r.json())
       .then((json) => {
@@ -57,8 +57,6 @@ const OurProducts = () => {
     product3,
     product4,
     product5,
-    product6,
-    product7,
   ] = allProducts;
 
   const imgUrl = (it) =>
@@ -105,7 +103,6 @@ const OurProducts = () => {
 
   // SVG dimensions and product anchor positions
   const SVG_WIDTH = containerWidth;
-  const SVG_HEIGHT = 1200;
   const centerX = containerWidth / 2;
 
   const positions = {

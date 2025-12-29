@@ -1,0 +1,96 @@
+:root {
+    --red: #e11d1d;
+    --white: #ffffff;
+    --black: #000000;
+    --gray: #f2f2f2;
+    --radius: 16px;
+    --font: "KelloggsSans", Arial, sans-serif;
+}
+
+/* MAIN SECTION */
+.sub-container {
+    margin-top: 10%;
+    background: var(--red);
+    color: var(--white);
+    padding: 4% 2%;
+    min-height: 100vh;
+    position: relative;
+}
+
+.sub-content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* FORM CARD */
+.sub-form {
+    background: transparent;
+    width: 45%;
+}
+
+/* TITLE */
+.sub-form h1 {
+    font-size: 46px;
+    line-height: 45px;
+    margin-bottom: 30px;
+    color: var(--white);
+}
+
+/* INPUTS */
+.sub-form input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--white);
+    padding: 10px 0;
+    margin-bottom: 32px;
+    color: var(--white);
+    font-size: 16px;
+}
+
+.sub-form input::placeholder {
+    color: var(--white);
+}
+
+.sub-form input:focus {
+    outline: none;
+}
+
+/* SUBMIT BUTTON */
+.sub-submit-btn {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.sub-submit-btn img {
+    width: 70%;
+
+}
+
+.sub-submit {
+    width: 50%;
+    height: 50px;
+    background: var(--white);
+    color: var(--black);
+    border: none;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .sub-form {
+        width: 100%;
+    }
+
+    .sub-form h1 {
+        font-size: 36px;
+        line-height: 40px;
+    }
+}
