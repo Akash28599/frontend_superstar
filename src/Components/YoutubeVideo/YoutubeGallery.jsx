@@ -12,24 +12,24 @@ const YoutubeGallery = () => {
         editionWinnersLink: [],
         editionName: ""
     })
-    // const data = {
-    //     main: "https://www.youtube.com/watch?v=odO24fa2AqA",
+    const sample = {
+        mainVideoLink: "https://www.youtube.com/watch?v=odO24fa2AqA",
 
-    //     snippets: [
+        newSnippetsLinks: [
 
-    //         "https://www.youtube.com/watch?v=sO6yTKuALmM",
-    //         "https://www.youtube.com/watch?v=Do-7YsqtaX4"
-    //     ],
-    //     editionWinners: [
+            "https://www.youtube.com/watch?v=sO6yTKuALmM",
+            "https://www.youtube.com/watch?v=Do-7YsqtaX4"
+        ],
+        editionWinnersLink: [
 
-    //         "https://www.youtube.com/watch?v=cxCjNytDL7g",
-    //         "https://www.youtube.com/watch?v=NlgJr5gGCro&t=1s",
-    //         "https://www.youtube.com/watch?v=3P8YKZUy7iQ",
-    //         "https://www.youtube.com/watch?v=cBSVyCAlTfk",
-    //         "https://www.youtube.com/watch?v=Co23nyyPWUc&t=1s",
-    //     ],
-    //     editionWinnerTitle: 'Second'
-    // }
+            "https://www.youtube.com/watch?v=cxCjNytDL7g",
+            "https://www.youtube.com/watch?v=NlgJr5gGCro&t=1s",
+            "https://www.youtube.com/watch?v=3P8YKZUy7iQ",
+            "https://www.youtube.com/watch?v=cBSVyCAlTfk",
+            "https://www.youtube.com/watch?v=Co23nyyPWUc&t=1s",
+        ],
+        editionName: 'Second'
+    }
     const fetchURLs = async () => {
     try {
         const res = await fetch(`${process.env.REACT_APP_STRAPI_URL}/api/youtube-url?populate=*`)
@@ -37,6 +37,8 @@ const YoutubeGallery = () => {
 
         setData(json.data)
     } catch (err) {
+                setData(sample)
+
         console.error("Fetch error:", err)
     }
 }

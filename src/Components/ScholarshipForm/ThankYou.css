@@ -1,0 +1,26 @@
+:root {
+    --red: #e11d1d;
+    --white: #ffffff;
+    --black: #000000;
+    --gray: #f2f2f2;
+    --radius: 16px;
+    --font: "KelloggsSans", Arial, sans-serif;
+}
+
+.btn {
+    font-family: var(--font);
+    background-color: #dd2120;
+    color: white;
+    border: 1px solid #dd2120;
+    /* optional but looks premium */
+
+}
+
+.btn:hover {
+    background-color: #ffffff;
+    /* ⚪ white bg */
+    color: #dd2120;
+    /* 🔴 red text */
+    border: 2px solid #dd2120;
+    /* optional but looks premium */
+}

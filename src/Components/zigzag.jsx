@@ -15,7 +15,7 @@ const OurProducts = () => {
   useEffect(() => {
     let mounted = true;
     fetch(
-      `${process.env.REACT_APP_STRAPI_URL}/api/ourproducts?populate=*`
+      `${process.env.REACT_APP_STRAPI_URL}/api/our-products?populate=*`
     )
       .then((r) => r.json())
       .then((json) => {
