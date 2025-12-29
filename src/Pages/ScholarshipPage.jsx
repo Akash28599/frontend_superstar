@@ -31,8 +31,8 @@ const ScholarshipPage = () => {
             "Fill in the necessary details, Snap and upload 5 packs of your favorite Kellogg’s cereal."
         ],
         shouldShowForm: true,
-        criteria:[
-            'Creativity','Story-telling','Grammar','Vocabulary'
+        criteria: [
+            'Creativity', 'Story-telling', 'Grammar', 'Vocabulary'
         ]
     };
 
