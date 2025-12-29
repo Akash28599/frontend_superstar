@@ -52,7 +52,7 @@ const ScholarshipPage = () => {
             {data.shouldShowForm && <ScholarshipForm data={data} />}
             <AboutCompetition data={data} />
             <YoutubeGallery/>
-            <ThankYou/>
+            <ThankYou socialLinks={data.scholarshipSocialLinks}/>
             {!data.shouldShowForm &&<SubmissionForm groupKellogs={data.groupKellogs}/>}
         </>
     )
