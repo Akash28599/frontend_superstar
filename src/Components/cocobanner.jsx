@@ -17,7 +17,7 @@ const CocoBanner = () => {
 
   const fetchBanner = async () => {
     try {
-      const res = await fetch('https://correct-prize-f0a5924469.strapiapp.com/api/cocobanners?populate=*');
+      const res = await fetch(`${process.env.REACT_APP_STRAPI_URL}/api/cocobanners?populate=*`);
       const resData = await res.json();
       setData(resData.data ? resData.data[0] : null);
     } catch (error) {
