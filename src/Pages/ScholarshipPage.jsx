@@ -4,6 +4,8 @@ import ScholarshipForm from '../Components/ScholarshipForm/ScholarshipForm'
 import AboutCompetition from '../Components/AboutCompetition/AboutCompetition';
 import YoutubeGallery from '../Components/YoutubeVideo/YoutubeGallery';
 import SubmissionForm from '../Components/SubmissionForm/SubmissionForm';
+import ThankYou from '../Components/ScholarshipForm/ThankYou';
+
 
 const ScholarshipPage = () => {
     const [data, setData] = useState({
@@ -26,38 +28,6 @@ const ScholarshipPage = () => {
             tiktok:""
         }
     });
-    // const testData = {
-    //     IconImage: "/assetss/icon.png",
-    //     groupKellogs: {
-    //         url: "/assetss/group.png"
-    //     },
-    //     bg: "/assetss/cloud.png",
-    //     groupKellogs2: {
-    //         url: "/assetss/group2.png"
-    //     },
-    //     hangingMonkey: {
-    //         url: '/assetss/hangingMonkey.png'
-    //     },
-    //     competitionTitle: "About the Competition",
-    //     competitionDescription: [
-    //         {
-    //             title: "Kellogg’s Super Stars",
-    //             des: "is our dream for the future generation in Nigeria: a generation of well-nurtured, healthy children."
-    //         },
-    //         {
-    //             title: "Kellogg’s Super Stars Scholarship",
-    //             des: "Competition is an initiative to bring out the best expressions from our Super Stars and motivate them by sponsoring their school expenses worth N150,000. This year, we are launching the 6th edition of our competition. It’s a lot easier with a simple 2-step process."
-    //         }
-    //     ],
-    //     CompetitionSteps: [
-    //         "Share your Breakfast to Greatness story with us: How breakfast habits Lead to Greatness?",
-    //         "Fill in the necessary details, Snap and upload 5 packs of your favorite Kellogg’s cereal."
-    //     ],
-    //     shouldShowForm: true,
-    //     criteria: [
-    //         'Creativity', 'Story-telling', 'Grammar', 'Vocabulary'
-    //     ]
-    // };
 
     const fetchURLs = async () => {
         try {
@@ -81,10 +51,9 @@ const ScholarshipPage = () => {
             <Navbar />
             {data.shouldShowForm && <ScholarshipForm data={data} />}
             <AboutCompetition data={data} />
-            <YoutubeGallery />
-
-            {!data.shouldShowForm && <SubmissionForm groupKellogs={data.groupKellogs} />}
-            <br />
+            <YoutubeGallery/>
+            <ThankYou/>
+            {!data.shouldShowForm &&<SubmissionForm groupKellogs={data.groupKellogs}/>}
         </>
     )
 }
