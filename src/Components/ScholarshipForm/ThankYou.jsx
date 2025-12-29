@@ -14,16 +14,33 @@ import { FaTwitter } from "react-icons/fa";
 
 const ThankYou = () => {
     const img = {
-        cocoMonkey: "/assetss/flying-monkey.png",
-        CocoPops: "/assetss/CocoPops.png",
+        // cocoMonkey: "/assetss/flying-monkey.png",
+        // CocoPops: "/assetss/CocoPops.png",
         leftCocoPops: "/assetss/CocoPops.png",
-        blurredCocoPops: "/assetss/CocoPops-pack-blurred.png"
+        // blurredCocoPops: "/assetss/CocoPops-pack-blurred.png"
     }
 
     //
 
-    // const [data, setData] = useState(null);
-    // const [loading, setLoading] = useState(true);
+    const [data, setData] = useState({
+        cocoPopsImage:
+        {
+            url: ''
+        },
+        cocoPopBlur:{
+            url:''
+        },
+        title: '',
+        description: '',
+        leftKelloggImage: {
+            url: ''
+        },
+        cocoMonkey: {
+            url: ''
+        },
+
+    });
+    const [loading, setLoading] = useState(true);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
     //  ADDED: refs for section & blurred image
@@ -52,24 +69,24 @@ const ThankYou = () => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    // const fetchParticipation = async () => {
-    //     try {
-    //         const res = await fetch('https://correct-prize-f0a5924469.strapiapp.com/api/thank-you-page?populate=*');
-    //         //api : correct-prize-f0a5924469.strapiapp.com/api/thank-you-page?populate=*
-    //         const resData = await res.json();
-    //         console.log(resData);
-    //         setData(resData.data ? resData.data : null);
+    const fetchParticipation = async () => {
+        try {
+            const res = await fetch(`${process.env.REACT_APP_STRAPI_URL}/api/thank-you-page?populate=*`);
+            const resData = await res.json();
+            console.log("ress",resData);
+            setData(resData.data ? resData.data : null);
 
-    //     } catch (error) {
-    //         console.error('Error  fetching Participation:', error);
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // };
+        } catch (error) {
+            console.error('Error  fetching Participation:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
-    // useEffect(() => {
-    //     fetchParticipation();
-    // }, []);
+    useEffect(() => {
+        console.log("rddess");
+        fetchParticipation();
+    }, []);
 
     //  ADDED: IntersectionObserver (Option 4 core logic)
     useEffect(() => {
@@ -140,12 +157,12 @@ const ThankYou = () => {
 
                 setOffsetY(prev => prev + (blurTarget - prev) * 0.18);
 
-                /* ===============================
-                   2️⃣ SMALL COCO (OLD WORKING LOGIC)
-                =============================== */
+
+                // SMALL COCO ( WORKING LOGIC)
+
 
                 const COCO_RANGE = 160; // mela evlo poganum (increase panna mela pogum)
-                const COCO_LERP = 0.08;    // 👈 speed control (SMALL = SLOW)
+                const COCO_LERP = 0.08;    //  speed control (SMALL = SLOW)
 
                 if (isScrollingUp) {
                     // 🔼 Scroll UP → mela move
@@ -188,14 +205,15 @@ const ThankYou = () => {
         }
     };
 
-    // if (loading) return <div>Loading...</div>;
-    // if (!data) return <div>No data available</div>;
+    if (loading) return <div>Loading...</div>;
+    if (!data) return <div>No data available</div>;
 
-    // const title = data.title;
-    // const description = data.description;
-    // const cocoMonkey = data.cocoMonkey?.url ?? null;
-    // const CocoPops = data.cocoPopsImage?.url ?? null;
-    // const blurredCocoPops = data.cocoPopBlur?.url ?? null;
+    const title = data.title;
+    const description = data.description;
+    const cocoMonkey = data.cocoMonkey?.url ?? null;
+    const CocoPops = data.cocoPopsImage?.url ?? null;
+    const blurredCocoPops = data.cocoPopBlur?.url ?? null;
+    // const leftCocoPops = data.leftKelloggImage?.url ?? null;
     // const socialIcons = data?.socialIcons;
 
     //  ADDED: dynamic positions based on screen width (CocoBanner pattern)
@@ -403,7 +421,7 @@ const ThankYou = () => {
                     alignItems: "center",
                     justifyContent: "center",
                     // flexWrap: "nowrap",// for small device need only horizontally.
-                    position: "relative"   // ✅ MUST
+                    position: "relative"   //  MUST
 
                 }}>
 
@@ -424,9 +442,9 @@ const ThankYou = () => {
                         //  marginLeft: positions.textContentMarginLeft,
                         // marginLeft: screenWidth < 1900 ? "clamp(130px, 12vw, 155px)" : "clamp(-100px, -12vw, 155px)",
                         marginLeft:
-                            screenWidth > 2200 ? "clamp(-200px, -18vw, -120px)" 
-                            : screenWidth >= 1900 ? "clamp(-100px, -12vw, 155px)"  
-                                : "clamp(130px, 12vw, 155px)",
+                            screenWidth > 2200 ? "clamp(-200px, -18vw, -120px)"
+                                : screenWidth >= 1900 ? "clamp(-100px, -12vw, 155px)"
+                                    : "clamp(130px, 12vw, 155px)",
                         //    marginLeft: "clamp(140px, 12vw, 350px)"
 
                     }}>
@@ -444,8 +462,7 @@ const ThankYou = () => {
                                 fontSize: positions.titleFontSize,
                                 margin: 0, marginTop: positions.titleMarginTop
                             }}>
-                                {/* remove default margin */}
-                                Thank you for your participation
+                                {title}
                             </h1>
 
                             <p style={{
@@ -455,7 +472,7 @@ const ThankYou = () => {
                                 margin: 0, marginTop: positions.paraMarginTop,
                                 marginBottom: positions.paraMarginBottom
                             }}>
-                                We wish you a healthy family with nutritious and tasty Kellogg's cereals.
+                                {description}
                             </p>
 
                             <div style={{
@@ -506,13 +523,13 @@ const ThankYou = () => {
 
                 {/* second parent div */}
                 <div className='monkey-parent' style={{ width: "100%", maxWidth: "695px", height: "620px", position: "relative" }}>
-                    {img.cocoMonkey && (
+                    {cocoMonkey && (
                         <div style={{ position: "absolute", top: positions.monkeyTop, right: positions.monkeyRight, zIndex: 2 }}>
-                            <img width={positions.monkeyWidth} src={img.cocoMonkey} height={positions.monkeyHeight} alt="cocoMonkey" />
+                            <img width={positions.monkeyWidth} src={cocoMonkey} height={positions.monkeyHeight} alt="cocoMonkey" />
                         </div>
                     )}
 
-                    {img.blurredCocoPops && (
+                    {blurredCocoPops && (
                         <div
                             ref={blurredRef} //  ADDED
                             style={{
@@ -524,16 +541,16 @@ const ThankYou = () => {
                                 transition: "transform 0.25s ease-out", //  fast & smooth
                             }}
                         >
-                            <img width={positions.blurWidth} height={positions.blurHeight} src={img.blurredCocoPops} alt="blurredCocoPops" />
+                            <img width={positions.blurWidth} height={positions.blurHeight} src={blurredCocoPops} alt="blurredCocoPops" />
                         </div>
                     )}
 
-                    {img.CocoPops && (
+                    {CocoPops && (
                         <div style={{
                             position: "absolute", bottom: positions.cocoBottom, right: positions.cocoRight, zIndex: 6,
                             transform: `translateY(${smallCocoOffsetY}px)`, willChange: "transform"
                         }}>
-                            <img width={positions.cocoWidth} src={img.CocoPops} alt="CocoPops" />
+                            <img width={positions.cocoWidth} src={CocoPops} alt="CocoPops" />
                         </div>
                     )}
                 </div>

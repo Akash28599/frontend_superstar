@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Navbar from '../Components/Navbar'
 import ScholarshipForm from '../Components/ScholarshipForm/ScholarshipForm'
 import AboutCompetition from '../Components/AboutCompetition/AboutCompetition';
 import YoutubeGallery from '../Components/YoutubeVideo/YoutubeGallery';
+import SubmissionForm from '../Components/SubmissionForm/SubmissionForm';
 import ThankYou from '../Components/ScholarshipForm/ThankYou';
 
 const ScholarshipPage = () => {
@@ -15,6 +16,9 @@ const ScholarshipPage = () => {
         bg: "/assetss/cloud.png",
         groupKellogs2: {
             url: "/assetss/group2.png"
+        },
+        hangingMonkey: {
+            url: '/assetss/hangingMonkey.png'
         },
         competitionTitle: "About the Competition",
         CompetitionDescription: [
@@ -38,7 +42,7 @@ const ScholarshipPage = () => {
     };
 
     useEffect(() => {
-        fetch("https://correct-prize-f0a5924469.strapiapp.com/api/scholarship-page?populate=*")
+        fetch(`${process.env.REACT_APP_STRAPI_URL}/api/scholarship-page?populate=*`)
             .then(res => {
                 if (!res.ok) {
                     throw new Error(`HTTP error! Status: ${res.status}`);
@@ -58,8 +62,9 @@ const ScholarshipPage = () => {
             <Navbar />
             {data.shouldShowForm && <ScholarshipForm data={data} />}
             <AboutCompetition data={data} />
-            <YoutubeGallery/>
-            <ThankYou/>
+            <YoutubeGallery />
+            <ThankYou  />
+            {!data.shouldShowForm && <SubmissionForm groupKellogs={data.groupKellogs} />}
 
         </>
     )
