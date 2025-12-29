@@ -19,7 +19,7 @@ const AboutCompetition = ({ data }) => {
                     </div>
                     <div className='abt-kg'>
                         {!data?.shouldShowForm && (
-                            <KelloggIcon IconImage={data?.IconImage?.url} />
+                            <KelloggIcon IconImage={data?.IconImage?.url} isBlack={true}/>
                         )}
                     </div>
                 </div>

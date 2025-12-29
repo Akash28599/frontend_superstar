@@ -1,6 +1,7 @@
 .about-container {
     margin: 2%;
     display: flex;
+    margin-top: 4%;
 }
 
 .about-left {
@@ -17,10 +18,13 @@
 }
 .abt-kg{
     z-index: 1;
+    justify-self: center;
+    max-width: 300px;
 }
 .img1 {
     width: 100%;
     margin-top: -4%;
+
 }
 
 .img2 {

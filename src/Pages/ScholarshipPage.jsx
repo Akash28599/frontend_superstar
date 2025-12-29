@@ -48,7 +48,6 @@ const ScholarshipPage = () => {
 
     return (
         <>
-            <Navbar />
             {data.shouldShowForm && <ScholarshipForm data={data} />}
             <AboutCompetition data={data} />
             <YoutubeGallery/>

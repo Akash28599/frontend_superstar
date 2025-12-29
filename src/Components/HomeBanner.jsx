@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from './Navbar';
-
 
 const HomeBanner = () => {
   const [banner, setBanner] = useState(null);
@@ -141,7 +139,6 @@ testFont.load().then(() => {
 
   return (
     <div style={containerStyle}>
-      <Navbar />
 
       {logoImage && (
         <div style={{

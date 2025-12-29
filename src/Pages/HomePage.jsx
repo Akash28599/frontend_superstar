@@ -1,10 +1,8 @@
 import HomeBanner from "../Components/HomeBanner"
-import Navbar from "../Components/Navbar"
 import TrendingStories from "../Components/TrendingStories"
 import CocoHeads from "../Components/cocohead"
 import PrintableGames from "../Components/games"
 import OurProducts from "../Components/zigzag"
-import FooterLayout from "../Components/Footer"
 import CocoBanner from "../Components/cocobanner"
 
 export default function HomePage() {
@@ -28,7 +26,6 @@ export default function HomePage() {
                  <CocoBanner/>
                 <OurProducts />
                 <PrintableGames />
-                <FooterLayout />
                
             </div>
         </>
