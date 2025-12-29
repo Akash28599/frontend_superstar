@@ -1,10 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react'; //  ADDED useRef
-
-import InstagramIcon from "@mui/icons-material/Instagram";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import FacebookIcon from "@mui/icons-material/Facebook";
+import { FaInstagram } from "react-icons/fa6";
 import { FiFacebook } from "react-icons/fi";
 import { FaTwitter } from "react-icons/fa";
+import { openUrl } from '../../Utils/Utilities';
+import "./ThankYou.css";
 
 // images static
 // import cocoMonkey from "/assetss/flying-monkey.png"
@@ -12,7 +11,8 @@ import { FaTwitter } from "react-icons/fa";
 // import leftCocoPops from "/assets/CocoPops.png"
 // import blurredCocoPops from "/assets/CocoPops-pack-blurred.png"
 
-const ThankYou = () => {
+const ThankYou = ({ socialLinks }) => {
+    // console.log(socialLinks)
     const img = {
         // cocoMonkey: "/assetss/flying-monkey.png",
         // CocoPops: "/assetss/CocoPops.png",
@@ -27,8 +27,8 @@ const ThankYou = () => {
         {
             url: ''
         },
-        cocoPopBlur:{
-            url:''
+        cocoPopBlur: {
+            url: ''
         },
         title: '',
         description: '',
@@ -42,6 +42,8 @@ const ThankYou = () => {
     });
     const [loading, setLoading] = useState(true);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+
 
     //  ADDED: refs for section & blurred image
     const sectionRef = useRef(null);
@@ -73,7 +75,7 @@ const ThankYou = () => {
         try {
             const res = await fetch(`${process.env.REACT_APP_STRAPI_URL}/api/thank-you-page?populate=*`);
             const resData = await res.json();
-            console.log("ress",resData);
+            console.log("ress", resData);
             setData(resData.data ? resData.data : null);
 
         } catch (error) {
@@ -90,6 +92,9 @@ const ThankYou = () => {
 
     //  ADDED: IntersectionObserver (Option 4 core logic)
     useEffect(() => {
+
+        if (loading) return;
+
         const observer = new IntersectionObserver(
             ([entry]) => {
                 setIsInView(entry.isIntersecting); // section visible ah irukka nu check
@@ -102,7 +107,14 @@ const ThankYou = () => {
         }
 
         return () => observer.disconnect();
-    }, []);
+    }, [loading]);
+
+    // Force isInView = true after data load
+    useEffect(() => {
+        if (!loading && data && sectionRef.current) {
+            setIsInView(true);
+        }
+    }, [loading, data]);
 
 
     useEffect(() => {
@@ -191,22 +203,23 @@ const ThankYou = () => {
     // for icons 
     const getSocialIcon = (type) => {
         switch (type) {
-            case "instagram":
-                return <InstagramIcon />;
 
             case "twitter":
-                return <TwitterIcon />;
-
+                return <FaTwitter />;
             case "facebook":
-                return <FacebookIcon />;
-
+                return <FiFacebook />;
+            // case "instagram":
+            //     return <FaInstagram />;
+            // case "youtube":
+            //     return <FaYoutube />;
+            // case "tiktok":
+            //     return <FaTiktok />;
             default:
                 return null; // unknown icon safe guard
         }
     };
 
-    if (loading) return <div>Loading...</div>;
-    if (!data) return <div>No data available</div>;
+
 
     const title = data.title;
     const description = data.description;
@@ -222,7 +235,7 @@ const ThankYou = () => {
         if (screenWidth >= 1920) {
             return {
                 // textAlign: "center", // for text content alignment.
-                textContentMarginLeft: "-100px",
+                // textContentMarginLeft: "-100px",
 
                 titleFontSize: "45px", titleMarginTop: "55px", titleLineHeight: "45px",
                 titleHeight: "90px", titleWidth: "576px", // title h1
@@ -245,7 +258,7 @@ const ThankYou = () => {
         if (screenWidth >= 1600) {
             return {
                 // textAlign: "center",// for text content alignment.
-                textContentMarginLeft: "80px",
+                // textContentMarginLeft: "80px",
 
                 titleFontSize: "38px", titleWidth: "360px", titleMarginTop: "55px", titleLineHeight: "45px", titleHeight: "90px", // title h1
                 paraFontSize: "17px", paraMarginTop: "15px", paraMarginBottom: "20px", paraLineHeight: "22px", // paragraph : description
@@ -268,7 +281,7 @@ const ThankYou = () => {
             return {
 
                 // textAlign: "center",// for text content alignment.
-                textContentMarginLeft: "140px",
+                // textContentMarginLeft: "140px",
 
                 titleFontSize: "38px", titleWidth: "360px", titleMarginTop: "55px", titleLineHeight: "45px", titleHeight: "90px", // title h1
                 paraFontSize: "17px", paraMarginTop: "15px", paraMarginBottom: "20px", paraLineHeight: "22px", // paragraph : description
@@ -290,7 +303,7 @@ const ThankYou = () => {
             return {
 
                 // textAlign: "flex-end", // for text content alignment.
-                textContentMarginLeft: "155px",
+                // textContentMarginLeft: "155px",
 
                 titleFontSize: "36px", titleWidth: "305px", titleMarginTop: "65px", titleLineHeight: "45px", titleHeight: "90px", // title h1
                 paraFontSize: "16px", paraMarginTop: "15px", paraMarginBottom: "20px", paraLineHeight: "22px", // paragraph : description
@@ -311,7 +324,7 @@ const ThankYou = () => {
         if (screenWidth >= 992) {
             return {
                 // textAlign: "right",
-                textContentMarginLeft: "140px",
+                // textContentMarginLeft: "140px",
 
                 titleFontSize: "36px", titleWidth: "305px", titleMarginTop: "70px", titleLineHeight: "45px", titleHeight: "90px",  // font sizes , mt, lh , h
                 paraFontSize: "16px", paraLineHeight: "22px", paraHeight: "66px", paraWidth: "325px",
@@ -332,7 +345,7 @@ const ThankYou = () => {
         if (screenWidth < 992) {
             return {
                 // textAlign: "flex-end",
-                textContentMarginLeft: "120px",
+                // textContentMarginLeft: "120px",
 
                 titleFontSize: "28px", titleWidth: "280px", titleMarginTop: "82px", titleLineHeight: "30px", titleHeight: "60px", // title h1
                 paraFontSize: "16px", paraMarginTop: "15px", paraMarginBottom: "20px", paraLineHeight: "22px",  // paragraph:description
@@ -351,26 +364,6 @@ const ThankYou = () => {
 
         };
 
-
-        return {
-
-
-            // textAlign: "flex-end",
-            // titleFontSize: "28px", titleWidth: "280px", titleMarginTop: "40px", titleLineHeight: "30px", titleHeight: "60px", // title h1
-            // paraFontSize: "16px", paraMarginTop: "15px", paraMarginBottom: "20px", paraLineHeight: "22px",  // paragraph:description
-            // paraHeight: "66px", paraWidth: "280px",
-            // iconsSize: "20px",
-            // winnerBtnWidth: "300px", winnerBtnHeight: "55px",  // past winners btn 
-            // winnerBtnPadding: "15px 22px", winnerBtnmarginTop: "10px",
-            // shareHeight: "29px", shareGap: "16px", shareWidth: "280px",// share para content  and icons gap, height
-            // monkeyTop: "10%", monkeyRight: "0%", monkeyWidth: "380px", monkeyHeight: "450px",  // hanging monkey
-            // blurTop: "2%", blurRight: "0%", blurWidth: "290px", blurHeight: "280px",// blurred image
-            // cocoBottom: "5%", cocoRight: "7%", cocoWidth: "190px", cocoHeight: "180px",// bottom cocoimg of monkey
-            // leftCocoWidth: "200px",
-            // leftCocoRotate: "55deg",
-
-
-        };
     };
 
     const positions = getPositions(); // called
@@ -384,177 +377,206 @@ const ThankYou = () => {
                 width: "100%",
                 padding: "40px 0px", overflow: "hidden",
                 // height: "auto", 
-                minHeight: "1100px",
+                minHeight: "800px",
                 margin: "0px",
             }}
         >
-            {/* LEFT COCO — SECTION LEVEL */}
-            {img.leftCocoPops && (
-                //  left: 0 ==> ALWAYS 0
-                <div style={{
-                    position: "absolute",
-                    top: "24%", // top:"50%" : chatgpt
-                    left: 0,
-                    transform: "translateY(-50%)",
 
-                }}>
-                    <div style={{
-
-                        // transform: `translateX(${positions.leftCocoTranslate}) rotate(${positions.leftCocoRotate})`,
-                        transform: `translateX(clamp(-45%, -28vw, -20%)) rotate(${positions.leftCocoRotate})`,
-                        transformOrigin: "center", zIndex: 3
-                    }}>
-                        <img width={positions.leftCocoWidth} src={img.leftCocoPops} alt="left coco pops" />
-                    </div>
+            {/* Loading state */}
+            {loading && (
+                <div style={{ textAlign: "center", padding: "40px" }}>
+                    Loading...
                 </div>
             )}
 
+            {/*  No data state */}
+            {!loading && !data && (
+                <div style={{ textAlign: "center", padding: "40px" }}>
+                    No data available
+                </div>
+            )}
 
-            {/* container : width for two parent */}
-            <div className='container '
-                style={{
-                    width: "100%",
-                    maxWidth: "1200px",   //  controls total content width
-                    margin: "0px auto",
-                    padding: "0 20px",    //   space
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    // flexWrap: "nowrap",// for small device need only horizontally.
-                    position: "relative"   //  MUST
+            {!loading && data && (
 
-                }}>
-
-
-
-                {/* first parent div */}
-                <div style={{
-                    width: "100%", maxWidth: "546px", height: "620px", position: "relative",
-                    display: "flex",
-                }}>
-
-                    {/* Text content wrapper */}
-                    <div style={{
-                        // display: "flex",
-                        width: "100%",
-                        // justifyContent: positions.textAlign,   //  NEW
-                        padding: "90px 0 0 0", // for text content to occur down
-                        //  marginLeft: positions.textContentMarginLeft,
-                        // marginLeft: screenWidth < 1900 ? "clamp(130px, 12vw, 155px)" : "clamp(-100px, -12vw, 155px)",
-                        marginLeft:
-                            screenWidth > 2200 ? "clamp(-200px, -18vw, -120px)"
-                                : screenWidth >= 1900 ? "clamp(-100px, -12vw, 155px)"
-                                    : "clamp(130px, 12vw, 155px)",
-                        //    marginLeft: "clamp(140px, 12vw, 350px)"
-
-                    }}>
-                        {/* text-contents */}
+                <>
+                    {/* LEFT COCO — SECTION LEVEL */}
+                    {img.leftCocoPops && (
+                        //  left: 0 ==> ALWAYS 0
                         <div style={{
-                            // display: "flex", flexDirection: "column",
-                            // justifyContent: "flex-start",
+                            position: "absolute",
+                            top: "35%", // top:"50%" : chatgpt
+                            left: 0,
+                            transform: "translateY(-50%)",
 
-                            // paddingLeft: screenWidth >= 970 && screenWidth < 1240 ? "20px" : "0px"
+                        }}>
+                            <div style={{
+
+                                // transform: `translateX(${positions.leftCocoTranslate}) rotate(${positions.leftCocoRotate})`,
+                                transform: `translateX(clamp(-45%, -28vw, -20%)) rotate(${positions.leftCocoRotate})`,
+                                transformOrigin: "center", zIndex: 3
+                            }}>
+                                <img width={positions.leftCocoWidth} src={img.leftCocoPops} alt="left coco pops" />
+                            </div>
+                        </div>
+                    )}
+
+
+                    {/* container : width for two parent */}
+                    <div className='container '
+                        style={{
+                            width: "100%",
+                            maxWidth: "1200px",   //  controls total content width
+                            margin: "0px auto",
+                            padding: "0 20px",    //   space
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            // flexWrap: "nowrap",// for small device need only horizontally.
+                            position: "relative"   //  MUST
+
                         }}>
 
-                            <h1 style={{
-                                height: positions.titleHeight, width: positions.titleWidth, color: "#dd2120",
-                                lineHeight: positions.titleLineHeight, textAlign: "left", fontWeight: 600,
-                                fontSize: positions.titleFontSize,
-                                margin: 0, marginTop: positions.titleMarginTop
-                            }}>
-                                {title}
-                            </h1>
 
-                            <p style={{
-                                width: positions.paraWidth, height: positions.paraHeight,
-                                lineHeight: positions.paraLineHeight, textAlign: "left",
-                                fontSize: positions.paraFontSize,
-                                margin: 0, marginTop: positions.paraMarginTop,
-                                marginBottom: positions.paraMarginBottom
-                            }}>
-                                {description}
-                            </p>
 
+                        {/* first parent div */}
+                        <div style={{
+                            width: "100%", maxWidth: "546px", height: "620px", position: "relative",
+                            display: "flex",
+                        }}>
+
+                            {/* Text content wrapper */}
                             <div style={{
-                                display: "flex", alignItems: "center", gap: positions.shareGap,
-                                height: positions.shareHeight, width: positions.shareWidth
-                            }}>
+                                // display: "flex",
+                                width: "100%",
+                                // justifyContent: positions.textAlign,   //  NEW
+                                padding: "90px 0 0 0", // for text content to occur down
+                                //  marginLeft: positions.textContentMarginLeft,
+                                // marginLeft: screenWidth < 1900 ? "clamp(130px, 12vw, 155px)" : "clamp(-100px, -12vw, 155px)",
+                                marginLeft:
+                                    screenWidth > 2200 ? "clamp(-200px, -18vw, -120px)"
+                                        : screenWidth >= 1900 ? "clamp(-100px, -12vw, 155px)"
+                                            : "clamp(130px, 12vw, 155px)",
+                                //    marginLeft: "clamp(140px, 12vw, 350px)"
 
-                                <p style={{
-                                    fontWeight: 600, fontSize: positions.paraFontSize,
-                                    margin: 0,
+                            }}>
+                                {/* text-contents */}
+                                <div style={{
+                                    // display: "flex", flexDirection: "column",
+                                    // justifyContent: "flex-start",
+
+                                    // paddingLeft: screenWidth >= 970 && screenWidth < 1240 ? "20px" : "0px"
                                 }}>
-                                    Share it to the world!
-                                </p>
 
-                                <button
-                                    style={{
-                                        border: "none", background: "transparent", cursor: "pointer",
-                                        padding: 0, fontSize: positions.iconsSize
-                                    }}
-                                    aria-label="twitter"
-                                >
-                                    <FaTwitter />
-                                </button>
+                                    <h1 style={{
+                                        height: positions.titleHeight, width: positions.titleWidth, color: "#dd2120",
+                                        lineHeight: positions.titleLineHeight, textAlign: "left", fontWeight: 600,
+                                        fontSize: positions.titleFontSize,
+                                        margin: 0, marginTop: positions.titleMarginTop
+                                    }}>
+                                        {title}
+                                        {/* Thank you for your participation */}
+                                    </h1>
 
-                                <button
-                                    style={{
-                                        border: "none", background: "transparent", cursor: "pointer",
-                                        padding: 0, fontSize: positions.iconsSize
-                                    }}
-                                    aria-label="facebook"
-                                >
-                                    <FiFacebook />
-                                </button>
+                                    <p style={{
+                                        width: positions.paraWidth, height: positions.paraHeight,
+                                        lineHeight: positions.paraLineHeight, textAlign: "left",
+                                        fontSize: positions.paraFontSize,
+                                        margin: 0, marginTop: positions.paraMarginTop,
+                                        marginBottom: positions.paraMarginBottom
+                                    }}>
+                                        {description}
+                                        {/* We wish you a healthy family with nutritious and tasty Kellogg's cereals. */}
+
+
+                                    </p>
+
+
+                                    <div style={{
+                                        display: "flex", alignItems: "center", gap: positions.shareGap,
+                                        height: positions.shareHeight, width: positions.shareWidth
+                                    }}>
+
+                                        <p style={{
+                                            fontWeight: 600, fontSize: positions.paraFontSize,
+                                            margin: 0,
+                                        }}>
+                                            Share it to the world!
+                                        </p>
+
+                                        {/* Socialicons and link from props */}
+                                        {Object.entries( socialLinks|| {}).map(
+                                            ([type, url]) => { // type :each and every item , and url : link of each item.
+                                                const Icon = getSocialIcon(type);
+                                                if (!Icon) return null; // twitter & facebook mattum
+
+                                                return (
+                                                    <button key={type}
+                                                        style={{  border: "none", background: "transparent", cursor: "pointer",
+                                                            padding: 0, fontSize: positions.iconsSize,
+                                                        }}
+                                                        aria-label={type}
+                                                        onClick={() => openUrl(url)}   //  util reuse
+                                                    >
+                                                        {Icon}
+                                                    </button>
+                                                );
+                                            }
+                                        )}
+
+
+                                    </div>
+
+                                    <button className='btn' style={{
+                                        display: "block", width: positions.winnerBtnWidth, height: positions.winnerBtnHeight,
+                                        borderRadius: "12px",
+                                         fontWeight: 600, 
+                                        padding: positions.winnerBtnPadding, cursor: "pointer",
+                                        marginTop: positions.winnerBtnmarginTop,
+                                    }}>
+                                        Click here to view the past winners
+                                    </button>
+                                </div>
                             </div>
+                        </div>
 
-                            <button style={{
-                                display: "block", width: positions.winnerBtnWidth, height: positions.winnerBtnHeight,
-                                borderRadius: "12px", background: "#dd2120",
-                                color: "white", fontWeight: 600, border: "none",
-                                padding: positions.winnerBtnPadding, cursor: "pointer",
-                                marginTop: positions.winnerBtnmarginTop,
-                            }}>
-                                Click here to view the past winners
-                            </button>
+                        {/* second parent div */}
+                        <div className='monkey-parent' style={{ width: "100%", maxWidth: "695px", height: "620px", position: "relative" }}>
+                            {cocoMonkey && (
+                                <div style={{ position: "absolute", top: positions.monkeyTop, right: positions.monkeyRight, zIndex: 2 }}>
+                                    <img width={positions.monkeyWidth} src={cocoMonkey} height={positions.monkeyHeight} alt="cocoMonkey" />
+                                </div>
+                            )}
+
+                            {blurredCocoPops && (
+                                <div
+                                    ref={blurredRef} //  ADDED
+                                    style={{
+                                        position: "absolute",
+                                        top: positions.blurTop,
+                                        right: positions.blurRight,
+                                        zIndex: 1,
+                                        transform: `translateY(${offsetY}px)`, // UPDATED: section-based parallax
+                                        transition: "transform 0.25s ease-out", //  fast & smooth
+                                    }}
+                                >
+                                    <img width={positions.blurWidth} height={positions.blurHeight} src={blurredCocoPops} alt="blurredCocoPops" />
+                                </div>
+                            )}
+
+                            {CocoPops && (
+                                <div style={{
+                                    position: "absolute", bottom: positions.cocoBottom, right: positions.cocoRight, zIndex: 6,
+                                    transform: `translateY(${smallCocoOffsetY}px)`, willChange: "transform"
+                                }}>
+                                    <img width={positions.cocoWidth} src={CocoPops} alt="CocoPops" />
+                                </div>
+                            )}
                         </div>
                     </div>
-                </div>
+                </>
 
-                {/* second parent div */}
-                <div className='monkey-parent' style={{ width: "100%", maxWidth: "695px", height: "620px", position: "relative" }}>
-                    {cocoMonkey && (
-                        <div style={{ position: "absolute", top: positions.monkeyTop, right: positions.monkeyRight, zIndex: 2 }}>
-                            <img width={positions.monkeyWidth} src={cocoMonkey} height={positions.monkeyHeight} alt="cocoMonkey" />
-                        </div>
-                    )}
+            )}
 
-                    {blurredCocoPops && (
-                        <div
-                            ref={blurredRef} //  ADDED
-                            style={{
-                                position: "absolute",
-                                top: positions.blurTop,
-                                right: positions.blurRight,
-                                zIndex: 1,
-                                transform: `translateY(${offsetY}px)`, // UPDATED: section-based parallax
-                                transition: "transform 0.25s ease-out", //  fast & smooth
-                            }}
-                        >
-                            <img width={positions.blurWidth} height={positions.blurHeight} src={blurredCocoPops} alt="blurredCocoPops" />
-                        </div>
-                    )}
-
-                    {CocoPops && (
-                        <div style={{
-                            position: "absolute", bottom: positions.cocoBottom, right: positions.cocoRight, zIndex: 6,
-                            transform: `translateY(${smallCocoOffsetY}px)`, willChange: "transform"
-                        }}>
-                            <img width={positions.cocoWidth} src={CocoPops} alt="CocoPops" />
-                        </div>
-                    )}
-                </div>
-            </div>
         </section>
     )
 }
