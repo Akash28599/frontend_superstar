@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'; // 🔥 ADDED useRef
+import React, { useEffect, useState, useRef } from 'react'; //  ADDED useRef
 
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
@@ -26,20 +26,23 @@ const ThankYou = () => {
     // const [loading, setLoading] = useState(true);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
-    // 🔥 ADDED: refs for section & blurred image
+    //  ADDED: refs for section & blurred image
     const sectionRef = useRef(null);
     const blurredRef = useRef(null);
 
-    // 🔥 ADDED: state to control animation
+    //  ADDED: state to control animation
     const [isInView, setIsInView] = useState(false);
-    // 🔥 UPDATED: start image already shifted (so movement visible)
+    //  UPDATED: start image already shifted (so movement visible)
     const [offsetY, setOffsetY] = useState(-40);
 
-    // 🔥 ADDED: small CocoPops animation state (ONLY UP movement)
+    //  ADDED: small CocoPops animation state (ONLY UP movement)
     const [smallCocoOffsetY, setSmallCocoOffsetY] = useState(0);
 
-    // 🔥 ADDED: to detect scroll direction
-    const lastScrollY = useRef(window.scrollY);
+    //  Small coco base position (FIXED start position)
+    const COCO_BASE_Y = 0;
+
+    //  ADDED: to detect scroll direction
+    const lastScrollY = useRef(window.scrollY || 0);
 
 
     // Responsive width tracking
@@ -68,13 +71,13 @@ const ThankYou = () => {
     //     fetchParticipation();
     // }, []);
 
-    // 🔥 ADDED: IntersectionObserver (Option 4 core logic)
+    //  ADDED: IntersectionObserver (Option 4 core logic)
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => {
                 setIsInView(entry.isIntersecting); // section visible ah irukka nu check
             },
-            { threshold: 0.4 } // 🔥 30% section visible aana trigger
+            { threshold: 0.3 } //  30% section visible aana trigger
         );
 
         if (sectionRef.current) {
@@ -86,48 +89,86 @@ const ThankYou = () => {
 
 
     useEffect(() => {
+        const ticking = { current: false };
+
         const handleScroll = () => {
-            if (!isInView || !sectionRef.current) return;
+            if (!isInView || !sectionRef.current || ticking.current) return;
 
-            const rect = sectionRef.current.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
+            ticking.current = true;
 
-            // for small cocopops
-            // 🔥 ADDED: detect scroll direction
-            const currentScrollY = window.scrollY;
-            const isScrollingUp = currentScrollY < lastScrollY.current;
-            lastScrollY.current = currentScrollY;
+            requestAnimationFrame(() => {
+                //  scroll direction (ONLY for blurred image)
+                const currentScrollY = window.scrollY;
+                const isScrollingUp = currentScrollY < lastScrollY.current;
+                lastScrollY.current = currentScrollY;
 
+                const rect = sectionRef.current.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                const sectionHeight = rect.height;
 
-            // 🔥 section enter progress (0 → 1)
-            const progress =
-                Math.min(
-                    Math.max((windowHeight - rect.top) / windowHeight, 0),
+                if (rect.bottom <= 0 || rect.top >= windowHeight) {
+                    ticking.current = false;
+                    return;
+                }
+
+                //  stable progress (0 → 1)
+                const progress = Math.min(
+                    Math.max(
+                        (windowHeight - rect.top) / (windowHeight + sectionHeight),
+                        0
+                    ),
                     1
                 );
 
-            // 🔥 STRONG & CLEAR movement (top + bottom)
-            const movement = -40 + progress * 140;
-            // -40  → start little UP
-            // +140 → scroll pannumbodhu DOWN clear-ah pogum
 
-            setOffsetY(movement);
+                //   BLURRED IMAGE (direction based)
 
-            // 🔥 ADDED: small CocoPops ONLY scroll UP animation
-            if (isScrollingUp) {
-                // scroll UP → move UP only
-                const upMovement = Math.min(progress * 12, 12); // adjust strength here
-                setSmallCocoOffsetY(-upMovement); // negative = UP
-            } else {
-                // scroll DOWN → reset to base position
-                setSmallCocoOffsetY(0);
-            }
 
+                const BLUR_BASE = -40;
+                const BLUR_SPEED = 55;
+                const BLUR_MAX_UP = -140;
+                const BLUR_MAX_DOWN = 70;
+
+                let blurTarget = isScrollingUp
+                    ? BLUR_BASE + progress * BLUR_SPEED
+                    : BLUR_BASE - progress * BLUR_SPEED;
+
+                blurTarget = Math.max(
+                    BLUR_MAX_UP,
+                    Math.min(blurTarget, BLUR_MAX_DOWN)
+                );
+
+                setOffsetY(prev => prev + (blurTarget - prev) * 0.18);
+
+                /* ===============================
+                   2️⃣ SMALL COCO (OLD WORKING LOGIC)
+                =============================== */
+
+                const COCO_RANGE = 160; // mela evlo poganum (increase panna mela pogum)
+                const COCO_LERP = 0.08;    // 👈 speed control (SMALL = SLOW)
+
+                if (isScrollingUp) {
+                    // 🔼 Scroll UP → mela move
+                    setSmallCocoOffsetY(prev =>
+                        prev + ((-progress * COCO_RANGE) - prev) * COCO_LERP
+                    );
+                } else {
+                    // 🔽 Scroll DOWN → fixed base position
+                    setSmallCocoOffsetY(prev =>
+                        prev + (COCO_BASE_Y - prev) * 0.15
+                    );
+                }
+
+
+                ticking.current = false;
+            });
         };
 
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, [isInView]);
+
+
 
 
     // for icons 
@@ -157,151 +198,314 @@ const ThankYou = () => {
     // const blurredCocoPops = data.cocoPopBlur?.url ?? null;
     // const socialIcons = data?.socialIcons;
 
-    // 🔥 ADDED: dynamic positions based on screen width (CocoBanner pattern)
+    //  ADDED: dynamic positions based on screen width (CocoBanner pattern)
     const getPositions = () => {
 
         if (screenWidth >= 1920) {
             return {
-                titleFontSize: "40px", paraFontSize: "18px",iconsSize:"30px",
-                monkeyTop: "3%", monkeyRight: "0%", monkeyWidth: "600px",monkeyHeight:"600px",
-                blurTop: "0%", blurRight: "6%", blurWidth: "390px",
-                cocoBottom: "0%", cocoRight: "2%", cocoWidth: "360px",
-                leftCocoTop: "10%", leftCocoLeft: "0%", leftCocoWidth: "320px",
+                // textAlign: "center", // for text content alignment.
+                textContentMarginLeft: "-100px",
+
+                titleFontSize: "45px", titleMarginTop: "55px", titleLineHeight: "45px",
+                titleHeight: "90px", titleWidth: "576px", // title h1
+                paraFontSize: "20px", paraMarginTop: "20px", paraMarginBottom: "40px", paraLineHeight: "30px", // paragraph : description
+                paraHeight: "66px", paraWidth: "576px",
+                iconsSize: "30px",
+                winnerBtnWidth: "300px", winnerBtnHeight: "55px",  // past winners btn 
+                winnerBtnPadding: "15px 22px", winnerBtnmarginTop: "10px",
+                shareHeight: "29px", shareGap: "16px", shareWidth: "576px",// share para content  and icons gap, height
+                monkeyTop: "5%", monkeyRight: "-40%", monkeyWidth: "750px", monkeyHeight: "710px",
+                blurTop: "6%", blurRight: "-35%", blurWidth: "470px", blurHeight: "505px",// blurred image
+                cocoBottom: "-27%", cocoRight: "-32%", cocoWidth: "320px", cocoHeight: "320px",// bottom cocoimg of monkey
+                leftCocoWidth: "430px",
                 leftCocoRotate: "55deg",
+
             };
         }
 
-        if (screenWidth >= 1440) {
+        // newly added
+        if (screenWidth >= 1600) {
             return {
-                titleFontSize: "38px", paraFontSize: "17px",  iconsSize:"28px",
-                monkeyTop: "3%", monkeyRight: "0%", monkeyWidth: "600px",monkeyHeight:"600px",
-                blurTop: "0%", blurRight: "0%", blurWidth: "365px",
-                cocoBottom: "0%", cocoRight: "2%", cocoWidth: "240px",
-                leftCocoTop: "5%", leftCocoLeft: "-12%", leftCocoWidth: "400px",
+                // textAlign: "center",// for text content alignment.
+                textContentMarginLeft: "80px",
+
+                titleFontSize: "38px", titleWidth: "360px", titleMarginTop: "55px", titleLineHeight: "45px", titleHeight: "90px", // title h1
+                paraFontSize: "17px", paraMarginTop: "15px", paraMarginBottom: "20px", paraLineHeight: "22px", // paragraph : description
+                paraHeight: "66px", paraWidth: "360px",
+                iconsSize: "28px", // share icons
+                winnerBtnWidth: "300px", winnerBtnHeight: "55px",  // past winners btn 
+                winnerBtnPadding: "15px 22px", winnerBtnmarginTop: "10px",
+                shareHeight: "29px", shareGap: "16px", shareWidth: "360px",// share para content  and icons gap, height
+                monkeyTop: "5%", monkeyRight: "-20%", monkeyWidth: "640px", monkeyHeight: "660px",
+                blurTop: "14%", blurRight: "-16%", blurWidth: "425px", blurHeight: "400px",// blurred image
+                cocoBottom: "-21%", cocoRight: "-14%", cocoWidth: "300px", cocoHeight: "300px",// bottom cocoimg of monkey
+                leftCocoWidth: "420px",
                 leftCocoRotate: "55deg",
+
             };
         }
 
+
+        if (screenWidth >= 1420) {
+            return {
+
+                // textAlign: "center",// for text content alignment.
+                textContentMarginLeft: "140px",
+
+                titleFontSize: "38px", titleWidth: "360px", titleMarginTop: "55px", titleLineHeight: "45px", titleHeight: "90px", // title h1
+                paraFontSize: "17px", paraMarginTop: "15px", paraMarginBottom: "20px", paraLineHeight: "22px", // paragraph : description
+                paraHeight: "66px", paraWidth: "360px",
+                iconsSize: "28px", // share icons
+                winnerBtnWidth: "300px", winnerBtnHeight: "55px",  // past winners btn 
+                winnerBtnPadding: "15px 22px", winnerBtnmarginTop: "10px",
+                shareHeight: "29px", shareGap: "16px", shareWidth: "360px",// share para content  and icons gap, height
+                monkeyTop: "5%", monkeyRight: "-17%", monkeyWidth: "600px", monkeyHeight: "620px",
+                blurTop: "12%", blurRight: "-12%", blurWidth: "365px", blurHeight: "380px",// blurred image
+                cocoBottom: "-9%", cocoRight: "-13%", cocoWidth: "280px", cocoHeight: "280px",// bottom cocoimg of monkey
+                leftCocoWidth: "400px",
+                leftCocoRotate: "55deg",
+
+            };
+        }
 
         if (screenWidth >= 1200) {
             return {
-                titleFontSize: "36px", paraFontSize: "16px", iconsSize:"26px",
-                monkeyTop: "3%", monkeyRight: "0%", monkeyWidth: "550px",monkeyHeight:"600px",
-                blurTop: "0%", blurRight: "0%", blurWidth: "345px",
-                cocoBottom: "0%", cocoRight: "0%", cocoWidth: "220px",
-                leftCocoTop: "10%", leftCocoLeft: "-8%", leftCocoWidth: "280px",
-                leftCocoRotate: "53deg",
 
+                // textAlign: "flex-end", // for text content alignment.
+                textContentMarginLeft: "155px",
+
+                titleFontSize: "36px", titleWidth: "305px", titleMarginTop: "65px", titleLineHeight: "45px", titleHeight: "90px", // title h1
+                paraFontSize: "16px", paraMarginTop: "15px", paraMarginBottom: "20px", paraLineHeight: "22px", // paragraph : description
+                paraHeight: "66px", paraWidth: "360px",
+                iconsSize: "26px", // icons size 
+                winnerBtnWidth: "300px", winnerBtnHeight: "55px",  // past winners btn 
+                winnerBtnPadding: "15px 22px", winnerBtnmarginTop: "10px",
+                shareHeight: "29px", shareGap: "16px", shareWidth: "360px",// share para content  and icons gap, height
+                monkeyTop: "7%", monkeyRight: "0%", monkeyWidth: "550px", monkeyHeight: "620px", // hanging monkey
+                blurTop: "19%", blurRight: "3%", blurWidth: "343px", blurHeight: "360px",// blurred image
+                cocoBottom: "-10%", cocoRight: "5%", cocoWidth: "250px", cocoHeight: "200px",// bottom cocoimg of monkey
+                leftCocoWidth: "300px", // left cocoimg
+                leftCocoRotate: "58deg",
             };
         }
 
-        //  fallback
+        // working on : 
+        if (screenWidth >= 992) {
+            return {
+                // textAlign: "right",
+                textContentMarginLeft: "140px",
+
+                titleFontSize: "36px", titleWidth: "305px", titleMarginTop: "70px", titleLineHeight: "45px", titleHeight: "90px",  // font sizes , mt, lh , h
+                paraFontSize: "16px", paraLineHeight: "22px", paraHeight: "66px", paraWidth: "325px",
+                paraMarginTop: "15px", paraMarginBottom: "20px", // paragraph:description
+                winnerBtnWidth: "296px", winnerBtnHeight: "54px",  // past winners btn 
+                winnerBtnPadding: "15px 22px", winnerBtnmarginTop: "10px",
+                shareHeight: "29px", shareGap: "14px", shareWidth: "360px",// share para content  and icons gap, height
+                iconsSize: "20px", // icons size 
+                monkeyTop: "10%", monkeyRight: "-3%", monkeyWidth: "450px", monkeyHeight: "500px", // hanging monkey
+                blurTop: "22%", blurRight: "-1%", blurWidth: "310px", blurHeight: "310px",// blurred image 
+                cocoBottom: "6%", cocoRight: "0%", cocoWidth: "210px", cocoHeight: "210px", // bottom near monkey image
+                leftCocoWidth: "250px", // left angle image
+                leftCocoRotate: "55deg",
+            }
+
+        };
+
+        if (screenWidth < 992) {
+            return {
+                // textAlign: "flex-end",
+                textContentMarginLeft: "120px",
+
+                titleFontSize: "28px", titleWidth: "280px", titleMarginTop: "82px", titleLineHeight: "30px", titleHeight: "60px", // title h1
+                paraFontSize: "16px", paraMarginTop: "15px", paraMarginBottom: "20px", paraLineHeight: "22px",  // paragraph:description
+                paraHeight: "66px", paraWidth: "280px",
+                iconsSize: "20px", // icons size
+                winnerBtnWidth: "300px", winnerBtnHeight: "55px",  // past winners btn 
+                winnerBtnPadding: "15px 22px", winnerBtnmarginTop: "10px",
+                shareHeight: "29px", shareGap: "16px", shareWidth: "280px",// share para content  and icons gap, height
+                monkeyTop: "10%", monkeyRight: "-3%", monkeyWidth: "380px", monkeyHeight: "450px",  // hanging monkey
+                blurTop: "18%", blurRight: "-4%", blurWidth: "280px", blurHeight: "280px",// blurred image
+                cocoBottom: "15%", cocoRight: "-1%", cocoWidth: "180px", cocoHeight: "180px",// bottom cocoimg of monkey
+                leftCocoWidth: "200px",
+                leftCocoRotate: "55deg",
+
+            }
+
+        };
+
+
         return {
-            monkeyTop: "10%", monkeyRight: "25%", monkeyWidth: "300px",
-            blurTop: "12%", blurRight: "-12%", blurWidth: "360px",
-            cocoBottom: "-55%", cocoRight: "-56%", cocoWidth: "260px",
-            leftCocoTop: "12%", leftCocoLeft: "0%", leftCocoWidth: "260px",
-            leftCocoRotate: "45deg",
+
+
+            // textAlign: "flex-end",
+            // titleFontSize: "28px", titleWidth: "280px", titleMarginTop: "40px", titleLineHeight: "30px", titleHeight: "60px", // title h1
+            // paraFontSize: "16px", paraMarginTop: "15px", paraMarginBottom: "20px", paraLineHeight: "22px",  // paragraph:description
+            // paraHeight: "66px", paraWidth: "280px",
+            // iconsSize: "20px",
+            // winnerBtnWidth: "300px", winnerBtnHeight: "55px",  // past winners btn 
+            // winnerBtnPadding: "15px 22px", winnerBtnmarginTop: "10px",
+            // shareHeight: "29px", shareGap: "16px", shareWidth: "280px",// share para content  and icons gap, height
+            // monkeyTop: "10%", monkeyRight: "0%", monkeyWidth: "380px", monkeyHeight: "450px",  // hanging monkey
+            // blurTop: "2%", blurRight: "0%", blurWidth: "290px", blurHeight: "280px",// blurred image
+            // cocoBottom: "5%", cocoRight: "7%", cocoWidth: "190px", cocoHeight: "180px",// bottom cocoimg of monkey
+            // leftCocoWidth: "200px",
+            // leftCocoRotate: "55deg",
+
+
         };
     };
 
     const positions = getPositions(); // called
 
-
     return (
         <section
-            ref={sectionRef} //  ADDED: section ref
+            ref={sectionRef}
             className='thank-you'
             style={{
-                width: "100%",  // 🔥 IMPORTANT
-                display: "flex", justifyContent: "center",gap:"200px", // // ✅ FIX
-                padding: "20px 0px", height: "auto", overflow: "hidden", margin: "0px"
+                position: "relative",
+                width: "100%",
+                padding: "40px 0px", overflow: "hidden",
+                // height: "auto", 
+                minHeight: "1100px",
+                margin: "0px",
             }}
         >
+            {/* LEFT COCO — SECTION LEVEL */}
+            {img.leftCocoPops && (
+                //  left: 0 ==> ALWAYS 0
+                <div style={{
+                    position: "absolute",
+                    top: "24%", // top:"50%" : chatgpt
+                    left: 0,
+                    transform: "translateY(-50%)",
+
+                }}>
+                    <div style={{
+
+                        // transform: `translateX(${positions.leftCocoTranslate}) rotate(${positions.leftCocoRotate})`,
+                        transform: `translateX(clamp(-45%, -28vw, -20%)) rotate(${positions.leftCocoRotate})`,
+                        transformOrigin: "center", zIndex: 3
+                    }}>
+                        <img width={positions.leftCocoWidth} src={img.leftCocoPops} alt="left coco pops" />
+                    </div>
+                </div>
+            )}
+
 
             {/* container : width for two parent */}
             <div className='container '
                 style={{
                     width: "100%",
-                    maxWidth: "1200px",   // 🔥 controls total content width
-                    margin:"0px auto",
-                    padding: "0 24px",    // 🔥 breathing space
+                    maxWidth: "1200px",   //  controls total content width
+                    margin: "0px auto",
+                    padding: "0 20px",    //   space
                     display: "flex",
                     alignItems: "center",
-                    justifyContent: "space-between",
+                    justifyContent: "center",
+                    // flexWrap: "nowrap",// for small device need only horizontally.
+                    position: "relative"   // ✅ MUST
+
                 }}>
+
+
 
                 {/* first parent div */}
                 <div style={{
                     width: "100%", maxWidth: "546px", height: "620px", position: "relative",
-                    display: "flex",justifyContent: "flex-end",paddingTop: "90px", 
+                    display: "flex",
                 }}>
 
-                    {img.leftCocoPops && (
-                        <div style={{ position: "absolute", top:positions.leftCocoTop, left: positions.leftCocoLeft }}>
-                            <div style={{ transform: `translateX(-40%) rotate(${positions.leftCocoRotate})` }}>
-                                <img width={positions.leftCocoWidth} src={img.leftCocoPops} alt="left coco pops" />
-                            </div>
-                        </div>
-                    )}
+                    {/* Text content wrapper */}
+                    <div style={{
+                        // display: "flex",
+                        width: "100%",
+                        // justifyContent: positions.textAlign,   //  NEW
+                        padding: "90px 0 0 0", // for text content to occur down
+                        //  marginLeft: positions.textContentMarginLeft,
+                        // marginLeft: screenWidth < 1900 ? "clamp(130px, 12vw, 155px)" : "clamp(-100px, -12vw, 155px)",
+                        marginLeft:
+                            screenWidth > 2200 ? "clamp(-200px, -18vw, -120px)" 
+                            : screenWidth >= 1900 ? "clamp(-100px, -12vw, 155px)"  
+                                : "clamp(130px, 12vw, 155px)",
+                        //    marginLeft: "clamp(140px, 12vw, 350px)"
 
-                    {/* text-contents */}
-                    <div style={{  display: "flex", flexDirection: "column" , justifyContent:"flex-start"}}>
+                    }}>
+                        {/* text-contents */}
+                        <div style={{
+                            // display: "flex", flexDirection: "column",
+                            // justifyContent: "flex-start",
 
-                        <h1 style={{ height: "90px", width: "360px", color: "#dd2120", 
-                             lineHeight: "45px",textAlign:"left", fontWeight: 600,
-                              fontSize:positions.titleFontSize ,
-                              margin: 0, marginTop:"55px"}}> 
-                               {/* remove default margin */}
-                            Thank you for your participation
-                        </h1>
+                            // paddingLeft: screenWidth >= 970 && screenWidth < 1240 ? "20px" : "0px"
+                        }}>
 
-                        <p style={{ width: "360px", height: "66px",
-                             lineHeight: "22px" ,textAlign:"left", 
-                             fontSize:positions.paraFontSize ,
-                             margin: 0, marginTop:"15px", marginBottom:"20px"}}>
-                            We wish you a healthy family with nutritious and tasty Kellogg's cereals.
-                        </p>
-
-                        <div style={{ display: "flex", alignItems: "center", gap: "16px",
-                               height: "29px" }}>
-
-                            <p style={{ fontWeight: 600, fontSize:positions.iconsSize, 
-                                margin:0,
+                            <h1 style={{
+                                height: positions.titleHeight, width: positions.titleWidth, color: "#dd2120",
+                                lineHeight: positions.titleLineHeight, textAlign: "left", fontWeight: 600,
+                                fontSize: positions.titleFontSize,
+                                margin: 0, marginTop: positions.titleMarginTop
                             }}>
-                                Share it to the world!
+                                {/* remove default margin */}
+                                Thank you for your participation
+                            </h1>
+
+                            <p style={{
+                                width: positions.paraWidth, height: positions.paraHeight,
+                                lineHeight: positions.paraLineHeight, textAlign: "left",
+                                fontSize: positions.paraFontSize,
+                                margin: 0, marginTop: positions.paraMarginTop,
+                                marginBottom: positions.paraMarginBottom
+                            }}>
+                                We wish you a healthy family with nutritious and tasty Kellogg's cereals.
                             </p>
 
-                            <button
-                                style={{ border: "none", background: "transparent", cursor: "pointer", 
-                                    padding: 0, fontSize:positions.iconsSize }}
-                                aria-label="twitter"
-                            >
-                                <FaTwitter />
-                            </button>
+                            <div style={{
+                                display: "flex", alignItems: "center", gap: positions.shareGap,
+                                height: positions.shareHeight, width: positions.shareWidth
+                            }}>
 
-                            <button
-                                style={{ border: "none", background: "transparent", cursor: "pointer",
-                                     padding: 0, fontSize:positions.iconsSize }}
-                                aria-label="facebook"
-                            >
-                                <FiFacebook />
+                                <p style={{
+                                    fontWeight: 600, fontSize: positions.paraFontSize,
+                                    margin: 0,
+                                }}>
+                                    Share it to the world!
+                                </p>
+
+                                <button
+                                    style={{
+                                        border: "none", background: "transparent", cursor: "pointer",
+                                        padding: 0, fontSize: positions.iconsSize
+                                    }}
+                                    aria-label="twitter"
+                                >
+                                    <FaTwitter />
+                                </button>
+
+                                <button
+                                    style={{
+                                        border: "none", background: "transparent", cursor: "pointer",
+                                        padding: 0, fontSize: positions.iconsSize
+                                    }}
+                                    aria-label="facebook"
+                                >
+                                    <FiFacebook />
+                                </button>
+                            </div>
+
+                            <button style={{
+                                display: "block", width: positions.winnerBtnWidth, height: positions.winnerBtnHeight,
+                                borderRadius: "12px", background: "#dd2120",
+                                color: "white", fontWeight: 600, border: "none",
+                                padding: positions.winnerBtnPadding, cursor: "pointer",
+                                marginTop: positions.winnerBtnmarginTop,
+                            }}>
+                                Click here to view the past winners
                             </button>
                         </div>
-
-                        <button
-                            style={{
-                                width: "300px", height: "55px", borderRadius: "12px", background: "red", color: "white",
-                                fontWeight: 600, border: "none", cursor: "pointer", marginTop: "10px",
-                            }}>
-                            Click here to view the past winners
-                        </button>
                     </div>
                 </div>
 
                 {/* second parent div */}
                 <div className='monkey-parent' style={{ width: "100%", maxWidth: "695px", height: "620px", position: "relative" }}>
-
                     {img.cocoMonkey && (
                         <div style={{ position: "absolute", top: positions.monkeyTop, right: positions.monkeyRight, zIndex: 2 }}>
                             <img width={positions.monkeyWidth} src={img.cocoMonkey} height={positions.monkeyHeight} alt="cocoMonkey" />
@@ -320,22 +524,20 @@ const ThankYou = () => {
                                 transition: "transform 0.25s ease-out", //  fast & smooth
                             }}
                         >
-                            <img width={positions.blurWidth} src={img.blurredCocoPops} alt="blurredCocoPops" />
+                            <img width={positions.blurWidth} height={positions.blurHeight} src={img.blurredCocoPops} alt="blurredCocoPops" />
                         </div>
                     )}
 
                     {img.CocoPops && (
                         <div style={{
-                            position: "absolute", bottom: positions.cocoBottom, right: positions.cocoRight, zIndex: 3,
-                            transform: `translateY(${smallCocoOffsetY}px)`, transition: "transform 0.45s ease-out",
+                            position: "absolute", bottom: positions.cocoBottom, right: positions.cocoRight, zIndex: 6,
+                            transform: `translateY(${smallCocoOffsetY}px)`, willChange: "transform"
                         }}>
                             <img width={positions.cocoWidth} src={img.CocoPops} alt="CocoPops" />
                         </div>
                     )}
                 </div>
-
             </div>
-
         </section>
     )
 }
