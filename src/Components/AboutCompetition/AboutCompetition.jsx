@@ -4,16 +4,24 @@ import './AboutCompetition.css'
 import { FaInstagram } from "react-icons/fa6";
 import { FaTwitter } from "react-icons/fa";
 import { LuFacebook } from "react-icons/lu";
+import { openUrl } from '../../Utils/Utilities';
 
 const AboutCompetition = ({ data }) => {
+
+
     return (
         <div className='about-container'>
             <div className='about-left'>
                 <div className="about-bg">
-                    <img src={data.bg} className='img1' alt="background" />
-                    {!data?.shouldShowForm && (
-                        <KelloggIcon IconImage={data?.IconImage} />
-                    )}
+                    <div className='bg-img' style={{ position:data?.shouldShowForm?'none':'absolute' }}>
+                        <img src={data.bg?.url} className='img1' alt="background" />
+
+                    </div>
+                    <div className='abt-kg'>
+                        {!data?.shouldShowForm && (
+                            <KelloggIcon IconImage={data?.IconImage?.url} />
+                        )}
+                    </div>
                 </div>
 
                 <img
@@ -27,7 +35,7 @@ const AboutCompetition = ({ data }) => {
                 <h1>{data.competitionTitle}</h1>
 
                 <div className='about-right-para'>
-                    {data.CompetitionDescription?.map((item, index) => (
+                    {data.competitionDescription?.map((item, index) => (
                         <p key={index}>
                             <strong>{item.title}</strong>{` ${item.des}`}
                         </p>
@@ -35,9 +43,9 @@ const AboutCompetition = ({ data }) => {
                 </div>
 
                 <div className="about-steps">
-                    {data.CompetitionSteps?.map((item, index) => (
+                    {data.competitionSteps?.map((item, index) => (
                         <div className="about-step"
-                            style={{ marginBottom: data.CompetitionSteps.length == index + 1 ? 'none' : '20px' }}
+                            style={{ marginBottom: data.competitionSteps.length == index + 1 ? 'none' : '20px' }}
                             key={index}>
                             <span className="about-step-dot" />
                             <div className="about-step-content">
@@ -48,9 +56,15 @@ const AboutCompetition = ({ data }) => {
                         </div>
                     ))}
                 </div>
-                <div className='abt-follow'>Follow us and stay tuned.<div className='abt-social-media'><FaInstagram className='abt-social-icon ' /><FaTwitter className='abt-social-icon ' /><LuFacebook className='abt-social-icon ' /></div></div>
+                <div className='abt-follow'>{data.socialLinkText}
+                    <div className='abt-social-media'>
+                        <FaInstagram className='abt-social-icon ' onClick={() => openUrl(data.scholarshipSocialLinks?.instagram)} />
+                        <FaTwitter className='abt-social-icon ' onClick={() => openUrl(data.scholarshipSocialLinks?.twitter)} />
+                        <LuFacebook className='abt-social-icon ' onClick={() => openUrl(data.scholarshipSocialLinks?.facebook)} />
+                    </div>
+                </div>
 
-                <div className='about-crit'>    
+                <div className='about-crit'>
                     <h1>Criteria for Selection</h1>
                     <div className='abt-crit-cont'>
                         {data.criteria?.map((item) =>

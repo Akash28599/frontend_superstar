@@ -3,7 +3,7 @@ import './YoutubeThumbnail.css'
 
 const YoutubeThumbnail = ({ url, onPlay, styleIcon, overlayText, shouldBlur = false ,styleThumb,styleThumbImage}) => {
     const ytIcon = '/assetss/youtube-icon.png'
-    const videoId = url.split('v=')[1]?.split('&')[0]
+    const videoId = url?.split('v=')[1]?.split('&')[0]
 
     return (
         <div className="yt-thumb" onClick={() => onPlay(videoId)} style={styleThumb}>
