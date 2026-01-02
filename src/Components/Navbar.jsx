@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const [menu, setMenu] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const location = useLocation();
+  const currentPath = location.pathname;
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_STRAPI_URL}/api/navbars?populate=*`)
@@ -19,7 +23,6 @@ const Navbar = () => {
       });
   }, []);
 
-  const currentPath = window.location.pathname;
 
   const navbarStyle = {
     position: 'relative',
@@ -88,7 +91,9 @@ const Navbar = () => {
     boxShadow: '0 3px 12px rgba(246, 9, 69, 0.25)'
   };
 
-  const isActive = (route) => currentPath === route;
+  const normalizePath = (path) => path.replace(/^\/|\/$/g, '');
+  const isActive = (route) => normalizePath(currentPath) === normalizePath(route);
+
 
   if (loading) {
     return null;
@@ -97,17 +102,31 @@ const Navbar = () => {
   return (
     <nav style={navbarStyle}>
       {menu.map((item) => (
-        <a
-          key={item.id}
-          href={item.route}
-          style={item.isButton?contactStyle:isActive(item.route) ? activeItemStyle : navItemStyle}
-          onClick={(e) => {
-            e.preventDefault();
-            window.location.href = item.route;
-          }}
+        // <a
+        //   key={item.id}
+        //   href={item.route}
+        //   style={item.isButton ? contactStyle : isActive(item.route) ? activeItemStyle : navItemStyle}
+        //   onClick={(e) => {
+        //     e.preventDefault();
+        //     window.location.href = item.route;
+        //   }}
+        // >
+        //   {item.label}
+        // </a>
+
+        <NavLink
+          to={item.route}
+          style={({ isActive }) =>
+            isActive
+              ? activeItemStyle
+              : item.isButton
+                ? contactStyle
+                : navItemStyle
+          }
         >
           {item.label}
-        </a>
+        </NavLink>
+
       ))}
 
       {/* Contact - Special styling

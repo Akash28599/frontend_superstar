@@ -296,8 +296,8 @@ testFont.load().then(() => {
 
 const containerStyle = {
   position: 'relative',
-  height: '113vh',
-  backgroundColor: '#F60945',
+  height: '100vh',
+  backgroundColor: '#dd2120',
   overflow: 'hidden',
   width: '100vw',
   margin: 0,

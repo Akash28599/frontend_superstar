@@ -1,4 +1,4 @@
-import HomeBanner from "../Components/HomeBanner"
+import HomeBanner from "../Components/HomeBanner/HomeBanner"
 import TrendingStories from "../Components/TrendingStories"
 import CocoHeads from "../Components/cocohead"
 import PrintableGames from "../Components/games"
@@ -14,7 +14,7 @@ export default function HomePage() {
                 {/* Red background ONLY for HomeBanner */}
                 <div
                     style={{
-                        backgroundColor: "#F60945",
+                        backgroundColor: "#dd2120",
                         position: "relative",
                     }}
                 >
@@ -25,6 +25,7 @@ export default function HomePage() {
                 <CocoHeads />
                  <CocoBanner/>
                 <OurProducts />
+                {/* <TrendingStories/> */}
                 <PrintableGames />
                
             </div>

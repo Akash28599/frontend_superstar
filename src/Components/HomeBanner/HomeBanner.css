@@ -1,0 +1,14 @@
+:root {
+    --red: #dd2120;
+    --font: "KelloggsSans", Arial, sans-serif;
+}
+
+.h-loading {
+    min-height: '100vh';
+    background-color: var(--red);
+    color: '#fff';
+    display: 'flex';
+    align-items: 'center';
+    justify-content: 'center';
+    font-size: '1.2rem';
+}

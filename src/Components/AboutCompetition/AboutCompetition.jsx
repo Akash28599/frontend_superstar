@@ -1,10 +1,7 @@
 import React from 'react'
 import KelloggIcon from '../KelloggIcon/KelloggIcon'
 import './AboutCompetition.css'
-import { FaInstagram } from "react-icons/fa6";
-import { FaTwitter } from "react-icons/fa";
-import { LuFacebook } from "react-icons/lu";
-import { openUrl } from '../../Utils/Utilities';
+import SocialIcons from '../SocialIcons/SocialIcons';
 
 const AboutCompetition = ({ data }) => {
 
@@ -57,11 +54,12 @@ const AboutCompetition = ({ data }) => {
                     ))}
                 </div>
                 <div className='abt-follow'>{data.socialLinkText}
-                    <div className='abt-social-media'>
-                        <FaInstagram className='abt-social-icon ' onClick={() => openUrl(data.scholarshipSocialLinks?.instagram)} />
-                        <FaTwitter className='abt-social-icon ' onClick={() => openUrl(data.scholarshipSocialLinks?.twitter)} />
-                        <LuFacebook className='abt-social-icon ' onClick={() => openUrl(data.scholarshipSocialLinks?.facebook)} />
-                    </div>
+                    {/* <div className='abt-social-media'>
+                        <FaInstagram className='abt-social-icon ' onClick={() => openUrl(data.siteSettings?.instagramurl)} />
+                        <FaTwitter className='abt-social-icon ' onClick={() => openUrl(data.siteSettings?.twitterurl)} />
+                        <LuFacebook className='abt-social-icon ' onClick={() => openUrl(data.siteSettings?.facebookurl)} />
+                    </div> */}
+                    <SocialIcons siteSettings={data.siteSettings}/>
                 </div>
 
                 <div className='about-crit'>

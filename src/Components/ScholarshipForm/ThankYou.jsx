@@ -1,9 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react'; //  ADDED useRef
-import { FaInstagram } from "react-icons/fa6";
-import { FiFacebook } from "react-icons/fi";
-import { FaTwitter } from "react-icons/fa";
-import { openUrl } from '../../Utils/Utilities';
+import { useEffect, useState, useRef, useCallback } from 'react'; //  ADDED useRef
 import "./ThankYou.css";
+import SocialIcons from '../SocialIcons/SocialIcons';
 
 // images static
 // import cocoMonkey from "/assetss/flying-monkey.png"
@@ -11,7 +8,7 @@ import "./ThankYou.css";
 // import leftCocoPops from "/assets/CocoPops.png"
 // import blurredCocoPops from "/assets/CocoPops-pack-blurred.png"
 
-const ThankYou = ({ socialLinks }) => {
+const ThankYou = ({ siteSettings }) => {
     // console.log(socialLinks)
     const img = {
         // cocoMonkey: "/assetss/flying-monkey.png",
@@ -43,8 +40,8 @@ const ThankYou = ({ socialLinks }) => {
     const [loading, setLoading] = useState(true);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
-const sample ={
-     cocoPopsImage:
+    const sample = {
+        cocoPopsImage:
         {
             url: '/assetss/CocoPops.png'
         },
@@ -59,7 +56,7 @@ const sample ={
         cocoMonkey: {
             url: "/assetss/flying-monkey.png"
         },
-}
+    }
 
     //  ADDED: refs for section & blurred image
     const sectionRef = useRef(null);
@@ -87,7 +84,7 @@ const sample ={
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    const fetchParticipation = async () => {
+    const fetchParticipation = useCallback(async () => {
         try {
             const res = await fetch(`${process.env.REACT_APP_STRAPI_URL}/api/thank-you-page?populate=*`);
             const resData = await res.json();
@@ -99,7 +96,7 @@ const sample ={
         } finally {
             setLoading(false);
         }
-    };
+    }, []);
 
     useEffect(() => {
         fetchParticipation();
@@ -212,30 +209,6 @@ const sample ={
         return () => window.removeEventListener("scroll", handleScroll);
     }, [isInView]);
 
-
-
-
-    // for icons 
-    const getSocialIcon = (type) => {
-        switch (type) {
-
-            case "twitter":
-                return <FaTwitter />;
-            case "facebook":
-                return <FiFacebook />;
-            // case "instagram":
-            //     return <FaInstagram />;
-            // case "youtube":
-            //     return <FaYoutube />;
-            // case "tiktok":
-            //     return <FaTiktok />;
-            default:
-                return null; // unknown icon safe guard
-        }
-    };
-
-
-
     const title = data.title;
     const description = data.description;
     const cocoMonkey = data.cocoMonkey?.url ?? null;
@@ -259,12 +232,13 @@ const sample ={
                 iconsSize: "30px",
                 winnerBtnWidth: "300px", winnerBtnHeight: "55px",  // past winners btn 
                 winnerBtnPadding: "15px 22px", winnerBtnmarginTop: "10px",
-                shareHeight: "29px", shareGap: "16px", shareWidth: "576px",// share para content  and icons gap, height
+                shareHeight: "29px", shareGap: "2px", shareWidth: "576px",// share para content  and icons gap, height
                 monkeyTop: "5%", monkeyRight: "-40%", monkeyWidth: "750px", monkeyHeight: "710px",
                 blurTop: "6%", blurRight: "-35%", blurWidth: "470px", blurHeight: "505px",// blurred image
                 cocoBottom: "-27%", cocoRight: "-32%", cocoWidth: "320px", cocoHeight: "320px",// bottom cocoimg of monkey
                 leftCocoWidth: "430px",
                 leftCocoRotate: "55deg",
+                socialIconsGap: '12px'
 
             };
         }
@@ -287,6 +261,7 @@ const sample ={
                 cocoBottom: "-21%", cocoRight: "-14%", cocoWidth: "300px", cocoHeight: "300px",// bottom cocoimg of monkey
                 leftCocoWidth: "420px",
                 leftCocoRotate: "55deg",
+                socialIconsGap: '12px'
 
             };
         }
@@ -310,6 +285,7 @@ const sample ={
                 cocoBottom: "-9%", cocoRight: "-13%", cocoWidth: "280px", cocoHeight: "280px",// bottom cocoimg of monkey
                 leftCocoWidth: "400px",
                 leftCocoRotate: "55deg",
+                socialIconsGap: '12px'
 
             };
         }
@@ -332,6 +308,8 @@ const sample ={
                 cocoBottom: "-10%", cocoRight: "5%", cocoWidth: "250px", cocoHeight: "200px",// bottom cocoimg of monkey
                 leftCocoWidth: "300px", // left cocoimg
                 leftCocoRotate: "58deg",
+                socialIconsGap: '12px'
+
             };
         }
 
@@ -353,6 +331,8 @@ const sample ={
                 cocoBottom: "6%", cocoRight: "0%", cocoWidth: "210px", cocoHeight: "210px", // bottom near monkey image
                 leftCocoWidth: "250px", // left angle image
                 leftCocoRotate: "55deg",
+                socialIconsGap: '12px'
+
             }
 
         };
@@ -374,7 +354,14 @@ const sample ={
                 cocoBottom: "15%", cocoRight: "-1%", cocoWidth: "180px", cocoHeight: "180px",// bottom cocoimg of monkey
                 leftCocoWidth: "200px",
                 leftCocoRotate: "55deg",
+                socialIconsGap: '0px'
+            }
 
+        };
+        if (screenWidth < 925) {
+            return {
+                socialIconsDisplay: 'column',
+                socialIconsGap: '0px'
             }
 
         };
@@ -507,8 +494,9 @@ const sample ={
 
 
                                     <div style={{
-                                        display: "flex", alignItems: "center", gap: positions.shareGap,
-                                        height: positions.shareHeight, width: positions.shareWidth
+                                        display: "flex",
+                                        gap: positions.socialIconsGap,
+                                        flexDirection: positions.socialIconsDisplay
                                     }}>
 
                                         <p style={{
@@ -519,24 +507,7 @@ const sample ={
                                         </p>
 
                                         {/* Socialicons and link from props */}
-                                        {Object.entries( socialLinks|| {}).map(
-                                            ([type, url]) => { // type :each and every item , and url : link of each item.
-                                                const Icon = getSocialIcon(type);
-                                                if (!Icon) return null; // twitter & facebook mattum
-
-                                                return (
-                                                    <button key={type}
-                                                        style={{  border: "none", background: "transparent", cursor: "pointer",
-                                                            padding: 0, fontSize: positions.iconsSize,
-                                                        }}
-                                                        aria-label={type}
-                                                        onClick={() => openUrl(url)}   //  util reuse
-                                                    >
-                                                        {Icon}
-                                                    </button>
-                                                );
-                                            }
-                                        )}
+                                        <SocialIcons siteSettings={siteSettings} />
 
 
                                     </div>
@@ -544,7 +515,7 @@ const sample ={
                                     <button className='btn' style={{
                                         display: "block", width: positions.winnerBtnWidth, height: positions.winnerBtnHeight,
                                         borderRadius: "12px",
-                                         fontWeight: 600, 
+                                        fontWeight: 600,
                                         padding: positions.winnerBtnPadding, cursor: "pointer",
                                         marginTop: positions.winnerBtnmarginTop,
                                     }}>
