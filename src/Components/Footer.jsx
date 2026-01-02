@@ -1,11 +1,9 @@
 import { Box, Grid, IconButton, List, ListItem } from "@mui/material";
-import { Facebook, Instagram, Twitter, YouTube } from "@mui/icons-material";
-import { BiLogoTiktok } from "react-icons/bi";
 import { useEffect, useState } from "react";
-import { openUrl } from "../Utils/Utilities";
+import SocialIcons from "./SocialIcons/SocialIcons";
 
-const FooterLayout = () => {
-  const [settingsData, setSettingsData] = useState(null);
+const FooterLayout = ({settingsData}) => {
+  //const [settingsData, setSettingsData] = useState(null);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth); // ✅ DYNAMIC WIDTH
 
   // ✅ RESPONSIVE WIDTH LISTENER (DESKTOP ONLY)
@@ -15,30 +13,29 @@ const FooterLayout = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  useEffect(() => {
-    const getFooterData = async () => {
-      try {
-        const res = await fetch(
-          `${process.env.REACT_APP_STRAPI_URL}/api/sitesettings?populate=*`
-        );
-        const json = await res.json();
-        console.log(json);
-        setSettingsData(json);
-      } catch (error) {
-        console.error("Error fetching footer data:", error);
-      }
-    };
-    getFooterData();
-  }, []);
+  // useEffect(() => {
+  //   const getFooterData = async () => {
+  //     try {
+  //       const res = await fetch(
+  //         `${process.env.REACT_APP_STRAPI_URL}/api/sitesettings?populate=*`
+  //       );
+  //       const json = await res.json();
+  //       console.log(json);
+  //       setSettingsData(json);
+  //     } catch (error) {
+  //       console.error("Error fetching footer data:", error);
+  //     }
+  //   };
+  //   getFooterData();
+  // }, []);
 
-  const settings = settingsData?.data?.[0];
+  //const settings = settingsData?.data?.[0];
 
 
-  const addressLines = settings?.address?.split("\n") ?? [];
-     console.log("settings",settings)
+  const addressLines = settingsData?.address?.split("\n") ?? [];
   return (
     <Box>
-      <Box sx={{ background: "#F60945" }}>
+      <Box sx={{ background: "#dd2120" }}>
         <Box sx={{ 
           p: { xs: 3, sm: 5, md: 8, lg: 10 }, // Responsive padding
           display: "flex", 
@@ -48,10 +45,10 @@ const FooterLayout = () => {
           mx: "auto"
         }}>
           {/* LOGO - RESPONSIVE SIZE */}
-          {settings?.logo?.url ? (
+          {settingsData?.logo?.url ? (
             <img
-              src={settings.logo.url}
-              alt={settings.sitename}
+              src={settingsData.logo.url}
+              alt={settingsData.sitename}
               style={{
                 width: screenWidth >= 1440 ? "20%" : "25%",
                 height: screenWidth >= 1440 ? "20%" : "25%",
@@ -124,7 +121,7 @@ const FooterLayout = () => {
                   p: 0,
                   m: 0
                 }}>
-                  <ListItem sx={{ pl: 0, py: 0.5 }}>{settings?.contactphone}</ListItem>
+                  <ListItem sx={{ pl: 0, py: 0.5 }}>{settingsData?.contactphone}</ListItem>
                   <ListItem sx={{ pl: 0, py: 0.5 }}>Privacy Policy</ListItem>
                   <ListItem sx={{ pl: 0, py: 0.5 }}>Sitemap</ListItem>
                 </List>
@@ -143,7 +140,7 @@ const FooterLayout = () => {
                   p: 0,
                   m: 0
                 }}>
-                  <ListItem sx={{ pl: 0, py: 0.5 }}>{settings?.contactemail ?? "—"}</ListItem>
+                  <ListItem sx={{ pl: 0, py: 0.5 }}>{settingsData?.contactemail ?? "—"}</ListItem>
                   <ListItem sx={{ pl: 0, py: 0.5 }}>{addressLines[0] ?? "—"}</ListItem>
                   <ListItem sx={{ pl: 0, py: 0.5 }}>{addressLines[1] ?? ""}</ListItem>
                 </List>
@@ -154,55 +151,7 @@ const FooterLayout = () => {
                   gap: screenWidth >= 1440 ? 1 : 0.8,
                   mt: 3,
                 }}>
-                  <IconButton sx={{
-                    borderRadius: 2,
-                    background: "#fff",
-                    width: screenWidth >= 1440 ? 48 : 42,
-                    height: screenWidth >= 1440 ? 48 : 42,
-                    "&:hover": { background: "#e2e2e2" },
-                  }} onClick={() => openUrl(settings?.facebookurl)}>
-                    <Facebook sx={{ color: "#111", fontSize: screenWidth >= 1440 ? 20 : 18 }} />
-                  </IconButton>
-
-                  <IconButton sx={{
-                    borderRadius: 2,
-                    background: "#fff",
-                    width: screenWidth >= 1440 ? 48 : 42,
-                    height: screenWidth >= 1440 ? 48 : 42,
-                    "&:hover": { background: "#e2e2e2" },
-                  }} onClick={() => openUrl(settings?.instagramurl)}>
-                    <Instagram sx={{ color: "#111", fontSize: screenWidth >= 1440 ? 20 : 18 }} />
-                  </IconButton>
-
-                  <IconButton sx={{
-                    borderRadius: 2,
-                    background: "#fff",
-                    width: screenWidth >= 1440 ? 48 : 42,
-                    height: screenWidth >= 1440 ? 48 : 42,
-                    "&:hover": { background: "#e2e2e2" },
-                  }} onClick={() => openUrl(settings?.twitterurl)}>
-                    <Twitter sx={{ color: "#111", fontSize: screenWidth >= 1440 ? 20 : 18 }} />
-                  </IconButton>
-
-                  <IconButton sx={{
-                    borderRadius: 2,
-                    background: "#fff",
-                    width: screenWidth >= 1440 ? 48 : 42,
-                    height: screenWidth >= 1440 ? 48 : 42,
-                    "&:hover": { background: "#e2e2e2" },
-                  }} onClick={() => openUrl(settings?.youtubeurl)}>
-                    <YouTube sx={{ color: "#111", fontSize: screenWidth >= 1440 ? 20 : 18 }} />
-                  </IconButton>
-
-                  <IconButton sx={{
-                    borderRadius: 2,
-                    background: "#fff",
-                    width: screenWidth >= 1440 ? 48 : 42,
-                    height: screenWidth >= 1440 ? 48 : 42,
-                    "&:hover": { background: "#e2e2e2" },
-                  }} onClick={() => openUrl(settings?.tiktokurl)}>
-                    <BiLogoTiktok style={{ color: "#111", fontSize: screenWidth >= 1440 ? 24 : 22 }} />
-                  </IconButton>
+                  <SocialIcons siteSettings={settingsData}/>
                 </Box>
               </Box>
             </Grid>
@@ -212,7 +161,7 @@ const FooterLayout = () => {
 
       {/* COPYRIGHT */}
       <Box sx={{
-        background: "#CE0E3E",
+        background: "#c11b1bff",
         display: "flex",
         justifyContent: "center",
         p: { xs: 2, md: 3 },
@@ -221,7 +170,7 @@ const FooterLayout = () => {
         lineHeight: "200%",
         color: "#fff",
       }}>
-        {settings?.copyright}
+        {settingsData?.copyright}
       </Box>
     </Box>
   );

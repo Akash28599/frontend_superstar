@@ -3,8 +3,8 @@ import '../fonts.css';
 
 // ✅ Detect if the browser is Edge
 const isEdgeBrowser = () => {
-  return navigator.userAgent.includes("Edg") || 
-         navigator.userAgent.includes("Edge");
+  return navigator.userAgent.includes("Edg") ||
+    navigator.userAgent.includes("Edge");
 };
 
 export default function PrintableGames() {
@@ -21,10 +21,32 @@ export default function PrintableGames() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
+  const sample = [
+    {
+      thumbnail: '',
+      printable: '/assetss/BrainGameVol1.pdf',
+    },
+    {
+      thumbnail: '',
+      printable: '/assetss/BrainGameVol2.pdf',
+    },
+    {
+      thumbnail: '',
+      printable: '/assetss/BrainGameVol3.pdf',
+    },
+    {
+      thumbnail: '',
+      printable: '/assetss/BrainGameVol4.pdf',
+    },
+    {
+      thumbnail: '',
+      printable: '/assetss/BrainGameVol5.pdf',
+    }
+  ]
   useEffect(() => {
     const url = `${process.env.REACT_APP_STRAPI_URL}/api/games?populate=*`;
     fetch(url)
+      .then((r) => { throw new Error("testing") })
       .then((r) => r.json())
       .then((json) => {
         const data = (json && json.data) || [];
@@ -33,13 +55,14 @@ export default function PrintableGames() {
       })
       .catch((err) => {
         console.error("Failed to load games:", err);
+        setItems(sample)
         setLoading(false);
       });
   }, []);
 
   const getGridConfig = () => {
     if (screenWidth >= 1920) {
-      return { 
+      return {
         minWidth: isEdge ? '250px' : '260px',
         paddingLeft: isEdge ? '10%' : '12%',
         fontSize: isEdge ? '24px' : '26px',
@@ -48,7 +71,7 @@ export default function PrintableGames() {
       };
     }
     if (screenWidth >= 1440) {
-      return { 
+      return {
         minWidth: isEdge ? '230px' : '240px',
         paddingLeft: isEdge ? '8%' : '10%',
         fontSize: isEdge ? '22px' : '24px',
@@ -57,7 +80,7 @@ export default function PrintableGames() {
       };
     }
     if (screenWidth >= 1200) {
-      return { 
+      return {
         minWidth: isEdge ? '210px' : '220px',
         paddingLeft: isEdge ? '6%' : '8%',
         fontSize: isEdge ? '20px' : '22px',
@@ -65,7 +88,7 @@ export default function PrintableGames() {
         borderWidth: isEdge ? '4px' : '6px'
       };
     }
-    return { 
+    return {
       minWidth: '200px',
       paddingLeft: '6%',
       fontSize: '20px',
@@ -88,7 +111,7 @@ export default function PrintableGames() {
         alignItems: 'stretch'
       };
     }
-    
+
     return {
       display: 'grid',
       gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
@@ -135,8 +158,8 @@ export default function PrintableGames() {
   if (loading) {
     return (
       <section style={{ padding: "4rem 2rem", textAlign: "center" }}>
-        <h2 style={{ 
-          fontSize: "2.4rem", 
+        <h2 style={{
+          fontSize: "2.4rem",
           marginBottom: ".5rem",
           fontFamily: "'Kellogg's Sans', sans-serif",
           fontWeight: 700,
@@ -144,9 +167,9 @@ export default function PrintableGames() {
         }}>
           Printable games
         </h2>
-        <p style={{ 
-          maxWidth: 880, 
-          margin: "0 auto 2rem", 
+        <p style={{
+          maxWidth: 880,
+          margin: "0 auto 2rem",
           color: "#666",
           fontFamily: "'Kellogg's Sans', sans-serif",
           fontWeight: 400
@@ -158,32 +181,32 @@ export default function PrintableGames() {
   }
 
   return (
-    <section style={{ 
-      background: "#fff", 
+    <section style={{
+      background: "#fff",
       padding: isEdge ? "4rem 1rem" : "4.5rem 1.5rem",
-      overflow: "hidden" 
+      overflow: "hidden"
     }}>
-      <div style={{ 
-        maxWidth: 1400, 
-        margin: "0 auto", 
+      <div style={{
+        maxWidth: 1400,
+        margin: "0 auto",
         padding: isEdge ? "0 0.5rem" : "0 1rem",
         width: '100%',
         boxSizing: 'border-box'
       }}>
-        <div style={{ 
+        <div style={{
           marginBottom: isEdge ? "2rem" : "2.25rem",
-          textAlign: "center", 
-          display: "block" 
+          textAlign: "center",
+          display: "block"
         }}>
           <h2 style={{
-              fontSize: isEdge ? "3.2rem" : "3.4rem",
-              margin: 0,
-              color: "red",
-              fontFamily: "'Kellogg's Sans', sans-serif",
-              fontWeight: "medium",
-              letterSpacing: "0%",
-            }}>
-              Printable games
+            fontSize: isEdge ? "3.2rem" : "3.4rem",
+            margin: 0,
+            color: "red",
+            fontFamily: "'Kellogg's Sans', sans-serif",
+            fontWeight: "medium",
+            letterSpacing: "0%",
+          }}>
+            Printable games
           </h2>
         </div>
 
@@ -201,35 +224,35 @@ export default function PrintableGames() {
 
             return (
               <div key={item.id} style={{
-                  background: "#fff",
-                  border: `${gridConfig.borderWidth} solid #f0f0f0`,
-                  borderRadius: 6,
-                  padding: gridConfig.itemPadding,
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  boxShadow: "0 4px 12px rgba(0,0,0,0.06)",
-                  boxSizing: "border-box",
-                  width: '100%',
-                  height: '100%',
-                  minHeight: 0,
-                  overflow: 'hidden',
-                  position: 'relative',
-                }}>
-                
+                background: "#fff",
+                border: `${gridConfig.borderWidth} solid #f0f0f0`,
+                borderRadius: 6,
+                padding: gridConfig.itemPadding,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                boxShadow: "0 4px 12px rgba(0,0,0,0.06)",
+                boxSizing: "border-box",
+                width: '100%',
+                height: '100%',
+                minHeight: 0,
+                overflow: 'hidden',
+                position: 'relative',
+              }}>
+
                 <div style={{
-                    background: "#fff",
-                    width: "100%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    padding: isEdge ? "8px 6px" : "10px 8px",
-                    borderRadius: 4,
-                    minHeight: isEdge 
-                      ? (screenWidth >= 1440 ? 300 : 260)
-                      : (screenWidth >= 1440 ? 320 : 280),
-                    flexShrink: 0,
-                  }}>
+                  background: "#fff",
+                  width: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: isEdge ? "8px 6px" : "10px 8px",
+                  borderRadius: 4,
+                  minHeight: isEdge
+                    ? (screenWidth >= 1440 ? 300 : 260)
+                    : (screenWidth >= 1440 ? 320 : 280),
+                  flexShrink: 0,
+                }}>
                   {thumb ? (
                     <img
                       src={thumb}
@@ -244,25 +267,25 @@ export default function PrintableGames() {
                     />
                   ) : (
                     <div style={{
-                        width: "100%",
-                        height: isEdge 
-                          ? (screenWidth >= 1440 ? 260 : 220)
-                          : (screenWidth >= 1440 ? 280 : 240),
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        color: "#aaa",
-                        background: "#fafafa",
-                        fontFamily: "'Kellogg's Sans', sans-serif",
-                        fontWeight: 400,
-                      }}>
+                      width: "100%",
+                      height: isEdge
+                        ? (screenWidth >= 1440 ? 260 : 220)
+                        : (screenWidth >= 1440 ? 280 : 240),
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#aaa",
+                      background: "#fafafa",
+                      fontFamily: "'Kellogg's Sans', sans-serif",
+                      fontWeight: 400,
+                    }}>
                       No image
                     </div>
                   )}
                 </div>
 
                 {/* ✅ Download Area - Yellow background appears on hover with rounded corners */}
-                <div 
+                <div
                   style={{
                     display: "flex",
                     alignItems: "center",
@@ -293,35 +316,35 @@ export default function PrintableGames() {
                     transition: 'all 0.3s ease',
                     zIndex: 1,
                   }} />
-                  
-                  <div style={{ 
-                    textAlign: "left", 
-                    flex: 1, 
+
+                  <div style={{
+                    textAlign: "left",
+                    flex: 1,
                     minWidth: 0,
                     position: 'relative',
                     zIndex: 2,
                   }}>
                     <div style={{
-                        fontSize: gridConfig.fontSize,
-                        color: "#f21f4d",
-                        fontWeight: 800,
-                        marginBottom: isEdge ? 4 : 6,
-                        textTransform: "capitalize",
-                        fontFamily: "'Kellogg's Sans', sans-serif",
-                        letterSpacing: "0%",
-                        paddingLeft: gridConfig.paddingLeft,
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                      }}>
+                      fontSize: gridConfig.fontSize,
+                      color: "#f21f4d",
+                      fontWeight: 800,
+                      marginBottom: isEdge ? 4 : 6,
+                      textTransform: "capitalize",
+                      fontFamily: "'Kellogg's Sans', sans-serif",
+                      letterSpacing: "0%",
+                      paddingLeft: gridConfig.paddingLeft,
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                    }}>
                       Download
                     </div>
                   </div>
 
-                  <div style={{ 
-                    display: "flex", 
-                    alignItems: "center", 
-                    gap: isEdge ? 8 : 10, 
+                  <div style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: isEdge ? 8 : 10,
                     flexShrink: 0,
                     position: 'relative',
                     zIndex: 2,
@@ -334,10 +357,10 @@ export default function PrintableGames() {
                       disabled={!hasPdf || downloadingId === item.id}
                       aria-disabled={!hasPdf || downloadingId === item.id}
                       style={{
-                        width: isEdge 
+                        width: isEdge
                           ? (screenWidth >= 1440 ? 52 : 46)
                           : (screenWidth >= 1440 ? 56 : 50),
-                        height: isEdge 
+                        height: isEdge
                           ? (screenWidth >= 1440 ? 52 : 46)
                           : (screenWidth >= 1440 ? 56 : 50),
                         borderRadius: "50%",
@@ -350,7 +373,7 @@ export default function PrintableGames() {
                         boxShadow: hasPdf ? '2px 3px 0px #F60945, 0 6px 18px rgba(0,0,0,0.18)' : "none",
                         background: hasPdf ? "linear-gradient(180deg,#ffb366,#ff8a2b)" : "#eee",
                         color: "#fff",
-                        fontSize: isEdge 
+                        fontSize: isEdge
                           ? (screenWidth >= 1440 ? 16 : 14)
                           : (screenWidth >= 1440 ? 18 : 16),
                         flexShrink: 0,
@@ -369,8 +392,8 @@ export default function PrintableGames() {
         </div>
 
         {/* ✅ SEE MORE BUTTON */}
-        <div style={{ 
-          textAlign: "center", 
+        <div style={{
+          textAlign: "center",
           marginTop: isEdge ? "1.5rem" : "2rem",
           width: '100%',
         }}>
@@ -397,7 +420,7 @@ export default function PrintableGames() {
             }}
           >
             See more
-            
+
             <div style={{
               width: isEdge ? "32px" : "36px",
               height: isEdge ? "32px" : "36px",
@@ -412,7 +435,7 @@ export default function PrintableGames() {
               transform: showMoreHovered ? 'scale(1.05)' : 'scale(1)',
             }}>
               <svg
-                style={{ 
+                style={{
                   width: isEdge ? "14px" : "16px",
                   height: isEdge ? "14px" : "16px",
                   transition: "all 0.3s ease"

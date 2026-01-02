@@ -1,14 +1,12 @@
-import { useEffect, useState } from 'react'
-import Navbar from '../Components/Navbar'
+import { useCallback, useEffect, useState } from 'react'
 import ScholarshipForm from '../Components/ScholarshipForm/ScholarshipForm'
 import AboutCompetition from '../Components/AboutCompetition/AboutCompetition';
 import YoutubeGallery from '../Components/YoutubeVideo/YoutubeGallery';
 import SubmissionForm from '../Components/SubmissionForm/SubmissionForm';
 import ThankYou from '../Components/ScholarshipForm/ThankYou';
-import { Description } from '@mui/icons-material';
 
 
-const ScholarshipPage = () => {
+const ScholarshipPage = ({settingsData}) => {
     const [data, setData] = useState({
         IconImage: { url: "" },
         groupKellogs: { url: "" },
@@ -21,14 +19,15 @@ const ScholarshipPage = () => {
         shouldShowForm: true,
         criteria: [],
         socialLinkText: "",
-        scholarshipSocialLinks: {
-            youtube: "",
-            instagram: "",
-            facebook: "",
-            twitter: "",
-            tiktok: ""
+        siteSettings: {
+            instagramurl: "",
+            facebookurl: "",
+            twitterurl: "" ,
+            tiktokurl:"",
+            youtubeurl:""
         }
     });
+    const [isLoading,setIsLoading]=useState(true);
     const sample = {
         IconImage: { url: "/assetss/iconNoHeader.png" },
         groupKellogs: { url: "/assetss/group.png" },
@@ -56,40 +55,40 @@ const ScholarshipPage = () => {
             "Grammar",
             "Vocabulary"],
         socialLinkText: "Follow us on",
-        scholarshipSocialLinks: {
-            youtube: "",
-            instagram: "",
-            facebook: "",
-            twitter: "",
-            tiktok: ""
+        siteSettings: {
         }
     }
+   useEffect(() => {
     const fetchURLs = async () => {
         try {
-            const res = await fetch(`${process.env.REACT_APP_STRAPI_URL}/api/scholarship-page?populate=*`)
-
-            const json = await res.json()
-
-            setData(json.data)
+            const res = await fetch(`${process.env.REACT_APP_STRAPI_URL}/api/scholarship-page?populate=*`);
+            const json = await res.json();
+            console.log(settingsData);
+            setData({
+                ...json.data,
+                siteSettings: { ...settingsData }
+            });
         } catch (err) {
-            console.log("ehellpo")
-            setData(sample)
-
-            console.error("Fetch error:", err)
+            console.log("hello");
+            setData(sample);
+            console.error("Fetch error:", err);
         }
-    }
+        finally{
+            setIsLoading(false)
+        }
+    };
 
-    useEffect(() => {
-        fetchURLs()
-    }, []);
+    fetchURLs();
+}, [settingsData]); 
 
+if(isLoading)return(<div>Loading...</div>)
 
     return (
         <>
             {data.shouldShowForm && <ScholarshipForm data={data} />}
             <AboutCompetition data={data} />
             <YoutubeGallery />
-            <ThankYou socialLinks={data.scholarshipSocialLinks} />
+            <ThankYou siteSettings={data.siteSettings} />
             {!data.shouldShowForm && <SubmissionForm groupKellogs={data.groupKellogs} />}
         </>
     )

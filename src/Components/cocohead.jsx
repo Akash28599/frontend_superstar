@@ -42,7 +42,7 @@ const CocoHeads = () => {
   const getYellowWidth = () => {
     if (screenWidth >= 1920) return '980px';
     if (screenWidth >= 1440) return '900px';
-    if (screenWidth >= 1200) return '920px';
+    if (screenWidth >= 1200) return '980px';
     return 'calc(100vw - 4rem)';
   };
 
@@ -88,8 +88,8 @@ const CocoHeads = () => {
         position: 'relative',
         overflow: 'visible',
         gap: '1rem',
-        minHeight: '234px',
-        height: screenWidth >= 1440 ? '274px' : '270px',
+        minHeight: '300px',
+        height: screenWidth >= 1440 ? '274px' : '280px',
         left: screenWidth >= 1440 ? '4%' : '2%',
         marginTop:"10%"
       }}>
