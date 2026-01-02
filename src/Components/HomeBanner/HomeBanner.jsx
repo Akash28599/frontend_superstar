@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import './HomeBanner.css'
 const HomeBanner = () => {
   const [banner, setBanner] = useState(null);
   const [cloudImage, setCloudImage] = useState(null);
@@ -60,10 +60,10 @@ testFont.load().then(() => {
 
   // ✅ FIXED: 1st CLOUD MORE RIGHT FOR MACBOOK (13%)
   const getCloudPositions = () => {
-    if (screenWidth >= 1920) return { cloud1Right: '7%', cloud1Size: '10%' };
-    if (screenWidth >= 1440) return { cloud1Right: '13%', cloud1Size: '10%' };  // ✅ +3% RIGHT
-    if (screenWidth >= 1200) return { cloud1Right: '15%', cloud1Size: '9%' };
-    if (screenWidth >= 1024) return { cloud1Right: '15%', cloud1Size: '8%' };
+    if (screenWidth >= 1920) return { cloud1Right: '8%', cloud1Size: '10%' };
+    if (screenWidth >= 1440) return { cloud1Right: '8%', cloud1Size: '10%' };  // ✅ +3% RIGHT
+    if (screenWidth >= 1200) return { cloud1Right: '10%', cloud1Size: '9%' };
+    if (screenWidth >= 1024) return { cloud1Right: '10%', cloud1Size: '8%' };
     return { cloud1Right: '7%', cloud1Size: '10%' };
   };
 
@@ -112,7 +112,7 @@ testFont.load().then(() => {
 
   const dynamicContentStyle = {
     height: screenWidth >= 1440 ? '95vh' : '100vh',     // ✅ SMALLER RED for MacBook
-    margin: '0 auto',
+    margin: '0 100px',
     padding: screenWidth >= 1440 ? '0 3%' : '0 1.5%',
     display: 'flex',
     alignItems: 'flex-start',
@@ -131,7 +131,7 @@ testFont.load().then(() => {
     maxHeight: screenWidth >= 1440 ? '115vh' : '92vh',
     objectFit: 'contain',
     position: 'relative',
-    right: screenWidth >= 1440 ? '45%' : '40%',
+    right: screenWidth >= 1440 ? '0%' : '0%',
     top: screenWidth >= 1440 ? '4%' : '0%',              // ✅ TOP UP: -5% → 0%
     transform: screenWidth >= 1440 ? 'none' : 'translateY(10%) scale(1.4)',
     className: 'hero-image',
@@ -303,12 +303,12 @@ const containerStyle = {
   margin: 0,
   padding: 0,
   display: 'flex',
-  flexDirection: 'column',
+  flexDirection: 'row',
 };
 
 const loadingStyle = {
   minHeight: '100vh',
-  backgroundColor: '#F60945',
+  backgroundColor: '#dd2120',
   color: '#fff',
   display: 'flex',
   alignItems: 'center',
@@ -367,7 +367,7 @@ const badgeTextStyle = {
   fontSize: '1.2rem',
   lineHeight: '100%',
   letterSpacing: '0%',
-  color: '#F60945',
+  color: '#dd2120',
 };
 
 const textColumnStyle = {
@@ -414,7 +414,7 @@ const buttonStyle = {
   borderRadius: '50px',
   border: 'none',
   backgroundColor: '#fff',
-  color: '#F60945',
+  color: '#dd2120',
   fontWeight: 500,
   fontSize: '1.4rem',
   display: 'inline-flex',
