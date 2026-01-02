@@ -4,8 +4,8 @@ import { BiLogoTiktok } from "react-icons/bi";
 import { useEffect, useState } from "react";
 import { openUrl } from "../Utils/Utilities";
 
-const FooterLayout = () => {
-  const [settingsData, setSettingsData] = useState(null);
+const FooterLayout = ({settingsData}) => {
+  //const [settingsData, setSettingsData] = useState(null);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth); // ✅ DYNAMIC WIDTH
 
   // ✅ RESPONSIVE WIDTH LISTENER (DESKTOP ONLY)
@@ -15,27 +15,26 @@ const FooterLayout = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  useEffect(() => {
-    const getFooterData = async () => {
-      try {
-        const res = await fetch(
-          `${process.env.REACT_APP_STRAPI_URL}/api/sitesettings?populate=*`
-        );
-        const json = await res.json();
-        console.log(json);
-        setSettingsData(json);
-      } catch (error) {
-        console.error("Error fetching footer data:", error);
-      }
-    };
-    getFooterData();
-  }, []);
+  // useEffect(() => {
+  //   const getFooterData = async () => {
+  //     try {
+  //       const res = await fetch(
+  //         `${process.env.REACT_APP_STRAPI_URL}/api/sitesettings?populate=*`
+  //       );
+  //       const json = await res.json();
+  //       console.log(json);
+  //       setSettingsData(json);
+  //     } catch (error) {
+  //       console.error("Error fetching footer data:", error);
+  //     }
+  //   };
+  //   getFooterData();
+  // }, []);
 
-  const settings = settingsData?.data?.[0];
+  //const settings = settingsData?.data?.[0];
 
 
-  const addressLines = settings?.address?.split("\n") ?? [];
-     console.log("settings",settings)
+  const addressLines = settingsData?.address?.split("\n") ?? [];
   return (
     <Box>
       <Box sx={{ background: "#F60945" }}>
@@ -48,10 +47,10 @@ const FooterLayout = () => {
           mx: "auto"
         }}>
           {/* LOGO - RESPONSIVE SIZE */}
-          {settings?.logo?.url ? (
+          {settingsData?.logo?.url ? (
             <img
-              src={settings.logo.url}
-              alt={settings.sitename}
+              src={settingsData.logo.url}
+              alt={settingsData.sitename}
               style={{
                 width: screenWidth >= 1440 ? "20%" : "25%",
                 height: screenWidth >= 1440 ? "20%" : "25%",
@@ -124,7 +123,7 @@ const FooterLayout = () => {
                   p: 0,
                   m: 0
                 }}>
-                  <ListItem sx={{ pl: 0, py: 0.5 }}>{settings?.contactphone}</ListItem>
+                  <ListItem sx={{ pl: 0, py: 0.5 }}>{settingsData?.contactphone}</ListItem>
                   <ListItem sx={{ pl: 0, py: 0.5 }}>Privacy Policy</ListItem>
                   <ListItem sx={{ pl: 0, py: 0.5 }}>Sitemap</ListItem>
                 </List>
@@ -143,7 +142,7 @@ const FooterLayout = () => {
                   p: 0,
                   m: 0
                 }}>
-                  <ListItem sx={{ pl: 0, py: 0.5 }}>{settings?.contactemail ?? "—"}</ListItem>
+                  <ListItem sx={{ pl: 0, py: 0.5 }}>{settingsData?.contactemail ?? "—"}</ListItem>
                   <ListItem sx={{ pl: 0, py: 0.5 }}>{addressLines[0] ?? "—"}</ListItem>
                   <ListItem sx={{ pl: 0, py: 0.5 }}>{addressLines[1] ?? ""}</ListItem>
                 </List>
@@ -160,7 +159,7 @@ const FooterLayout = () => {
                     width: screenWidth >= 1440 ? 48 : 42,
                     height: screenWidth >= 1440 ? 48 : 42,
                     "&:hover": { background: "#e2e2e2" },
-                  }} onClick={() => openUrl(settings?.facebookurl)}>
+                  }} onClick={() => openUrl(settingsData?.facebookurl)}>
                     <Facebook sx={{ color: "#111", fontSize: screenWidth >= 1440 ? 20 : 18 }} />
                   </IconButton>
 
@@ -170,7 +169,7 @@ const FooterLayout = () => {
                     width: screenWidth >= 1440 ? 48 : 42,
                     height: screenWidth >= 1440 ? 48 : 42,
                     "&:hover": { background: "#e2e2e2" },
-                  }} onClick={() => openUrl(settings?.instagramurl)}>
+                  }} onClick={() => openUrl(settingsData?.instagramurl)}>
                     <Instagram sx={{ color: "#111", fontSize: screenWidth >= 1440 ? 20 : 18 }} />
                   </IconButton>
 
@@ -180,7 +179,7 @@ const FooterLayout = () => {
                     width: screenWidth >= 1440 ? 48 : 42,
                     height: screenWidth >= 1440 ? 48 : 42,
                     "&:hover": { background: "#e2e2e2" },
-                  }} onClick={() => openUrl(settings?.twitterurl)}>
+                  }} onClick={() => openUrl(settingsData?.twitterurl)}>
                     <Twitter sx={{ color: "#111", fontSize: screenWidth >= 1440 ? 20 : 18 }} />
                   </IconButton>
 
@@ -190,7 +189,7 @@ const FooterLayout = () => {
                     width: screenWidth >= 1440 ? 48 : 42,
                     height: screenWidth >= 1440 ? 48 : 42,
                     "&:hover": { background: "#e2e2e2" },
-                  }} onClick={() => openUrl(settings?.youtubeurl)}>
+                  }} onClick={() => openUrl(settingsData?.youtubeurl)}>
                     <YouTube sx={{ color: "#111", fontSize: screenWidth >= 1440 ? 20 : 18 }} />
                   </IconButton>
 
@@ -200,7 +199,7 @@ const FooterLayout = () => {
                     width: screenWidth >= 1440 ? 48 : 42,
                     height: screenWidth >= 1440 ? 48 : 42,
                     "&:hover": { background: "#e2e2e2" },
-                  }} onClick={() => openUrl(settings?.tiktokurl)}>
+                  }} onClick={() => openUrl(settingsData?.tiktokurl)}>
                     <BiLogoTiktok style={{ color: "#111", fontSize: screenWidth >= 1440 ? 24 : 22 }} />
                   </IconButton>
                 </Box>
@@ -221,7 +220,7 @@ const FooterLayout = () => {
         lineHeight: "200%",
         color: "#fff",
       }}>
-        {settings?.copyright}
+        {settingsData?.copyright}
       </Box>
     </Box>
   );

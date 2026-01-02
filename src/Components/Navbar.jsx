@@ -96,11 +96,11 @@ const Navbar = () => {
 
   return (
     <nav style={navbarStyle}>
-      {menu.slice(0, -1).map((item) => (
+      {menu.map((item) => (
         <a
           key={item.id}
           href={item.route}
-          style={isActive(item.route) ? activeItemStyle : navItemStyle}
+          style={item.isButton?contactStyle:isActive(item.route) ? activeItemStyle : navItemStyle}
           onClick={(e) => {
             e.preventDefault();
             window.location.href = item.route;
@@ -109,20 +109,20 @@ const Navbar = () => {
           {item.label}
         </a>
       ))}
-      
-      {/* Contact - Special styling */}
-      {menu.find(item => item.label === 'Contact') && (
+
+      {/* Contact - Special styling
+      {menu.find(item => item.isButton) && (
         <a
-          href="/contact"
+          href={item.route}
           style={contactStyle}
           onClick={(e) => {
             e.preventDefault();
-            window.location.href = '/contact';
+            window.location.href = item.route;
           }}
         >
           Contact
         </a>
-      )}
+      )} */}
     </nav>
   );
 };

@@ -298,7 +298,7 @@ const OurProducts = () => {
                   src={imgUrl(product3)}
                   alt={product3.title_description?.title}
                   style={{
-                    maxWidth: 320,
+                    maxWidth: 220,
                     width: "100%",
                     height: "auto",
                     objectFit: "contain",

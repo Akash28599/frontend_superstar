@@ -91,7 +91,6 @@ const sample ={
         try {
             const res = await fetch(`${process.env.REACT_APP_STRAPI_URL}/api/thank-you-page?populate=*`);
             const resData = await res.json();
-            console.log("ress", resData);
             setData(resData.data ? resData.data : null);
 
         } catch (error) {
@@ -103,7 +102,6 @@ const sample ={
     };
 
     useEffect(() => {
-        console.log("rddess");
         fetchParticipation();
     }, []);
 

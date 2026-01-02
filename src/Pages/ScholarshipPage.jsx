@@ -8,7 +8,7 @@ import ThankYou from '../Components/ScholarshipForm/ThankYou';
 import { Description } from '@mui/icons-material';
 
 
-const ScholarshipPage = () => {
+const ScholarshipPage = ({settingsData}) => {
     const [data, setData] = useState({
         IconImage: { url: "" },
         groupKellogs: { url: "" },
@@ -69,8 +69,9 @@ const ScholarshipPage = () => {
             const res = await fetch(`${process.env.REACT_APP_STRAPI_URL}/api/scholarship-page?populate=*`)
 
             const json = await res.json()
+            console.log(settingsData)
+            setData({...json.data,scholarshipSocialLinks:{...settingsData.data?.[0]}} )
 
-            setData(json.data)
         } catch (err) {
             console.log("ehellpo")
             setData(sample)
