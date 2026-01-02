@@ -6,7 +6,7 @@ const SubmissionForm = ({ groupKellogs }) => {
             <div className="sub-container">
                 <div className="sub-content">
                     <div className="sub-form">
-                        <h1>Submit your details here</h1>
+                        <h1>Join the Wishlist</h1>
 
                         <input type="text" placeholder="Name" />
                         <input type="text" placeholder="Contact Number" />

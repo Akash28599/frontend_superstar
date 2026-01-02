@@ -2,15 +2,29 @@ import React from 'react'
 import './KelloggIcon.css'
 const KelloggIcon = ({ IconImage, isBlack }) => {
 
-
+    const redCode = '#dd2120'
     return (
         <div className="brand">
-            <img
+            <div
+                style={{
+                    width: '80%',
+                    height: '150px',
+                    backgroundColor: isBlack ? redCode : 'white',
+                    WebkitMaskImage: `url(assetss/kelloggH1.png)`,
+                    WebkitMaskRepeat: 'no-repeat',
+                    WebkitMaskSize: 'contain',
+                    maskImage: `url(assetss/kelloggH1.png)`,
+                    maskRepeat: 'no-repeat',
+                    maskSize: 'contain',
+
+                }}
+            />
+
+            {/* <img
                 src='assetss/kelloggH1.png'
                 alt="icon"
                 className="brand-image"
-                style={{ filter: isBlack ? 'invert(1)' : 'none' }}
-            />
+            /> */}
             <img
                 src={IconImage}
                 alt="icon"
@@ -18,10 +32,14 @@ const KelloggIcon = ({ IconImage, isBlack }) => {
 
             />
 
-            <div className="brand-title">Scholarship</div>
+            <div className="brand-title" style={{ color: isBlack ? redCode : 'white' }}>Scholarship</div>
 
             <div className="prize-box"
-                            style={{ filter: isBlack ? 'invert(1)' : 'none' }}
+                style={{
+                    color: isBlack ? redCode : 'white',
+                    border: `2px solid ${isBlack ? redCode : 'white'}`
+
+                }}
             >
                 <div className="prize-amount">Win N150,000</div>
                 <div className="prize-sub">as educational expense</div>
