@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef, useCallback } from 'react'; //  ADDED useRef
 import "./ThankYou.css";
 import SocialIcons from '../SocialIcons/SocialIcons';
+import { useNavigate } from 'react-router-dom';
 
 // images static
 // import cocoMonkey from "/assetss/flying-monkey.png"
@@ -39,7 +40,7 @@ const ThankYou = ({ siteSettings }) => {
     });
     const [loading, setLoading] = useState(true);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-
+    const navigate=useNavigate()
     const sample = {
         cocoPopsImage:
         {
@@ -512,7 +513,9 @@ const ThankYou = ({ siteSettings }) => {
 
                                     </div>
 
-                                    <button className='btn' style={{
+                                    <button className='btn' 
+                                    onClick={()=>navigate('/past-winners')}
+                                    style={{
                                         display: "block", width: positions.winnerBtnWidth, height: positions.winnerBtnHeight,
                                         borderRadius: "12px",
                                         fontWeight: 600,

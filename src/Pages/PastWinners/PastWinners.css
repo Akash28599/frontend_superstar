@@ -1,0 +1,114 @@
+:root {
+    --gold: #f3c720;
+    --red: #dd2120;
+    --font: "KelloggsSans", Arial, sans-serif;
+}
+
+.pw-container {
+    font-family: var(--font);
+    width: 100%;
+}
+
+/* Banner */
+.pw-banner {
+    position: relative;
+    width: 100%;
+    height: 420px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+/* Back button */
+.pw-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 5;
+}
+
+.pw-btn button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px;
+    font-size: 1rem;
+    background-color: var(--gold);
+    border: 2px solid var(--gold);
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 25px;
+}
+
+.pw-btn button:hover {
+    background-color: white;
+    color: var(--gold);
+}
+
+/* Winners text */
+.pw-banner h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    color: var(--red);
+    font-size: 6rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    z-index: 3;
+}
+
+/* Monkey (left, large, grounded) */
+.pw-monkey {
+    position: absolute;
+    bottom: -10px;
+    left: 100px;
+    width: 500px;
+    height: 460px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: bottom left;
+    z-index: 2;
+}
+
+/* Milk decor (right splash) */
+.pw-milkDecor {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 500px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 100%;
+    z-index: 2;
+}
+
+.pw-grid {
+    margin: 40px auto;
+    padding: 0 24px;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+
+    max-width: 1200px;
+}
+
+.pw-box {
+    padding: 16px;
+    text-align: left;
+}
+
+.pw-box h1 {
+    margin: 0;
+    font-size:xx-large;
+}
+
+.pw-box h5 {
+    margin: 4px 0 0;
+    color: #666;
+}

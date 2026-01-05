@@ -19,7 +19,7 @@ const CocoHeads = () => {
       .then(json => {
         const data = json.data || [];
         const headItem = data.find(d => d.thumbnail);
-        const starItem = data.find(d => !d.icon_description && d.icons);
+        const starItem = data.find(d => !(d.icon_description && d.icons));
         const iconItems = data.filter(d => d.icon_description && d.icon_description.title);
 
         setHead(headItem || null);
@@ -60,7 +60,7 @@ const CocoHeads = () => {
         <div style={{
           position: 'absolute',
           left: screenWidth >= 1440 ? '-5%' : '-5%',
-          top: '19%',
+          top: '16%',
           transform: 'translateY(-50%)',
           pointerEvents: 'none',
           zIndex: 2,
@@ -220,23 +220,23 @@ const CocoHeads = () => {
                     border: '2px solid black'
 
                   }}> */}
-                    <p style={{
-                      fontFamily: "'Kellogg's Sans', sans-serif",
-                      fontWeight: 400,
-                      fontSize: screenWidth >= 1440 ? '0.95rem' : '0.85rem',
-                      lineHeight: '1.4',
-                      color: '#2A2F2F',
-                      margin: 0,
-                      textAlign: 'left',
-                      width: '100%',
-                      wordWrap: 'break-word',
-                      display: 'flex',
-                      alignItems: 'center', // Add this for better vertical alignment
-                      justifyContent: 'center',
-                      minHeight: '60px',
-                    }}>
-                      {desc}
-                    </p>
+                  <p style={{
+                    fontFamily: "'Kellogg's Sans', sans-serif",
+                    fontWeight: 400,
+                    fontSize: screenWidth >= 1440 ? '0.95rem' : '0.85rem',
+                    lineHeight: '1.4',
+                    color: '#2A2F2F',
+                    margin: 0,
+                    textAlign: 'left',
+                    width: '100%',
+                    wordWrap: 'break-word',
+                    display: 'flex',
+                    alignItems: 'center', // Add this for better vertical alignment
+                    justifyContent: 'center',
+                    minHeight: '60px',
+                  }}>
+                    {desc}
+                  </p>
                   {/* </div> */}
                 </div>
               </div>

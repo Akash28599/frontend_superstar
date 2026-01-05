@@ -10,9 +10,8 @@
 .scholarship {
     background: var(--red);
     color: var(--white);
-    padding: 4% 2%;
+    padding: 6% 2% 4%;
     position: relative;
-
 }
 
 .container {
