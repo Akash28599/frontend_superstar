@@ -27,7 +27,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <LayoutComponent />
+        <LayoutComponent settingsData={settingsData}/>
       </BrowserRouter>
 
       <FooterLayout settingsData={settingsData} />

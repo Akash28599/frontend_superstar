@@ -40,7 +40,7 @@ const ThankYou = ({ siteSettings }) => {
     });
     const [loading, setLoading] = useState(true);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-    const navigate=useNavigate()
+    const navigate = useNavigate()
     const sample = {
         cocoPopsImage:
         {
@@ -215,7 +215,7 @@ const ThankYou = ({ siteSettings }) => {
     const cocoMonkey = data.cocoMonkey?.url ?? null;
     const CocoPops = data.cocoPopsImage?.url ?? null;
     const blurredCocoPops = data.cocoPopBlur?.url ?? null;
-    // const leftCocoPops = data.leftKelloggImage?.url ?? null;
+    const leftCocoPops = data.leftKelloggImage?.url ?? img.leftCocoPops;
     // const socialIcons = data?.socialIcons;
 
     //  ADDED: dynamic positions based on screen width (CocoBanner pattern)
@@ -418,7 +418,7 @@ const ThankYou = ({ siteSettings }) => {
                                 transform: `translateX(clamp(-45%, -28vw, -20%)) rotate(${positions.leftCocoRotate})`,
                                 transformOrigin: "center", zIndex: 3
                             }}>
-                                <img width={positions.leftCocoWidth} src={img.leftCocoPops} alt="left coco pops" />
+                                <img width={positions.leftCocoWidth} src={leftCocoPops} alt="left coco pops" />
                             </div>
                         </div>
                     )}
@@ -508,20 +508,19 @@ const ThankYou = ({ siteSettings }) => {
                                         </p>
 
                                         {/* Socialicons and link from props */}
-                                        <SocialIcons siteSettings={siteSettings} />
-
+                                            <SocialIcons siteSettings={siteSettings} />
 
                                     </div>
 
-                                    <button className='btn' 
-                                    onClick={()=>navigate('/past-winners')}
-                                    style={{
-                                        display: "block", width: positions.winnerBtnWidth, height: positions.winnerBtnHeight,
-                                        borderRadius: "12px",
-                                        fontWeight: 600,
-                                        padding: positions.winnerBtnPadding, cursor: "pointer",
-                                        marginTop: positions.winnerBtnmarginTop,
-                                    }}>
+                                    <button className='btn'
+                                        onClick={() => navigate('/past-winners')}
+                                        style={{
+                                            display: "block", width: positions.winnerBtnWidth, height: positions.winnerBtnHeight,
+                                            borderRadius: "12px",
+                                            fontWeight: 600,
+                                            padding: positions.winnerBtnPadding, cursor: "pointer",
+                                            marginTop: positions.winnerBtnmarginTop,
+                                        }}>
                                         Click here to view the past winners
                                     </button>
                                 </div>
@@ -546,6 +545,8 @@ const ThankYou = ({ siteSettings }) => {
                                         zIndex: 1,
                                         transform: `translateY(${offsetY}px)`, // UPDATED: section-based parallax
                                         transition: "transform 0.25s ease-out", //  fast & smooth
+                                        filter: 'blur(3px)',
+                                        scale:1.4
                                     }}
                                 >
                                     <img width={positions.blurWidth} height={positions.blurHeight} src={blurredCocoPops} alt="blurredCocoPops" />
@@ -555,7 +556,7 @@ const ThankYou = ({ siteSettings }) => {
                             {CocoPops && (
                                 <div style={{
                                     position: "absolute", bottom: positions.cocoBottom, right: positions.cocoRight, zIndex: 6,
-                                    transform: `translateY(${smallCocoOffsetY}px)`, willChange: "transform"
+                                    transform: `translateY(${smallCocoOffsetY}px)`, willChange: "transform",scale:1.2
                                 }}>
                                     <img width={positions.cocoWidth} src={CocoPops} alt="CocoPops" />
                                 </div>
