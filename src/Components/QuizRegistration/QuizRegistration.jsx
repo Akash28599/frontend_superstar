@@ -12,202 +12,148 @@ const QuizLandingPage = () => {
       .catch((err) => console.error("Error fetching data:", err));
   }, []);
 
-  if (!pageData) return <div style={{ textAlign: 'center', marginTop: '100px', fontSize: '20px' }}>Loading...</div>;
+  if (!pageData) return <div style={loadingStyle}>Loading...</div>;
 
   const { heading, sub_heading, first_component, second_component } = pageData;
 
   return (
-    <div style={{ fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif', backgroundColor: '#fdfdfd', minHeight: '100vh', margin: 0 }}>
+    <div style={{ fontFamily: '"Quicksand", sans-serif', backgroundColor: '#fff', minHeight: '100vh', overflowX: 'hidden' }}>
       
-      <header style={{ 
-        backgroundColor: '#d31245', 
-        color: 'white', 
-        padding: '100px 20px 80px 20px', 
-        textAlign: 'center', 
-        position: 'relative', 
-        borderBottomLeftRadius: '50% 15%', 
-        borderBottomRightRadius: '50% 15%',
-        boxShadow: '0 4px 15px rgba(0,0,0,0.1)'
-      }}>
-        <div style={{ 
-          maxWidth: '1200px', 
-          margin: '0 auto', 
-          display: 'flex', 
-          alignItems: 'center', 
-          justifyContent: 'center', 
-          gap: '30px' 
-        }}>
-          <img 
-            src={first_component.daily_challenges.image} 
-            alt="Coco Monkey" 
-            style={{ width: '150px', height: 'auto', marginBottom: '-50px', filter: 'drop-shadow(2px 4px 6px rgba(0,0,0,0.2))' }} 
-          />
+      <style>
+        {`
+          @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap');
+          .card-anim { transition: transform 0.2s ease; }
+          .card-anim:hover { transform: translateY(-5px); }
+          @keyframes swing {
+            0% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+            100% { transform: rotate(-3deg); }
+          }
+        `}
+      </style>
+
+      <header style={headerStyle}>
+        <div style={headerInner}>
+          <img src={first_component.student_exam_login.image} alt="Coco" style={cocoStyle} />
           
-          <div style={{ textAlign: 'left' }}>
-            <h1 style={{ fontSize: '48px', margin: '0', fontWeight: '800', letterSpacing: '-1px' }}>{heading}</h1>
-            <p style={{ fontSize: '22px', margin: '5px 0 0 0', fontWeight: '400', opacity: '0.9' }}>{sub_heading}</p>
+          <div style={headerTextContainer}>
+            <h1 style={titleStyle}>{heading}</h1>
+            <p style={subtitleStyle}>{sub_heading}</p>
+          </div>
+
+          <div style={headerActionArea}>
+            <img src={first_component.daily_challenges.image} alt="Coco Head" style={cocoHeadIcon} />
+            <div style={helpCircle}>?</div>
           </div>
         </div>
       </header>
 
-      <main style={{ maxWidth: '1150px', margin: '80px auto', padding: '0 20px' }}>
-        <div style={{ display: 'flex', gap: '25px', justifyContent: 'center', flexWrap: 'wrap' }}>
-          
-          <div style={cardStyle}>
-            <div style={iconWrapperStyle}>
-                <img src={first_component.daily_challenges.icon} alt="Daily Challenges" style={iconImgStyle} />
-            </div>
-            <h3 style={cardTitleStyle}>{first_component.daily_challenges.title}</h3>
-            <p style={cardDescStyle}>{first_component.daily_challenges.description}</p>
-            <button style={whiteBtnStyle}>{first_component.daily_challenges.button_text}</button>
+      <main style={mainContent}>
+        <div style={cardRow}>
+          <div className="card-anim" style={yellowCard}>
+            <div style={iconBox}>🏆</div>
+            <h3 style={cardTitle}>{first_component.daily_challenges.title}</h3>
+            <p style={cardDesc}>{first_component.daily_challenges.description}</p>
+            <button style={whiteBtn}>Start Daily Quiz</button>
           </div>
 
-          <div style={cardStyle}>
-            <div style={iconWrapperStyle}>
-                <img src={first_component.school_registration.icon} alt="School Registration" style={iconImgStyle} />
-            </div>
-            <h3 style={cardTitleStyle}>{first_component.school_registration.title}</h3>
-            <p style={cardDescStyle}>{first_component.school_registration.description}</p>
-            <button 
-              style={redBtnStyle} 
-              onClick={() => navigate('/student-register')} // Change this path to match your route
-            >
-              {first_component.school_registration.button_text}
-            </button>
+          <div className="card-anim" style={yellowCard}>
+            <div style={iconBox}>⭐</div>
+            <h3 style={cardTitle}>{first_component.school_registration.title}</h3>
+            <p style={cardDesc}>{first_component.school_registration.description}</p>
+            <button style={redBtn} onClick={() => navigate('/student-register')}>Register Now</button>
           </div>
 
-          <div style={cardStyle}>
-            <div style={iconWrapperStyle}>
-                <img src={first_component.student_exam_login.icon} alt="Student Login" style={iconImgStyle} />
-            </div>
-            <h3 style={cardTitleStyle}>{first_component.student_exam_login.title}</h3>
-            <p style={cardDescStyle}>{first_component.student_exam_login.description}</p>
-            <button 
-                style={redBtnStyle}
-                onClick={() => navigate('/login')} // Change this path to match your login route
-            >
-                {first_component.student_exam_login.button_text}
-            </button>
+          <div className="card-anim" style={yellowCard}>
+            <div style={iconBox}>🔑</div>
+            <h3 style={cardTitle}>{first_component.student_exam_login.title}</h3>
+            <p style={cardDesc}>{first_component.student_exam_login.description}</p>
+            <button style={redBtn} onClick={() => navigate('/login')}>Start Exam</button>
           </div>
-
         </div>
 
-        <section style={{ marginTop: '100px', borderTop: '1px solid #eee', paddingTop: '50px' }}>
-          <h2 style={{ fontSize: '28px', color: '#333', marginBottom: '30px', textAlign: 'left' }}>How It Works</h2>
-          <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
-            {second_component.sections.map((sec, index) => (
-              <div key={index} style={infoBoxStyle}>
-                <div style={stepCircleStyle}>{index + 1}</div>
-                <div>
-                  <div style={{ fontWeight: '700', fontSize: '16px', color: '#333' }}>{sec.title}</div>
-                  <div style={{ fontSize: '14px', color: '#666', marginTop: '5px' }}>{sec.description}</div>
+        <section style={roadmapSection}>
+          <h2 style={sectionHeading}>How It Works</h2>
+          
+          <div style={roadmapContainer}>
+            <svg style={roadmapSvg} viewBox="0 0 800 500" fill="none">
+              <path d="M400 100 H700 C780 100 780 380 700 380 H100" stroke="#D3D3D3" strokeWidth="5" strokeDasharray="15 15" />
+            </svg>
+
+            <div style={stepRow}>
+              <div style={stepWrapper}>
+                <div style={stepNumberBadge}>1</div>
+                <div style={{...stepCardInner, borderBottom: '8px solid #FFCC00'}}>
+                  <h4 style={stepCardTitle}>{second_component.sections[0]?.title}</h4>
+                  <p style={stepCardDesc}>{second_component.sections[0]?.description}</p>
                 </div>
               </div>
-            ))}
+
+              <div style={stepWrapper}>
+                <div style={stepNumberBadge}>2</div>
+                <div style={{...stepCardInner, borderBottom: '8px solid #E30613'}}>
+                  <h4 style={stepCardTitle}>{second_component.sections[1]?.title}</h4>
+                  <p style={stepCardDesc}>{second_component.sections[1]?.description}</p>
+                </div>
+              </div>
+            </div>
+
+            <div style={{...stepRow, justifyContent: 'flex-start', marginTop: '100px'}}>
+              <div style={stepWrapper}>
+                <div style={stepNumberBadge}>3</div>
+                <div style={{...stepCardInner, borderBottom: '8px solid #FFCC00'}}>
+                  <h4 style={stepCardTitle}>{second_component.sections[2]?.title}</h4>
+                  <p style={stepCardDesc}>{second_component.sections[2]?.description}</p>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       </main>
+
+      <footer style={{ height: '80px', backgroundColor: '#e30613', marginTop: '100px', borderRadius: '40px 40px 0 0' }}></footer>
     </div>
   );
 };
 
-
-const cardStyle = {
-  backgroundColor: '#ffcc00', 
-  borderRadius: '24px',
-  padding: '45px 30px',
-  width: '320px',
-  textAlign: 'center',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  boxShadow: '0 10px 30px rgba(0,0,0,0.08)',
-  transition: 'transform 0.2s ease-in-out',
+const headerStyle = {
+  backgroundColor: '#e30613', 
+  color: '#fff', 
+  padding: '140px 20px 100px', 
+  borderBottomLeftRadius: '50% 12%', 
+  borderBottomRightRadius: '50% 12%', 
+  position: 'relative',
 };
 
-const iconWrapperStyle = {
-  backgroundColor: 'white',
-  width: '60px',
-  height: '60px',
-  borderRadius: '12px',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  marginBottom: '20px'
-};
+const headerInner = { maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', position: 'relative' };
+const cocoStyle = { position: 'absolute', left: '-50px', top: '-40px', width: '230px', zIndex: 10, animation: 'swing 3s ease-in-out infinite' };
+const headerTextContainer = { textAlign: 'center', flex: 1, paddingLeft: '140px' };
+const titleStyle = { fontSize: '46px', margin: 0, fontWeight: '800' };
+const subtitleStyle = { fontSize: '20px', margin: '5px 0 0', opacity: 0.9 };
+const headerActionArea = { display: 'flex', alignItems: 'center', gap: '15px' };
+const cocoHeadIcon = { width: '45px', height: '45px', borderRadius: '50%', border: '2px solid #fff', backgroundColor: '#fff' };
+const helpCircle = { width: '40px', height: '40px', borderRadius: '50%', border: '2px solid #fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' };
 
-const iconImgStyle = {
-  width: '35px',
-  height: '35px',
-  objectFit: 'contain'
-};
+const mainContent = { maxWidth: '1100px', margin: '40px auto 0', padding: '0 20px' };
+const cardRow = { display: 'flex', gap: '25px', justifyContent: 'center' };
+const yellowCard = { backgroundColor: '#ffcc00', borderRadius: '30px', padding: '35px 25px', flex: 1, maxWidth: '320px', textAlign: 'center', boxShadow: '0 8px 25px rgba(0,0,0,0.08)' };
+const iconBox = { backgroundColor: '#fff', width: '55px', height: '55px', borderRadius: '15px', margin: '0 auto 15px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '28px' };
+const cardTitle = { fontSize: '22px', fontWeight: '800', margin: '0 0 10px', color: '#333' };
+const cardDesc = { fontSize: '14px', color: '#444', lineHeight: '1.4', marginBottom: '25px', height: '50px' };
+const redBtn = { backgroundColor: '#d31245', color: '#fff', border: 'none', padding: '14px', borderRadius: '12px', width: '100%', fontWeight: '700', cursor: 'pointer' };
+const whiteBtn = { ...redBtn, backgroundColor: '#fff', color: '#d31245' };
 
-const cardTitleStyle = {
-  fontSize: '24px',
-  fontWeight: 'bold',
-  color: '#222',
-  margin: '10px 0'
-};
+const roadmapSection = { marginTop: '160px', textAlign: 'center', position: 'relative' };
+const sectionHeading = { fontSize: '34px', fontWeight: '800', color: '#333', marginBottom: '80px' };
+const roadmapContainer = { position: 'relative', maxWidth: '900px', margin: '0 auto' };
+const roadmapSvg = { position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 };
+const stepRow = { display: 'flex', justifyContent: 'space-between', position: 'relative', zIndex: 1 };
+const stepWrapper = { display: 'flex', alignItems: 'center', gap: '20px', width: '45%', position: 'relative' };
+const stepNumberBadge = { width: '55px', height: '55px', borderRadius: '50%', backgroundColor: '#FFCC00', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px', fontWeight: '800', flexShrink: 0, boxShadow: '0 6px 15px rgba(255,204,0,0.3)' };
+const stepCardInner = { backgroundColor: '#fff', padding: '25px', borderRadius: '20px', textAlign: 'left', boxShadow: '0 12px 30px rgba(0,0,0,0.06)', flex: 1 };
+const stepCardTitle = { margin: '0 0 8px', fontSize: '20px', fontWeight: '700', color: '#333' };
+const stepCardDesc = { margin: 0, fontSize: '14px', color: '#666', lineHeight: '1.5' };
 
-const cardDescStyle = {
-  fontSize: '15px',
-  color: '#444',
-  marginBottom: '30px',
-  lineHeight: '1.5',
-  minHeight: '45px'
-};
-
-const redBtnStyle = {
-  backgroundColor: '#d31245',
-  color: 'white',
-  border: 'none',
-  padding: '14px 0',
-  borderRadius: '10px',
-  cursor: 'pointer',
-  fontWeight: 'bold',
-  fontSize: '16px',
-  width: '100%',
-  boxShadow: '0 4px 10px rgba(211, 18, 69, 0.3)'
-};
-
-const whiteBtnStyle = {
-  backgroundColor: 'white',
-  color: '#333',
-  border: 'none',
-  padding: '14px 0',
-  borderRadius: '10px',
-  cursor: 'pointer',
-  fontWeight: 'bold',
-  fontSize: '16px',
-  width: '100%',
-  boxShadow: '0 4px 10px rgba(0,0,0,0.05)'
-};
-
-const infoBoxStyle = {
-  backgroundColor: 'white',
-  padding: '25px',
-  borderRadius: '16px',
-  flex: '1 1 300px',
-  display: 'flex',
-  alignItems: 'center',
-  boxShadow: '0 4px 15px rgba(0,0,0,0.03)',
-  border: '1px solid #f0f0f0'
-};
-
-const stepCircleStyle = {
-  backgroundColor: '#fff0f3',
-  color: '#d31245',
-  width: '40px',
-  height: '40px',
-  borderRadius: '50%',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  fontWeight: 'bold',
-  fontSize: '18px',
-  marginRight: '20px',
-  border: '2px solid #d31245'
-};
+const loadingStyle = { textAlign: 'center', padding: '100px', fontSize: '24px', color: '#e30613' };
 
 export default QuizLandingPage;
-
