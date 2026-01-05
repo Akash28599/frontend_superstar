@@ -3,8 +3,9 @@ import { useNavigate } from 'react-router-dom';
 
 const QuizLandingPage = () => {
   const [pageData, setPageData] = useState(null);
-  const [showLogin, setShowLogin] = useState(false); // Modal state
+  const [showLogin, setShowLogin] = useState(false);
   const [loginForm, setLoginForm] = useState({ username: '', password: '' });
+  const [waitlistEmail, setWaitlistEmail] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,6 +22,12 @@ const QuizLandingPage = () => {
     } else {
       alert("Please fill in both fields!");
     }
+  };
+
+  const handleWaitlistSubmit = (e) => {
+    e.preventDefault();
+    alert(`Success! ${waitlistEmail} has been added to the waitlist.`);
+    setWaitlistEmail('');
   };
 
   if (!pageData) return <div style={loadingStyle}>Loading...</div>;
@@ -96,7 +103,6 @@ const QuizLandingPage = () => {
         </div>
       </header>
 
-
       <main style={mainContent}>
         <div style={cardRow}>
           <div className="card-anim" style={yellowCard}>
@@ -120,7 +126,6 @@ const QuizLandingPage = () => {
             <button style={redBtn} onClick={() => setShowLogin(true)}>Start Exam</button>
           </div>
         </div>
-
 
         <section style={roadmapSection}>
           <h2 style={sectionHeading}>How It Works</h2>
@@ -155,13 +160,35 @@ const QuizLandingPage = () => {
             </div>
           </div>
         </section>
+
+        <section style={waitlistSection}>
+          <div style={waitlistContainer}>
+            <div style={waitlistTextContent}>
+              <h2 style={waitlistHeading}>Join the Waitlist</h2>
+              <p style={waitlistSubtext}>
+                Be the first to know about upcoming exam dates, proctoring schedules, 
+                and scholarship winner announcements.
+              </p>
+            </div>
+            <form onSubmit={handleWaitlistSubmit} style={waitlistForm}>
+              <input 
+                type="email" 
+                placeholder="Enter School Email" 
+                style={waitlistInput} 
+                required
+                value={waitlistEmail}
+                onChange={(e) => setWaitlistEmail(e.target.value)}
+              />
+              <button type="submit" style={waitlistBtn}>Join</button>
+            </form>
+          </div>
+        </section>
       </main>
 
       <footer style={footerStyle}></footer>
     </div>
   );
 };
-
 
 const headerStyle = { backgroundColor: '#e30613', color: '#fff', padding: '140px 20px 100px', borderBottomLeftRadius: '50% 12%', borderBottomRightRadius: '50% 12%', position: 'relative' };
 const headerInner = { maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', position: 'relative' };
@@ -190,6 +217,14 @@ const stepNumberBadge = { width: '55px', height: '55px', borderRadius: '50%', ba
 const stepCardInner = { backgroundColor: '#fff', padding: '25px', borderRadius: '20px', textAlign: 'left', boxShadow: '0 12px 30px rgba(0,0,0,0.06)', flex: 1 };
 const stepCardTitle = { margin: '0 0 8px', fontSize: '20px', fontWeight: '700', color: '#333' };
 const stepCardDesc = { margin: 0, fontSize: '14px', color: '#666', lineHeight: '1.5' };
+const waitlistSection = { marginTop: '120px', padding: '60px 20px', backgroundColor: '#fff9e6', borderRadius: '40px', textAlign: 'center' };
+const waitlistContainer = { maxWidth: '800px', margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '30px' };
+const waitlistTextContent = { textAlign: 'center' };
+const waitlistHeading = { fontSize: '32px', fontWeight: '800', color: '#333', margin: '0 0 10px' };
+const waitlistSubtext = { fontSize: '16px', color: '#666', maxWidth: '600px', margin: '0 auto', lineHeight: '1.6' };
+const waitlistForm = { display: 'flex', gap: '10px', width: '100%', maxWidth: '500px' };
+const waitlistInput = { flex: 2, padding: '15px 20px', borderRadius: '15px', border: '2px solid #ffcc00', outline: 'none', fontSize: '16px' };
+const waitlistBtn = { flex: 1, backgroundColor: '#e30613', color: '#fff', border: 'none', padding: '15px 25px', borderRadius: '15px', fontWeight: '800', cursor: 'pointer', whiteSpace: 'nowrap' };
 const footerStyle = { height: '80px', backgroundColor: '#e30613', marginTop: '100px', borderRadius: '40px 40px 0 0' };
 const loadingStyle = { textAlign: 'center', padding: '100px', fontSize: '24px', color: '#e30613' };
 const modalOverlay = { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(5px)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 2000 };
