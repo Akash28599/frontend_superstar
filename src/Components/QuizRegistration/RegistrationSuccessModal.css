@@ -1,0 +1,124 @@
+:root {
+    --red: #dd2120;
+    --green: #4caf50;
+    --radius: 22px;
+    --shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
+}
+
+.rs-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.rs-modal {
+    background: white;
+    width: 92%;
+    max-width: 560px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    animation: pop 0.35s ease;
+}
+
+/* Header */
+.rs-header {
+    background: linear-gradient(90deg, #c91515, var(--red));
+    color: white;
+    padding: 18px;
+    text-align: center;
+}
+
+.rs-header>div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 30%;
+
+}
+
+.rs-logo {
+    height: 26px;
+    margin-bottom: 6px;
+}
+
+.rs-header h3 {
+    margin: 4px 0;
+    font-size: 1.1rem;
+}
+
+.rs-header p {
+    font-size: 0.85rem;
+    opacity: 0.9;
+}
+
+/* Body */
+.rs-body {
+    padding: 28px;
+    text-align: center;
+}
+
+.rs-body h1 {
+    color: var(--red);
+    margin-bottom: 4px;
+}
+
+.rs-sub {
+    font-size: 0.95rem;
+    margin-bottom: 18px;
+}
+
+.rs-check {
+    font-size: 64px;
+    color: var(--green);
+    margin: 14px 0;
+}
+
+.rs-body h2 {
+    margin-top: 18px;
+    font-size: 1.1rem;
+}
+
+.rs-body ol {
+    text-align: left;
+    margin: 12px auto 16px;
+    max-width: 380px;
+    font-size: 0.9rem;
+}
+
+.rs-info {
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+/* Button */
+.rs-btn {
+    background: var(--red);
+    color: white;
+    border: none;
+    padding: 12px 26px;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.rs-btn:hover {
+    opacity: 0.9;
+}
+
+/* Animation */
+@keyframes pop {
+    from {
+        transform: scale(0.92);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
