@@ -13,12 +13,12 @@ const HomeBanner = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
   // Add this somewhere in your app
- const testFont = new FontFace("Kellogg's Sans Test", "url('../fonts/kelloggssans-light.otf')");
-testFont.load().then(() => {
-  console.log('✅ Font loaded successfully');
-}).catch(error => {
-  console.error('❌ Font failed to load:', error);
-});
+//  const testFont = new FontFace("Kellogg's Sans Test", "url('../fonts/kelloggssans-light.otf')");
+// testFont.load().then(() => {
+//   console.log('✅ Font loaded successfully');
+// }).catch(error => {
+//   console.error('❌ Font failed to load:', error);
+// });
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_STRAPI_URL}/api/homebanners?populate=*`)
@@ -103,7 +103,7 @@ testFont.load().then(() => {
   const dynamicLeftSectionStyle = {
     flex: screenWidth >= 1440 ? '0 0 550px' : '0 0 480px',
     zIndex: 5,
-    marginTop: screenWidth >= 1440 ? '10%' : '11%',
+    marginTop: screenWidth >= 1440 ? '14%' : '20%',
     paddingLeft: '0',
     paddingBottom: '1.5rem',
     maxWidth: screenWidth >= 1440 ? '550px' : '480px',
@@ -112,7 +112,7 @@ testFont.load().then(() => {
 
   const dynamicContentStyle = {
     height: screenWidth >= 1440 ? '95vh' : '100vh',     // ✅ SMALLER RED for MacBook
-    margin: '0 100px',
+    margin: '0% 100px',
     padding: screenWidth >= 1440 ? '0 3%' : '0 1.5%',
     display: 'flex',
     alignItems: 'flex-start',
@@ -174,7 +174,6 @@ testFont.load().then(() => {
                 fontSize: screenWidth >= 1440 ? '82px' : '75px',
                 lineHeight: screenWidth >= 1440 ? '1.05' : '0.9',
                 maxHeight: screenWidth >= 1440 ? '175px' : '140px',
-                overflow: 'hidden'
               }}>
                 {banner.title}
               </h1>
@@ -296,7 +295,7 @@ testFont.load().then(() => {
 
 const containerStyle = {
   position: 'relative',
-  height: '100vh',
+  height: '115vh',
   backgroundColor: '#dd2120',
   overflow: 'hidden',
   width: '100vw',
@@ -304,6 +303,7 @@ const containerStyle = {
   padding: 0,
   display: 'flex',
   flexDirection: 'row',
+
 };
 
 const loadingStyle = {
@@ -383,13 +383,13 @@ const textColumnStyle = {
 const h1Style = {
   fontFamily: "Kellogg's Sans",
   fontWeight: 700,
-  fontSize: '82px',
+  fontSize: '78px',
   lineHeight: '1.05',
   letterSpacing: '8%',
   margin: '0 0 1.2rem 0',
   color: '#fff',
   alignSelf: 'flex-start',
-  width: '100%',
+  width: '120%',
   textAlign: 'left',
   className: 'h1-title',
 };

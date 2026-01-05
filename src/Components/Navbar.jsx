@@ -40,7 +40,7 @@ const Navbar = () => {
     zIndex: 1000,
     backdropFilter: 'blur(10px)',
     width: 'fit-content',
-    maxWidth: '90vw'
+    maxWidth: '90vw',
   };
 
   // Regular (non-active) menu item style - JUST TEXT COLOR

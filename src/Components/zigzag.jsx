@@ -72,6 +72,7 @@ const OurProducts = () => {
     fontWeight: "bold",
     lineHeight: 1.05,
     margin: 0,
+    marginTop:'20px',
     letterSpacing: "0%",
   };
 
@@ -338,7 +339,7 @@ const OurProducts = () => {
               style={{
                 position: "absolute",
                 right: "6%",
-                top: 110,
+                top: 150,
                 width: "44%",
                 display: "flex",
                 flexDirection: "row",
