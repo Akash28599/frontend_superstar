@@ -7,18 +7,20 @@ const AboutCompetition = ({ data }) => {
 
 
     return (
-        <div className='about-container'>
+        <div className='about-container' style={{marginTop:data.shouldShowForm?'0':'10%'}}>
             <div className='about-left'>
                 <div className="about-bg">
-                    <div className='bg-img' style={{ position:data?.shouldShowForm?'none':'absolute' }}>
-                        <img src={data.bg?.url} className='img1' alt="background" />
+                    
 
-                    </div>
-                    <div className='abt-kg'>
-                        {!data?.shouldShowForm && (
-                            <KelloggIcon IconImage={data?.IconImage?.url} isBlack={true}/>
-                        )}
-                    </div>
+                        <div className='bg-img' style={{ position: data?.shouldShowForm ? 'none' : 'absolute' }}>
+                            <img src={data.bg?.url} className='img1' alt="background" />
+
+                        </div> 
+                        {!data?.shouldShowForm &&
+                        <div className='abt-kg'>
+                            <KelloggIcon IconImage={data?.IconImage?.url} isBlack={true} />
+
+                        </div>}
                 </div>
 
                 <img
@@ -59,7 +61,7 @@ const AboutCompetition = ({ data }) => {
                         <FaTwitter className='abt-social-icon ' onClick={() => openUrl(data.siteSettings?.twitterurl)} />
                         <LuFacebook className='abt-social-icon ' onClick={() => openUrl(data.siteSettings?.facebookurl)} />
                     </div> */}
-                    <SocialIcons siteSettings={data.siteSettings}/>
+                    <SocialIcons siteSettings={data.siteSettings} />
                 </div>
 
                 <div className='about-crit'>

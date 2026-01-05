@@ -2,7 +2,12 @@ import "./SubmissionForm.css";
 
 const SubmissionForm = ({ groupKellogs }) => {
     return (
-        <section>
+        <section style={{
+            backgroundImage: "url('/assetss/cloud.png')"
+        }}>
+            <div className="sub-stars">
+                <img src="/assetss/stars.png" alt="stars decoration" />
+            </div>
             <div className="sub-container">
                 <div className="sub-content">
                     <div className="sub-form">
@@ -24,7 +29,7 @@ const SubmissionForm = ({ groupKellogs }) => {
 
             </div>
 
-        </section>
+        </section >
     );
 };
 
