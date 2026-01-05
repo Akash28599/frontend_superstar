@@ -105,10 +105,24 @@
 
 .pw-box h1 {
     margin: 0;
-    font-size:xx-large;
+    font-size: xx-large;
 }
 
 .pw-box h5 {
     margin: 4px 0 0;
     color: #666;
+}
+
+.pw-top {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+
+.pw-top>button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin: 10px;
+    font-size: 50px;
 }
