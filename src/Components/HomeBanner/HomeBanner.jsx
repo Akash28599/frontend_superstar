@@ -215,7 +215,7 @@ const HomeBanner = () => {
             <>
               <img src={heroImage} alt="Hero" style={dynamicHeroImageStyle} />
               <Cloud top="36%" right={cloudPositions.cloud1Right} size={cloudPositions.cloud1Size} zIndex={3} />
-              <Cloud top="18%" left="40%" size="7%" zIndex={4} />
+              <Cloud top="18%" left="50%" size="7%" zIndex={4} />
             </>
           )}
         </div>

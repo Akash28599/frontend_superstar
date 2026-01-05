@@ -223,6 +223,7 @@ const OurProducts = () => {
     );
   };
 
+  //main return
   return (
     <>
       <div style={sectionHeadingWrapper}>

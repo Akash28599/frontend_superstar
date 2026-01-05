@@ -1,8 +1,9 @@
 .App {
   text-align: center;
-;
 }
-
+.br{
+  border: 2px solid black;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

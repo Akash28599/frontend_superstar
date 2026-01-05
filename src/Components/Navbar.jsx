@@ -26,7 +26,7 @@ const Navbar = () => {
 
   const navbarStyle = {
     position: 'relative',
-    top: '35px',
+    top: '25px',
     left: '60%',
     transform: 'translateX(-50%)',
     background: 'white',

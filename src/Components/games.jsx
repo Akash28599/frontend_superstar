@@ -205,12 +205,12 @@ export default function PrintableGames() {
   return (
     <section style={{
       background: "#fff",
-      padding: isEdge ? "4rem 1rem" : "4.5rem 1.5rem",
+      padding: isEdge ? "0rem 1rem 4rem" : "0rem 1.5rem 4.5rem",
       overflow: "hidden"
     }}>
       <div style={{
         maxWidth: 1400,
-        margin: "-10px auto",
+        margin: "0 auto",
         padding: isEdge ? "0 0.5rem" : "0 1rem",
         width: '100%',
         boxSizing: 'border-box'
