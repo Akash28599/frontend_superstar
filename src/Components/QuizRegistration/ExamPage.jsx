@@ -7,16 +7,43 @@ const ExamPage = () => {
   const [loading, setLoading] = useState(true);
   const [timeLeft, setTimeLeft] = useState(2722);
   const [warnings, setWarnings] = useState(0);
-  const [showConfirm, setShowConfirm] = useState(false); // Modal State
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [proctorMessage, setProctorMessage] = useState("");
   const videoRef = useRef(null);
 
-  // 1. Tab visibility logic
+  useEffect(() => {
+    let localStream = null;
+    const startVideo = async () => {
+      try {
+        localStream = await navigator.mediaDevices.getUserMedia({ 
+          video: { width: 640, height: 480 },
+          audio: false 
+        });
+        if (videoRef.current) {
+          videoRef.current.srcObject = localStream;
+          videoRef.current.onloadedmetadata = () => {
+            videoRef.current.play().catch(console.error);
+          };
+        }
+      } catch (err) { 
+        console.error(err); 
+      }
+    };
+    startVideo();
+    return () => {
+      if (localStream) {
+        localStream.getTracks().forEach(track => track.stop());
+      }
+    };
+  }, []);
+
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.hidden) {
         setWarnings((prev) => {
           const newCount = prev + 1;
-          alert(`Warning ${newCount}/3: Please stay on the exam tab.`);
+          setProctorMessage(`WARNING ${newCount}/3: Do not switch tabs!`);
+          setTimeout(() => setProctorMessage(""), 5000);
           return newCount;
         });
       }
@@ -25,26 +52,28 @@ const ExamPage = () => {
     return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
   }, []);
 
-
   useEffect(() => {
-    const startVideo = async () => {
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        if (videoRef.current) videoRef.current.srcObject = stream;
-      } catch (err) { console.error(err); }
-    };
-    startVideo();
     fetch('https://strapi-superstar.onrender.com/api/exam-questions')
       .then(res => res.json())
       .then(json => {
         if (json.data?.[0]?.questions) setQuestions(json.data[0].questions);
         setLoading(false);
-      });
-  }, []);
+      })
+      .catch(() => setLoading(false));
 
-  const confirmEndExam = () => {
-    window.location.href = '/quiz'; 
-  };
+    const endTime = Date.now() + timeLeft * 1000;
+    const timer = setInterval(() => {
+      const now = Date.now();
+      const remaining = Math.round((endTime - now) / 1000);
+      if (remaining <= 0) {
+        setTimeLeft(0);
+        clearInterval(timer);
+      } else {
+        setTimeLeft(remaining);
+      }
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
@@ -57,21 +86,19 @@ const ExamPage = () => {
 
   return (
     <div style={containerStyle}>
-  
       {showConfirm && (
         <div style={modalOverlay}>
           <div style={modalContent}>
-            <h2 style={{color: '#E30613'}}>End Exam?</h2>
-            <p>Are you sure you want to end the exam? Your progress will be saved.</p>
-            <div style={{display: 'flex', gap: '15px', marginTop: '20px'}}>
-              <button style={cancelBtn} onClick={() => setShowConfirm(false)}>No, Continue</button>
-              <button style={confirmBtn} onClick={confirmEndExam}>Yes, End Exam</button>
+            <h2 style={{color: '#E30613', marginTop: 0}}>End Exam?</h2>
+            <p>Are you sure you want to exit? Your progress will be saved.</p>
+            <div style={{display: 'flex', gap: '15px', marginTop: '20px', justifyContent: 'center'}}>
+              <button style={cancelBtn} onClick={() => setShowConfirm(false)}>Continue</button>
+              <button style={confirmBtn} onClick={() => window.location.href = '/quiz'}>End Now</button>
             </div>
           </div>
         </div>
       )}
 
-      
       <nav style={navStyle}>
         <div style={navLeft}>
           <div style={logoStyle}>Kellogg's</div>
@@ -80,11 +107,11 @@ const ExamPage = () => {
             <span style={timerValue}>{formatTime(timeLeft)}</span>
           </div>
         </div>
-        
       </nav>
 
       <div style={subHeader}>
         <span style={warningText}>⚠️ Warnings: {warnings} / 3</span>
+        {proctorMessage && <span style={toastStyle}>{proctorMessage}</span>}
         <button style={endExamBtn} onClick={() => setShowConfirm(true)}>End Exam</button>
       </div>
 
@@ -133,7 +160,7 @@ const ExamPage = () => {
               </>
             )}
             <div style={actionButtons}>
-              <button disabled={currentIdx === 0} onClick={() => setCurrentIdx(currentIdx - 1)} style={prevBtn}>Previous</button>
+              <button disabled={currentIdx === 0} onClick={() => setCurrentIdx(currentIdx - 1)} style={prevBtn}>Back</button>
               <button onClick={() => setCurrentIdx(Math.min(questions.length - 1, currentIdx + 1))} style={nextBtn}>Save & Next</button>
             </div>
           </div>
@@ -145,8 +172,8 @@ const ExamPage = () => {
             <video ref={videoRef} autoPlay playsInline muted style={videoStyle} />
           </div>
           <div style={monitorInfo}>
-            <p style={{color: 'green'}}>● Camera: Active</p>
-            <p style={{color: 'green'}}>● Audio: Monitoring</p>
+            <p style={{color: 'green', fontWeight: 'bold'}}>● Camera: Active</p>
+            <p style={{color: 'green', fontWeight: 'bold'}}>● Audio: Monitoring</p>
           </div>
         </aside>
       </div>
@@ -154,42 +181,39 @@ const ExamPage = () => {
   );
 };
 
-
-const modalOverlay = { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.6)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1000 };
-const modalContent = { backgroundColor: '#fff', padding: '30px', borderRadius: '15px', textAlign: 'center', maxWidth: '400px', boxShadow: '0 5px 15px rgba(0,0,0,0.3)' };
-const cancelBtn = { padding: '10px 20px', borderRadius: '8px', border: '1px solid #ccc', cursor: 'pointer', backgroundColor: '#eee' };
-const confirmBtn = { padding: '10px 20px', borderRadius: '8px', border: 'none', cursor: 'pointer', backgroundColor: '#E30613', color: '#fff', fontWeight: 'bold' };
-
+const modalOverlay = { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 9999 };
+const modalContent = { backgroundColor: '#fff', padding: '30px', borderRadius: '15px', textAlign: 'center', width: '350px' };
+const cancelBtn = { padding: '10px 15px', borderRadius: '8px', border: '1px solid #ccc', cursor: 'pointer' };
+const confirmBtn = { padding: '10px 15px', borderRadius: '8px', border: 'none', cursor: 'pointer', backgroundColor: '#E30613', color: '#fff', fontWeight: 'bold' };
 const containerStyle = { backgroundColor: '#F5F5F5', minHeight: '100vh', fontFamily: 'Arial, sans-serif' };
 const navStyle = { backgroundColor: '#E30613', padding: '10px 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#fff' };
 const navLeft = { display: 'flex', alignItems: 'center', gap: '30px' };
-const navRight = { display: 'flex' };
 const logoStyle = { fontSize: '24px', fontWeight: 'bold', fontStyle: 'italic' };
 const timerBox = { display: 'flex', flexDirection: 'column', alignItems: 'center' };
 const timerLabel = { fontSize: '10px' };
 const timerValue = { fontSize: '28px', fontWeight: 'bold' };
-const loginBtn = { backgroundColor: '#FFCC00', border: 'none', padding: '10px 20px', borderRadius: '20px', fontWeight: 'bold', cursor: 'pointer' };
-const subHeader = { display: 'flex', justifyContent: 'space-between', padding: '10px 40px', alignItems: 'center' };
-const warningText = { color: '#E30613', fontWeight: 'bold', fontSize: '16px' };
+const subHeader = { display: 'flex', justifyContent: 'space-between', padding: '10px 40px', alignItems: 'center', position: 'relative' };
+const warningText = { color: '#E30613', fontWeight: 'bold' };
+const toastStyle = { position: 'absolute', left: '50%', transform: 'translateX(-50%)', backgroundColor: '#E30613', color: '#fff', padding: '5px 15px', borderRadius: '5px', fontSize: '14px', animation: 'fadeIn 0.5s' };
 const endExamBtn = { padding: '5px 15px', borderRadius: '5px', border: '1px solid #ccc', cursor: 'pointer', backgroundColor: '#fff' };
-const mainLayout = { display: 'grid', gridTemplateColumns: '250px 1fr 300px', gap: '20px', padding: '0 40px' };
-const leftPanel = { backgroundColor: '#fff', padding: '20px', borderRadius: '15px' };
+const mainLayout = { display: 'grid', gridTemplateColumns: '220px 1fr 280px', gap: '20px', padding: '0 40px' };
+const leftPanel = { backgroundColor: '#fff', padding: '20px', borderRadius: '15px', height: 'fit-content' };
 const panelTitle = { margin: '0 0 15px', fontSize: '18px' };
-const gridContainer = { display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '8px' };
-const gridItem = { height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '5px', cursor: 'pointer', fontWeight: 'bold' };
+const gridContainer = { display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px' };
+const gridItem = { height: '35px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '5px', cursor: 'pointer', fontWeight: 'bold', fontSize: '14px' };
 const centerPanel = { display: 'flex', flexDirection: 'column', gap: '15px' };
 const questionHeader = { backgroundColor: '#E30613', color: '#fff', padding: '10px 20px', borderRadius: '10px 10px 0 0' };
-const questionCard = { backgroundColor: '#fff', padding: '40px', borderRadius: '0 0 15px 15px' };
-const questionTitle = { fontSize: '22px', marginBottom: '30px' };
-const optionsGrid = { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '40px' };
+const questionCard = { backgroundColor: '#fff', padding: '40px', borderRadius: '0 0 15px 15px', minHeight: '300px' };
+const questionTitle = { fontSize: '20px', marginBottom: '25px' };
+const optionsGrid = { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', marginBottom: '30px' };
 const optionBox = { padding: '15px', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center' };
 const actionButtons = { display: 'flex', justifyContent: 'space-between' };
-const prevBtn = { backgroundColor: '#DDD', border: 'none', padding: '12px 25px', borderRadius: '8px', cursor: 'pointer' };
-const nextBtn = { backgroundColor: '#E30613', color: '#fff', border: 'none', padding: '12px 25px', borderRadius: '8px', cursor: 'pointer' };
-const rightPanel = { backgroundColor: '#fff', padding: '20px', borderRadius: '15px' };
-const webcamContainer = { width: '100%', marginBottom: '15px', background: '#000', borderRadius: '10px', height: '180px', overflow: 'hidden' };
-const videoStyle = { width: '100%', height: '100%', objectFit: 'cover', transform: 'scaleX(-1)' };
-const monitorInfo = { fontSize: '14px', lineHeight: '2' };
+const prevBtn = { backgroundColor: '#DDD', border: 'none', padding: '10px 20px', borderRadius: '5px', cursor: 'pointer' };
+const nextBtn = { backgroundColor: '#E30613', color: '#fff', border: 'none', padding: '10px 20px', borderRadius: '5px', cursor: 'pointer' };
+const rightPanel = { backgroundColor: '#fff', padding: '20px', borderRadius: '15px', height: 'fit-content' };
+const webcamContainer = { width: '100%', height: '180px', background: '#000', borderRadius: '10px', overflow: 'hidden', marginBottom: '10px' };
+const videoStyle = { width: '100%', height: '100%', objectFit: 'cover', transform: 'scaleX(-1)', display: 'block' };
+const monitorInfo = { fontSize: '13px', lineHeight: '1.8' };
 const centerStyle = { display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' };
 
 export default ExamPage;
