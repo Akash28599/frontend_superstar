@@ -25,9 +25,9 @@ const CocoHeads = () => {
         setHead(headItem || null);
 
         if (starItem?.icons) {
-          const starUrl = starItem.icons.formats?.small?.url || 
-                         starItem.icons.formats?.thumbnail?.url || 
-                         starItem.icons.url;
+          const starUrl = starItem.icons.formats?.small?.url ||
+            starItem.icons.formats?.thumbnail?.url ||
+            starItem.icons.url;
           setStarImage(starUrl);
         }
 
@@ -40,20 +40,20 @@ const CocoHeads = () => {
   if (loading) return <div>Loading...</div>;
 
   const getYellowWidth = () => {
-    if (screenWidth >= 1920) return '980px';
-    if (screenWidth >= 1440) return '900px';
-    if (screenWidth >= 1200) return '980px';
+    if (screenWidth >= 1920) return '1450px';
+    if (screenWidth >= 1440) return '1100px';
+    if (screenWidth >= 1200) return '1080px';
     return 'calc(100vw - 4rem)';
   };
 
   const yellowWidth = getYellowWidth();
 
   return (
-    <div style={{ 
-      display: 'flex', 
-      justifyContent: 'center', 
-      padding: '3rem 0', 
-      backgroundColor: 'white', 
+    <div style={{
+      display: 'flex',
+      justifyContent: 'center',
+      padding: '3rem 0',
+      backgroundColor: 'white',
       position: 'relative',
     }}>
       {starImage && (
@@ -65,20 +65,21 @@ const CocoHeads = () => {
           pointerEvents: 'none',
           zIndex: 2,
         }}>
-          <img 
-            src={starImage} 
-            alt="Stars" 
-            style={{ 
+          <img
+            src={starImage}
+            alt="Stars"
+            style={{
               width: screenWidth >= 1440 ? '322px' : '280px',
               height: screenWidth >= 1440 ? '543px' : '470px',
               objectFit: 'contain',
               display: 'block',
-            }} 
+            }}
           />
         </div>
       )}
 
       <div style={{
+        justifySelf: 'center',
         width: yellowWidth,
         backgroundColor: '#FBCA05',
         borderRadius: '32px',
@@ -91,24 +92,24 @@ const CocoHeads = () => {
         minHeight: '300px',
         height: screenWidth >= 1440 ? '274px' : '280px',
         left: screenWidth >= 1440 ? '4%' : '2%',
-        marginTop:"10%"
+        marginTop: "10%"
       }}>
         {head?.thumbnail && (
           <div style={{
             position: 'absolute',
-            left: screenWidth >= 1440 ?'-30px':'-100px',
+            left: screenWidth >= 1440 ? '-30px' : '-100px',
             top: '-40px',
             pointerEvents: 'none',
           }}>
-            <img 
-              src={head.thumbnail.url} 
-              alt="Coco head" 
-              style={{ 
+            <img
+              src={head.thumbnail.url}
+              alt="Coco head"
+              style={{
                 width: screenWidth >= 1440 ? '416.5469970703125px' : '520px',
                 height: screenWidth >= 1440 ? '354.79876708984375px' : '365px',
                 objectFit: 'contain',
                 display: 'block',
-              }} 
+              }}
             />
           </div>
         )}
@@ -123,8 +124,8 @@ const CocoHeads = () => {
           marginLeft: screenWidth >= 1440 ? '23%' : '28%',
         }}>
           {items.map(item => {
-            const iconUrl = item.icons?.url || item.icon?.url || item.image?.url || 
-                           (item.icons && item.icons[0] && item.icons[0].url) || null;
+            const iconUrl = item.icons?.url || item.icon?.url || item.image?.url ||
+              (item.icons && item.icons[0] && item.icons[0].url) || null;
             const title = item.icon_description?.title || item.title || '';
             const desc = item.icon_description?.description || item.description || '';
 
@@ -136,9 +137,9 @@ const CocoHeads = () => {
                 textAlign: 'center',
                 width: screenWidth >= 1440 ? '220px' : '190px',
                 boxSizing: 'border-box',
-                padding: '0.6rem',
+                padding: '0.5rem',
                 flex: '1 1 0',
-                height: '100%',
+                height: 'auto',
                 justifyContent: 'space-between',
               }}>
                 {/* ICON SECTION */}
@@ -151,15 +152,15 @@ const CocoHeads = () => {
                   marginBottom: '1rem',
                 }}>
                   {iconUrl ? (
-                    <img 
-                      src={iconUrl} 
-                      alt={item.icon_description?.title || 'icon'} 
-                      style={{ 
+                    <img
+                      src={iconUrl}
+                      alt={item.icon_description?.title || 'icon'}
+                      style={{
                         width: '75px',
                         height: '62px',
                         objectFit: 'contain',
                         display: 'block',
-                      }} 
+                      }}
                     />
                   ) : (
                     <div style={{
@@ -173,18 +174,18 @@ const CocoHeads = () => {
 
                 {/* TITLE SECTION */}
                 <div style={{
-                  width: '100%',
+                  width: '120%',
                   minHeight: '52px',
-                  height: 'auto',
+                  height: '20%',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
+                  justifyContent: 'start',
                   marginBottom: '0.6rem',
                   padding: '4px 8px',
                 }}>
-                  <h3 style={{
+                  <h4 style={{
                     fontFamily: "'Kellogg's Sans', sans-serif",
-                    fontWeight: 700,
+                    fontWeight: 600,
                     fontSize: screenWidth >= 1440 ? '20px' : '18px',
                     lineHeight: '1.2',
                     letterSpacing: '0%',
@@ -193,14 +194,10 @@ const CocoHeads = () => {
                     margin: 0,
                     padding: 0,
                     width: '100%',
-                    wordWrap: 'break-word',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
                     height: '100%',
                   }}>
                     {title}
-                  </h3>
+                  </h4>
                 </div>
 
                 {/* DESCRIPTION SECTION - FIXED ALIGNMENT */}
@@ -208,19 +205,21 @@ const CocoHeads = () => {
                   width: '100%',
                   flex: 1,
                   display: 'flex',
-                  alignItems: 'center', // Changed from flex-start to center
+                  alignItems: 'start', // Changed from flex-start to center
                   justifyContent: 'center',
                   minHeight: '60px',
                 }}>
-                  <div style={{
+                  {/* <div style={{
                     width: '100%',
                     height: '100%',
                     display: 'flex',
                     alignItems: 'center', // Center vertically
                     justifyContent: 'center', // Center horizontally
-                    position:'relative',
-                    left:'8%'
-                  }}>
+                    position: 'relative',
+                    left: '8%',
+                    border: '2px solid black'
+
+                  }}> */}
                     <p style={{
                       fontFamily: "'Kellogg's Sans', sans-serif",
                       fontWeight: 400,
@@ -238,7 +237,7 @@ const CocoHeads = () => {
                     }}>
                       {desc}
                     </p>
-                  </div>
+                  {/* </div> */}
                 </div>
               </div>
             );

@@ -23,41 +23,63 @@ export default function PrintableGames() {
   }, []);
   const sample = [
     {
+      name: "Game1",
       thumbnail: '',
       printable: '/assetss/BrainGameVol1.pdf',
     },
     {
+      name: "Game2",
       thumbnail: '',
       printable: '/assetss/BrainGameVol2.pdf',
     },
     {
+      name: "Game3",
       thumbnail: '',
       printable: '/assetss/BrainGameVol3.pdf',
     },
     {
+      name: "Game4",
       thumbnail: '',
       printable: '/assetss/BrainGameVol4.pdf',
     },
     {
+      name: "Game5",
       thumbnail: '',
       printable: '/assetss/BrainGameVol5.pdf',
     }
   ]
+
+
   useEffect(() => {
     const url = `${process.env.REACT_APP_STRAPI_URL}/api/games?populate=*`;
+
     fetch(url)
-      .then((r) => { throw new Error("testing") })
       .then((r) => r.json())
       .then((json) => {
-        const data = (json && json.data) || [];
-        setItems(data);
+        const data = json?.data ?? [];
+
+        const dataWithPrintable = data.map((item) => {
+          if (!item.printable) {
+            const fallback = sample.find((s) => s.name === item.name);
+
+            return {
+              ...item,
+              printable: fallback?.printable || null,
+            };
+          }
+
+          return item;
+        });
+        console.log("dada",dataWithPrintable)
+        setItems(dataWithPrintable);
         setLoading(false);
       })
       .catch((err) => {
         console.error("Failed to load games:", err);
-        setItems(sample)
         setLoading(false);
-      });
+      })
+      .finally(
+      );
   }, []);
 
   const getGridConfig = () => {
@@ -188,7 +210,7 @@ export default function PrintableGames() {
     }}>
       <div style={{
         maxWidth: 1400,
-        margin: "0 auto",
+        margin: "-10px auto",
         padding: isEdge ? "0 0.5rem" : "0 1rem",
         width: '100%',
         boxSizing: 'border-box'
@@ -220,7 +242,7 @@ export default function PrintableGames() {
               (item.thumbnail && item.thumbnail.url) ||
               null;
             const printable = item.printable && item.printable[0];
-            const hasPdf = !!(printable && printable.url);
+            const hasPdf = !!(printable || printable.url);
 
             return (
               <div key={item.id} style={{

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import {  useEffect, useState } from 'react'
 import ScholarshipForm from '../Components/ScholarshipForm/ScholarshipForm'
 import AboutCompetition from '../Components/AboutCompetition/AboutCompetition';
 import YoutubeGallery from '../Components/YoutubeVideo/YoutubeGallery';
