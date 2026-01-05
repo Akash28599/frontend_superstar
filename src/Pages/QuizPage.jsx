@@ -1,9 +1,9 @@
-import { QuizRegistration } from "../Components/QuizRegistration/QuizRegistration";
+import { QuizLandingPage } from "../Components/QuizRegistration/QuizRegistration";
 
 function QuizPage() {
     return (
         <>
-            <QuizRegistration/>
+            <QuizLandingPage/>
         </>
     );
 }
