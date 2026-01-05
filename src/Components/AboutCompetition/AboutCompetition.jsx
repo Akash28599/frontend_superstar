@@ -7,7 +7,7 @@ const AboutCompetition = ({ data }) => {
 
 
     return (
-        <div className='about-container' style={{marginTop:data.shouldShowForm?'0':'10%'}}>
+        <div className='about-container'>
             <div className='about-left'>
                 <div className="about-bg">
                     
