@@ -7,7 +7,8 @@
 
 
 .sr-container {
-    margin: 8% 0%;
+    width: 1000px;
+    margin: 4% 0% 6%;
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -22,15 +23,26 @@
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     overflow: hidden;
+    position: relative;
+
 }
 
 /* Header */
 .sr-header {
-    background:var(--red);
+    background: var(--red);
     color: white;
-    padding: 24px;
+    padding: 8px;
     text-align: center;
     position: relative;
+
+}
+
+.sr-header>div {
+    width: 65%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    justify-self: end;
 }
 
 .sr-logo {
@@ -57,12 +69,12 @@
 
 /* Body */
 .sr-body {
-    padding: 24px;
+    padding: 0px 24px 24px;
 }
 
 .sr-body h2 {
     font-size: 1.2rem;
-    margin: 24px 0 12px;
+    margin: 18px 0 12px;
     border-bottom: 1px solid #ddd;
     padding-bottom: 6px;
     text-align: left;
@@ -72,48 +84,49 @@
 .sr-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 12px;
+    gap: 8px;
+
 }
 
 /* Inputs */
 .sr-grid input {
-    padding: 10px;
+    padding: 6px;
     border-radius: 6px;
     border: 1px solid #ccc;
     font-size: 0.9rem;
+
 }
 
-/* Upload button */
 .sr-upload {
     border: 2px solid var(--red);
     background: white;
     color: var(--red);
     border-radius: 6px;
-    padding: 10px;
+    padding: 4px;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: 500;
     display: flex;
     align-items: center;
     gap: 6px;
     justify-content: center;
 }
 
-
 .sr-upload:hover {
     background: var(--red);
     color: white;
 }
 
+
 /* Footer */
 .sr-footer {
-    margin-top: 24px;
+    margin-top: 18px;
     text-align: center;
 }
 
 .sr-footer label {
     font-size: 0.85rem;
     display: block;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
 }
 
 /* Submit */
@@ -121,12 +134,26 @@
     background: var(--red);
     color: white;
     border: none;
-    padding: 12px 24px;
+    padding: 8px 24px;
     border-radius: 8px;
-    font-size: 1rem;
+    font-size: 0.9rem;
     cursor: pointer;
 }
 
 .sr-submit:hover {
     opacity: 0.9;
+}
+
+.sr-btn {
+    z-index: 5;
+    font-size: 32px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #ffffff;
+
+}
+
+.sr-btn:hover {
+    color: var(--gold);
 }

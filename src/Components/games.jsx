@@ -70,7 +70,6 @@ export default function PrintableGames() {
 
           return item;
         });
-        console.log("dada",dataWithPrintable)
         setItems(dataWithPrintable);
         setLoading(false);
       })
@@ -146,36 +145,65 @@ export default function PrintableGames() {
 
   const gridStyle = getGridStyle();
 
-  async function downloadPrintable(item) {
-    const printable = item.printable && item.printable[0];
-    if (!printable || !printable.url) return;
+  // async function downloadPrintable(item) {
+  //   const printable = item.printable && item.printable[0];
+  //   if (!printable || !printable.url) return;
 
-    try {
-      setDownloadingId(item.id);
-      const res = await fetch(printable.url);
-      if (!res.ok) throw new Error("Network error while downloading file");
-      const blob = await res.blob();
-      const blobUrl = window.URL.createObjectURL(blob);
+  //   try {
+  //     setDownloadingId(item.id);
+  //     const res = await fetch(printable.url);
+  //     if (!res.ok) throw new Error("Network error while downloading file");
+  //     const blob = await res.blob();
+  //     const blobUrl = window.URL.createObjectURL(blob);
 
-      const filename =
-        printable.name ||
-        printable.hash ||
-        `printable-${item.id}${printable.ext || ".pdf"}`;
+  //     const filename =
+  //       printable.name ||
+  //       printable.hash ||
+  //       `printable-${item.id}${printable.ext || ".pdf"}`;
 
-      const a = document.createElement("a");
-      a.href = blobUrl;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      window.URL.revokeObjectURL(blobUrl);
-    } catch (err) {
-      console.error("Download failed, opening in new tab:", err);
-      window.open(printable.url, "_blank", "noopener");
-    } finally {
-      setDownloadingId(null);
-    }
+  //     const a = document.createElement("a");
+  //     a.href = blobUrl;
+  //     a.download = filename;
+  //     document.body.appendChild(a);
+  //     a.click();
+  //     a.remove();
+  //     window.URL.revokeObjectURL(blobUrl);
+  //   } catch (err) {
+  //     console.error("Download failed, opening in new tab:", err);
+  //     window.open(printable.url, "_blank", "noopener");
+  //   } finally {
+  //     setDownloadingId(null);
+  //   }
+  // }
+async function downloadPrintable(item) {
+  const printable = item.printable && item.printable[0];
+  if (!printable) return;
+
+  try {
+    setDownloadingId(item.id);
+
+    const fileUrl = printable; // e.g. /assetss/pdfs/sample.pdf
+
+    const filename =
+      printable.name ||
+      printable.hash ||
+      `printable-${item.id}${printable.ext || ".pdf"}`;
+
+    const a = document.createElement("a");
+    a.href = fileUrl;
+    a.download = filename;
+    a.target = "_self"; // force download instead of new tab
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+
+  } catch (err) {
+    console.error("Download failed, opening in new tab:", err);
+    window.open(printable.url, "_blank", "noopener");
+  } finally {
+    setDownloadingId(null);
   }
+}
 
   if (loading) {
     return (
