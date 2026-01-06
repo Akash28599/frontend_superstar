@@ -209,6 +209,7 @@ const CocoHeads = () => {
                   alignItems: 'start', // Changed from flex-start to center
                   justifyContent: 'center',
                   minHeight: '60px',
+                  marginLeft:'6%'
                 }}>
                   {/* <div style={{
                     width: '100%',
