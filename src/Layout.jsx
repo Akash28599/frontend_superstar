@@ -26,7 +26,7 @@ export function LayoutComponent({ settingsData }) {
         <Route path='/scholarship' element={<ScholarshipPage settingsData={settingsData} />} />
         <Route path='/quiz' element={<QuizPage />} />
         <Route path='/past-winners' element={<PastWinners />} />
-        <Route path='/student-register' element={<StudentForm/>}/>
+        {/* <Route path='/student-register' element={<StudentForm/>}/> */}
         <Route path='/exam-page' element={<ExamPage/>}/>
       </Routes>
     </>

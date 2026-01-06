@@ -1,5 +1,4 @@
 import  QuizLandingPage  from "../Components/QuizRegistration/QuizRegistration";
-
 function QuizPage() {
     return (
         <>

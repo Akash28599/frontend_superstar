@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import StudentForm from './StudentRegisterForm';
 
@@ -38,11 +38,10 @@ const QuizLandingPage = () => {
   const { heading, sub_heading, first_component, second_component } = pageData;
 
   return (
-    <div style={{ fontFamily: '"Quicksand", sans-serif', backgroundColor: '#fff', minHeight: '100vh', overflowX: 'hidden', position: 'relative' }}>
+    <div style={{ fontFamily:constants.fontFamily, backgroundColor: '#fff', minHeight: '100vh', overflowX: 'hidden', position: 'relative' }}>
 
       <style>
         {`
-          @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700;800&display=swap');
           .card-anim { transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
           .card-anim:hover { transform: translateY(-10px); }
           @keyframes popIn {
@@ -202,7 +201,7 @@ const QuizLandingPage = () => {
     </div>
   );
 };
-const constants = { red: '#dd2120' }
+const constants = { red: '#dd2120' ,fontFamily:'"KelloggsSans", Arial, sans-serif'}
 const headerStyle = { backgroundColor: constants.red, color: '#fff', padding: '140px 20px 100px', borderBottomLeftRadius: '50% 12%', borderBottomRightRadius: '50% 12%', position: 'relative' };
 const headerInner = { maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', position: 'relative' };
 const cocoStyle = { position: 'absolute', left: '-40px', top: '-40px', width: '230px', zIndex: 10, animation: 'swing 3s ease-in-out infinite' };
