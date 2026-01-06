@@ -110,14 +110,14 @@ const QuizLandingPage = () => {
             <div style={stepRow}>
               <div style={stepWrapper}>
                 <div style={stepNumberBadge}>1</div>
-                <div style={{ ...stepCardInner, borderBottom: '8px solid #FFCC00' }}>
+                <div style={{ ...stepCardInner, borderBottom: `8px solid ${constants.gold}` }}>
                   <h4 style={stepCardTitle}>{second_component.sections[0]?.title}</h4>
                   <p style={stepCardDesc}>{second_component.sections[0]?.description}</p>
                 </div>
               </div>
               <div style={stepWrapper}>
                 <div style={stepNumberBadge}>2</div>
-                <div style={{ ...stepCardInner, borderBottom: '8px solid #E30613' }}>
+                <div style={{ ...stepCardInner, borderBottom: `8px solid ${constants.red}` }}>
                   <h4 style={stepCardTitle}>{second_component.sections[1]?.title}</h4>
                   <p style={stepCardDesc}>{second_component.sections[1]?.description}</p>
                 </div>
@@ -126,7 +126,7 @@ const QuizLandingPage = () => {
             <div style={{ ...stepRow, justifyContent: 'flex-start', marginTop: '100px' }}>
               <div style={stepWrapper}>
                 <div style={stepNumberBadge}>3</div>
-                <div style={{ ...stepCardInner, borderBottom: '8px solid #FFCC00' }}>
+                <div style={{ ...stepCardInner, borderBottom: `8px solid ${constants.gold}` }}>
                   <h4 style={stepCardTitle}>{second_component.sections[2]?.title}</h4>
                   <p style={stepCardDesc}>{second_component.sections[2]?.description}</p>
                 </div>
@@ -163,7 +163,7 @@ const QuizLandingPage = () => {
     </div>
   );
 };
-const constants = { red: '#dd2120' ,fontFamily:'"KelloggsSans", Arial, sans-serif'}
+const constants = { gold:'#FBCA05',red: '#dd2120' ,fontFamily:'"KelloggsSans", Arial, sans-serif'}
 const headerStyle = { backgroundColor: constants.red, color: '#fff', padding: '140px 20px 100px', borderBottomLeftRadius: '50% 12%', borderBottomRightRadius: '50% 12%', position: 'relative' };
 const headerInner = { maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', position: 'relative' };
 const cocoStyle = { position: 'absolute', left: '-40px', top: '-40px', width: '230px', zIndex: 10, animation: 'swing 3s ease-in-out infinite' };
@@ -175,7 +175,7 @@ const cocoHeadIcon = { width: '45px', height: '45px', borderRadius: '50%', borde
 const helpCircle = { width: '40px', height: '40px', borderRadius: '50%', border: '2px solid #fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' };
 const mainContent = { maxWidth: '1100px', margin: '40px auto 0', padding: '0 20px' };
 const cardRow = { display: 'flex', gap: '25px', justifyContent: 'center' };
-const yellowCard = { backgroundColor: '#ffcc00', borderRadius: '30px', padding: '35px 25px', flex: 1, maxWidth: '320px', textAlign: 'center', boxShadow: '0 8px 25px rgba(0,0,0,0.08)' };
+const yellowCard = { backgroundColor: constants.gold, borderRadius: '30px', padding: '35px 25px', flex: 1, maxWidth: '320px', textAlign: 'center', boxShadow: '0 8px 25px rgba(0,0,0,0.08)' };
 const iconBox = { backgroundColor: '#fff', width: '55px', height: '55px', borderRadius: '15px', margin: '0 auto 15px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '28px' };
 const cardTitle = { fontSize: '22px', fontWeight: '800', margin: '0 0 10px', color: '#333' };
 const cardDesc = { fontSize: '14px', color: '#444', lineHeight: '1.4', marginBottom: '25px', height: '50px' };
@@ -187,17 +187,17 @@ const roadmapContainer = { position: 'relative', maxWidth: '900px', margin: '0 a
 const roadmapSvg = { position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 };
 const stepRow = { display: 'flex', justifyContent: 'space-between', position: 'relative', zIndex: 1 };
 const stepWrapper = { display: 'flex', alignItems: 'center', gap: '20px', width: '45%', position: 'relative' };
-const stepNumberBadge = { width: '55px', height: '55px', borderRadius: '50%', backgroundColor: '#FFCC00', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px', fontWeight: '800', flexShrink: 0, boxShadow: '0 6px 15px rgba(255,204,0,0.3)' };
+const stepNumberBadge = { width: '55px', height: '55px', borderRadius: '50%', backgroundColor: constants.gold, color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px', fontWeight: '800', flexShrink: 0, boxShadow: '0 6px 15px rgba(255,204,0,0.3)' };
 const stepCardInner = { backgroundColor: '#fff', padding: '25px', borderRadius: '20px', textAlign: 'left', boxShadow: '0 12px 30px rgba(0,0,0,0.06)', flex: 1 };
 const stepCardTitle = { margin: '0 0 8px', fontSize: '20px', fontWeight: '700', color: '#333' };
 const stepCardDesc = { margin: 0, fontSize: '14px', color: '#666', lineHeight: '1.5' };
-const waitlistSection = { margin: '120px 0', padding: '60px 20px', backgroundColor: '#fff9e6', borderRadius: '40px', textAlign: 'center' };
+const waitlistSection = { margin: '120px 0', padding: '60px 20px', backgroundColor: '#fff7d6ff', borderRadius: '40px', textAlign: 'center' };
 const waitlistContainer = { maxWidth: '800px', margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '30px' };
 const waitlistTextContent = { textAlign: 'center' };
 const waitlistHeading = { fontSize: '32px', fontWeight: '800', color: '#333', margin: '0 0 10px' };
 const waitlistSubtext = { fontSize: '16px', color: '#666', maxWidth: '600px', margin: '0 auto', lineHeight: '1.6' };
 const waitlistForm = { display: 'flex', gap: '10px', width: '100%', maxWidth: '500px' };
-const waitlistInput = { flex: 2, padding: '15px 20px', borderRadius: '15px', border: '2px solid #ffcc00', outline: 'none', fontSize: '16px' };
+const waitlistInput = { flex: 2, padding: '15px 20px', borderRadius: '15px', border: `2px solid ${constants.gold}`, outline: 'none', fontSize: '16px' };
 const waitlistBtn = { flex: 1, backgroundColor: constants.red, color: '#fff', border: 'none', padding: '15px 25px', borderRadius: '15px', fontWeight: '800', cursor: 'pointer', whiteSpace: 'nowrap' };
 const loadingStyle = { textAlign: 'center', padding: '100px', fontSize: '24px', color: constants.red };
 const modalOverlay = { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(5px)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 2000 };
