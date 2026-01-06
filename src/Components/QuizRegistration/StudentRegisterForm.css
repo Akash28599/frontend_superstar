@@ -38,11 +38,10 @@
 }
 
 .sr-header>div {
-    width: 65%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    justify-self: end;
+    margin: 0 5% 0 35%;
 }
 
 .sr-logo {
