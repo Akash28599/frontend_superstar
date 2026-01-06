@@ -53,7 +53,7 @@ const ExamPage = () => {
   }, []);
 
   useEffect(() => {
-    fetch('https://strapi-superstar.onrender.com/api/exam-questions')
+    fetch(`${process.env.REACT_APP_STRAPI_URL}/api/exam-questions`)
       .then(res => res.json())
       .then(json => {
         if (json.data?.[0]?.questions) setQuestions(json.data[0].questions);
