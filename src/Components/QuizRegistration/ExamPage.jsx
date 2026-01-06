@@ -163,7 +163,7 @@ const ExamPage = () => {
               <button disabled={currentIdx === 0} onClick={() => setCurrentIdx(currentIdx - 1)} style={prevBtn}>Back</button>
               <button
                 onClick={() => {
-                  if (currentIdx == questions.length - 1) {
+                  if (currentIdx === questions.length - 1) {
                     setShowConfirm(true)
                   }
                   else {
@@ -171,7 +171,7 @@ const ExamPage = () => {
                   }
                 }
                 }
-                style={nextBtn}>{currentIdx == questions.length - 1 ? `Submit Exam` : `Save & Next`}
+                style={nextBtn}>{currentIdx === questions.length - 1 ? `Submit Exam` : `Save & Next`}
               </button>
             </div>
           </div>

@@ -1,4 +1,4 @@
-import { Box, Grid, IconButton, List, ListItem } from "@mui/material";
+import { Box, Grid, List, ListItem } from "@mui/material";
 import { useEffect, useState } from "react";
 import SocialIcons from "./SocialIcons/SocialIcons";
 

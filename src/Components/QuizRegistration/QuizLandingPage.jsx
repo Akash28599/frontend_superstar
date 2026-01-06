@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import StudentForm from './StudentRegisterForm';
+import { StudentLogin } from './StudentLogin';
+import StudentRegister from './StudentRegisterForm';
 
 const QuizLandingPage = () => {
   const [pageData, setPageData] = useState(null);
   const [showLogin, setShowLogin] = useState(false);
-  const [loginForm, setLoginForm] = useState({ username: '', password: '' });
   const [waitlistEmail, setWaitlistEmail] = useState('');
   const [showRegister, setShowRegister] = useState(false);
 
-  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_STRAPI_URL}/api/quiz-landing-page`)
@@ -18,14 +16,7 @@ const QuizLandingPage = () => {
       .catch((err) => console.error("Error fetching data:", err));
   }, []);
 
-  const handleLoginSubmit = (e) => {
-    e.preventDefault();
-    if (loginForm.username && loginForm.password) {
-      navigate('/exam-page');
-    } else {
-      alert("Please fill in both fields!");
-    }
-  };
+
 
   const handleWaitlistSubmit = (e) => {
     e.preventDefault();
@@ -58,41 +49,12 @@ const QuizLandingPage = () => {
 
       {showLogin && (
         <div style={modalOverlay}>
-          <div style={modalContent}>
-            <button onClick={() => setShowLogin(false)} style={closeBtn}>×</button>
-            <div style={modalIcon}>🔑</div>
-            <h2 style={{ fontSize: '24px', margin: '0 0 5px', color: '#333' }}>Student Login</h2>
-            <p style={{ color: '#666', fontSize: '14px', marginBottom: '25px' }}>Enter your details to start the quiz!</p>
-
-            <form onSubmit={handleLoginSubmit} style={{ textAlign: 'left' }}>
-              <div style={inputGroup}>
-                <label style={labelStyle}>Username</label>
-                <input
-                  type="text"
-                  placeholder="Your username"
-                  style={inputStyle}
-                  required
-                  onChange={(e) => setLoginForm({ ...loginForm, username: e.target.value })}
-                />
-              </div>
-              <div style={inputGroup}>
-                <label style={labelStyle}>Password</label>
-                <input
-                  type="password"
-                  placeholder="••••••••"
-                  style={inputStyle}
-                  required
-                  onChange={(e) => setLoginForm({ ...loginForm, password: e.target.value })}
-                />
-              </div>
-              <button type="submit" style={modalLoginBtn}>Login & Start Exam</button>
-            </form>
-          </div>
+         <StudentLogin onClose={() => setShowLogin(false)} />
         </div>
       )}
       {showRegister && (
         <div style={modalOverlay}>
-          <StudentForm onClose={() => setShowRegister(false)} />
+          <StudentRegister onClose={() => setShowRegister(false)} />
         </div>
       )}
       <header style={headerStyle}>
@@ -237,15 +199,7 @@ const waitlistSubtext = { fontSize: '16px', color: '#666', maxWidth: '600px', ma
 const waitlistForm = { display: 'flex', gap: '10px', width: '100%', maxWidth: '500px' };
 const waitlistInput = { flex: 2, padding: '15px 20px', borderRadius: '15px', border: '2px solid #ffcc00', outline: 'none', fontSize: '16px' };
 const waitlistBtn = { flex: 1, backgroundColor: constants.red, color: '#fff', border: 'none', padding: '15px 25px', borderRadius: '15px', fontWeight: '800', cursor: 'pointer', whiteSpace: 'nowrap' };
-const footerStyle = { height: '80px', backgroundColor: constants.red, marginTop: '100px', borderRadius: '40px 40px 0 0' };
 const loadingStyle = { textAlign: 'center', padding: '100px', fontSize: '24px', color: constants.red };
 const modalOverlay = { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(5px)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 2000 };
-const modalContent = { backgroundColor: '#fff', padding: '40px', borderRadius: '30px', width: '90%', maxWidth: '400px', textAlign: 'center', position: 'relative', animation: 'popIn 0.3s ease-out' };
-const closeBtn = { position: 'absolute', top: '15px', right: '20px', fontSize: '28px', background: 'none', border: 'none', cursor: 'pointer', color: '#999' };
-const modalIcon = { width: '70px', height: '70px', backgroundColor: '#ffcc00', borderRadius: '50%', margin: '0 auto 15px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '30px' };
-const inputGroup = { marginBottom: '15px', textAlign: 'left' };
-const labelStyle = { display: 'block', fontWeight: '700', marginBottom: '5px', fontSize: '14px' };
-const inputStyle = { width: '100%', padding: '12px', borderRadius: '10px', border: '2px solid #eee', outline: 'none', boxSizing: 'border-box' };
-const modalLoginBtn = { width: '100%', padding: '15px', backgroundColor: constants.red, color: '#fff', border: 'none', borderRadius: '12px', fontWeight: '800', cursor: 'pointer', marginTop: '10px' };
 
 export default QuizLandingPage;

@@ -44,7 +44,7 @@ const AboutCompetition = ({ data }) => {
                 <div className="about-steps">
                     {data.competitionSteps?.map((item, index) => (
                         <div className="about-step"
-                            style={{ marginBottom: data.competitionSteps.length == index + 1 ? 'none' : '20px' }}
+                            style={{ marginBottom: data.competitionSteps.length === index + 1 ? 'none' : '20px' }}
                             key={index}>
                             <span className="about-step-dot" />
                             <div className="about-step-content">

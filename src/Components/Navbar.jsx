@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
   const [menu, setMenu] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  const location = useLocation();
-  const currentPath = location.pathname;
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_STRAPI_URL}/api/navbars?populate=*`)
@@ -90,10 +87,6 @@ const Navbar = () => {
     cursor: 'pointer',
     boxShadow: '0 3px 12px rgba(246, 9, 69, 0.25)'
   };
-
-  const normalizePath = (path) => path.replace(/^\/|\/$/g, '');
-  const isActive = (route) => normalizePath(currentPath) === normalizePath(route);
-
 
   if (loading) {
     return null;

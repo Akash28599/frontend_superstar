@@ -1,6 +1,6 @@
 import './App.css';
 import FooterLayout from './Components/Footer';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { LayoutComponent } from './Layout';
 
@@ -14,8 +14,6 @@ function App() {
         );
         const json = await res.json();
         setSettingsData(json?.data?.[0]);
-        //const settings = settingsData?.data?.[0];
-
       } catch (error) {
         console.error("Error fetching footer data:", error);
       }
