@@ -46,7 +46,7 @@ const StudentForm = ({ onClose }) => {
                 accept=".jpg,.jpeg,.png,.pdf"
               />
             </label>
-            <label className="sr-upload">
+            {/* <label className="sr-upload">
               <HiIdentification />
               Upload School ID Card
               <input
@@ -54,7 +54,7 @@ const StudentForm = ({ onClose }) => {
                 hidden
                 accept=".jpg,.jpeg,.png,.pdf"
               />
-            </label>
+            </label> */}
           </div>
 
           <h2>Student 2 Registration</h2>
@@ -70,7 +70,7 @@ const StudentForm = ({ onClose }) => {
                 accept=".jpg,.jpeg,.png,.pdf"
               />
             </label>
-            <label className="sr-upload">
+            {/* <label className="sr-upload">
               <HiIdentification />
               Upload School ID Card
               <input
@@ -78,7 +78,7 @@ const StudentForm = ({ onClose }) => {
                 hidden
                 accept=".jpg,.jpeg,.png,.pdf"
               />
-            </label>
+            </label> */}
           </div>
 
           <div className="sr-footer">
