@@ -3,6 +3,7 @@ import { FaWpforms } from "react-icons/fa";
 import { HiIdentification } from "react-icons/hi2";
 import RegistrationSuccessModal from './RegistrationSuccessModal';
 import { useNavigate } from 'react-router-dom';
+import './StudentRegisterForm.css'
 
 const StudentForm = () => {
   const [showPopup, setShowPopup] = useState(false);

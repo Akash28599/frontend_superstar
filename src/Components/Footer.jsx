@@ -52,7 +52,7 @@ const FooterLayout = ({settingsData}) => {
               style={{
                 width: screenWidth >= 1440 ? "20%" : "25%",
                 height: screenWidth >= 1440 ? "20%" : "25%",
-                maxWidth: screenWidth >= 1440 ? "180px" : "150px",
+                maxWidth: screenWidth >= 1440 ? "220px" : "200px",
                 borderRadius: "8px",
                 objectFit: "cover",
                 padding: "10px",
