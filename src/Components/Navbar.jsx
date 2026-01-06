@@ -20,7 +20,7 @@ const Navbar = () => {
       });
   }, []);
 
-
+const constants= {gold: '#f3c720',red: '#dd2120',font: '"KelloggsSans", Arial, sans-serif'}
   const navbarStyle = {
     position: 'relative',
     top: '25px',
@@ -72,13 +72,13 @@ const Navbar = () => {
     backgroundColor: 'transparent', // No background
   };
 
-  const contactStyle = {
+  const ButtonStyle = {
     fontFamily: "'Kellogg's Sans', sans-serif",
     fontWeight: 700,
     fontSize: '18px',
     lineHeight: '100%',
     letterSpacing: '0%',
-    backgroundColor: '#F60945',
+    backgroundColor: constants.red,
     color: 'white',
     textDecoration: 'none',
     padding: '8px 20px',
@@ -87,6 +87,23 @@ const Navbar = () => {
     cursor: 'pointer',
     boxShadow: '0 3px 12px rgba(246, 9, 69, 0.25)'
   };
+
+    const ActiveButtonStyle = {
+    fontFamily: "'Kellogg's Sans', sans-serif",
+    fontWeight: 700,
+    fontSize: '18px',
+    lineHeight: '100%',
+    letterSpacing: '0%',
+    backgroundColor: constants.gold,
+    color: 'black',
+    textDecoration: 'none',
+    padding: '8px 20px',
+    borderRadius: '20px',
+    transition: 'all 0.3s ease',
+    cursor: 'pointer',
+    boxShadow: '0 3px 12px rgba(246, 9, 69, 0.25)',
+  };
+
 
   if (loading) {
     return null;
@@ -98,7 +115,7 @@ const Navbar = () => {
         // <a
         //   key={item.id}
         //   href={item.route}
-        //   style={item.isButton ? contactStyle : isActive(item.route) ? activeItemStyle : navItemStyle}
+        //   style={item.isButton ? ButtonStyle : isActive(item.route) ? activeItemStyle : navItemStyle}
         //   onClick={(e) => {
         //     e.preventDefault();
         //     window.location.href = item.route;
@@ -112,9 +129,11 @@ const Navbar = () => {
           to={item.route}
           style={({ isActive }) =>
             isActive
-              ? activeItemStyle
+              ? item.isButton
+                ? ActiveButtonStyle
+                : activeItemStyle
               : item.isButton
-                ? contactStyle
+                ? ButtonStyle
                 : navItemStyle
           }
         >
