@@ -85,11 +85,11 @@ const ExamPage = () => {
   const currentQuestion = questions[currentIdx];
 
   return (
-    <div style={containerStyle}>
+    <div style={{...containerStyle,fontFamily:constants.fontFamily}}>
       {showConfirm && (
         <div style={modalOverlay}>
           <div style={modalContent}>
-            <h2 style={{ color: '#dd2120', marginTop: 0 }}>End Exam?</h2>
+            <h2 style={{ color: constants.red, marginTop: 0 }}>End Exam?</h2>
             <p>Are you sure you want to exit? Your progress will be saved.</p>
             <div style={{ display: 'flex', gap: '15px', marginTop: '20px', justifyContent: 'center' }}>
               <button style={cancelBtn} onClick={() => setShowConfirm(false)}>Continue</button>
@@ -101,7 +101,7 @@ const ExamPage = () => {
 
       <nav style={navStyle}>
         <div style={navLeft}>
-          <div style={logoStyle}>Kellogg's</div>
+          <div style={logoStyle}><img src='/assetss/kelloggH1.png' alt="Kellogg's" style={logoImageStyle}/></div>
           <div style={timerBox}>
             <span style={timerLabel}>Time Remaining:</span>
             <span style={timerValue}>{formatTime(timeLeft)}</span>
@@ -191,7 +191,7 @@ const ExamPage = () => {
     </div>
   );
 };
-
+const constants = { red: '#dd2120' ,fontFamily:'"KelloggsSans", Arial, sans-serif'}
 const modalOverlay = { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 9999 };
 const modalContent = { backgroundColor: '#fff', padding: '30px', borderRadius: '15px', textAlign: 'center', width: '350px' };
 const cancelBtn = { padding: '10px 15px', borderRadius: '8px', border: '1px solid #ccc', cursor: 'pointer' };
@@ -199,7 +199,8 @@ const confirmBtn = { padding: '10px 15px', borderRadius: '8px', border: 'none', 
 const containerStyle = { backgroundColor: '#F5F5F5', minHeight: '100vh', fontFamily: 'Arial, sans-serif' };
 const navStyle = { backgroundColor: '#E30613', padding: '10px 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: '#fff' };
 const navLeft = { display: 'flex', alignItems: 'center', gap: '30px' };
-const logoStyle = { fontSize: '24px', fontWeight: 'bold', fontStyle: 'italic' };
+const logoStyle = { fontSize: '24px', fontWeight: 'bold', fontStyle: 'italic' ,objectFit:'contain'};
+const logoImageStyle={width:'140px'}
 const timerBox = { display: 'flex', flexDirection: 'column', alignItems: 'center' };
 const timerLabel = { fontSize: '10px' };
 const timerValue = { fontSize: '28px', fontWeight: 'bold' };
