@@ -31,17 +31,17 @@ const YoutubeGallery = () => {
         editionName: 'Second'
     }
     const fetchURLs = async () => {
-    try {
-        const res = await fetch(`${process.env.REACT_APP_STRAPI_URL}/api/youtube-url?populate=*`)
-        const json = await res.json()
+        try {
+            const res = await fetch(`${process.env.REACT_APP_STRAPI_URL}/api/youtube-url?populate=*`)
+            const json = await res.json()
 
-        setData(json.data)
-    } catch (err) {
-                setData(sample)
+            setData(json.data)
+        } catch (err) {
+            setData(sample)
 
-        console.error("Fetch error:", err)
+            console.error("Fetch error:", err)
+        }
     }
-}
 
     useEffect(() => {
         fetchURLs()

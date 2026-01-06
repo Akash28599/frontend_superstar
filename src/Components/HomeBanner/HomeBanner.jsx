@@ -95,7 +95,7 @@ const HomeBanner = () => {
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: '12px',
-    boxShadow: '2px 3px 0px #F60945, 0 4px 12px rgba(0,0,0,0.1)',
+    boxShadow: `2px 3px 0px ${constants.red}, 0 4px 12px rgba(0,0,0,0.1)`,
     transition: 'all 0.3s ease',
     transform: isHovered ? 'scale(1.05)' : 'scale(1)',
   };
@@ -171,7 +171,7 @@ const HomeBanner = () => {
             }}>
               <h1 style={{
                 ...h1Style,
-                fontSize: screenWidth >= 1440 ? '82px' : '75px',
+                fontSize: screenWidth >= 1440 ? '76px' : '70px',
                 lineHeight: screenWidth >= 1440 ? '1.05' : '0.9',
                 maxHeight: screenWidth >= 1440 ? '175px' : '140px',
               }}>
@@ -186,8 +186,8 @@ const HomeBanner = () => {
               <button
                 style={{
                   ...buttonStyle,
-                  backgroundColor: isHovered ? '#FCD34D' : '#fff',
-                  color: '#F60945',
+                  backgroundColor: isHovered ? constants.gold : '#fff',
+                  color: constants.red,
                   fontSize: screenWidth >= 1440 ? '1.4rem' : '1.2rem',
                   padding: screenWidth >= 1440 ? '0.75rem 2.5rem' : '0.6rem 2rem'
                 }}
