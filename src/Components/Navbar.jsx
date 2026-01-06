@@ -108,6 +108,7 @@ const Navbar = () => {
         // </a>
 
         <NavLink
+        key={item.id}
           to={item.route}
           style={({ isActive }) =>
             isActive
