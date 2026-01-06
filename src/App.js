@@ -13,7 +13,6 @@ function App() {
           `${process.env.REACT_APP_STRAPI_URL}/api/sitesettings?populate=*`
         );
         const json = await res.json();
-        console.log(json);
         setSettingsData(json?.data?.[0]);
         //const settings = settingsData?.data?.[0];
 
