@@ -175,34 +175,66 @@ export default function PrintableGames() {
   //     setDownloadingId(null);
   //   }
   // }
+// async function downloadPrintable(item) {
+//   const printable = item.printable && item.printable[0];
+//   if (!printable) return;
+
+//   try {
+//     setDownloadingId(item.id);
+
+//     const fileUrl = printable; // e.g. /assetss/pdfs/sample.pdf
+
+//     const filename =
+//       printable.name ||
+//       printable.hash ||
+//       `printable-${item.id}${printable.ext || ".pdf"}`;
+
+//     const a = document.createElement("a");
+//     a.href = fileUrl;
+//     a.download = filename;
+//     a.target = "_self"; // force download instead of new tab
+//     document.body.appendChild(a);
+//     a.click();
+//     a.remove();
+
+//   } catch (err) {
+//     console.error("Download failed, opening in new tab:", err);
+//     window.open(printable.url, "_blank", "noopener");
+//   } finally {
+//     setDownloadingId(null);
+//   }
+// }
 async function downloadPrintable(item) {
-  const printable = item.printable && item.printable[0];
-  if (!printable) return;
+  let fileUrl = null;
+  let filename = "printable.pdf";
 
-  try {
-    setDownloadingId(item.id);
-
-    const fileUrl = printable; // e.g. /assetss/pdfs/sample.pdf
-
-    const filename =
-      printable.name ||
-      printable.hash ||
-      `printable-${item.id}${printable.ext || ".pdf"}`;
-
-    const a = document.createElement("a");
-    a.href = fileUrl;
-    a.download = filename;
-    a.target = "_self"; // force download instead of new tab
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-
-  } catch (err) {
-    console.error("Download failed, opening in new tab:", err);
-    window.open(printable.url, "_blank", "noopener");
-  } finally {
-    setDownloadingId(null);
+  // Case 1: public folder string (your assetss PDFs)
+  if (typeof item.printable === "string") {
+    fileUrl = item.printable;
+    filename = item.printable.split("/").pop();
   }
+
+  // Case 2: Strapi media array
+  else if (Array.isArray(item.printable) && item.printable[0]) {
+    fileUrl = item.printable[0].url;
+    filename =
+      item.printable[0].name ||
+      `printable-${item.id}${item.printable[0].ext || ".pdf"}`;
+  }
+
+  if (!fileUrl) return;
+
+  setDownloadingId(item.id);
+
+  const a = document.createElement("a");
+  a.href = fileUrl;
+  a.download = filename;
+  a.target = "_self";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  setDownloadingId(null);
 }
 
   if (loading) {
