@@ -15,9 +15,9 @@ const ExamPage = () => {
     let localStream = null;
     const startVideo = async () => {
       try {
-        localStream = await navigator.mediaDevices.getUserMedia({ 
+        localStream = await navigator.mediaDevices.getUserMedia({
           video: { width: 640, height: 480 },
-          audio: false 
+          audio: false
         });
         if (videoRef.current) {
           videoRef.current.srcObject = localStream;
@@ -25,8 +25,8 @@ const ExamPage = () => {
             videoRef.current.play().catch(console.error);
           };
         }
-      } catch (err) { 
-        console.error(err); 
+      } catch (err) {
+        console.error(err);
       }
     };
     startVideo();
@@ -89,9 +89,9 @@ const ExamPage = () => {
       {showConfirm && (
         <div style={modalOverlay}>
           <div style={modalContent}>
-            <h2 style={{color: '#E30613', marginTop: 0}}>End Exam?</h2>
+            <h2 style={{ color: '#dd2120', marginTop: 0 }}>End Exam?</h2>
             <p>Are you sure you want to exit? Your progress will be saved.</p>
-            <div style={{display: 'flex', gap: '15px', marginTop: '20px', justifyContent: 'center'}}>
+            <div style={{ display: 'flex', gap: '15px', marginTop: '20px', justifyContent: 'center' }}>
               <button style={cancelBtn} onClick={() => setShowConfirm(false)}>Continue</button>
               <button style={confirmBtn} onClick={() => window.location.href = '/quiz'}>End Now</button>
             </div>
@@ -143,9 +143,9 @@ const ExamPage = () => {
                 <h2 style={questionTitle}>{currentQuestion.question}</h2>
                 <div style={optionsGrid}>
                   {currentQuestion.options.map((opt, i) => (
-                    <div 
-                      key={i} 
-                      onClick={() => setAnswers({...answers, [currentQuestion.id]: opt})}
+                    <div
+                      key={i}
+                      onClick={() => setAnswers({ ...answers, [currentQuestion.id]: opt })}
                       style={{
                         ...optionBox,
                         border: answers[currentQuestion.id] === opt ? '2px solid #2196F3' : '1px solid #FFCC00',
@@ -153,7 +153,7 @@ const ExamPage = () => {
                       }}
                     >
                       <input type="radio" checked={answers[currentQuestion.id] === opt} readOnly />
-                      <span style={{marginLeft: '10px'}}>{opt}</span>
+                      <span style={{ marginLeft: '10px' }}>{opt}</span>
                     </div>
                   ))}
                 </div>
@@ -161,7 +161,18 @@ const ExamPage = () => {
             )}
             <div style={actionButtons}>
               <button disabled={currentIdx === 0} onClick={() => setCurrentIdx(currentIdx - 1)} style={prevBtn}>Back</button>
-              <button onClick={() => setCurrentIdx(Math.min(questions.length - 1, currentIdx + 1))} style={nextBtn}>Save & Next</button>
+              <button
+                onClick={() => {
+                  if (currentIdx == questions.length - 1) {
+                    setShowConfirm(true)
+                  }
+                  else {
+                    setCurrentIdx(Math.min(questions.length - 1, currentIdx + 1))
+                  }
+                }
+                }
+                style={nextBtn}>{currentIdx == questions.length - 1 ? `Submit Exam` : `Save & Next`}
+              </button>
             </div>
           </div>
         </main>
@@ -172,8 +183,8 @@ const ExamPage = () => {
             <video ref={videoRef} autoPlay playsInline muted style={videoStyle} />
           </div>
           <div style={monitorInfo}>
-            <p style={{color: 'green', fontWeight: 'bold'}}>● Camera: Active</p>
-            <p style={{color: 'green', fontWeight: 'bold'}}>● Audio: Monitoring</p>
+            <p style={{ color: 'green', fontWeight: 'bold' }}>● Camera: Active</p>
+            <p style={{ color: 'green', fontWeight: 'bold' }}>● Audio: Monitoring</p>
           </div>
         </aside>
       </div>

@@ -1,19 +1,23 @@
 import { useState } from 'react';
-import './StudentRegisterForm.css';
 import { FaWpforms } from "react-icons/fa";
+import { HiIdentification } from "react-icons/hi2";
 import RegistrationSuccessModal from './RegistrationSuccessModal';
+import { useNavigate } from 'react-router-dom';
 
 const StudentForm = () => {
   const [showPopup, setShowPopup] = useState(false);
+  const navigate = useNavigate()
 
   return (
     <div className="sr-container">
+
       <div className="sr-card">
+        <button onClick={() => navigate('/quiz')} className='sr-btn'>×</button>
+
         <div className="sr-header">
           <span className="sr-logo"><img src='/assetss/kelloggH1.png' /></span>
           <h1>Fill Your Details</h1>
         </div>
-
         <div className="sr-body">
           <h2>School Details</h2>
 
@@ -28,14 +32,48 @@ const StudentForm = () => {
 
           <div className="sr-grid">
             <input placeholder="Full Name" />
-            <button className="sr-upload"><FaWpforms />Upload Birth Certificate</button>
+            <label className="sr-upload">
+              <FaWpforms />
+              Upload Birth Certificate
+              <input
+                type="file"
+                hidden
+                accept=".jpg,.jpeg,.png,.pdf"
+              />
+            </label>
+            <label className="sr-upload">
+              <HiIdentification />
+              Upload School ID Card
+              <input
+                type="file"
+                hidden
+                accept=".jpg,.jpeg,.png,.pdf"
+              />
+            </label>
           </div>
 
           <h2>Student 2 Registration</h2>
 
           <div className="sr-grid">
             <input placeholder="Full Name" />
-            <button className="sr-upload"><FaWpforms />Upload Birth Certificate</button>
+            <label className="sr-upload">
+              <FaWpforms />
+              Upload Birth Certificate
+              <input
+                type="file"
+                hidden
+                accept=".jpg,.jpeg,.png,.pdf"
+              />
+            </label>
+            <label className="sr-upload">
+              <HiIdentification />
+              Upload School ID Card
+              <input
+                type="file"
+                hidden
+                accept=".jpg,.jpeg,.png,.pdf"
+              />
+            </label>
           </div>
 
           <div className="sr-footer">
@@ -54,7 +92,11 @@ const StudentForm = () => {
       </div>
       {showPopup && (
         <RegistrationSuccessModal
-          onClose={() => setShowPopup(false)}
+          onClose={() => {
+            setShowPopup(false);
+            window.scrollTo({ top: 0, behavior: 'instant' })
+            navigate('/quiz')
+          }}
         />
       )}
 
