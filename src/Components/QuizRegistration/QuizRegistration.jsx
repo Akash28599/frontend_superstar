@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import StudentForm from './StudentRegisterForm';
 
 const QuizLandingPage = () => {
   const [pageData, setPageData] = useState(null);
   const [showLogin, setShowLogin] = useState(false);
   const [loginForm, setLoginForm] = useState({ username: '', password: '' });
   const [waitlistEmail, setWaitlistEmail] = useState('');
+  const [showRegister, setShowRegister] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -88,7 +91,11 @@ const QuizLandingPage = () => {
           </div>
         </div>
       )}
-
+      {showRegister && (
+        <div style={modalOverlay}>
+          <StudentForm onClose={() => setShowRegister(false)} />
+        </div>
+      )}
       <header style={headerStyle}>
         <div style={headerInner}>
           <img src={first_component.student_exam_login.image} alt="Coco" style={cocoStyle} />
@@ -116,7 +123,13 @@ const QuizLandingPage = () => {
             <div style={iconBox}>⭐</div>
             <h3 style={cardTitle}>{first_component.school_registration.title}</h3>
             <p style={cardDesc}>{first_component.school_registration.description}</p>
-            <button style={redBtn} onClick={() => navigate('/student-register')}>Register Now</button>
+            <button
+              style={redBtn}
+              onClick={() => setShowRegister(true)}
+            >
+              Register Now
+            </button>
+
           </div>
 
           <div className="card-anim" style={yellowCard}>
@@ -183,12 +196,13 @@ const QuizLandingPage = () => {
             </form>
           </div>
         </section>
+
       </main>
-      
+
     </div>
   );
 };
-const constants={red:'#dd2120'}
+const constants = { red: '#dd2120' }
 const headerStyle = { backgroundColor: constants.red, color: '#fff', padding: '140px 20px 100px', borderBottomLeftRadius: '50% 12%', borderBottomRightRadius: '50% 12%', position: 'relative' };
 const headerInner = { maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', position: 'relative' };
 const cocoStyle = { position: 'absolute', left: '-40px', top: '-40px', width: '230px', zIndex: 10, animation: 'swing 3s ease-in-out infinite' };

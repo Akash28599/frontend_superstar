@@ -83,14 +83,14 @@ const CocoHeads = () => {
         width: yellowWidth,
         backgroundColor: '#FBCA05',
         borderRadius: '32px',
-        padding: screenWidth >= 1440 ? '0.3rem 0.1rem 2.2rem 140px' : '0.3rem 1.1rem 2.2rem 120px',
+        padding: screenWidth >= 1440 ? '0.3rem 0.1rem 2rem 140px' : '0.3rem 1.1rem 2rem 120px',
         display: 'flex',
         alignItems: 'flex-start',
         position: 'relative',
         overflow: 'visible',
         gap: '1rem',
-        minHeight: '300px',
-        height: screenWidth >= 1440 ? '274px' : '280px',
+        minHeight: '280px',
+        height: screenWidth >= 1440 ? '320px' : '280px',
         left: screenWidth >= 1440 ? '4%' : '2%',
         marginTop: "10%"
       }}>
@@ -135,7 +135,7 @@ const CocoHeads = () => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 textAlign: 'center',
-                width: screenWidth >= 1440 ? '220px' : '190px',
+                width: screenWidth >= 1440 ? '220px' : '180px',
                 boxSizing: 'border-box',
                 padding: '0.5rem',
                 flex: '1 1 0',
@@ -174,7 +174,7 @@ const CocoHeads = () => {
 
                 {/* TITLE SECTION */}
                 <div style={{
-                  width: '120%',
+                  width: '100%',
                   minHeight: '52px',
                   height: '20%',
                   display: 'flex',
@@ -186,7 +186,7 @@ const CocoHeads = () => {
                   <h4 style={{
                     fontFamily: "'Kellogg's Sans', sans-serif",
                     fontWeight: 600,
-                    fontSize: screenWidth >= 1440 ? '20px' : '18px',
+                    fontSize: screenWidth >= 1440 ? '20px' : '16px',
                     lineHeight: '1.2',
                     letterSpacing: '0%',
                     textAlign: 'center',
@@ -195,6 +195,7 @@ const CocoHeads = () => {
                     padding: 0,
                     width: '100%',
                     height: '100%',
+
                   }}>
                     {title}
                   </h4>
@@ -223,7 +224,7 @@ const CocoHeads = () => {
                   <p style={{
                     fontFamily: "'Kellogg's Sans', sans-serif",
                     fontWeight: 400,
-                    fontSize: screenWidth >= 1440 ? '0.95rem' : '0.85rem',
+                    fontSize: screenWidth >= 1440 ? '0.9rem' : '0.8rem',
                     lineHeight: '1.4',
                     color: '#2A2F2F',
                     margin: 0,

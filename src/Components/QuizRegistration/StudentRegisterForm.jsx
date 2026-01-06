@@ -5,19 +5,23 @@ import RegistrationSuccessModal from './RegistrationSuccessModal';
 import { useNavigate } from 'react-router-dom';
 import './StudentRegisterForm.css'
 
-const StudentForm = () => {
+const StudentForm = ({ onClose }) => {
   const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate()
 
   return (
+
     <div className="sr-container">
 
       <div className="sr-card">
-        <button onClick={() => navigate('/quiz')} className='sr-btn'>×</button>
 
         <div className="sr-header">
           <span className="sr-logo"><img src='/assetss/kelloggH1.png' /></span>
-          <h1>Fill Your Details</h1>
+          <div>
+            <h1>Fill Your Details</h1>
+            <button onClick={onClose} className="sr-btn">×</button>
+
+          </div>
         </div>
         <div className="sr-body">
           <h2>School Details</h2>
@@ -84,7 +88,10 @@ const StudentForm = () => {
 
             <button
               className="sr-submit"
-              onClick={() => setShowPopup(true)}
+              onClick={() => {
+                setShowPopup(true)
+
+              }}
             >
               Submit Registration
             </button>
@@ -96,12 +103,16 @@ const StudentForm = () => {
           onClose={() => {
             setShowPopup(false);
             window.scrollTo({ top: 0, behavior: 'instant' })
+                            onClose()
+
             navigate('/quiz')
           }}
         />
       )}
 
     </div>
+
+
   );
 };
 
