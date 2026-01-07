@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import * as faceapi from 'face-api.js';
 
-
 const ExamPage = () => {
   const [questions, setQuestions] = useState([]);
   const [currentIdx, setCurrentIdx] = useState(0);
@@ -16,12 +15,14 @@ const ExamPage = () => {
   
   const [modelsLoaded, setModelsLoaded] = useState(false);
   const [faceStatus, setFaceStatus] = useState("Initializing...");
-
+  const [currentViolation, setCurrentViolation] = useState(null);
+  
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const animationRef = useRef(null);
   const localStream = useRef(null);
-  const lastFaceCountRef = useRef(1);
+  const warningTimeoutRef = useRef(null);
+  const currentViolationRef = useRef(null);
 
   useEffect(() => {
     const loadModels = async () => {
@@ -52,21 +53,82 @@ const ExamPage = () => {
         }
       } catch (err) {
         console.error('❌ Camera denied:', err);
-        setProctorMessage("🚫 Camera access REQUIRED for exam!");
-        incrementWarning("Camera access denied");
+        handleViolation("Camera access denied");
       }
     };
     startVideo();
     return () => {
       if (localStream.current) localStream.current.getTracks().forEach(t => t.stop());
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
+      if (warningTimeoutRef.current) {
+        clearTimeout(warningTimeoutRef.current);
+        warningTimeoutRef.current = null;
+      }
     };
   }, []);
 
   useEffect(() => {
-    const handleVisibility = () => document.hidden && incrementWarning("Tab switching not allowed!");
+    const handleVisibility = () => {
+      if (document.hidden) handleViolation("Tab switching not allowed!");
+    };
     document.addEventListener("visibilitychange", handleVisibility);
     return () => document.removeEventListener("visibilitychange", handleVisibility);
+  }, []);
+
+  const handleViolation = useCallback((violationText) => {
+    console.log('🔄 New violation:', violationText);
+    
+    // Clear existing timeout
+    if (warningTimeoutRef.current) {
+      clearTimeout(warningTimeoutRef.current);
+      warningTimeoutRef.current = null;
+    }
+
+    currentViolationRef.current = violationText;
+    setCurrentViolation(violationText);
+    setProctorMessage(`⚠️ Warning Active: ${violationText}`);
+    setFaceStatus(violationText);
+
+    warningTimeoutRef.current = setTimeout(() => {
+      console.log('⏰ 5 seconds passed - incrementing warning count');
+      
+      setWarnings(prevWarnings => {
+        const newCount = prevWarnings + 1;
+        console.log(`⚠️ Warning count increased to: ${newCount}/4`);
+        
+        setProctorMessage(`⚠️ WARNING ${newCount}/4: ${violationText}`);
+        
+        // Clear violation after counting
+        setCurrentViolation(null);
+        currentViolationRef.current = null;
+        
+        // TERMINATE if 4 warnings reached
+        if (newCount >= 4) {
+          console.log('🚨 TERMINATING EXAM - 4 warnings reached');
+          setTimeout(() => {
+            localStorage.setItem('exam_progress', JSON.stringify(answers));
+            alert("🚨 EXAM TERMINATED: 4+ violations detected!");
+            window.location.href = '/quiz';
+          }, 1000);
+        }
+        
+        return newCount;
+      });
+      
+      warningTimeoutRef.current = null;
+    }, 5000);
+  }, [answers]);
+
+  const clearViolation = useCallback(() => {
+    console.log('✅ Clearing violation');
+    if (warningTimeoutRef.current) {
+      clearTimeout(warningTimeoutRef.current);
+      warningTimeoutRef.current = null;
+    }
+    currentViolationRef.current = null;
+    setCurrentViolation(null);
+    setProctorMessage("");
+    setFaceStatus("✅ OK");
   }, []);
 
   const detectFaces = useCallback(async () => {
@@ -101,7 +163,7 @@ const ExamPage = () => {
       violation = `${faceCount} faces detected! Only 1 allowed.`;
     } else {
       const box = resizedDetections[0].detection.box;
-      const frameArea = displaySize.width * displaySize.height * 0.15;
+      const frameArea = displaySize.width * displaySize.height * 0.03;
       
       if (box.width * box.height < frameArea) {
         violation = "Face too small! Center in frame.";
@@ -110,41 +172,28 @@ const ExamPage = () => {
         const noseTip = landmarks[30];
         const centerX = displaySize.width / 2;
         
-        if (Math.abs(noseTip.x - centerX) > displaySize.width * 0.25) {
+        if (Math.abs(noseTip.x - centerX) > displaySize.width * 0.40) {
           violation = "Looking away! Face camera directly.";
         }
       }
     }
 
-    if (violation && lastFaceCountRef.current !== faceCount) {
-      incrementWarning(violation);
-      lastFaceCountRef.current = faceCount;
+    if (violation) {
+      if (currentViolationRef.current !== violation) {
+        handleViolation(violation);
+      }
+    } else if (currentViolationRef.current) {
+      clearViolation();
     }
 
-    setFaceStatus(violation || "✅ OK");
     animationRef.current = requestAnimationFrame(detectFaces);
-  }, [modelsLoaded]);
+  }, [modelsLoaded, handleViolation, clearViolation]);
 
   useEffect(() => {
-    if (modelsLoaded) detectFaces();
-  }, [modelsLoaded]);
-
-  const incrementWarning = (reason) => {
-    setWarnings(prev => {
-      const count = prev + 1;
-      setProctorMessage(`⚠️ WARNING ${count}/4: ${reason}`);
-      setTimeout(() => setProctorMessage(""), 5000);
-      
-      if (count >= 4) {
-        setTimeout(() => {
-          localStorage.setItem('exam_progress', JSON.stringify(answers));
-          alert("🚨 EXAM TERMINATED: 4+ violations detected!");
-          window.location.href = '/quiz';
-        }, 1000);
-      }
-      return count;
-    });
-  };
+    if (modelsLoaded) {
+      detectFaces();
+    }
+  }, [modelsLoaded, detectFaces]);
 
   useEffect(() => {
     fetch('https://strapi-superstar.onrender.com/api/exam-questions')
@@ -199,7 +248,11 @@ const ExamPage = () => {
       <div style={subHeader}>
         <span style={warningText}>
           Warnings: {warnings}/4 | 
-          <span style={{color: faceStatus.includes('OK') ? '#4CAF50' : '#f44336', fontWeight: 'bold'}}>
+          <span style={{ 
+            color: faceStatus.includes('OK') ? '#4CAF50' : 
+                   currentViolation ? '#f44336' : '#FF9800', 
+            fontWeight: 'bold'
+          }}>
             {faceStatus}
           </span>
         </span>
@@ -281,7 +334,11 @@ const ExamPage = () => {
             <p style={{color: warnings < 4 ? '#4CAF50' : '#f44336', margin: '0 0 8px'}}>
               📹 Camera: {modelsLoaded ? 'Active' : 'Loading'}
             </p>
-            <p style={{color: faceStatus.includes('OK') ? '#4CAF50' : '#FF9800', margin: 0}}>
+            <p style={{ 
+              color: faceStatus.includes('OK') ? '#4CAF50' : 
+                     currentViolation ? '#f44336' : '#FF9800', 
+              margin: 0
+            }}>
               👤 {faceStatus}
             </p>
             <p style={{fontSize: 11, color: '#666', marginTop: 12}}>4 warnings = Exam ends</p>
@@ -292,7 +349,7 @@ const ExamPage = () => {
   );
 };
 
-
+// Styles remain exactly the same
 const containerStyle = { backgroundColor: '#F5F7FA', minHeight: '100vh', fontFamily: 'system-ui, sans-serif' };
 const modalOverlay = { position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.8)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 9999 };
 const modalContent = { background: 'white', padding: '40px', borderRadius: '16px', maxWidth: '450px', textAlign: 'center' };
