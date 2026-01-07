@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './Cocohead.css'
-export const CocoHead = () => {
+export const CocoHead = ({dpr}) => {
     const [items, setItems] = useState([]);
     const [head, setHead] = useState(null);
     const [starImage, setStarImage] = useState(null);
@@ -20,7 +20,6 @@ export const CocoHead = () => {
     }, []);
     const is100PercentScale = scale === 1;
 
-    console.log(is100PercentScale)
     useEffect(() => {
         fetch(`${process.env.REACT_APP_STRAPI_URL}/api/coco-heads?populate=*`)
             .then(res => res.json())
@@ -66,10 +65,10 @@ export const CocoHead = () => {
                                     {iconUrl &&
                                         <img src={iconUrl} alt='item icon' />}
                                 </div>
-                                <div className='ch-title' style={{ fontSize: is100PercentScale ? '1.6rem' : '1rem' }}>
+                                <div className='ch-title' style={{ fontSize: dpr ? '1.6rem' : '1rem' }}>
                                     {title}
                                 </div>
-                                <div className='ch-description' style={{ fontSize: is100PercentScale ? '1.3rem' : '.8rem' }}>
+                                <div className='ch-description' style={{ fontSize: dpr ? '1.3rem' : '.8rem' }}>
                                     {desc}
                                 </div>
                             </div>

@@ -22,8 +22,8 @@ export default function HomePage({dpr}) {
                 </div>
 
                 {/* Other components */}
-                <CocoHead/>
-                 <CocoBanner/>
+                <CocoHead dpr={dpr}/>
+                 <CocoBanner dpr={dpr}/>
                 <OurProducts />
                 {/* <TrendingStories/> */}
                 <PrintableGames />
