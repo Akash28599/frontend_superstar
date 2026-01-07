@@ -46,14 +46,14 @@ const CocoBanner = () => {
       textTop: '42%', textLeft: '22%',
       titleSize: '5.6rem', descSize: '2.1rem'
     };
-    
+
     if (screenWidth >= 1440) return { // Medium desktop 
       charBottom: '22%', charLeft: '14%',
       cloudTop: '38%', cloudRight: '13%',
       textTop: '45%', textLeft: '25%',
       titleSize: '4.8rem', descSize: '1.9rem'
     };
-    
+
     if (screenWidth >= 1200) return { // Your smaller laptop - adjusted
       charBottom: '15%', charLeft: '15%',
       cloudTop: '39%', cloudRight: '10%',
@@ -70,28 +70,30 @@ const CocoBanner = () => {
   };
 
   const positions = getPositions();
-      console.log("cc",screenWidth,'cc',positions.charLeft)
+  console.log("cc", screenWidth, 'cc', positions.charLeft)
 
   return (
-    <div style={{ position: "relative", width: "100%", height: "auto" }}>
+    <div style={{ position: "relative", width: "100%", height: "auto", }}>
       {/* wave background */}
-      <img 
-        src={waveImage} 
-        alt="wave background" 
-        style={{ width: "100%", display: "block", position: "relative" }} 
-      />
+      <img
+        src={waveImage}
+        alt="wave background"
+        style={{
+          width: "100%", display: "block", position: "relative",
+          height: screenWidth >= 1900 ? "1000px" : "100%",
+        }} />
 
       {/* character image */}
       {charImg && (
-        <img 
-          src={charImg} 
-          alt="character" 
-          style={{ 
-            position: "absolute", 
-            bottom: positions.charBottom, 
-            left: positions.charLeft, 
-            transform: screenWidth>=1900?"translateX(-62.5%)":"translateX(-50%)", 
-            zIndex: 2, 
+        <img
+          src={charImg}
+          alt="character"
+          style={{
+            position: "absolute",
+            bottom: positions.charBottom,
+            left: positions.charLeft,
+            transform: screenWidth >= 1900 ? "translateX(-62.5%)" : "translateX(-50%)",
+            zIndex: 2,
             pointerEvents: "none",
             maxWidth: "100%",
             height: "auto"
@@ -101,14 +103,14 @@ const CocoBanner = () => {
 
       {/* title cloud */}
       {cloudImg && (
-        <img 
-          src={cloudImg} 
-          alt="cloud" 
-          style={{ 
-            position: "absolute", 
-            top: positions.cloudTop, 
-            right: positions.cloudRight, 
-            zIndex: 1, 
+        <img
+          src={cloudImg}
+          alt="cloud"
+          style={{
+            position: "absolute",
+            top: positions.cloudTop,
+            right: positions.cloudRight,
+            zIndex: 1,
             pointerEvents: "none",
             maxWidth: "100%",
             height: "auto"
@@ -117,24 +119,24 @@ const CocoBanner = () => {
       )}
 
       {/* Text content */}
-      <div 
-        style={{ 
-          display: "flex", 
-          flexDirection: "column", 
-          gap: "12px", 
-          position: "absolute", 
-          top: positions.textTop, 
-          left: positions.textLeft, 
-          textAlign: "center", 
-          color: "white", 
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "12px",
+          position: "absolute",
+          top: positions.textTop,
+          left: positions.textLeft,
+          textAlign: "center",
+          color: "white",
           zIndex: 2,
           maxWidth: "80%"
         }}
       >
-        <h1 
-          style={{ 
+        <h1
+          style={{
             fontWeight: 700,
-            marginBottom: "16px", 
+            marginBottom: "16px",
             maxWidth: "72%",
             fontSize: positions.titleSize,
             lineHeight: 1.2,
@@ -144,14 +146,14 @@ const CocoBanner = () => {
           {title}
         </h1>
 
-        <div 
+        <div
           dangerouslySetInnerHTML={{ __html: description }}
-          style={{ 
+          style={{
             fontFamily: "Kellogg's Sans",
             fontWeight: 400,
-            fontStyle:"italic",
-            opacity: 0.9, 
-            maxWidth: "75%", 
+            fontStyle: "italic",
+            opacity: 0.9,
+            maxWidth: "75%",
             position: 'relative',
             lineHeight: "1.2",
             fontSize: positions.descSize,
