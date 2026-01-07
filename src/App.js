@@ -6,6 +6,14 @@ import { LayoutComponent } from './Layout';
 
 function App() {
   const [settingsData, setSettingsData] = useState(null);
+  const [dpr, setDpr] = useState(window.devicePixelRatio || 1);
+
+  useEffect(() => {
+    const updateDpr = () => setDpr(window.devicePixelRatio || 1);
+    window.addEventListener("resize", updateDpr);
+    return () => window.removeEventListener("resize", updateDpr);
+  }, []);
+
   useEffect(() => {
     const getFooterData = async () => {
       try {
@@ -24,7 +32,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <LayoutComponent settingsData={settingsData}/>
+        <LayoutComponent settingsData={settingsData} dpr={dpr}/>
       </BrowserRouter>
 
       <FooterLayout settingsData={settingsData} />

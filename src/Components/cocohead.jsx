@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
-const CocoHeads = () => {
+const CocoHeads = ({dpr}) => {
   const [items, setItems] = useState([]);
   const [head, setHead] = useState(null);
   const [starImage, setStarImage] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth*dpr);
+
 
   useEffect(() => {
     const handleResize = () => setScreenWidth(window.innerWidth);
@@ -89,8 +90,8 @@ const CocoHeads = () => {
         position: 'relative',
         overflow: 'visible',
         gap: '1rem',
-        minHeight: '280px',
-        height: screenWidth >= 1440 ? '320px' : '280px',
+        minHeight: '260px',
+        height: screenWidth >= 1440 ? '320px' : '260px',
         left: screenWidth >= 1440 ? '4%' : '2%',
         marginTop: "10%"
       }}>
@@ -117,9 +118,8 @@ const CocoHeads = () => {
         <div style={{
           display: 'flex',
           gap: screenWidth >= 1440 ? '1.5rem' : '1rem',
-          alignItems: 'stretch',
           justifyContent: 'center',
-          width: '100%',
+          width: '70%',
           boxSizing: 'border-box',
           marginLeft: screenWidth >= 1440 ? '23%' : '28%',
         }}>
@@ -209,7 +209,8 @@ const CocoHeads = () => {
                   alignItems: 'start', // Changed from flex-start to center
                   justifyContent: 'center',
                   minHeight: '60px',
-                  marginLeft:'6%'
+                  margin: '2% 6%'
+
                 }}>
                   {/* <div style={{
                     width: '100%',
