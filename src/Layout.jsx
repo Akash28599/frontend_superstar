@@ -7,7 +7,7 @@ import QuizPage from './Pages/QuizPage';
 import { PastWinners } from './Pages/PastWinners/PastWinners';
 import ExamPage from './Components/QuizRegistration/ExamPage';
 
-export function LayoutComponent({ settingsData }) {
+export function LayoutComponent({ settingsData,dpr }) {
   const location = useLocation();
   const hidePaths=['/past-winners','/student-register','/exam-page']
   const hideNavbar = hidePaths.includes(location.pathname);
@@ -21,7 +21,7 @@ export function LayoutComponent({ settingsData }) {
       )}
 
       <Routes>
-        <Route path='/' element={<HomePage />} />
+        <Route path='/' element={<HomePage dpr={dpr}/>} />
         <Route path='/scholarship' element={<ScholarshipPage settingsData={settingsData} />} />
         <Route path='/quiz' element={<QuizPage />} />
         <Route path='/past-winners' element={<PastWinners />} />

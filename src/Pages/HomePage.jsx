@@ -4,8 +4,9 @@ import CocoHeads from "../Components/cocohead"
 import PrintableGames from "../Components/games"
 import OurProducts from "../Components/zigzag"
 import CocoBanner from "../Components/cocobanner"
+import { CocoHead } from "../Components/Cocohead/Cocohead"
 
-export default function HomePage() {
+export default function HomePage({dpr}) {
     return (
         <>
             <div style={{ overflowX: "hidden", width: "100%" }}>
@@ -21,7 +22,7 @@ export default function HomePage() {
                 </div>
 
                 {/* Other components */}
-                <CocoHeads />
+                <CocoHead/>
                  <CocoBanner/>
                 <OurProducts />
                 {/* <TrendingStories/> */}
