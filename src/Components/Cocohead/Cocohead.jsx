@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './Cocohead.css'
-export const CocoHead = ({dpr}) => {
+export const CocoHead = ({ dpr }) => {
     const [items, setItems] = useState([]);
     const [head, setHead] = useState(null);
     const [starImage, setStarImage] = useState(null);
@@ -65,7 +65,10 @@ export const CocoHead = ({dpr}) => {
                                     {iconUrl &&
                                         <img src={iconUrl} alt='item icon' />}
                                 </div>
-                                <div className='ch-title' style={{ fontSize: dpr ? '1.6rem' : '1rem' }}>
+                                <div className='ch-title' style={{
+                                    fontSize: dpr ? '1.6rem' : '1rem',
+                                    width: title.split(" ").length < 4 ? "80%" : "100%"
+                                }}>
                                     {title}
                                 </div>
                                 <div className='ch-description' style={{ fontSize: dpr ? '1.3rem' : '.8rem' }}>

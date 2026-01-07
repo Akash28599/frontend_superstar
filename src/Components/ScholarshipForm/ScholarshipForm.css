@@ -151,7 +151,6 @@ textarea:focus {
 /* ESSAY */
 .essay {
     position: relative;
-
 }
 
 .counter {
@@ -194,7 +193,6 @@ textarea {
     color: var(--black);
     cursor: pointer;
     font-family: var(--font);
-
 }
 
 .submit:hover {
@@ -234,5 +232,15 @@ textarea {
     .right {
         width: 100%;
 
+    }
+
+    .counter {
+        top: 30px;
+    }
+}
+@media (min-width: 1600px) and (max-width: 2000px){
+    
+    .counter {
+        top: 17px;
     }
 }
