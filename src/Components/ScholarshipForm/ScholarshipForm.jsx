@@ -43,7 +43,7 @@ const ScholarshipForm = ({ data }) => {
 
                         <div className="row">
                             <input type="text" placeholder="City/Location" />
-                            <select>
+                            <select  style={{paddingLeft:'8px'}}>
                                 <option value="">Age</option>
                                 {intArrayBuilder(5, 18).map(age => (
                                     <option key={age} value={age}>{age}</option>

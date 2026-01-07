@@ -6,13 +6,20 @@ import { LayoutComponent } from './Layout';
 
 function App() {
   const [settingsData, setSettingsData] = useState(null);
-  const [dpr, setDpr] = useState(window.devicePixelRatio || 1);
+      const [scale, setScale] = useState(window.devicePixelRatio);
 
-  useEffect(() => {
-    const updateDpr = () => setDpr(window.devicePixelRatio || 1);
-    window.addEventListener("resize", updateDpr);
-    return () => window.removeEventListener("resize", updateDpr);
-  }, []);
+     useEffect(() => {
+        const handleResize = () => {
+            setScale(window.devicePixelRatio);
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+    const is100PercentScale = scale === 1;
 
   useEffect(() => {
     const getFooterData = async () => {
@@ -32,7 +39,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <LayoutComponent settingsData={settingsData} dpr={dpr}/>
+        <LayoutComponent settingsData={settingsData} dpr={is100PercentScale}/>
       </BrowserRouter>
 
       <FooterLayout settingsData={settingsData} />
