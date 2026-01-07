@@ -10,7 +10,8 @@ import ExamPage from './Components/QuizRegistration/ExamPage';
 
 export function LayoutComponent({ settingsData }) {
   const location = useLocation();
-  const hideNavbar = location.pathname === '/past-winners';
+  const hideNavbar = location.pathname === '/past-winners' || location.pathname==='/exam-page'
+  
 
   return (
     <>
