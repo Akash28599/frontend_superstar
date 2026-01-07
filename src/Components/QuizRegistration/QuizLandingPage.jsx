@@ -8,15 +8,12 @@ const QuizLandingPage = () => {
   const [waitlistEmail, setWaitlistEmail] = useState('');
   const [showRegister, setShowRegister] = useState(false);
 
-
   useEffect(() => {
     fetch(`${process.env.REACT_APP_STRAPI_URL}/api/quiz-landing-page`)
       .then((res) => res.json())
       .then((json) => setPageData(json.data))
       .catch((err) => console.error("Error fetching data:", err));
   }, []);
-
-
 
   const handleWaitlistSubmit = (e) => {
     e.preventDefault();
@@ -29,7 +26,7 @@ const QuizLandingPage = () => {
   const { heading, sub_heading, first_component, second_component } = pageData;
 
   return (
-    <div style={{ fontFamily:constants.fontFamily, backgroundColor: '#fff', minHeight: '100vh', overflowX: 'hidden', position: 'relative' }}>
+    <div style={{ fontFamily: constants.fontFamily, backgroundColor: '#fff', minHeight: '100vh', overflowX: 'hidden', position: 'relative' }}>
 
       <style>
         {`
@@ -57,9 +54,15 @@ const QuizLandingPage = () => {
           <StudentRegister onClose={() => setShowRegister(false)} />
         </div>
       )}
+      
+      <img 
+        src={first_component.student_exam_login.image} 
+        alt="Coco" 
+        style={cocoStyle} 
+      />
+      
       <header style={headerStyle}>
         <div style={headerInner}>
-          <img src={first_component.student_exam_login.image} alt="Coco" style={cocoStyle} />
           <div style={headerTextContainer}>
             <h1 style={titleStyle}>{heading}</h1>
             <p style={subtitleStyle}>{sub_heading}</p>
@@ -90,7 +93,6 @@ const QuizLandingPage = () => {
             >
               Register Now
             </button>
-
           </div>
 
           <div className="card-anim" style={yellowCard}>
@@ -157,17 +159,57 @@ const QuizLandingPage = () => {
             </form>
           </div>
         </section>
-
       </main>
-
     </div>
   );
 };
-const constants = { gold:'#FBCA05',red: '#dd2120' ,fontFamily:'"KelloggsSans", Arial, sans-serif'}
-const headerStyle = { backgroundColor: constants.red, color: '#fff', padding: '140px 20px 100px', borderBottomLeftRadius: '50% 12%', borderBottomRightRadius: '50% 12%', position: 'relative' };
-const headerInner = { maxWidth: '1200px', margin: '0 auto', display: 'flex', alignItems: 'center', position: 'relative' };
-const cocoStyle = { position: 'absolute', left: '-40px', top: '-40px', width: '230px', zIndex: 10, animation: 'swing 3s ease-in-out infinite' };
-const headerTextContainer = { textAlign: 'center', flex: 1, paddingLeft: '140px' };
+
+const constants = { gold:'#FBCA05', red: '#dd2120', fontFamily:'"KelloggsSans", Arial, sans-serif' }
+
+const cocoStyle = { 
+  position: 'absolute', // Use absolute positioning
+  left: '0',
+  top: '0',
+  width: '230px', 
+  height: 'auto',
+  zIndex: 10, // Lower z-index than modals but above header
+  animation: 'swing 3s ease-in-out infinite',
+  transformOrigin: 'top left',
+  
+  '@media (max-width: 768px)': {
+    width: '180px',
+  },
+  '@media (max-width: 480px)': {
+    width: '150px',
+  }
+};
+
+const headerStyle = { 
+  backgroundColor: constants.red, 
+  color: '#fff', 
+  padding: '140px 20px 100px', 
+  borderBottomLeftRadius: '50% 12%', 
+  borderBottomRightRadius: '50% 12%', 
+  position: 'relative',
+  overflow: 'hidden',
+  marginTop: '0',
+  paddingTop: '140px'
+};
+
+const headerInner = { 
+  maxWidth: '1200px', 
+  margin: '0 auto', 
+  display: 'flex', 
+  alignItems: 'center', 
+  position: 'relative' 
+};
+
+
+const headerTextContainer = { 
+  textAlign: 'center', 
+  flex: 1,
+};
+
 const titleStyle = { fontSize: '46px', margin: 0, fontWeight: '800' };
 const subtitleStyle = { fontSize: '20px', margin: '5px 0 0', opacity: 0.9 };
 const headerActionArea = { display: 'flex', alignItems: 'center', gap: '15px' };
