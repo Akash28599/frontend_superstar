@@ -73,10 +73,10 @@ const OurProducts = () => {
     it?.image?.formats?.medium?.url ||
     it?.image?.formats?.thumbnail?.url ||
     "";
-
+  const constants = { gold: "#f3c720", red: "#dd2120", font: '"KelloggsSans", Arial, sans-serif' }
   const headingStyle = {
-    fontFamily: "'Kellogg's Sans', sans-serif",
-    color: "#F60945",
+    fontFamily: constants.font,
+    color: constants.red,
     fontWeight: "bold",
     lineHeight: 1.05,
     margin: 0,
@@ -92,7 +92,7 @@ const OurProducts = () => {
   };
 
   const paragraphStyle = {
-    fontFamily: "'Kellogg's Sans', sans-serif",
+    fontFamily: constants.font,
     fontWeight: 400,
     fontSize: 16,
     lineHeight: 1.6,
@@ -103,7 +103,7 @@ const OurProducts = () => {
   };
 
   const productTitleStyle = {
-    fontFamily: "'Kellogg's Sans', sans-serif",
+    fontFamily: constants.font,
     fontWeight: 700,
     lineHeight: 1.1,
     margin: 0,
@@ -142,21 +142,35 @@ const OurProducts = () => {
                   ${coco.x - 80} ${coco.y - 40},
                   ${coco.x} ${coco.y}`;
 
-    const s2 = `C ${coco.x + 80} ${coco.y + 40},
+    const s2 = screenWidth >= 1900 ?
+                `C ${coco.x + 80} ${coco.y + 40},
+                  ${product4.x +100} ${(coco.y + product4.y-10) / 2},
+                  ${product4.x+100} ${product4.y }`
+                :
+                `C ${coco.x + 80} ${coco.y + 40},
                   ${product4.x + 80} ${(coco.y + product4.y) / 2},
-                  ${product4.x} ${product4.y+50}`;
+                  ${product4.x} ${product4.y + 50}`;
 
-    const s3 = `C ${product4.x - 100} ${product4.y + 250},
+    const s3 = screenWidth >= 1900 ?
+                 `C ${product4.x - 100} ${product4.y + 50},
                   ${product5.x + 20} ${product5.y - 57},
-                  ${product5.x-2} ${product5.y +100}`;
+                  ${product5.x-10 } ${product5.y }` 
+                 : 
+                 `C ${product4.x - 100} ${product4.y + 250},
+                  ${product5.x + 20} ${product5.y - 57},
+                  ${product5.x -10} ${product5.y + 200}`;
 
-    const s4 = `C ${product5.x-30} ${product5.y + 152},
-                  ${product5.x-10} ${product5.y + 252},
-                  ${product5.x} ${product5.y + 352}`;
+    const s4 = //true?``:
+    screenWidth >= 1900 ? 
+                  `${product4.x -950} ${product5.y +40},
+                  ${product4.x -900} ${product5.y +100},
+                  ${product4.x -900} ${product5.y +100}`
+                :
+                 ``;
 
 
-    // return `${s1} ${s2} ${s3}`;
-        return `${s1} ${s2} ${s3} ${s4}`;
+    //  return `${s1} ${s2} ${s3}`;
+    return `${s1} ${s2} ${s3} ${s4}`;
 
   };
 
