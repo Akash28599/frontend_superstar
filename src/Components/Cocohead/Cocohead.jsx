@@ -5,7 +5,22 @@ export const CocoHead = () => {
     const [head, setHead] = useState(null);
     const [starImage, setStarImage] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [scale, setScale] = useState(window.devicePixelRatio);
 
+    useEffect(() => {
+        const handleResize = () => {
+            setScale(window.devicePixelRatio);
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+    const is100PercentScale = scale === 1;
+
+    console.log(is100PercentScale)
     useEffect(() => {
         fetch(`${process.env.REACT_APP_STRAPI_URL}/api/coco-heads?populate=*`)
             .then(res => res.json())
@@ -51,10 +66,10 @@ export const CocoHead = () => {
                                     {iconUrl &&
                                         <img src={iconUrl} alt='item icon' />}
                                 </div>
-                                <div className='ch-title'>
+                                <div className='ch-title' style={{ fontSize: is100PercentScale ? '1.6rem' : '1rem' }}>
                                     {title}
                                 </div>
-                                <div className='ch-description'>
+                                <div className='ch-description' style={{ fontSize: is100PercentScale ? '1.3rem' : '.8rem' }}>
                                     {desc}
                                 </div>
                             </div>

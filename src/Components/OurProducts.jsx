@@ -35,12 +35,20 @@ const OurProducts = () => {
   useEffect(() => {
     const handleResize = () => {
       setScreenWidth(window.innerWidth);
-      const w = containerRef.current?.clientWidth || 1400;
-      setContainerWidth(Math.max(900, w));
     };
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const ro = new ResizeObserver(([entry]) => {
+      setContainerWidth(entry.contentRect.width);
+    });
+
+    ro.observe(containerRef.current);
+    return () => ro.disconnect();
   }, []);
 
   if (loading) return <div style={{ padding: 40 }}>Loading...</div>;
@@ -72,7 +80,7 @@ const OurProducts = () => {
     fontWeight: "bold",
     lineHeight: 1.05,
     margin: 0,
-    marginTop:'20px',
+    marginTop: '20px',
     letterSpacing: "0%",
   };
 
@@ -120,9 +128,9 @@ const OurProducts = () => {
     const controlY = product1.y - 230;
     const cp1x = centerX * 0.5;
     const cp2x = centerX * 1.5;
-    return `M ${product1.x+3} ${product1.y+11}
-            C ${cp1x+10} ${controlY+10},
-              ${cp2x+10} ${controlY},
+    return `M ${product1.x + 3} ${product1.y + 11}
+            C ${cp1x + 10} ${controlY + 10},
+              ${cp2x + 10} ${controlY},
               ${product2.x} ${product2.y}`;
   };
 
@@ -136,13 +144,20 @@ const OurProducts = () => {
 
     const s2 = `C ${coco.x + 80} ${coco.y + 40},
                   ${product4.x + 80} ${(coco.y + product4.y) / 2},
-                  ${product4.x} ${product4.y}`;
+                  ${product4.x} ${product4.y+50}`;
 
-    const s3 = `C ${product4.x - 100} ${product4.y + 80},
-                  ${product5.x + 20} ${product5.y -57},
-                  ${product5.x} ${product5.y+52}`;
+    const s3 = `C ${product4.x - 100} ${product4.y + 250},
+                  ${product5.x + 20} ${product5.y - 57},
+                  ${product5.x-2} ${product5.y +100}`;
 
-    return `${s1} ${s2} ${s3}`;
+    const s4 = `C ${product5.x-30} ${product5.y + 152},
+                  ${product5.x-10} ${product5.y + 252},
+                  ${product5.x} ${product5.y + 352}`;
+
+
+    // return `${s1} ${s2} ${s3}`;
+        return `${s1} ${s2} ${s3} ${s4}`;
+
   };
 
   // reusable row component with custom text positioning
@@ -239,7 +254,7 @@ const OurProducts = () => {
           minHeight: "100vh",
         }}
       >
-        <svg
+        {/* <svg
           width="100%"
           height={1200}
           viewBox={`0 0 ${SVG_WIDTH} ${1200}`}
@@ -251,7 +266,21 @@ const OurProducts = () => {
             pointerEvents: "none",
             zIndex: 0,
           }}
+        > */}
+        <svg
+          width="100%"
+          height={1200}
+          viewBox={`0 0 ${SVG_WIDTH} 1200`}
+          preserveAspectRatio="xMidYMin meet"   // ✅ IMPORTANT
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
         >
+
           <path
             d={createTopCurve()}
             fill="none"
@@ -355,7 +384,7 @@ const OurProducts = () => {
                   maxWidth: 320,
                   position: "absolute",
                   bottom: "60%",
-                  left: isMacBook?"19%":"8%",
+                  left: isMacBook ? "19%" : "8%",
                 }}
               >
                 <h2
