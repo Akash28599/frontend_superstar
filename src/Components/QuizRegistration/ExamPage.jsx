@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import * as faceapi from 'face-api.js';
 
+
 const ExamPage = () => {
   const [questions, setQuestions] = useState([]);
   const [currentIdx, setCurrentIdx] = useState(0);
@@ -146,7 +147,7 @@ const ExamPage = () => {
   };
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_STRAPI_URL}/api/exam-questions`)
+    fetch('https://strapi-superstar.onrender.com/api/exam-questions')
       .then(res => res.json())
       .then(data => {
         if (data.data?.[0]?.questions) setQuestions(data.data[0].questions);
@@ -171,7 +172,7 @@ const ExamPage = () => {
   const currentQuestion = questions[currentIdx];
 
   return (
-    <div style={{...containerStyle,fontFamily:constants.fontFamily}}>
+    <div style={containerStyle}>
       {showConfirm && (
         <div style={modalOverlay}>
           <div style={modalContent}>
@@ -187,7 +188,7 @@ const ExamPage = () => {
 
       <nav style={navStyle}>
         <div style={navLeft}>
-          <div style={logoStyle}><img src='/assetss/kelloggH1.png' alt="Kellogg's" style={logoImageStyle}/></div>
+          <div style={logoStyle}>Kellogg's</div>
           <div style={timerBox}>
             <span style={timerLabel}>Time Left:</span>
             <span style={timerValue}>{formatTime(timeLeft)}</span>
@@ -290,6 +291,7 @@ const ExamPage = () => {
     </div>
   );
 };
+
 
 const containerStyle = { backgroundColor: '#F5F7FA', minHeight: '100vh', fontFamily: 'system-ui, sans-serif' };
 const modalOverlay = { position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.8)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 9999 };
