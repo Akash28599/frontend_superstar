@@ -41,14 +41,14 @@ const CocoBanner = () => {
   // ✅ DYNAMIC POSITIONS FOR YOUR LAPTOPS
   const getPositions = () => {
     if (screenWidth >= 1920) return { // Large desktop - your "good" laptop
-      charBottom: '120%', charLeft: '-100%',
+      charBottom: '120%', charLeft: '14%',
       cloudTop: '35%', cloudRight: '11%',
       textTop: '42%', textLeft: '22%',
       titleSize: '5.6rem', descSize: '2.1rem'
     };
     
     if (screenWidth >= 1440) return { // Medium desktop 
-      charBottom: '22%', charLeft: '-14%',
+      charBottom: '22%', charLeft: '14%',
       cloudTop: '38%', cloudRight: '13%',
       textTop: '45%', textLeft: '25%',
       titleSize: '4.8rem', descSize: '1.9rem'
@@ -90,7 +90,7 @@ const CocoBanner = () => {
             position: "absolute", 
             bottom: positions.charBottom, 
             left: positions.charLeft, 
-            transform: "translateX(-50%)", 
+            transform: screenWidth>=1900?"translateX(-62.5%)":"translateX(-50%)", 
             zIndex: 2, 
             pointerEvents: "none",
             maxWidth: "100%",
