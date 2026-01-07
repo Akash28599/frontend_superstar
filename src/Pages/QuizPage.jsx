@@ -1,5 +1,4 @@
-import  QuizLandingPage  from "../Components/QuizRegistration/QuizRegistration";
-
+import  QuizLandingPage  from "../Components/QuizRegistration/QuizLandingPage";
 function QuizPage() {
     return (
         <>

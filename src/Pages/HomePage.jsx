@@ -1,5 +1,5 @@
 import HomeBanner from "../Components/HomeBanner/HomeBanner"
-import TrendingStories from "../Components/TrendingStories"
+// import TrendingStories from "../Components/TrendingStories"
 import CocoHeads from "../Components/cocohead"
 import PrintableGames from "../Components/games"
 import OurProducts from "../Components/zigzag"

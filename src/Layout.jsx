@@ -5,13 +5,12 @@ import Navbar from "./Components/Navbar"
 import {  Route, Routes, useLocation } from 'react-router-dom';
 import QuizPage from './Pages/QuizPage';
 import { PastWinners } from './Pages/PastWinners/PastWinners';
-import StudentForm from './Components/QuizRegistration/StudentRegisterForm';
 import ExamPage from './Components/QuizRegistration/ExamPage';
 
 export function LayoutComponent({ settingsData }) {
   const location = useLocation();
-  const hideNavbar = location.pathname === '/past-winners' || location.pathname==='/exam-page'
-  
+  const hidePaths=['/past-winners','/student-register','/exam-page']
+  const hideNavbar = hidePaths.includes(location.pathname);
 
   return (
     <>
@@ -26,7 +25,6 @@ export function LayoutComponent({ settingsData }) {
         <Route path='/scholarship' element={<ScholarshipPage settingsData={settingsData} />} />
         <Route path='/quiz' element={<QuizPage />} />
         <Route path='/past-winners' element={<PastWinners />} />
-        <Route path='/student-register' element={<StudentForm/>}/>
         <Route path='/exam-page' element={<ExamPage/>}/>
       </Routes>
     </>

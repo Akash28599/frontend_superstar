@@ -1,3 +1,9 @@
+:root {
+    --red: #dd2120;
+    --gold:#FBCA05;
+    --font: "KelloggsSans", Arial, sans-serif;
+}
+
 .about-container {
     margin: 2%;
     display: flex;
@@ -40,7 +46,7 @@
 }
 
 .about-right h1 {
-    color: #dd2120;
+    color:var(--red);
     font-size: 35px;
     margin: 0 0 10px 0;
 }
@@ -57,7 +63,7 @@
 .about-steps {
     margin: 30px 10px;
     padding-left: 28px;
-    border-left: 4px solid #f3c720;
+    border-left: 4px solid var(--gold);
 }
 
 .about-step {
@@ -74,7 +80,7 @@
     /* 🔥 aligns to Step text */
     width: 20px;
     height: 20px;
-    background: #f3c720;
+    background: var(--gold);
     border-radius: 50%;
 }
 
@@ -113,7 +119,7 @@
     margin: 5px;
     padding: 20px;
     flex: 0 0 auto;
-    border: 1.5px solid #dd2120;
+    border: 1.5px solid var(--red);
     border-radius: 10px;
     font-size: 15px;
     font-weight: 500;

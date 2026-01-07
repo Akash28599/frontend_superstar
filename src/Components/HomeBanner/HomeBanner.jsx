@@ -95,7 +95,7 @@ const HomeBanner = () => {
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: '12px',
-    boxShadow: '2px 3px 0px #F60945, 0 4px 12px rgba(0,0,0,0.1)',
+    boxShadow: `2px 3px 0px ${constants.red}, 0 4px 12px rgba(0,0,0,0.1)`,
     transition: 'all 0.3s ease',
     transform: isHovered ? 'scale(1.05)' : 'scale(1)',
   };
@@ -171,7 +171,7 @@ const HomeBanner = () => {
             }}>
               <h1 style={{
                 ...h1Style,
-                fontSize: screenWidth >= 1440 ? '82px' : '75px',
+                fontSize: screenWidth >= 1440 ? '76px' : '70px',
                 lineHeight: screenWidth >= 1440 ? '1.05' : '0.9',
                 maxHeight: screenWidth >= 1440 ? '175px' : '140px',
               }}>
@@ -186,8 +186,8 @@ const HomeBanner = () => {
               <button
                 style={{
                   ...buttonStyle,
-                  backgroundColor: isHovered ? '#FCD34D' : '#fff',
-                  color: '#F60945',
+                  backgroundColor: isHovered ? constants.gold : '#fff',
+                  color: constants.red,
                   fontSize: screenWidth >= 1440 ? '1.4rem' : '1.2rem',
                   padding: screenWidth >= 1440 ? '0.75rem 2.5rem' : '0.6rem 2rem'
                 }}
@@ -293,10 +293,11 @@ const HomeBanner = () => {
   );
 };
 
+const constants = { gold:'#FBCA05',red: '#dd2120' ,fontFamily:'"KelloggsSans", Arial, sans-serif'}
 const containerStyle = {
   position: 'relative',
   height: '115vh',
-  backgroundColor: '#dd2120',
+  backgroundColor: constants.red,
   overflow: 'hidden',
   width: '100vw',
   margin: 0,
@@ -308,7 +309,7 @@ const containerStyle = {
 
 const loadingStyle = {
   minHeight: '100vh',
-  backgroundColor: '#dd2120',
+  backgroundColor: constants.red,
   color: '#fff',
   display: 'flex',
   alignItems: 'center',
@@ -352,7 +353,7 @@ const badgeContainerStyle = {
 };
 
 const badgeStyle = {
-  backgroundColor: '#FCD34D',
+  backgroundColor: constants.gold,
   padding: '0.75rem 1.5rem',
   borderRadius: '26px',
   display: 'inline-block',
@@ -367,7 +368,7 @@ const badgeTextStyle = {
   fontSize: '1.2rem',
   lineHeight: '100%',
   letterSpacing: '0%',
-  color: '#dd2120',
+  color: constants.red,
 };
 
 const textColumnStyle = {
@@ -381,7 +382,7 @@ const textColumnStyle = {
 };
 
 const h1Style = {
-  fontFamily: "Kellogg's Sans",
+  fontFamily: constants.fontFamily,
   fontWeight: 700,
   fontSize: '78px',
   lineHeight: '1.05',
@@ -397,7 +398,7 @@ const h1Style = {
 const descStyle = {
   color: '#fff',
   maxWidth: '520px',
-  fontFamily: "'Kellogg's Sans', sans-serif",
+  fontFamily: constants.fontFamily,
   fontWeight: 500,
   fontSize: '1.3rem',
   lineHeight: '1.2',
@@ -414,7 +415,7 @@ const buttonStyle = {
   borderRadius: '50px',
   border: 'none',
   backgroundColor: '#fff',
-  color: '#dd2120',
+  color: constants.gold,
   fontWeight: 500,
   fontSize: '1.4rem',
   display: 'inline-flex',

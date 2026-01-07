@@ -41,7 +41,7 @@ const CocoBanner = () => {
   // ✅ DYNAMIC POSITIONS FOR YOUR LAPTOPS
   const getPositions = () => {
     if (screenWidth >= 1920) return { // Large desktop - your "good" laptop
-      charBottom: '19%', charLeft: '14%',
+      charBottom: '20%', charLeft: '14%',
       cloudTop: '35%', cloudRight: '11%',
       textTop: '42%', textLeft: '22%',
       titleSize: '5.6rem', descSize: '2.1rem'
@@ -55,7 +55,7 @@ const CocoBanner = () => {
     };
     
     if (screenWidth >= 1200) return { // Your smaller laptop - adjusted
-      charBottom: '15%', charLeft: '17%',
+      charBottom: '15%', charLeft: '15%',
       cloudTop: '39%', cloudRight: '10%',
       textTop: '48%', textLeft: '28%',
       titleSize: '4.2rem', descSize: '1.7rem'

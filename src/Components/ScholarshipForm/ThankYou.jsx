@@ -238,7 +238,7 @@ const ThankYou = ({ siteSettings }) => {
                 blurTop: "6%", blurRight: "-35%", blurWidth: "470px", blurHeight: "505px",// blurred image
                 cocoBottom: "-27%", cocoRight: "-32%", cocoWidth: "320px", cocoHeight: "320px",// bottom cocoimg of monkey
                 leftCocoWidth: "430px",
-                leftCocoRotate: "55deg",
+                leftCocoRotate: "40deg",
                 socialIconsGap: '12px'
 
             };
@@ -261,7 +261,7 @@ const ThankYou = ({ siteSettings }) => {
                 blurTop: "14%", blurRight: "-16%", blurWidth: "425px", blurHeight: "400px",// blurred image
                 cocoBottom: "-21%", cocoRight: "-14%", cocoWidth: "300px", cocoHeight: "300px",// bottom cocoimg of monkey
                 leftCocoWidth: "420px",
-                leftCocoRotate: "55deg",
+                leftCocoRotate: "40deg",
                 socialIconsGap: '12px'
 
             };
@@ -285,7 +285,7 @@ const ThankYou = ({ siteSettings }) => {
                 blurTop: "12%", blurRight: "-12%", blurWidth: "365px", blurHeight: "380px",// blurred image
                 cocoBottom: "-9%", cocoRight: "-13%", cocoWidth: "280px", cocoHeight: "280px",// bottom cocoimg of monkey
                 leftCocoWidth: "400px",
-                leftCocoRotate: "55deg",
+                leftCocoRotate: "40deg",
                 socialIconsGap: '12px'
 
             };
@@ -308,7 +308,7 @@ const ThankYou = ({ siteSettings }) => {
                 blurTop: "19%", blurRight: "3%", blurWidth: "343px", blurHeight: "360px",// blurred image
                 cocoBottom: "-10%", cocoRight: "5%", cocoWidth: "250px", cocoHeight: "200px",// bottom cocoimg of monkey
                 leftCocoWidth: "300px", // left cocoimg
-                leftCocoRotate: "58deg",
+                leftCocoRotate: "40deg",
                 socialIconsGap: '12px'
 
             };
@@ -331,7 +331,7 @@ const ThankYou = ({ siteSettings }) => {
                 blurTop: "22%", blurRight: "-1%", blurWidth: "310px", blurHeight: "310px",// blurred image 
                 cocoBottom: "6%", cocoRight: "0%", cocoWidth: "210px", cocoHeight: "210px", // bottom near monkey image
                 leftCocoWidth: "250px", // left angle image
-                leftCocoRotate: "55deg",
+                leftCocoRotate: "45deg",
                 socialIconsGap: '12px'
 
             }
@@ -354,7 +354,7 @@ const ThankYou = ({ siteSettings }) => {
                 blurTop: "18%", blurRight: "-4%", blurWidth: "280px", blurHeight: "280px",// blurred image
                 cocoBottom: "15%", cocoRight: "-1%", cocoWidth: "180px", cocoHeight: "180px",// bottom cocoimg of monkey
                 leftCocoWidth: "200px",
-                leftCocoRotate: "55deg",
+                leftCocoRotate: "45deg",
                 socialIconsGap: '0px'
             }
 

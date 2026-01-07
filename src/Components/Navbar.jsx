@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
   const [menu, setMenu] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  const location = useLocation();
-  const currentPath = location.pathname;
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_STRAPI_URL}/api/navbars?populate=*`)
@@ -23,7 +20,7 @@ const Navbar = () => {
       });
   }, []);
 
-
+const constants= {gold: '#f3c720',red: '#dd2120',font: '"KelloggsSans", Arial, sans-serif'}
   const navbarStyle = {
     position: 'relative',
     top: '25px',
@@ -75,13 +72,13 @@ const Navbar = () => {
     backgroundColor: 'transparent', // No background
   };
 
-  const contactStyle = {
+  const ButtonStyle = {
     fontFamily: "'Kellogg's Sans', sans-serif",
     fontWeight: 700,
     fontSize: '18px',
     lineHeight: '100%',
     letterSpacing: '0%',
-    backgroundColor: '#F60945',
+    backgroundColor: constants.red,
     color: 'white',
     textDecoration: 'none',
     padding: '8px 20px',
@@ -91,8 +88,21 @@ const Navbar = () => {
     boxShadow: '0 3px 12px rgba(246, 9, 69, 0.25)'
   };
 
-  const normalizePath = (path) => path.replace(/^\/|\/$/g, '');
-  const isActive = (route) => normalizePath(currentPath) === normalizePath(route);
+    const ActiveButtonStyle = {
+    fontFamily: "'Kellogg's Sans', sans-serif",
+    fontWeight: 700,
+    fontSize: '18px',
+    lineHeight: '100%',
+    letterSpacing: '0%',
+    backgroundColor: constants.gold,
+    color: 'black',
+    textDecoration: 'none',
+    padding: '8px 20px',
+    borderRadius: '20px',
+    transition: 'all 0.3s ease',
+    cursor: 'pointer',
+    boxShadow: '0 3px 12px rgba(246, 9, 69, 0.25)',
+  };
 
 
   if (loading) {
@@ -105,7 +115,7 @@ const Navbar = () => {
         // <a
         //   key={item.id}
         //   href={item.route}
-        //   style={item.isButton ? contactStyle : isActive(item.route) ? activeItemStyle : navItemStyle}
+        //   style={item.isButton ? ButtonStyle : isActive(item.route) ? activeItemStyle : navItemStyle}
         //   onClick={(e) => {
         //     e.preventDefault();
         //     window.location.href = item.route;
@@ -115,12 +125,15 @@ const Navbar = () => {
         // </a>
 
         <NavLink
+        key={item.id}
           to={item.route}
           style={({ isActive }) =>
             isActive
-              ? activeItemStyle
+              ? item.isButton
+                ? ActiveButtonStyle
+                : activeItemStyle
               : item.isButton
-                ? contactStyle
+                ? ButtonStyle
                 : navItemStyle
           }
         >

@@ -1,4 +1,4 @@
-import {  useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import ScholarshipForm from '../Components/ScholarshipForm/ScholarshipForm'
 import AboutCompetition from '../Components/AboutCompetition/AboutCompetition';
 import YoutubeGallery from '../Components/YoutubeVideo/YoutubeGallery';
@@ -63,7 +63,6 @@ const ScholarshipPage = ({settingsData}) => {
         try {
             const res = await fetch(`${process.env.REACT_APP_STRAPI_URL}/api/scholarship-page?populate=*`);
             const json = await res.json();
-            console.log(settingsData);
             setData({
                 ...json.data,
                 siteSettings: { ...settingsData }

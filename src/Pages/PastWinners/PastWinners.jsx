@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import './PastWinners.css'
 import { FaArrowCircleLeft, FaArrowCircleUp } from "react-icons/fa";
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export const PastWinners = () => {
     const navigate = useNavigate()
