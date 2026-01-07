@@ -13,12 +13,12 @@ const HomeBanner = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
   // Add this somewhere in your app
-//  const testFont = new FontFace("Kellogg's Sans Test", "url('../fonts/kelloggssans-light.otf')");
-// testFont.load().then(() => {
-//   console.log('✅ Font loaded successfully');
-// }).catch(error => {
-//   console.error('❌ Font failed to load:', error);
-// });
+  //  const testFont = new FontFace("Kellogg's Sans Test", "url('../fonts/kelloggssans-light.otf')");
+  // testFont.load().then(() => {
+  //   console.log('✅ Font loaded successfully');
+  // }).catch(error => {
+  //   console.error('❌ Font failed to load:', error);
+  // });
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_STRAPI_URL}/api/homebanners?populate=*`)
@@ -156,10 +156,14 @@ const HomeBanner = () => {
             paddingLeft: screenWidth >= 1440 ? '12%' : '10%'
           }}>
             <div style={badgeContainerStyle}>
-              <div style={badgeStyle}>
+              <div style={{
+                ...badgeStyle,
+                marginLeft: screenWidth >= 1440 ? '6%' :'0%',
+                marginRight: screenWidth >= 1440 ? '0%' : '10%',
+              }}>
                 <h3 style={{
                   ...badgeTextStyle,
-                  fontSize: screenWidth >= 1440 ? '1.2rem' : '1rem'
+                  fontSize: screenWidth >= 1440 ? '1.2rem' : '1rem',
                 }}>{banner.topheading}</h3>
               </div>
             </div>
@@ -293,7 +297,7 @@ const HomeBanner = () => {
   );
 };
 
-const constants = { gold:'#FBCA05',red: '#dd2120' ,fontFamily:'"KelloggsSans", Arial, sans-serif'}
+const constants = { gold: '#FBCA05', red: '#dd2120', fontFamily: '"KelloggsSans", Arial, sans-serif' }
 const containerStyle = {
   position: 'relative',
   height: '115vh',
@@ -363,7 +367,6 @@ const badgeStyle = {
 
 const badgeTextStyle = {
   margin: 0,
-  
   fontWeight: 500,
   fontSize: '1.2rem',
   lineHeight: '100%',
