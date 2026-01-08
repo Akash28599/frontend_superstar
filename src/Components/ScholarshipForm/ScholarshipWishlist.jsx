@@ -1,6 +1,6 @@
-import "./SubmissionForm.css";
+import "./ScholarshipWishlist.css";
 
-const SubmissionForm = ({ groupKellogs }) => {
+const ScholarshipWishlist = ({ groupKellogs }) => {
     return (
         <section style={{
             backgroundImage: "url('/assetss/cloud.png')"
@@ -33,4 +33,4 @@ const SubmissionForm = ({ groupKellogs }) => {
     );
 };
 
-export default SubmissionForm;
+export default ScholarshipWishlist;

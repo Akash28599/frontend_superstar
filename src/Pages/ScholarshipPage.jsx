@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import ScholarshipForm from '../Components/ScholarshipForm/ScholarshipForm'
 import AboutCompetition from '../Components/ScholarshipForm/AboutCompetition';
 import YoutubeGallery from '../Components/ScholarshipForm/YoutubeVideo/YoutubeGallery';
-import SubmissionForm from '../Components/ScholarshipForm/SubmissionForm';
 import ThankYou from '../Components/ScholarshipForm/ThankYou';
+import ScholarshipWishlist from '../Components/ScholarshipForm/ScholarshipWishlist';
 
 
 const ScholarshipPage = ({settingsData}) => {
@@ -88,7 +88,7 @@ if(isLoading)return(<div>Loading...</div>)
             <AboutCompetition data={data} />
             <YoutubeGallery />
             <ThankYou siteSettings={data.siteSettings} />
-            {!data.shouldShowForm && <SubmissionForm groupKellogs={data.groupKellogs} />}
+            {!data.shouldShowForm && <ScholarshipWishlist groupKellogs={data.groupKellogs} />}
         </>
     )
 }

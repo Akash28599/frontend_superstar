@@ -3,6 +3,8 @@
     --green: #4caf50;
     --radius: 22px;
     --shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
+    --fontFamily:"KelloggsSans", Arial, sans-serif;
+
 }
 
 .rs-overlay {
@@ -104,6 +106,7 @@
     border-radius: 10px;
     font-size: 1rem;
     cursor: pointer;
+    font-family: var(--fontFamily);
 }
 
 .rs-btn:hover {

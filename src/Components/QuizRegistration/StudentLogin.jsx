@@ -47,11 +47,11 @@ export const StudentLogin = ({ onClose }) => {
     )
 }
 
-const constants = { red: '#dd2120' ,fontFamily:'"KelloggsSans", Arial, sans-serif'}
+const constants = { gold:'#FBCA05',red: '#dd2120' ,fontFamily:'"KelloggsSans", Arial, sans-serif'}
 const modalContent = { backgroundColor: '#fff', padding: '40px', borderRadius: '30px', width: '90%', maxWidth: '400px', textAlign: 'center', position: 'relative', animation: 'popIn 0.3s ease-out' };
 const closeBtn = { position: 'absolute', top: '15px', right: '20px', fontSize: '28px', background: 'none', border: 'none', cursor: 'pointer', color: '#999' };
-const modalIcon = { width: '70px', height: '70px', backgroundColor: '#ffcc00', borderRadius: '50%', margin: '0 auto 15px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '30px' };
+const modalIcon = { width: '70px', height: '70px', backgroundColor: constants.gold, borderRadius: '50%', margin: '0 auto 15px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '30px' };
 const inputGroup = { marginBottom: '15px', textAlign: 'left' };
 const labelStyle = { display: 'block', fontWeight: '700', marginBottom: '5px', fontSize: '14px' };
-const inputStyle = { width: '100%', padding: '12px', borderRadius: '10px', border: '2px solid #eee', outline: 'none', boxSizing: 'border-box' };
-const modalLoginBtn = { width: '100%', padding: '15px', backgroundColor: constants.red, color: '#fff', border: 'none', borderRadius: '12px', fontWeight: '800', cursor: 'pointer', marginTop: '10px' };
+const inputStyle = { fontFamily:constants.fontFamily,width: '100%', padding: '12px', borderRadius: '10px', border: '2px solid #eee', outline: 'none', boxSizing: 'border-box' };
+const modalLoginBtn = {fontFamily:constants.fontFamily, width: '100%', padding: '15px', backgroundColor: constants.red, color: '#fff', border: 'none', borderRadius: '12px', fontWeight: '800', cursor: 'pointer', marginTop: '10px' };

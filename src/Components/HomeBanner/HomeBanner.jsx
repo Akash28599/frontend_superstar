@@ -426,6 +426,7 @@ const buttonStyle = {
   cursor: 'pointer',
   transition: 'all 0.3s ease',
   alignSelf: 'flex-start',
+  fontFamily:constants.fontFamily
 };
 
 const imageWrapperStyle = {

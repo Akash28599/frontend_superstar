@@ -78,9 +78,9 @@ export default function PrintableGames() {
         setLoading(false);
       })
       .finally(
-      );
+    );
   }, []);
-
+  const constants = { gold: "#f3c720", red: "#dd2120", font: '"KelloggsSans", Arial, sans-serif' }
   const getGridConfig = () => {
     if (screenWidth >= 1920) {
       return {
@@ -144,98 +144,38 @@ export default function PrintableGames() {
   };
 
   const gridStyle = getGridStyle();
+  async function downloadPrintable(item) {
+    let fileUrl = null;
+    let filename = "printable.pdf";
 
-  // async function downloadPrintable(item) {
-  //   const printable = item.printable && item.printable[0];
-  //   if (!printable || !printable.url) return;
+    // Case 1: public folder string (your assetss PDFs)
+    if (typeof item.printable === "string") {
+      fileUrl = item.printable;
+      filename = item.printable.split("/").pop();
+    }
 
-  //   try {
-  //     setDownloadingId(item.id);
-  //     const res = await fetch(printable.url);
-  //     if (!res.ok) throw new Error("Network error while downloading file");
-  //     const blob = await res.blob();
-  //     const blobUrl = window.URL.createObjectURL(blob);
+    // Case 2: Strapi media array
+    else if (Array.isArray(item.printable) && item.printable[0]) {
+      fileUrl = item.printable[0].url;
+      filename =
+        item.printable[0].name ||
+        `printable-${item.id}${item.printable[0].ext || ".pdf"}`;
+    }
 
-  //     const filename =
-  //       printable.name ||
-  //       printable.hash ||
-  //       `printable-${item.id}${printable.ext || ".pdf"}`;
+    if (!fileUrl) return;
 
-  //     const a = document.createElement("a");
-  //     a.href = blobUrl;
-  //     a.download = filename;
-  //     document.body.appendChild(a);
-  //     a.click();
-  //     a.remove();
-  //     window.URL.revokeObjectURL(blobUrl);
-  //   } catch (err) {
-  //     console.error("Download failed, opening in new tab:", err);
-  //     window.open(printable.url, "_blank", "noopener");
-  //   } finally {
-  //     setDownloadingId(null);
-  //   }
-  // }
-// async function downloadPrintable(item) {
-//   const printable = item.printable && item.printable[0];
-//   if (!printable) return;
+    setDownloadingId(item.id);
 
-//   try {
-//     setDownloadingId(item.id);
+    const a = document.createElement("a");
+    a.href = fileUrl;
+    a.download = filename;
+    a.target = "_self";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
 
-//     const fileUrl = printable; // e.g. /assetss/pdfs/sample.pdf
-
-//     const filename =
-//       printable.name ||
-//       printable.hash ||
-//       `printable-${item.id}${printable.ext || ".pdf"}`;
-
-//     const a = document.createElement("a");
-//     a.href = fileUrl;
-//     a.download = filename;
-//     a.target = "_self"; // force download instead of new tab
-//     document.body.appendChild(a);
-//     a.click();
-//     a.remove();
-
-//   } catch (err) {
-//     console.error("Download failed, opening in new tab:", err);
-//     window.open(printable.url, "_blank", "noopener");
-//   } finally {
-//     setDownloadingId(null);
-//   }
-// }
-async function downloadPrintable(item) {
-  let fileUrl = null;
-  let filename = "printable.pdf";
-
-  // Case 1: public folder string (your assetss PDFs)
-  if (typeof item.printable === "string") {
-    fileUrl = item.printable;
-    filename = item.printable.split("/").pop();
+    setDownloadingId(null);
   }
-
-  // Case 2: Strapi media array
-  else if (Array.isArray(item.printable) && item.printable[0]) {
-    fileUrl = item.printable[0].url;
-    filename =
-      item.printable[0].name ||
-      `printable-${item.id}${item.printable[0].ext || ".pdf"}`;
-  }
-
-  if (!fileUrl) return;
-
-  setDownloadingId(item.id);
-
-  const a = document.createElement("a");
-  a.href = fileUrl;
-  a.download = filename;
-  a.target = "_self";
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-
-  setDownloadingId(null);
-}
 
   if (loading) {
     return (
@@ -243,7 +183,6 @@ async function downloadPrintable(item) {
         <h2 style={{
           fontSize: "2.4rem",
           marginBottom: ".5rem",
-          fontFamily: "'Kellogg's Sans', sans-serif",
           fontWeight: 700,
           color: "red"
         }}>
@@ -253,7 +192,6 @@ async function downloadPrintable(item) {
           maxWidth: 880,
           margin: "0 auto 2rem",
           color: "#666",
-          fontFamily: "'Kellogg's Sans', sans-serif",
           fontWeight: 400
         }}>
           Loading printable games — please wait.
@@ -284,7 +222,6 @@ async function downloadPrintable(item) {
             fontSize: isEdge ? "3.2rem" : "3.4rem",
             margin: 0,
             color: "red",
-            fontFamily: "'Kellogg's Sans', sans-serif",
             fontWeight: "medium",
             letterSpacing: "0%",
           }}>
@@ -358,7 +295,6 @@ async function downloadPrintable(item) {
                       justifyContent: "center",
                       color: "#aaa",
                       background: "#fafafa",
-                      fontFamily: "'Kellogg's Sans', sans-serif",
                       fontWeight: 400,
                     }}>
                       No image
@@ -393,7 +329,7 @@ async function downloadPrintable(item) {
                     right: 0,
                     height: '62px', // Reduced height
                     transform: 'translateY(-50%)',
-                    background: hoveredDownloadId === item.id ? '#FCD34D' : 'transparent',
+                    background: hoveredDownloadId === item.id ? constants.gold : 'transparent',
                     borderRadius: '22px', // Half of height for pill shape
                     transition: 'all 0.3s ease',
                     zIndex: 1,
@@ -408,11 +344,10 @@ async function downloadPrintable(item) {
                   }}>
                     <div style={{
                       fontSize: gridConfig.fontSize,
-                      color: "#f21f4d",
+                      color: constants.red,
                       fontWeight: 800,
                       marginBottom: isEdge ? 4 : 6,
                       textTransform: "capitalize",
-                      fontFamily: "'Kellogg's Sans', sans-serif",
                       letterSpacing: "0%",
                       paddingLeft: gridConfig.paddingLeft,
                       whiteSpace: 'nowrap',
@@ -445,14 +380,14 @@ async function downloadPrintable(item) {
                         height: isEdge
                           ? (screenWidth >= 1440 ? 52 : 46)
                           : (screenWidth >= 1440 ? 56 : 50),
-                        borderRadius: "50%",
                         border: "none",
+                        borderRadius: "50%",
                         outline: "none",
                         cursor: hasPdf ? "pointer" : "not-allowed",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        boxShadow: hasPdf ? '2px 3px 0px #F60945, 0 6px 18px rgba(0,0,0,0.18)' : "none",
+                        boxShadow: hasPdf ? `2px 3px 0px ${constants.red}, 0 6px 18px rgba(0,0,0,0.18)` : "none",
                         background: hasPdf ? "linear-gradient(180deg,#ffb366,#ff8a2b)" : "#eee",
                         color: "#fff",
                         fontSize: isEdge
@@ -483,9 +418,9 @@ async function downloadPrintable(item) {
             onMouseEnter={() => setShowMoreHovered(true)}
             onMouseLeave={() => setShowMoreHovered(false)}
             style={{
-              background: showMoreHovered ? '#FCD34D' : 'transparent',
+              background: showMoreHovered ? constants.gold : 'transparent',
               border: "none",
-              color: "#f21f4d",
+              color: constants.red,
               fontSize: isEdge ? "1.3rem" : "1.4rem",
               fontWeight: 700,
               cursor: "pointer",
@@ -494,7 +429,7 @@ async function downloadPrintable(item) {
               gap: isEdge ? "10px" : "12px",
               padding: isEdge ? "10px 24px" : "12px 28px",
               borderRadius: "50px",
-              fontFamily: "'Kellogg's Sans', sans-serif",
+              fontFamily: constants.font,
               transition: "all 0.3s ease",
               letterSpacing: "0%",
               position: 'relative',
@@ -511,7 +446,7 @@ async function downloadPrintable(item) {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              boxShadow: '2px 3px 0px #F60945, 0 4px 12px rgba(0,0,0,0.1)',
+              boxShadow: `2px 3px 0px ${constants.red}, 0 4px 12px rgba(0,0,0,0.1)`,
               flexShrink: 0,
               transition: "all 0.3s ease",
               transform: showMoreHovered ? 'scale(1.05)' : 'scale(1)',

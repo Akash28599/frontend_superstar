@@ -1,9 +1,9 @@
 import HomeBanner from "../Components/HomeBanner/HomeBanner"
 // import TrendingStories from "../Components/TrendingStories"
-import CocoHeads from "../Components/cocohead"
-import PrintableGames from "../Components/games"
+import CocoHeads from "../Components/CocoheadOld"
+import PrintableGames from "../Components/Games"
 import OurProducts from "../Components/OurProducts"
-import CocoBanner from "../Components/cocobanner"
+import CocoBanner from "../Components/Cocobanner"
 import { CocoHead } from "../Components/Cocohead/Cocohead"
 
 export default function HomePage({dpr}) {

@@ -61,6 +61,7 @@
     margin-bottom: 32px;
     color: var(--white);
     font-size: 16px;
+    font-family: var(--font);
 }
 
 .sub-form input::placeholder {
@@ -95,6 +96,8 @@
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
+        font-family: var(--font);
+
 }
 
 /* RESPONSIVE */

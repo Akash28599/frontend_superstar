@@ -1,5 +1,4 @@
 import './App.css';
-import FooterLayout from './Components/Footer';
 import { BrowserRouter } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { LayoutComponent } from './Layout';
@@ -42,7 +41,6 @@ function App() {
         <LayoutComponent settingsData={settingsData} dpr={is100PercentScale}/>
       </BrowserRouter>
 
-      <FooterLayout settingsData={settingsData} />
     </div>
   );
 }

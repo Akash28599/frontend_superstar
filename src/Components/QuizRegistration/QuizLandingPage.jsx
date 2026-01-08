@@ -155,7 +155,7 @@ const QuizLandingPage = () => {
                 value={waitlistEmail}
                 onChange={(e) => setWaitlistEmail(e.target.value)}
               />
-              <button type="submit" style={waitlistBtn}>Join</button>
+              <button type="submit" style={redBtn}>Join</button>
             </form>
           </div>
         </section>
@@ -221,7 +221,7 @@ const yellowCard = { backgroundColor: constants.gold, borderRadius: '30px', padd
 const iconBox = { backgroundColor: '#fff', width: '55px', height: '55px', borderRadius: '15px', margin: '0 auto 15px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '28px' };
 const cardTitle = { fontSize: '22px', fontWeight: '800', margin: '0 0 10px', color: '#333' };
 const cardDesc = { fontSize: '14px', color: '#444', lineHeight: '1.4', marginBottom: '25px', height: '50px' };
-const redBtn = { backgroundColor: constants.red, color: '#fff', border: 'none', padding: '14px', borderRadius: '12px', width: '100%', fontWeight: '700', cursor: 'pointer' };
+const redBtn = { flex:1,backgroundColor: constants.red, color: '#fff', border: 'none', padding: '14px', borderRadius: '12px', width: '100%', fontWeight: '700', cursor: 'pointer' ,fontFamily:constants.fontFamily};
 const whiteBtn = { ...redBtn, backgroundColor: '#fff', color: constants.red };
 const roadmapSection = { marginTop: '160px', textAlign: 'center', position: 'relative' };
 const sectionHeading = { fontSize: '34px', fontWeight: '800', color: '#333', marginBottom: '80px' };
@@ -239,8 +239,7 @@ const waitlistTextContent = { textAlign: 'center' };
 const waitlistHeading = { fontSize: '32px', fontWeight: '800', color: '#333', margin: '0 0 10px' };
 const waitlistSubtext = { fontSize: '16px', color: '#666', maxWidth: '600px', margin: '0 auto', lineHeight: '1.6' };
 const waitlistForm = { display: 'flex', gap: '10px', width: '100%', maxWidth: '500px' };
-const waitlistInput = { flex: 2, padding: '15px 20px', borderRadius: '15px', border: `2px solid ${constants.gold}`, outline: 'none', fontSize: '16px' };
-const waitlistBtn = { flex: 1, backgroundColor: constants.red, color: '#fff', border: 'none', padding: '15px 25px', borderRadius: '15px', fontWeight: '800', cursor: 'pointer', whiteSpace: 'nowrap' };
+const waitlistInput = { flex: 2, padding: '15px 20px', borderRadius: '15px', border: `2px solid ${constants.gold}`, outline: 'none', fontSize: '16px',fontFamily:constants.fontFamily };
 const loadingStyle = { textAlign: 'center', padding: '100px', fontSize: '24px', color: constants.red };
 const modalOverlay = { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(5px)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 2000 };
 
