@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import ScholarshipForm from '../Components/ScholarshipForm/ScholarshipForm'
-import AboutCompetition from '../Components/AboutCompetition/AboutCompetition';
-import YoutubeGallery from '../Components/YoutubeVideo/YoutubeGallery';
-import SubmissionForm from '../Components/SubmissionForm/SubmissionForm';
+import AboutCompetition from '../Components/ScholarshipForm/AboutCompetition';
+import YoutubeGallery from '../Components/ScholarshipForm/YoutubeVideo/YoutubeGallery';
+import SubmissionForm from '../Components/ScholarshipForm/SubmissionForm';
 import ThankYou from '../Components/ScholarshipForm/ThankYou';
 
 

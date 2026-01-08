@@ -108,3 +108,10 @@
         line-height: 40px;
     }
 }
+
+@media (max-width: 2000px) {
+    .sub-container {
+        min-height: 60vh;
+
+    }
+}
