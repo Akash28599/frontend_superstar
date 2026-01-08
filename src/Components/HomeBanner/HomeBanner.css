@@ -87,14 +87,14 @@
     line-height: 1.05;
     letter-spacing: 8%;
     margin: 0 0 1.2rem 0;
-    color: #fff;
+    color:var(--white);
     align-self: flex-start;
     width: 120%;
     text-align: left;
 }
 
 .h-desc {
-    color: #fff;
+    color:var(--white);
     max-width: 520px;
     font-family: var(--font);
     font-weight: 500;
@@ -173,4 +173,58 @@
     width: auto;
     object-fit: contain;
     position: relative;
+}
+
+.h-cloud {
+    position: absolute;
+    pointer-events: none;
+    z-index: 3;
+    width: 10%;
+}
+
+.h-cloud-1 {
+    top: 36%;
+    right: 7%;
+}
+
+.h-cloud-2 {
+    top: 18%;
+    left: 50%;
+    width: 7%;
+    z-index: 4;
+}
+
+@media (min-width: 1920px) {
+    .h-cloud-1 {
+        right: 8%;
+        width: 10%;
+    }
+}
+
+@media (min-width: 1440px) {
+    .h-cloud-1 {
+        right: 8%;
+        width: 10%;
+    }
+}
+
+@media (max-width: 1439px) and (min-width: 1200px) {
+    .h-cloud-1 {
+        right: 10%;
+        width: 9%;
+    }
+}
+
+@media (max-width: 1199px) and (min-width: 1024px) {
+    .h-cloud-1 {
+        right: 10%;
+        width: 8%;
+    }
+}
+
+@media (max-width: 1023px) {
+    .h-cloud-1 {
+        right: 7%;
+        width: 10%;
+    }
 }

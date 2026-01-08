@@ -4,7 +4,6 @@ const HomeBanner = () => {
   const [banner, setBanner] = useState(null);
   const [cloudImage, setCloudImage] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [isHovered, setIsHovered] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -12,13 +11,6 @@ const HomeBanner = () => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-  // Add this somewhere in your app
-  //  const testFont = new FontFace("Kellogg's Sans Test", "url('../fonts/kelloggssans-light.otf')");
-  // testFont.load().then(() => {
-  //   console.log('✅ Font loaded successfully');
-  // }).catch(error => {
-  //   console.error('❌ Font failed to load:', error);
-  // });
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_STRAPI_URL}/api/homebanners?populate=*`)
@@ -58,31 +50,13 @@ const HomeBanner = () => {
     banner.image?.formats?.medium?.url ||
     banner.image?.url;
 
-  // ✅ FIXED: 1st CLOUD MORE RIGHT FOR MACBOOK (13%)
-  const getCloudPositions = () => {
-    if (screenWidth >= 1920) return { cloud1Right: '8%', cloud1Size: '10%' };
-    if (screenWidth >= 1440) return { cloud1Right: '8%', cloud1Size: '10%' };  // ✅ +3% RIGHT
-    if (screenWidth >= 1200) return { cloud1Right: '10%', cloud1Size: '9%' };
-    if (screenWidth >= 1024) return { cloud1Right: '10%', cloud1Size: '8%' };
-    return { cloud1Right: '7%', cloud1Size: '10%' };
-  };
-
-  const cloudPositions = getCloudPositions();
-
-  const Cloud = ({ top, left, right, size, zIndex }) =>
+  const Cloud = ({ className }) =>
     cloudImage && (
       <img
         src={cloudImage}
         alt="Cloud"
-        style={{
-          position: 'absolute',
-          top,
-          left,
-          right,
-          width: size,
-          zIndex,
-          pointerEvents: 'none',
-        }}
+        className={`h-cloud ${className}`}
+        aria-hidden="true"
       />
     );
 
@@ -93,19 +67,18 @@ const HomeBanner = () => {
   };
 
   const dynamicContentStyle = {
-    height: screenWidth >= 1440 ? '95vh' : '100vh',     // ✅ SMALLER RED for MacBook
+    height: screenWidth >= 1440 ? '95vh' : '100vh',
     padding: screenWidth >= 1440 ? '0 3%' : '0 1.5%',
     justifyContent: screenWidth >= 1440 ? 'center' : 'flex-start',
     gap: screenWidth >= 1440 ? '35px' : '20px',
   };
 
-  // ✅ HERO TOP UP: 0% (MacBook only)
   const dynamicHeroImageStyle = {
     height: screenWidth >= 1440 ? '115vh' : '100%',
     maxWidth: screenWidth >= 1440 ? '97vw' : '92vw',
     maxHeight: screenWidth >= 1440 ? '115vh' : '92vh',
     right: screenWidth >= 1440 ? '0%' : '0%',
-    top: screenWidth >= 1440 ? '4%' : '0%',              // ✅ TOP UP: -5% → 0%
+    top: screenWidth >= 1440 ? '4%' : '0%',
     transform: screenWidth >= 1440 ? 'none' : 'translateY(10%) scale(1.4)',
   };
 
@@ -184,91 +157,22 @@ const HomeBanner = () => {
           </div>
         </div>
 
-        <div 
+        <div
           className='h-image-wrapper'
           style={{
-          width: screenWidth >= 1440 ? '50%' : '45%',
-          maxWidth: screenWidth >= 1440 ? 'none' : '600px',
-          height: screenWidth >= 1440 ? '125vh' : 'auto'
-        }}>
+            width: screenWidth >= 1440 ? '50%' : '45%',
+            maxWidth: screenWidth >= 1440 ? 'none' : '600px',
+            height: screenWidth >= 1440 ? '125vh' : 'auto'
+          }}>
           {heroImage && (
             <>
               <img src={heroImage} alt="Hero" className='h-hero-image' style={dynamicHeroImageStyle} />
-              <Cloud top="36%" right={cloudPositions.cloud1Right} size={cloudPositions.cloud1Size} zIndex={3} />
-              <Cloud top="18%" left="50%" size="7%" zIndex={4} />
+              <Cloud className="h-cloud-1" />
+              <Cloud className="h-cloud-2" />
             </>
           )}
         </div>
       </div>
-
-      <style jsx="true">{`
-        @media (min-width: 1440px) {
-          .content-container { 
-            height: 95vh !important;       /* ✅ SMALLER RED */
-            max-width: 1440px; 
-            margin: 0 auto; 
-            overflow: visible !important;
-          }
-          .left-section { margin-top: 10%; }
-          .h1-title { 
-            font-size: 82px !important;
-            line-height: 1.05 !important;
-            max-height: 175px !important;
-            overflow: hidden !important;
-          }
-          .hero-image { 
-            height: 115vh !important;
-            max-height: 115vh !important;
-            right: 45% !important;
-            top: 0% !important;              /* ✅ TOP UP */
-            transform: none !important;
-          }
-          .image-wrapper {
-            height: 125vh !important;
-          }
-        }
-        
-        @media (max-width: 1439px) {
-          .content-container {
-            padding: 0 1.5% !important;
-            gap: 20px !important;
-            height: 100vh !important;
-            overflow: hidden !important;
-          }
-          .left-section {
-            margin-top: 9% !important;
-            flex: 0 0 480px !important;
-            max-width: 480px !important;
-            padding-bottom: 1rem !important;
-          }
-          .text-column {
-            padding-left: 10% !important;
-            max-width: 450px !important;
-          }
-          .h1-title { font-size: 75px !important; }
-          .description { 
-            font-size: 1.1rem !important; 
-            max-width: 450px !important; 
-          }
-          .logo-container { left: 4% !important; }
-          .hero-image { 
-            max-width: 92vw !important;
-            max-height: 92vh !important;
-            right: 40% !important;
-            transform: translateY(18%) scale(1.4) !important;
-          }
-          .image-wrapper {
-            width: 45% !important;
-            max-width: 600px !important;
-          }
-        }
-        
-        @media (max-height: 850px) {
-          .content-container { padding: 2% 1.5% !important; align-items: flex-start !important; }
-          .left-section { margin-top: 7% !important; padding-bottom: 1rem !important; }
-          .hero-image { height: 85vh !important; transform: translateY(15%) scale(1.3) !important; }
-        }
-      `}</style>
     </div>
   );
 };

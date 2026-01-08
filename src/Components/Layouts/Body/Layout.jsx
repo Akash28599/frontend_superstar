@@ -1,11 +1,11 @@
-import HomePage from './Pages/HomePage';
-import ScholarshipPage from './Pages/ScholarshipPage';
-import Navbar from "./Components/Navbar"
+import HomePage from '../../../Pages/HomePage';
+import ScholarshipPage from '../../../Pages/ScholarshipPage';
+import Navbar from "../Navbar/Navbar"
 import { Route, Routes, useLocation } from 'react-router-dom';
-import QuizPage from './Pages/QuizPage';
-import { PastWinners } from './Pages/PastWinners/PastWinners';
-import ExamPage from './Components/QuizRegistration/ExamPage';
-import FooterLayout from './Components/Footer';
+import QuizPage from '../../../Pages/QuizPage';
+import { PastWinners } from '../../../Pages/PastWinners/PastWinners';
+import ExamPage from '../../QuizRegistration/ExamPage';
+import FooterLayout from '../../Footer';
 
 export function LayoutComponent({ settingsData, dpr }) {
   const location = useLocation();
