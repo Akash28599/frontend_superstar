@@ -1,6 +1,6 @@
 import { BrowserRouter } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { LayoutComponent } from './Components/Layouts/Body/Layout';
+import { LayoutComponent } from './Layouts/Body/Layout';
 
 function App() {
   const [settingsData, setSettingsData] = useState(null);

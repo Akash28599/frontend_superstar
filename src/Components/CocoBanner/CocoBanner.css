@@ -1,0 +1,108 @@
+.coco-banner {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.coco-banner-wave {
+  width: 100%;
+  display: block;
+  position: relative;
+  height: auto;
+}
+
+.coco-character {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  max-width: 100%;
+  height: auto;
+  transform: translateX(-50%);
+}
+
+.coco-cloud {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  max-width: 100%;
+  height: auto;
+}
+
+.coco-text {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: absolute;
+  text-align: center;
+  color: white;
+  z-index: 2;
+  max-width: 80%;
+}
+
+.coco-title {
+  font-weight: 700;
+  margin-bottom: 16px;
+  max-width: 72%;
+  line-height: 1.2;
+  letter-spacing: 0%;
+}
+
+.coco-desc {
+  font-family: "Kellogg's Sans";
+  font-weight: 400;
+  font-style: italic;
+  opacity: 0.9;
+  max-width: 75%;
+  position: relative;
+  line-height: 1.2;
+  letter-spacing: 0%;
+  right: 3%;
+  bottom: 3%;
+}
+
+/* BREAKPOINTS */
+
+/* Mobile / Tablet */
+@media (max-width: 1199px) {
+  .coco-title { font-size: 3rem; }
+  .coco-desc { font-size: 1.3rem; }
+  .coco-character { bottom: 20%; left: 15%; transform: translateX(-50%); }
+  .coco-cloud { top: 40%; right: 12%; }
+  .coco-text { top: 50%; left: 25%; }
+}
+
+/* Smaller laptops */
+@media (min-width: 1200px) and (max-width: 1439px) {
+  .coco-character { bottom: 15%; left: 15%; transform: translateX(-50%); }
+  .coco-cloud { top: 39%; right: 10%; }
+  .coco-text { top: 48%; left: 28%; }
+  .coco-title { font-size: 4.2rem; }
+  .coco-desc { font-size: 1.7rem; }
+}
+
+/* Medium desktops */
+@media (min-width: 1440px) and (max-width: 1919px) {
+  .coco-character { bottom: 22%; left: 13.5%; transform: translateX(-50%); }
+  .coco-cloud { top: 38%; right: 13%; }
+  .coco-text { top: 45%; left: 25%; }
+  .coco-title { font-size: 4.8rem; }
+  .coco-desc { font-size: 1.9rem; }
+}
+
+/* Large desktops */
+@media (min-width: 1920px) and (max-width: 2999px) {
+  .coco-character { bottom: 120%; left: 14%; transform: translateX(-62.5%); }
+  .coco-cloud { top: 35%; right: 11%; }
+  .coco-text { top: 42%; left: 22%; }
+  .coco-title { font-size: 5.6rem; }
+  .coco-desc { font-size: 2.1rem; }
+}
+
+/* Ultra wide screens */
+@media (min-width: 3000px) {
+  .coco-character { bottom: 50%; left: 16%; transform: translateX(-65%); scale: 1.5;}
+  .coco-cloud { top: 30%; right: 10%; }
+  .coco-text { top: 40%; left: 20%; }
+  .coco-title { font-size: 7rem; }
+  .coco-desc { font-size: 2.5rem; }
+}

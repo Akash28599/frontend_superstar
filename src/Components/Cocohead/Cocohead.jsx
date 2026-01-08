@@ -1,24 +1,10 @@
 import { useEffect, useState } from 'react';
 import './Cocohead.css'
-export const CocoHead = ({ dpr }) => {
+const Cocohead = ({ dpr }) => {
     const [items, setItems] = useState([]);
     const [head, setHead] = useState(null);
     const [starImage, setStarImage] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [scale, setScale] = useState(window.devicePixelRatio);
-
-    useEffect(() => {
-        const handleResize = () => {
-            setScale(window.devicePixelRatio);
-        };
-
-        window.addEventListener("resize", handleResize);
-
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    }, []);
-    const is100PercentScale = scale === 1;
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_STRAPI_URL}/api/coco-heads?populate=*`)
@@ -44,13 +30,15 @@ export const CocoHead = ({ dpr }) => {
             .catch(() => setLoading(false));
     }, []);
 
+    if (loading) return <div>Loading...</div>
+
     return (
         <div className='ch-container'>
             <div className='ch-star'>
                 <img src={starImage} alt='stars' />
             </div>
             <div className='ch-yellow-banner'>
-                <div className='ch-cocohead'>
+                <div className='ch-h'>
                     {head?.thumbnail && <img src={head.thumbnail.url} alt='coco monkey' />}
                 </div>
                 <div className='ch-yellow-box'>
@@ -77,10 +65,11 @@ export const CocoHead = ({ dpr }) => {
                             </div>
                         )
                     })}
-
                 </div>
             </div>
         </div>
     )
 
 }
+
+export default Cocohead

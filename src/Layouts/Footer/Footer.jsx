@@ -1,8 +1,8 @@
 import { Box, Grid, List, ListItem } from "@mui/material";
 import { useEffect, useState } from "react";
-import SocialIcons from "./SocialIcons/SocialIcons";
+import SocialIcons from "../../Components/SocialIcons/SocialIcons";
 
-const FooterLayout = ({settingsData}) => {
+const Footer = ({settingsData}) => {
   //const [settingsData, setSettingsData] = useState(null);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth); // ✅ DYNAMIC WIDTH
 
@@ -12,24 +12,6 @@ const FooterLayout = ({settingsData}) => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
-  // useEffect(() => {
-  //   const getFooterData = async () => {
-  //     try {
-  //       const res = await fetch(
-  //         `${process.env.REACT_APP_STRAPI_URL}/api/sitesettings?populate=*`
-  //       );
-  //       const json = await res.json();
-  //       console.log(json);
-  //       setSettingsData(json);
-  //     } catch (error) {
-  //       console.error("Error fetching footer data:", error);
-  //     }
-  //   };
-  //   getFooterData();
-  // }, []);
-
-  //const settings = settingsData?.data?.[0];
 
 
   const addressLines = settingsData?.address?.split("\n") ?? [];
@@ -176,4 +158,4 @@ const FooterLayout = ({settingsData}) => {
   );
 };
 
-export default FooterLayout;
+export default Footer;

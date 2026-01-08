@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 // ✅ Detect if the browser is Edge
 const isEdgeBrowser = () => {
