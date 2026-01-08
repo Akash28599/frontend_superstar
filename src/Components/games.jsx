@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import '../fonts.css';
 
 // ✅ Detect if the browser is Edge
 const isEdgeBrowser = () => {

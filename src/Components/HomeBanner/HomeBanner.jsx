@@ -45,8 +45,8 @@ const HomeBanner = () => {
       .catch(() => setLoading(false));
   }, []);
 
-  if (loading) return <div style={loadingStyle}>Loading...</div>;
-  if (!banner) return <div style={loadingStyle}>No banner data</div>;
+  if (loading) return <div className='h-loading'>Loading...</div>;
+  if (!banner) return <div className='h-loading'>No banner data</div>;
 
   const logoImage =
     banner.nav_icon?.formats?.small?.url ||
@@ -86,120 +86,95 @@ const HomeBanner = () => {
       />
     );
 
-  const iconCircleStyle = {
-    width: '36px',
-    height: '36px',
-    borderRadius: '50%',
-    background: isHovered ? 'linear-gradient(180deg,#ffb366,#ff8a2b)' : 'linear-gradient(180deg,#ffb366,#ff8a2b)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginLeft: '12px',
-    boxShadow: `2px 3px 0px ${constants.red}, 0 4px 12px rgba(0,0,0,0.1)`,
-    transition: 'all 0.3s ease',
-    transform: isHovered ? 'scale(1.05)' : 'scale(1)',
-  };
-
   const dynamicLeftSectionStyle = {
     flex: screenWidth >= 1440 ? '0 0 550px' : '0 0 480px',
-    zIndex: 5,
     marginTop: screenWidth >= 1440 ? '14%' : '20%',
-    paddingLeft: '0',
-    paddingBottom: '1.5rem',
     maxWidth: screenWidth >= 1440 ? '550px' : '480px',
-    className: 'left-section',
   };
 
   const dynamicContentStyle = {
     height: screenWidth >= 1440 ? '95vh' : '100vh',     // ✅ SMALLER RED for MacBook
-    margin: '0% 100px',
     padding: screenWidth >= 1440 ? '0 3%' : '0 1.5%',
-    display: 'flex',
-    alignItems: 'flex-start',
     justifyContent: screenWidth >= 1440 ? 'center' : 'flex-start',
     gap: screenWidth >= 1440 ? '35px' : '20px',
-    maxWidth: '100%',
-    overflow: 'visible',
-    className: 'content-container',
   };
 
   // ✅ HERO TOP UP: 0% (MacBook only)
   const dynamicHeroImageStyle = {
-    width: 'auto',
     height: screenWidth >= 1440 ? '115vh' : '100%',
     maxWidth: screenWidth >= 1440 ? '97vw' : '92vw',
     maxHeight: screenWidth >= 1440 ? '115vh' : '92vh',
-    objectFit: 'contain',
-    position: 'relative',
     right: screenWidth >= 1440 ? '0%' : '0%',
     top: screenWidth >= 1440 ? '4%' : '0%',              // ✅ TOP UP: -5% → 0%
     transform: screenWidth >= 1440 ? 'none' : 'translateY(10%) scale(1.4)',
-    className: 'hero-image',
   };
 
   return (
-    <div style={containerStyle}>
+    <div className='h-container'>
 
       {logoImage && (
-        <div style={{
-          ...logoContainerStyle,
-          left: screenWidth >= 1440 ? '6%' : '4%'
-        }}>
-          <img src={logoImage} alt="Logo" style={logoStyle} />
+        <div
+          className='h-logo-container'
+          style={{
+            left: screenWidth >= 1440 ? '6%' : '4%'
+          }}>
+          <img src={logoImage} alt="Logo" className='h-logo' />
         </div>
       )}
 
-      <div style={dynamicContentStyle}>
-        <div style={dynamicLeftSectionStyle}>
-          <div style={{
-            ...textContainerStyle,
-            paddingLeft: screenWidth >= 1440 ? '12%' : '10%'
-          }}>
-            <div style={badgeContainerStyle}>
-              <div style={{
-                ...badgeStyle,
-                marginLeft: screenWidth >= 1440 ? '6%' :'0%',
-                marginRight: screenWidth >= 1440 ? '0%' : '10%',
-              }}>
-                <h3 style={{
-                  ...badgeTextStyle,
-                  fontSize: screenWidth >= 1440 ? '1.2rem' : '1rem',
-                }}>{banner.topheading}</h3>
+      <div className='h-content' style={dynamicContentStyle}>
+        <div className='h-left-section' style={dynamicLeftSectionStyle}>
+          <div className='h-text-container'
+            style={{
+              paddingLeft: screenWidth >= 1440 ? '12%' : '10%'
+            }}>
+            <div className='h-badge-container'>
+              <div
+                className='h-badge'
+                style={{
+
+                  marginLeft: screenWidth >= 1440 ? '6%' : '0%',
+                  marginRight: screenWidth >= 1440 ? '0%' : '10%',
+                }}>
+                <h3
+                  className='h-badge-text'
+                  style={{
+                    fontSize: screenWidth >= 1440 ? '1.2rem' : '1rem',
+                  }}>{banner.topheading}</h3>
               </div>
             </div>
 
-            <div style={{
-              ...textColumnStyle,
-              paddingLeft: screenWidth >= 1440 ? '13%' : '10%',
-              maxWidth: screenWidth >= 1440 ? '520px' : '450px'
-            }}>
-              <h1 style={{
-                ...h1Style,
-                fontSize: screenWidth >= 1440 ? '76px' : '70px',
-                lineHeight: screenWidth >= 1440 ? '1.05' : '0.9',
-                maxHeight: screenWidth >= 1440 ? '175px' : '140px',
+            <div
+              className='h-text-column'
+              style={{
+                paddingLeft: screenWidth >= 1440 ? '13%' : '10%',
+                maxWidth: screenWidth >= 1440 ? '520px' : '450px'
               }}>
+              <h1
+                className='h-h1'
+                style={{
+                  fontSize: screenWidth >= 1440 ? '76px' : '70px',
+                  lineHeight: screenWidth >= 1440 ? '1.05' : '0.9',
+                  maxHeight: screenWidth >= 1440 ? '175px' : '140px',
+                }}>
                 {banner.title}
               </h1>
-              <p style={{
-                ...descStyle,
-                fontSize: screenWidth >= 1440 ? '1.3rem' : '1.1rem',
-                maxWidth: screenWidth >= 1440 ? '520px' : '450px'
-              }}>{banner.description}</p>
+              <p
+                className='h-desc'
+                style={{
+                  fontSize: screenWidth >= 1440 ? '1.3rem' : '1.1rem',
+                  maxWidth: screenWidth >= 1440 ? '520px' : '450px'
+                }}>{banner.description}</p>
 
               <button
+                className='h-button'
                 style={{
-                  ...buttonStyle,
-                  backgroundColor: isHovered ? constants.gold : '#fff',
-                  color: constants.red,
                   fontSize: screenWidth >= 1440 ? '1.4rem' : '1.2rem',
                   padding: screenWidth >= 1440 ? '0.75rem 2.5rem' : '0.6rem 2rem'
                 }}
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
               >
                 Play Now
-                <div style={iconCircleStyle}>
+                <div className='h-icon-circle'>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff">
                     <polygon points="8,5 8,19 19,12" />
                   </svg>
@@ -209,15 +184,16 @@ const HomeBanner = () => {
           </div>
         </div>
 
-        <div style={{
-          ...imageWrapperStyle,
+        <div 
+          className='h-image-wrapper'
+          style={{
           width: screenWidth >= 1440 ? '50%' : '45%',
           maxWidth: screenWidth >= 1440 ? 'none' : '600px',
           height: screenWidth >= 1440 ? '125vh' : 'auto'
         }}>
           {heroImage && (
             <>
-              <img src={heroImage} alt="Hero" style={dynamicHeroImageStyle} />
+              <img src={heroImage} alt="Hero" className='h-hero-image' style={dynamicHeroImageStyle} />
               <Cloud top="36%" right={cloudPositions.cloud1Right} size={cloudPositions.cloud1Size} zIndex={3} />
               <Cloud top="18%" left="50%" size="7%" zIndex={4} />
             </>
@@ -295,149 +271,6 @@ const HomeBanner = () => {
       `}</style>
     </div>
   );
-};
-
-const constants = { gold: '#FBCA05', red: '#dd2120', fontFamily: '"KelloggsSans", Arial, sans-serif' }
-const containerStyle = {
-  position: 'relative',
-  height: '115vh',
-  backgroundColor: constants.red,
-  overflow: 'hidden',
-  width: '100vw',
-  margin: 0,
-  padding: 0,
-  display: 'flex',
-  flexDirection: 'row',
-
-};
-
-const loadingStyle = {
-  minHeight: '100vh',
-  backgroundColor: constants.red,
-  color: '#fff',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  fontSize: '1.2rem',
-};
-
-const logoContainerStyle = {
-  position: 'absolute',
-  top: '0%',
-  left: '6%',
-  width: '9rem',
-  height: '11rem',
-  backgroundColor: 'rgba(255,255,255,0.95)',
-  borderRadius: '0 0 30px 30px',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  zIndex: 10,
-  className: 'logo-container',
-};
-
-const logoStyle = {
-  width: '90px',
-  height: '140px',
-  objectFit: 'contain',
-  borderRadius: '16px',
-};
-
-const textContainerStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  width: '100%',
-  paddingLeft: '12%',
-};
-
-const badgeContainerStyle = {
-  marginBottom: '0.5rem',
-  width: '100%',
-  marginLeft: '1.5rem',
-};
-
-const badgeStyle = {
-  backgroundColor: constants.gold,
-  padding: '0.75rem 1.5rem',
-  borderRadius: '26px',
-  display: 'inline-block',
-  marginRight: '10%',
-  className: 'badge',
-};
-
-const badgeTextStyle = {
-  margin: 0,
-  fontWeight: 500,
-  fontSize: '1.2rem',
-  lineHeight: '100%',
-  letterSpacing: '0%',
-  color: constants.red,
-};
-
-const textColumnStyle = {
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'flex-start',
-  maxWidth: '520px',
-  marginLeft: '0',
-  paddingLeft: '13%',
-  className: 'text-column',
-};
-
-const h1Style = {
-  fontFamily: constants.fontFamily,
-  fontWeight: 700,
-  fontSize: '78px',
-  lineHeight: '1.05',
-  letterSpacing: '8%',
-  margin: '0 0 1.2rem 0',
-  color: '#fff',
-  alignSelf: 'flex-start',
-  width: '120%',
-  textAlign: 'left',
-  className: 'h1-title',
-};
-
-const descStyle = {
-  color: '#fff',
-  maxWidth: '520px',
-  fontFamily: constants.fontFamily,
-  fontWeight: 500,
-  fontSize: '1.3rem',
-  lineHeight: '1.2',
-  letterSpacing: '0%',
-  marginBottom: '1.5rem',
-  alignSelf: 'flex-start',
-  textAlign: 'left',
-  paddingLeft: '2%',
-  className: 'description',
-};
-
-const buttonStyle = {
-  padding: '0.75rem 2.5rem',
-  borderRadius: '50px',
-  border: 'none',
-  backgroundColor: '#fff',
-  color: constants.gold,
-  fontWeight: 500,
-  fontSize: '1.4rem',
-  display: 'inline-flex',
-  alignItems: 'center',
-  cursor: 'pointer',
-  transition: 'all 0.3s ease',
-  alignSelf: 'flex-start',
-  fontFamily:constants.fontFamily
-};
-
-const imageWrapperStyle = {
-  flex: 1,
-  width: '50%',
-  height: 'auto',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'flex-start',
-  transform: 'none',
-  className: 'image-wrapper',
 };
 
 export default HomeBanner;

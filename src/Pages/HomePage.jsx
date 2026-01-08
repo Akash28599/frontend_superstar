@@ -1,6 +1,6 @@
 import HomeBanner from "../Components/HomeBanner/HomeBanner"
 // import TrendingStories from "../Components/TrendingStories"
-import CocoHeads from "../Components/CocoheadOld"
+// import CocoHeads from "../Components/CocoheadOld"
 import PrintableGames from "../Components/Games"
 import OurProducts from "../Components/OurProducts"
 import CocoBanner from "../Components/Cocobanner"

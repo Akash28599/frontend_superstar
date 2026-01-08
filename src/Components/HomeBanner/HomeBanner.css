@@ -1,14 +1,176 @@
-:root {
-    --red: #dd2120;
-    --font: "KelloggsSans", Arial, sans-serif;
+.h-loading {
+    min-height: 100vh;
+    background-color: var(--red);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
 }
 
-.h-loading {
-    min-height: '100vh';
+.h-container {
+    position: relative;
+    height: 115vh;
     background-color: var(--red);
-    color: '#fff';
-    display: 'flex';
-    align-items: 'center';
-    justify-content: 'center';
-    font-size: '1.2rem';
+    overflow: hidden;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+}
+
+.h-logo-container {
+    position: absolute;
+    top: 0%;
+    left: 6%;
+    width: 9rem;
+    height: 11rem;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 0 0 30px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.h-logo {
+    width: 90px;
+    height: 140px;
+    object-fit: contain;
+    border-radius: 16px;
+}
+
+.h-text-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-left: 12%;
+}
+
+.h-badge-container {
+    margin-bottom: 0.5rem;
+    width: 100%;
+    margin-left: 1.5rem;
+}
+
+.h-badge {
+    background-color: var(--gold);
+    padding: 0.75rem 1.5rem;
+    border-radius: 26px;
+    display: inline-block;
+    margin-right: 10%;
+}
+
+.h-badge-text {
+    margin: 0;
+    font-weight: 500;
+    font-size: 1.2rem;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: var(--red);
+}
+
+.h-text-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 520px;
+    margin-left: 0;
+    padding-left: 13%;
+}
+
+.h-h1 {
+    font-family: var(--font);
+    font-weight: 700;
+    font-size: 78px;
+    line-height: 1.05;
+    letter-spacing: 8%;
+    margin: 0 0 1.2rem 0;
+    color: #fff;
+    align-self: flex-start;
+    width: 120%;
+    text-align: left;
+}
+
+.h-desc {
+    color: #fff;
+    max-width: 520px;
+    font-family: var(--font);
+    font-weight: 500;
+    font-size: 1.3rem;
+    line-height: 1.2;
+    letter-spacing: 0%;
+    margin-bottom: 1.5rem;
+    align-self: flex-start;
+    text-align: left;
+    padding-left: 2%;
+}
+
+.h-button {
+    padding: 0.75rem 2.5rem;
+    border-radius: 50px;
+    border: none;
+    background-color: var(--white);
+    color: var(--red);
+    font-weight: 500;
+    font-size: 1.4rem;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: flex-start;
+    font-family: var(--font);
+    background-color: var(--white);
+}
+
+.h-button:hover {
+    background-color: var(--gold);
+}
+
+.h-image-wrapper {
+    flex: 1;
+    width: 50%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    transform: none;
+}
+
+.h-icon-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 12px;
+    box-shadow: 2px 3px 0px var(--red), 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    background: linear-gradient(180deg, #ffb366, #ff8a2b);
+}
+
+.h-button:hover>.h-icon-circle {
+    transform: scale(1.05);
+}
+
+.h-left-section {
+    z-index: 5;
+    padding-left: 0;
+    padding-bottom: 1.5rem;
+}
+
+.h-content {
+    margin: 0% 100px;
+    display: flex;
+    align-items: flex-start;
+    max-width: 100%;
+    overflow: visible;
+}
+
+.h-hero-image {
+    width: auto;
+    object-fit: contain;
+    position: relative;
 }

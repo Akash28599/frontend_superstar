@@ -1,4 +1,3 @@
-import './App.css';
 import HomePage from './Pages/HomePage';
 import ScholarshipPage from './Pages/ScholarshipPage';
 import Navbar from "./Components/Navbar"
