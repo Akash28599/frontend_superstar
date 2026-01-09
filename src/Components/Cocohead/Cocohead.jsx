@@ -38,7 +38,7 @@ const Cocohead = ({ dpr }) => {
                 <img src={starImage} alt='stars' />
             </div>
             <div className='ch-yellow-banner'>
-                <div className='ch-h'>
+                <div className='ch-head'>
                     {head?.thumbnail && <img src={head.thumbnail.url} alt='coco monkey' />}
                 </div>
                 <div className='ch-yellow-box'>

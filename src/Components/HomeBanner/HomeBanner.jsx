@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './HomeBanner.css'
+import HoverButton from '../HoverButton/HoverButton';
 const HomeBanner = () => {
   const [banner, setBanner] = useState(null);
   const [cloudImage, setCloudImage] = useState(null);
@@ -139,20 +140,7 @@ const HomeBanner = () => {
                   maxWidth: screenWidth >= 1440 ? '520px' : '450px'
                 }}>{banner.description}</p>
 
-              <button
-                className='h-button'
-                style={{
-                  fontSize: screenWidth >= 1440 ? '1.4rem' : '1.2rem',
-                  padding: screenWidth >= 1440 ? '0.75rem 2.5rem' : '0.6rem 2rem'
-                }}
-              >
-                Play Now
-                <div className='h-icon-circle'>
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff">
-                    <polygon points="8,5 8,19 19,12" />
-                  </svg>
-                </div>
-              </button>
+             <HoverButton text='Play Now'/>
             </div>
           </div>
         </div>

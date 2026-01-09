@@ -1,0 +1,93 @@
+.pg-loading {
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.pg-loading h2 {
+    font-size: 2.4rem;
+    margin-bottom: .5rem;
+    font-weight: 700;
+    color: var(--red);
+}
+
+.pg-loading p {
+    max-width: 880px;
+    margin: 0 auto 2rem;
+    color: #666;
+    font-weight: 400;
+}
+
+.pg-section {
+    background: var(--white);
+    overflow: hidden;
+}
+
+.pg-border-box {
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.pg-block {
+    text-align: center;
+    display: block;
+}
+
+.pg-block h2 {
+    margin: 0;
+    color: var(--red);
+    font-weight: medium;
+    letter-spacing: 0%;
+}
+
+.pg-grid {
+    display: grid;
+    margin-bottom: 3rem;
+    justify-items: stretch;
+    align-items: stretch;
+}
+
+
+.pg-grid-item-holder {
+    background: var(--white);
+    border-radius: 6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.pg-grid-item {
+    background: var(--white);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4;
+    flex-shrink: 0;
+}
+
+.pg-grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    max-width: 100%;
+}
+
+.pg-grid-item>div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    background: #fafafa;
+    font-weight: 400;
+}
