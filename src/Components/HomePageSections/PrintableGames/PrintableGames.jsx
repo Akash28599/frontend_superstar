@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import './PrintableGames/PrintableGames.css'
-import HoverButton from "./HoverButton/HoverButton";
+import './PrintableGames.css'
+import HoverButton from "../HoverButton/HoverButton";
 // ✅ Detect if the browser is Edge
 const isEdgeBrowser = () => {
   return navigator.userAgent.includes("Edg") ||

@@ -1,10 +1,10 @@
-import HomeBanner from "../Components/HomeBanner/HomeBanner"
+import HomeBanner from "../Components/HomePageSections/HomeBanner/HomeBanner"
 // import TrendingStories from "../Components/TrendingStories"
 // import CocoHeads from "../Components/CocoheadOld"
-import OurProducts from "../Components/OurProducts"
-import PrintableGames from "../Components/PrintableGames";
-import Cocohead from '../Components/Cocohead/Cocohead'
-import CocoBanner from "../Components/CocoBanner/CocoBanner";
+import OurProducts from "../Components/HomePageSections/OurProducts/OurProducts"
+import PrintableGames from "../Components/HomePageSections/PrintableGames/PrintableGames";
+import Cocohead from '../Components/HomePageSections/Cocohead/Cocohead'
+import CocoBanner from "../Components/HomePageSections/CocoBanner/CocoBanner";
 export default function HomePage({ dpr }) {
     return (
         <>

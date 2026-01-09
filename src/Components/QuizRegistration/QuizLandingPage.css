@@ -1,0 +1,214 @@
+
+.q-container {
+    background-color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.q-coco {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 230px;
+    height: auto;
+    z-index: 10;
+    animation: swing 3s ease-in-out infinite;
+    transform-origin: top left;
+}
+
+@media (max-width: 768px) {
+    .q-coco {
+        width: 180px;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .q-coco {
+        width: 150px;
+    }
+}
+
+.q-main-content {
+    max-width: 1100px;
+    margin: 40px auto 0;
+    padding: 0 20px;
+}
+
+
+.q-redbtn,
+.q-whitebtn {
+
+    flex: 1;
+    background-color: var(--red);
+    color: var(--white);
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    width: 100%;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: var(--font);
+}
+
+.q-whitebtn {
+    background-color: var(--white);
+    color: var(--red);
+}
+
+.q-roadmap-section {
+    margin-top: 160px;
+    text-align: center;
+    position: relative;
+}
+
+.q-section-heading {
+    font-size: 34px;
+    font-weight: 800;
+    color: #333;
+    margin-bottom: 80px;
+}
+
+.q-roadmap-container {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.q-roadmap-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.q-step-row {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+}
+
+.q-step-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 45%;
+    position: relative;
+}
+
+.q-step-number-badge {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background-color: var(--gold);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 800;
+    flex-shrink: 0;
+    box-shadow: 0 6px 15px rgba(255, 204, 0, 0.3);
+}
+
+.q-step-card-inner {
+    background-color: var(--white);
+    padding: 25px;
+    border-radius: 20px;
+    text-align: left;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+    flex: 1;
+}
+
+.q-step-card-title {
+    margin: 0 0 8px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #333;
+}
+
+.q-step-card-desc {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+}
+
+.q-waitlist-section {
+    margin: 120px 0;
+    padding: 60px 20px;
+    background-color: #fff7d6ff;
+    border-radius: 40px;
+    text-align: center;
+}
+
+.q-waitlist-container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.q-waitlist-text-content {
+    text-align: center;
+}
+
+.q-waitlist-heading {
+    font-size: 32px;
+    font-weight: 800;
+    color: #333;
+    margin: 0 0 10px;
+}
+
+.q-waitlist-subtext {
+    font-size: 16px;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.q-waitlist-form {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.q-waitlist-input {
+
+    flex: 2;
+    padding: 15px 20px;
+    border-radius: 15px;
+    border: 2px solid var(--gold);
+    outline: none;
+    font-size: 16px;
+    font-family: var(--font);
+}
+
+.q-loading {
+    text-align: center;
+    padding: 100px;
+    font-size: 24px;
+    color: var(--red);
+}
+
+.q-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
