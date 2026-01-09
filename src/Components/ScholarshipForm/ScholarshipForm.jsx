@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import "./ScholarshipForm.css";
 import { intArrayBuilder } from "../../Utils/Array";
-import KelloggIcon from "../KelloggIcon/KelloggIcon";
+import KelloggIcon from "./KelloggIcon/KelloggIcon";
 
 const ScholarshipForm = ({ data }) => {
     const fileRef = useRef(null);

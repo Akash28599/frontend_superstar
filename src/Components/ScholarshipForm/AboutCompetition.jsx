@@ -1,5 +1,5 @@
 import React from 'react'
-import KelloggIcon from '../KelloggIcon/KelloggIcon'
+import KelloggIcon from './KelloggIcon/KelloggIcon'
 import './AboutCompetition.css'
 import SocialIcons from '../SocialIcons/SocialIcons';
 

@@ -19,8 +19,6 @@ const KelloggIcon = ({ IconImage, isBlack }) => {
 
                 }}
             />
-            aada
-
             {/* <img
                 src='assetss/kelloggH1.png'
                 alt="icon"

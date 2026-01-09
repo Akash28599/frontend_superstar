@@ -3,7 +3,7 @@ import './PastWinners.css'
 import { FaArrowCircleLeft, FaArrowCircleUp } from "react-icons/fa";
 import { useEffect, useState } from 'react';
 
-export const PastWinners = () => {
+const PastWinners = () => {
     const navigate = useNavigate()
     const [pwData, setPwData] = useState(null)
 
@@ -91,3 +91,5 @@ export const PastWinners = () => {
         </div>
     )
 }
+
+export default PastWinners

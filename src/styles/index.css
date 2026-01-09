@@ -1,3 +1,12 @@
+/* Global reset */
+@import "./variables.css";
+
+body {
+  margin: 0;
+  font-family: "Kellogg's Sans";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 .App {
   text-align: center;
 }
