@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { StudentLogin } from './StudentLogin';
+import { StudentLogin } from './StudentLoginPopup/StudentLogin';
 import StudentRegister from './StudentRegisterForm';
 import './QuizLandingPage.css'
 import QuizHeader from './QuizHeader/QuizHeader';

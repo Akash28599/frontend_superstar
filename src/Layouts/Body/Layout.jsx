@@ -4,7 +4,7 @@ import HomePage from '../../Pages/HomePage';
 import ScholarshipPage from '../../Pages/ScholarshipPage';
 import QuizLandingPage from '../../Components/QuizRegistration/QuizLandingPage';
 import PastWinners from '../../Pages/PastWinners/PastWinners'
-import ExamPage from '../../Components/QuizRegistration/ExamPage';
+import ExamPage from '../../Components/QuizRegistration/ExamPage/ExamPage';
 import Footer from '../Footer/Footer';
 export function LayoutComponent({ settingsData, dpr }) {
   const location = useLocation();

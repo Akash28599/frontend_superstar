@@ -1,9 +1,3 @@
-:root {
-    --gold: #f3c720;
-    --red: #dd2120;
-    --font: "KelloggsSans", Arial, sans-serif;
-}
-
 .pw-container {
     font-family: var(--font);
     width: 100%;

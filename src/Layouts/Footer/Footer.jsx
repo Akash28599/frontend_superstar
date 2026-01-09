@@ -17,7 +17,7 @@ const Footer = ({settingsData}) => {
   const addressLines = settingsData?.address?.split("\n") ?? [];
   return (
     <Box>
-      <Box sx={{ background: "#dd2120" }}>
+      <Box sx={{ background: "#f60945" }}>
         <Box sx={{ 
           p: { xs: 3, sm: 5, md: 8, lg: 10 }, // Responsive padding
           display: "flex", 
@@ -143,7 +143,7 @@ const Footer = ({settingsData}) => {
 
       {/* COPYRIGHT */}
       <Box sx={{
-        background: "#c11b1bff",
+        background: "#d6073bff",
         display: "flex",
         justifyContent: "center",
         p: { xs: 2, md: 3 },
