@@ -91,7 +91,7 @@
 
 /* Large desktops */
 @media (min-width: 1920px) and (max-width: 2999px) {
-  .coco-character { bottom: 120%; left: 14%; transform: translateX(-62.5%); }
+  .coco-character { bottom: 40%; left: 13%; transform: translateX(-62.5%); }
   .coco-cloud { top: 35%; right: 11%; }
   .coco-text { top: 42%; left: 22%; }
   .coco-title { font-size: 5.6rem; }

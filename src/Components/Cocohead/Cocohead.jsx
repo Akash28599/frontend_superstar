@@ -54,7 +54,7 @@ const Cocohead = ({ dpr }) => {
                                         <img src={iconUrl} alt='item icon' />}
                                 </div>
                                 <div className='ch-title' style={{
-                                    fontSize: dpr ? '1.6rem' : '1rem',
+                                    fontSize: dpr ? '1.2rem' : '0.9rem',
                                     width: title.split(" ").length < 4 ? "80%" : "100%"
                                 }}>
                                     {title}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-
+import './OurProducts/OurProducts.css'
 const OurProducts = () => {
   const [products, setProducts] = useState([]);
   const [coco, setCoco] = useState(null);
@@ -72,44 +72,7 @@ const OurProducts = () => {
     it?.image?.formats?.medium?.url ||
     it?.image?.formats?.thumbnail?.url ||
     "";
-  const constants = { gold: "#f3c720", red: "#dd2120", font: '"KelloggsSans", Arial, sans-serif' }
-  const headingStyle = {
-    fontFamily: constants.font,
-    color: constants.red,
-    fontWeight: "bold",
-    lineHeight: 1.05,
-    margin: 0,
-    marginTop: '20px',
-    letterSpacing: "0%",
-  };
 
-  const sectionHeadingWrapper = {
-    maxWidth: 1400,
-    margin: "0 auto 40px",
-    padding: "0 38px",
-    textAlign: "center",
-  };
-
-  const paragraphStyle = {
-    fontFamily: constants.font,
-    fontWeight: 400,
-    fontSize: 16,
-    lineHeight: 1.6,
-    color: "#4b4b4b",
-    marginTop: 10,
-    maxWidth: 320,
-    letterSpacing: "0%",
-  };
-
-  const productTitleStyle = {
-    fontFamily: constants.font,
-    fontWeight: 700,
-    lineHeight: 1.1,
-    margin: 0,
-    letterSpacing: "0%",
-  };
-
-  // SVG dimensions and product anchor positions
   const SVG_WIDTH = containerWidth;
   const centerX = containerWidth / 2;
 
@@ -201,16 +164,11 @@ const OurProducts = () => {
         {!isLeft && (
           <div style={{ textAlign: "right", maxWidth: 320, ...customTextStyle }}>
             <h2
-              style={{
-                ...productTitleStyle,
-                fontSize: 34,
-                color: "#333",
-                marginBottom: 10,
-              }}
+              className="p-product-title"
             >
               {product.title_description?.title}
             </h2>
-            <p style={{ ...paragraphStyle, margin: 0 }}>
+            <p className="p-paragraph">
               {product.title_description?.description}
             </p>
           </div>
@@ -233,16 +191,11 @@ const OurProducts = () => {
         {isLeft && (
           <div style={{ textAlign: "left", maxWidth: 320, ...customTextStyle }}>
             <h2
-              style={{
-                ...productTitleStyle,
-                fontSize: 34,
-                color: "#333",
-                marginBottom: 10,
-              }}
+              className="p-product-title"
             >
               {product.title_description?.title}
             </h2>
-            <p style={{ ...paragraphStyle, margin: 0 }}>
+            <p className="p-paragraph">
               {product.title_description?.description}
             </p>
           </div>
@@ -254,8 +207,8 @@ const OurProducts = () => {
   //main return
   return (
     <>
-      <div style={sectionHeadingWrapper}>
-        <h1 style={{ ...headingStyle, fontSize: 52 }}>Our products</h1>
+      <div className='p-section-heading-wrapper'>
+        <h1 className='p-heading'>Our products</h1>
       </div>
       <section
         ref={containerRef}
@@ -267,19 +220,6 @@ const OurProducts = () => {
           minHeight: "100vh",
         }}
       >
-        {/* <svg
-          width="100%"
-          height={1200}
-          viewBox={`0 0 ${SVG_WIDTH} ${1200}`}
-          preserveAspectRatio="xMidYMin slice"
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            pointerEvents: "none",
-            zIndex: 0,
-          }}
-        > */}
         <svg
           width="100%"
           height={1200}
@@ -360,16 +300,11 @@ const OurProducts = () => {
                 }}
               >
                 <h2
-                  style={{
-                    ...productTitleStyle,
-                    fontSize: 34,
-                    color: "#333",
-                    marginBottom: 10,
-                  }}
+                  className="p-product-title"
                 >
                   {product3.title_description?.title}
                 </h2>
-                <p style={{ ...paragraphStyle, margin: 0 }}>
+                <p className="p-paragraph">
                   {product3.title_description?.description}
                 </p>
               </div>
@@ -401,16 +336,11 @@ const OurProducts = () => {
                 }}
               >
                 <h2
-                  style={{
-                    ...productTitleStyle,
-                    fontSize: 34,
-                    color: "#333",
-                    marginBottom: 10,
-                  }}
+                  className="p-product-title"
                 >
                   {product2.title_description?.title}
                 </h2>
-                <p style={{ ...paragraphStyle, margin: 0 }}>
+                <p className='p-paragraph'>
                   {product2.title_description?.description}
                 </p>
               </div>
@@ -483,16 +413,11 @@ const OurProducts = () => {
                 }}
               >
                 <h2
-                  style={{
-                    ...productTitleStyle,
-                    fontSize: 34,
-                    color: "#333",
-                    marginBottom: 10,
-                  }}
+                  className="p-product-title"
                 >
                   {product1.title_description?.title}
                 </h2>
-                <p style={{ ...paragraphStyle, margin: 0 }}>
+                <p className="p-paragraph">
                   {product1.title_description?.description}
                 </p>
               </div>
@@ -537,16 +462,11 @@ const OurProducts = () => {
                 }}
               >
                 <h2
-                  style={{
-                    ...productTitleStyle,
-                    fontSize: 34,
-                    color: "#333",
-                    marginBottom: 10,
-                  }}
+                className='p-product-title'
                 >
                   {product4.title_description?.title}
                 </h2>
-                <p style={{ ...paragraphStyle, margin: 0 }}>
+                <p className="p-paragraph">
                   {product4.title_description?.description}
                 </p>
               </div>

@@ -136,3 +136,9 @@
     }
 
 }
+
+@media(max-width:4000px){
+    .ch-title {
+
+    margin-top: 14%;
+    }}
