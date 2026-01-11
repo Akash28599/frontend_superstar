@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import './Cocohead.css'
 import { constants } from '../../Utils/constants';
@@ -8,7 +9,7 @@ export const CocoHead = () => {
     const [starImage, setStarImage] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    const isEdge = /Edg/.test(navigator.userAgent);
+    const isEdge = /Edg|Edge/.test(navigator.userAgent);
     useEffect(() => {
         fetch(`${process.env.REACT_APP_STRAPI_URL}/api/coco-heads?populate=*`)
             .then(res => res.json())
@@ -71,3 +72,5 @@ export const CocoHead = () => {
     )
 
 }
+
+export default CocoHead;
