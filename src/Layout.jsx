@@ -10,7 +10,7 @@ import FooterLayout from './Components/Footer';
 
 export function LayoutComponent({ settingsData, dpr }) {
   const location = useLocation();
-  const hidePathsNav = ['/past-winners', '/student-register', '/exam-page']
+  const hidePathsNav = ['/past-winners', '/student-register', '/exam-page', '/']
   const hideNavbar = hidePathsNav.includes(location.pathname);
   const hidePathsFooter = ['/exam-page']
   const hideFooter = hidePathsFooter.includes(location.pathname);
@@ -18,7 +18,7 @@ export function LayoutComponent({ settingsData, dpr }) {
   return (
     <>
       {!hideNavbar && (
-        <div style={{ backgroundColor: '#dd2120', height: '0px' }}>
+        <div style={{ backgroundColor: '#E41F35', height: '0px' }}>
           <Navbar />
         </div>
       )}

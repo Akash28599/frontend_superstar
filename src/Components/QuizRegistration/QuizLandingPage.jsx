@@ -41,6 +41,25 @@ const QuizLandingPage = () => {
             50% { transform: rotate(3deg); }
             100% { transform: rotate(-3deg); }
           }
+          /* Responsive Hanging Monkey */
+          .hanging-monkey {
+            position: absolute;
+            left: 0;
+            top: 0;
+            /* Large size for 100% scale (1920px -> ~384px), scales down robustly */
+            width: clamp(280px, 20vw, 450px); 
+            height: auto;
+            z-index: 10;
+            animation: swing 3s ease-in-out infinite;
+            transform-origin: top left;
+          }
+          @media (max-width: 1536px) {
+             /* Adjust for 125% scale laptop or smaller desktops */
+            .hanging-monkey { width: clamp(240px, 18vw, 320px); }
+          }
+          @media (max-width: 768px) {
+            .hanging-monkey { width: 180px; }
+          }
         `}
       </style>
 
@@ -58,7 +77,7 @@ const QuizLandingPage = () => {
       <img 
         src={first_component.student_exam_login.image} 
         alt="Coco" 
-        style={cocoStyle} 
+        className="hanging-monkey"
       />
       
       <header style={headerStyle}>
@@ -69,7 +88,6 @@ const QuizLandingPage = () => {
           </div>
           <div style={headerActionArea}>
             <img src={first_component.daily_challenges.image} alt="Coco Head" style={cocoHeadIcon} />
-            <div style={helpCircle}>?</div>
           </div>
         </div>
       </header>
@@ -80,7 +98,7 @@ const QuizLandingPage = () => {
             <div style={iconBox}>🏆</div>
             <h3 style={cardTitle}>{first_component.daily_challenges.title}</h3>
             <p style={cardDesc}>{first_component.daily_challenges.description}</p>
-            <button style={whiteBtn}>Start Daily Quiz</button>
+            <button style={redBtn}>Start Daily Quiz</button>
           </div>
 
           <div className="card-anim" style={yellowCard}>
@@ -164,13 +182,13 @@ const QuizLandingPage = () => {
   );
 };
 
-const constants = { gold:'#FBCA05', red: '#dd2120', fontFamily:'"KelloggsSans", Arial, sans-serif' }
+const constants = { gold:'#FBCA05', red: '#F60945', fontFamily:'"KelloggsSans", Arial, sans-serif' }
 
 const cocoStyle = { 
   position: 'absolute', // Use absolute positioning
   left: '0',
   top: '0',
-  width: '230px', 
+  width: '320px', 
   height: 'auto',
   zIndex: 10, // Lower z-index than modals but above header
   animation: 'swing 3s ease-in-out infinite',

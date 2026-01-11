@@ -1,26 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import './HomeBanner.css'
+import { constants } from '../../Utils/constants';
+
+import Navbar from '../Navbar';
+
 const HomeBanner = () => {
   const [banner, setBanner] = useState(null);
   const [cloudImage, setCloudImage] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const isEdge = /Edg|Edge/.test(navigator.userAgent);
 
   useEffect(() => {
     const handleResize = () => setScreenWidth(window.innerWidth);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-  // Add this somewhere in your app
-  //  const testFont = new FontFace("Kellogg's Sans Test", "url('../fonts/kelloggssans-light.otf')");
-  // testFont.load().then(() => {
-  //   console.log('✅ Font loaded successfully');
-  // }).catch(error => {
-  //   console.error('❌ Font failed to load:', error);
-  // });
+
+  const [starImage, setStarImage] = useState(null);
 
   useEffect(() => {
+    // Fetch banner data
     fetch(`${process.env.REACT_APP_STRAPI_URL}/api/homebanners?populate=*`)
       .then(res => res.json())
       .then(data => {
@@ -39,14 +40,30 @@ const HomeBanner = () => {
             img.url
           );
         }
-
         setLoading(false);
       })
       .catch(() => setLoading(false));
+
+    // Fetch star data from coco-heads
+    fetch(`${process.env.REACT_APP_STRAPI_URL}/api/coco-heads?populate=*`)
+        .then(res => res.json())
+        .then(json => {
+            const data = json.data || [];
+            const starItem = data.find(d => !(d.icon_description && d.icons));
+            if (starItem?.icons) {
+                const starUrl = starItem.icons.formats?.small?.url ||
+                    starItem.icons.formats?.thumbnail?.url ||
+                    starItem.icons.url;
+                setStarImage(starUrl);
+            }
+        })
+        .catch(err => console.log("Star fetch error", err));
   }, []);
 
   if (loading) return <div style={loadingStyle}>Loading...</div>;
   if (!banner) return <div style={loadingStyle}>No banner data</div>;
+
+  const isConstrained = screenWidth < 1350;
 
   const logoImage =
     banner.nav_icon?.formats?.small?.url ||
@@ -58,12 +75,11 @@ const HomeBanner = () => {
     banner.image?.formats?.medium?.url ||
     banner.image?.url;
 
-  // ✅ FIXED: 1st CLOUD MORE RIGHT FOR MACBOOK (13%)
+  // fluid cloud positioning
   const getCloudPositions = () => {
-    if (screenWidth >= 1920) return { cloud1Right: '8%', cloud1Size: '10%' };
-    if (screenWidth >= 1440) return { cloud1Right: '8%', cloud1Size: '10%' };  // ✅ +3% RIGHT
+    if (screenWidth >= 1600) return { cloud1Right: '8%', cloud1Size: '10%' };
+    if (screenWidth >= 1440) return { cloud1Right: '8%', cloud1Size: '10%' };
     if (screenWidth >= 1200) return { cloud1Right: '10%', cloud1Size: '9%' };
-    if (screenWidth >= 1024) return { cloud1Right: '10%', cloud1Size: '8%' };
     return { cloud1Right: '7%', cloud1Size: '10%' };
   };
 
@@ -90,7 +106,7 @@ const HomeBanner = () => {
     width: '36px',
     height: '36px',
     borderRadius: '50%',
-    background: isHovered ? 'linear-gradient(180deg,#ffb366,#ff8a2b)' : 'linear-gradient(180deg,#ffb366,#ff8a2b)',
+    background: 'linear-gradient(180deg,#ffb366,#ff8a2b)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -101,90 +117,128 @@ const HomeBanner = () => {
   };
 
   const dynamicLeftSectionStyle = {
-    flex: screenWidth >= 1440 ? '0 0 550px' : '0 0 480px',
+    flex: 1,
     zIndex: 5,
-    marginTop: screenWidth >= 1440 ? '14%' : '20%',
-    paddingLeft: '0',
-    paddingBottom: '1.5rem',
-    maxWidth: screenWidth >= 1440 ? '550px' : '480px',
+    marginTop: '0',
+    alignSelf: 'flex-end',
+    paddingLeft: '15%',
+    paddingBottom: '10vh',
+    paddingTop: screenWidth < 1200 ? '20vh' : (isConstrained ? '10vh' : '0'), // Push left section down for small screens
+    maxWidth: 'none',
     className: 'left-section',
+    transition: 'all 0.3s ease',
   };
 
   const dynamicContentStyle = {
-    height: screenWidth >= 1440 ? '95vh' : '100vh',     // ✅ SMALLER RED for MacBook
-    margin: '0% 100px',
-    padding: screenWidth >= 1440 ? '0 3%' : '0 1.5%',
+    height: 'auto',
+    flex: 1,
+    margin: isConstrained ? '0% 1%' : '0% 5%',
+    padding: '0 2%',
     display: 'flex',
-    alignItems: 'flex-start',
-    justifyContent: screenWidth >= 1440 ? 'center' : 'flex-start',
-    gap: screenWidth >= 1440 ? '35px' : '20px',
-    maxWidth: '100%',
-    overflow: 'visible',
+    alignItems: 'stretch',
+    justifyContent: 'center',
+    gap: '5vw', 
+    maxWidth: '1600px',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    position: 'relative',
     className: 'content-container',
   };
 
-  // ✅ HERO TOP UP: 0% (MacBook only)
   const dynamicHeroImageStyle = {
-    width: 'auto',
-    height: screenWidth >= 1440 ? '115vh' : '100%',
-    maxWidth: screenWidth >= 1440 ? '97vw' : '92vw',
-    maxHeight: screenWidth >= 1440 ? '115vh' : '92vh',
+    width: screenWidth < 1200 ? '45vw' : (isConstrained ? '55vw' : '48vw'),
+    height: 'auto',
+    flexShrink: 0,
+    // Increased max height for all resolutions as requested
+    maxHeight: isConstrained ? '125vh' : '115vh',
+    maxWidth: 'none', 
     objectFit: 'contain',
     position: 'relative',
-    right: screenWidth >= 1440 ? '0%' : '0%',
-    top: screenWidth >= 1440 ? '4%' : '0%',              // ✅ TOP UP: -5% → 0%
-    transform: screenWidth >= 1440 ? 'none' : 'translateY(10%) scale(1.4)',
+    marginTop: screenWidth >= 1440 ? '2%' : (isConstrained ? '5%' : '5%'),
+    transition: 'all 0.3s ease',
     className: 'hero-image',
   };
 
   return (
     <div style={containerStyle}>
+      <Navbar customStyle={{
+        top: '0',
+        left: 'auto',
+        transform: 'none',
+        // Granular left margin - Adjusted to be robust moving right for all scales
+        // <1350: 25%
+        // 1350-1600: 25% (Moved right from 22%)
+        // >1600: 25% (Moved right from 18% per user request)
+        margin: screenWidth < 1200
+          ? '20px auto -10px 25%' // Negative margin to bring kid up, while left section is pushed down via padding
+          : (screenWidth < 1350 
+            ? '20px auto -30px 25%' 
+            : '20px auto -220px 25%'),
+        
+        // Adjust max-width to match margins
+        maxWidth: screenWidth < 1350 
+          ? '70vw' 
+          : '71vw',
+          
+        paddingRight: isConstrained ? '28px' : '40px',
+        position: 'relative',
+        zIndex: 20
+      }} />
 
       {logoImage && (
         <div style={{
           ...logoContainerStyle,
-          left: screenWidth >= 1440 ? '6%' : '4%'
+          left: '5%',
+          // Dynamic overrides for constrained width
+          width: isConstrained ? '7rem' : '9rem',
+          height: isConstrained ? '8.5rem' : '11rem',
         }}>
-          <img src={logoImage} alt="Logo" style={logoStyle} />
+          <img src={logoImage} alt="Logo" style={{
+              ...logoStyle,
+              width: isConstrained ? '65px' : '90px',
+              height: isConstrained ? '110px' : '140px',
+          }} />
         </div>
       )}
 
       <div style={dynamicContentStyle}>
         <div style={dynamicLeftSectionStyle}>
-          <div style={{
-            ...textContainerStyle,
-            paddingLeft: screenWidth >= 1440 ? '12%' : '10%'
-          }}>
-            <div style={badgeContainerStyle}>
+          <div style={textContainerStyle}>
+            <div style={{
+              ...textColumnStyle,
+              paddingLeft: '0',
+              width: '100%'
+            }}>
               <div style={{
                 ...badgeStyle,
-                marginLeft: screenWidth >= 1440 ? '6%' :'0%',
-                marginRight: screenWidth >= 1440 ? '0%' : '10%',
+                marginBottom: '1rem'
               }}>
                 <h3 style={{
                   ...badgeTextStyle,
-                  fontSize: screenWidth >= 1440 ? '1.2rem' : '1rem',
+                  fontSize: screenWidth >= 1440 ? '1.2rem' : (isConstrained ? '1rem' : '1.2rem'),
+                  whiteSpace: 'nowrap',
                 }}>{banner.topheading}</h3>
               </div>
-            </div>
 
-            <div style={{
-              ...textColumnStyle,
-              paddingLeft: screenWidth >= 1440 ? '13%' : '10%',
-              maxWidth: screenWidth >= 1440 ? '520px' : '450px'
-            }}>
               <h1 style={{
                 ...h1Style,
-                fontSize: screenWidth >= 1440 ? '76px' : '70px',
-                lineHeight: screenWidth >= 1440 ? '1.05' : '0.9',
-                maxHeight: screenWidth >= 1440 ? '175px' : '140px',
+                // Adaptive font size
+                fontSize: screenWidth >= 1600 ? '4.5rem' : (screenWidth >= 1350 ? '3.5rem' : '3.3rem'),
+                lineHeight: '1.2',
               }}>
-                {banner.title}
+                {banner.title && banner.title.split(' ').length > 1 ? (
+                  <>
+                    {banner.title.split(' ')[0]}
+                    <br />
+                    {banner.title.split(' ').slice(1).join(' ')}
+                  </>
+                ) : (
+                  banner.title
+                )}
               </h1>
               <p style={{
                 ...descStyle,
-                fontSize: screenWidth >= 1440 ? '1.3rem' : '1.1rem',
-                maxWidth: screenWidth >= 1440 ? '520px' : '450px'
+                fontSize: screenWidth >= 1440 ? '1.3rem' : (isConstrained ? '1.1rem' : '1.3rem'),
               }}>{banner.description}</p>
 
               <button
@@ -192,8 +246,8 @@ const HomeBanner = () => {
                   ...buttonStyle,
                   backgroundColor: isHovered ? constants.gold : '#fff',
                   color: constants.red,
-                  fontSize: screenWidth >= 1440 ? '1.4rem' : '1.2rem',
-                  padding: screenWidth >= 1440 ? '0.75rem 2.5rem' : '0.6rem 2rem'
+                  fontSize: screenWidth >= 1440 ? '1.4rem' : (screenWidth < 1200 ? '0.8rem' : isConstrained ? '1.1rem' : '1.4rem'),
+                  padding: screenWidth < 1200 ? '0.6rem 2rem' : '0.75rem 2.5rem',
                 }}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
@@ -211,104 +265,68 @@ const HomeBanner = () => {
 
         <div style={{
           ...imageWrapperStyle,
-          width: screenWidth >= 1440 ? '50%' : '45%',
-          maxWidth: screenWidth >= 1440 ? 'none' : '600px',
-          height: screenWidth >= 1440 ? '125vh' : 'auto'
+          display: 'flex',
+          justifyContent: 'center',
+          flex: '1',
+          alignItems: 'flex-end'
         }}>
           {heroImage && (
             <>
               <img src={heroImage} alt="Hero" style={dynamicHeroImageStyle} />
-              <Cloud top="36%" right={cloudPositions.cloud1Right} size={cloudPositions.cloud1Size} zIndex={3} />
-              <Cloud top="18%" left="50%" size="7%" zIndex={4} />
+              {/* Right Cloud - Lower & Inward - Increased Size (Reduced slightly) */}
+              <Cloud top="45%" right="5%" size="17%" zIndex={3} />
+              {/* Left Cloud - Lower & Inward - Increased Size (Reduced slightly) */}
+              <Cloud top="30%" left="1%" size="9%" zIndex={4} />
             </>
           )}
         </div>
+        {/* Floating Star overlapped */}
+        {starImage && (
+            <div style={{
+                position: 'absolute',
+                // Overlap: Move down by roughly half the height (negative bottom)
+                // Using vw ensures it scales with width
+                bottom: '-14vw', 
+                left: '0.5%',
+                // Robust size: 15% of viewport width, clamped for sanity
+                width: '15vw',
+                minWidth: '200px',
+                maxWidth: '300px',
+                zIndex: 10,
+                transform: 'rotate(-10deg)',
+                pointerEvents: 'none'
+            }}>
+                <img src={starImage} alt="star" style={{
+                    width: '100%',
+                    height: 'auto'
+                }} />
+            </div>
+        )}
       </div>
 
       <style jsx="true">{`
-        @media (min-width: 1440px) {
-          .content-container { 
-            height: 95vh !important;       /* ✅ SMALLER RED */
-            max-width: 1440px; 
-            margin: 0 auto; 
-            overflow: visible !important;
-          }
-          .left-section { margin-top: 10%; }
-          .h1-title { 
-            font-size: 82px !important;
-            line-height: 1.05 !important;
-            max-height: 175px !important;
-            overflow: hidden !important;
-          }
-          .hero-image { 
-            height: 115vh !important;
-            max-height: 115vh !important;
-            right: 45% !important;
-            top: 0% !important;              /* ✅ TOP UP */
-            transform: none !important;
-          }
-          .image-wrapper {
-            height: 125vh !important;
-          }
+        @media (min-width: 1600px) {
+            .content-container {
+                max-width: 1800px;
+            }
         }
-        
-        @media (max-width: 1439px) {
-          .content-container {
-            padding: 0 1.5% !important;
-            gap: 20px !important;
-            height: 100vh !important;
-            overflow: hidden !important;
-          }
-          .left-section {
-            margin-top: 9% !important;
-            flex: 0 0 480px !important;
-            max-width: 480px !important;
-            padding-bottom: 1rem !important;
-          }
-          .text-column {
-            padding-left: 10% !important;
-            max-width: 450px !important;
-          }
-          .h1-title { font-size: 75px !important; }
-          .description { 
-            font-size: 1.1rem !important; 
-            max-width: 450px !important; 
-          }
-          .logo-container { left: 4% !important; }
-          .hero-image { 
-            max-width: 92vw !important;
-            max-height: 92vh !important;
-            right: 40% !important;
-            transform: translateY(18%) scale(1.4) !important;
-          }
-          .image-wrapper {
-            width: 45% !important;
-            max-width: 600px !important;
-          }
-        }
-        
-        @media (max-height: 850px) {
-          .content-container { padding: 2% 1.5% !important; align-items: flex-start !important; }
-          .left-section { margin-top: 7% !important; padding-bottom: 1rem !important; }
-          .hero-image { height: 85vh !important; transform: translateY(15%) scale(1.3) !important; }
-        }
+        /* Mobile/Tablet adjustments could go here if needed, but we focus on desktop */
       `}</style>
     </div>
   );
 };
 
-const constants = { gold: '#FBCA05', red: '#dd2120', fontFamily: '"KelloggsSans", Arial, sans-serif' }
+// Pure constant styles defined below (unchanged mostly)
 const containerStyle = {
   position: 'relative',
-  height: '115vh',
+  minHeight: '100vh', 
   backgroundColor: constants.red,
-  overflow: 'hidden',
-  width: '100vw',
+  overflow: 'visible', // Changed from hidden to visible so the star can poke out
+  width: '100%',
   margin: 0,
   padding: 0,
   display: 'flex',
-  flexDirection: 'row',
-
+  flexDirection: 'column', 
 };
 
 const loadingStyle = {
@@ -324,9 +342,7 @@ const loadingStyle = {
 const logoContainerStyle = {
   position: 'absolute',
   top: '0%',
-  left: '6%',
-  width: '9rem',
-  height: '11rem',
+  // width/height overridden in component
   backgroundColor: 'rgba(255,255,255,0.95)',
   borderRadius: '0 0 30px 30px',
   display: 'flex',
@@ -337,8 +353,7 @@ const logoContainerStyle = {
 };
 
 const logoStyle = {
-  width: '90px',
-  height: '140px',
+  // width/height overridden in component
   objectFit: 'contain',
   borderRadius: '16px',
 };
@@ -347,13 +362,12 @@ const textContainerStyle = {
   display: 'flex',
   flexDirection: 'column',
   width: '100%',
-  paddingLeft: '12%',
 };
 
 const badgeContainerStyle = {
   marginBottom: '0.5rem',
   width: '100%',
-  marginLeft: '1.5rem',
+  marginLeft: '0', 
 };
 
 const badgeStyle = {
@@ -361,14 +375,12 @@ const badgeStyle = {
   padding: '0.75rem 1.5rem',
   borderRadius: '26px',
   display: 'inline-block',
-  marginRight: '10%',
   className: 'badge',
 };
 
 const badgeTextStyle = {
   margin: 0,
   fontWeight: 500,
-  fontSize: '1.2rem',
   lineHeight: '100%',
   letterSpacing: '0%',
   color: constants.red,
@@ -378,38 +390,25 @@ const textColumnStyle = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'flex-start',
-  maxWidth: '520px',
-  marginLeft: '0',
-  paddingLeft: '13%',
   className: 'text-column',
 };
 
 const h1Style = {
   fontFamily: constants.fontFamily,
   fontWeight: 700,
-  fontSize: '78px',
-  lineHeight: '1.05',
-  letterSpacing: '8%',
   margin: '0 0 1.2rem 0',
   color: '#fff',
-  alignSelf: 'flex-start',
-  width: '120%',
   textAlign: 'left',
   className: 'h1-title',
 };
 
 const descStyle = {
   color: '#fff',
-  maxWidth: '520px',
   fontFamily: constants.fontFamily,
   fontWeight: 500,
-  fontSize: '1.3rem',
   lineHeight: '1.2',
-  letterSpacing: '0%',
   marginBottom: '1.5rem',
-  alignSelf: 'flex-start',
   textAlign: 'left',
-  paddingLeft: '2%',
   className: 'description',
 };
 
@@ -417,27 +416,20 @@ const buttonStyle = {
   padding: '0.75rem 2.5rem',
   borderRadius: '50px',
   border: 'none',
-  backgroundColor: '#fff',
-  color: constants.gold,
   fontWeight: 500,
-  fontSize: '1.4rem',
   display: 'inline-flex',
   alignItems: 'center',
   cursor: 'pointer',
   transition: 'all 0.3s ease',
-  alignSelf: 'flex-start',
-  fontFamily:constants.fontFamily
+  fontFamily: constants.fontFamily
 };
 
 const imageWrapperStyle = {
   flex: 1,
-  width: '50%',
   height: 'auto',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'flex-start',
-  transform: 'none',
+  position: 'relative',
   className: 'image-wrapper',
 };
 
 export default HomeBanner;
+

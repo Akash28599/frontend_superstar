@@ -1,5 +1,5 @@
 :root {
-    --red: #e11d1d;
+    --red: #F60945;
     --white: #ffffff;
     --black: #000000;
     --gray: #f2f2f2;
@@ -9,9 +9,9 @@
 
 .btn {
     font-family: var(--font);
-    background-color: #dd2120;
+    background-color: #E41F35;
     color: white;
-    border: 1px solid #dd2120;
+    border: 1px solid #E41F35;
     /* optional but looks premium */
 
 }
@@ -19,8 +19,8 @@
 .btn:hover {
     background-color: #ffffff;
     /* ⚪ white bg */
-    color: #dd2120;
+    color: #E41F35;
     /* 🔴 red text */
-    border: 2px solid #dd2120;
+    border: 2px solid #E41F35;
     /* optional but looks premium */
 }

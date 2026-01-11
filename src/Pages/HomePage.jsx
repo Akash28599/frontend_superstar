@@ -5,6 +5,7 @@ import PrintableGames from "../Components/Games"
 import OurProducts from "../Components/OurProducts"
 import CocoBanner from "../Components/Cocobanner"
 import { CocoHead } from "../Components/Cocohead/Cocohead"
+import { constants } from "../Utils/constants"
 
 export default function HomePage({dpr}) {
     return (
@@ -14,7 +15,7 @@ export default function HomePage({dpr}) {
                 {/* Red background ONLY for HomeBanner */}
                 <div
                     style={{
-                        backgroundColor: "#dd2120",
+                        backgroundColor: constants.red,
                         position: "relative",
                     }}
                 >

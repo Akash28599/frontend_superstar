@@ -36,7 +36,7 @@ const ScholarshipForm = ({ data }) => {
 
                     {/* LEFT FORM */}
                     <div className="form">
-                        <h1>Submit your entries here</h1>
+                        <h1>Submit your <br /> entries here</h1>
 
                         <input type="text" placeholder="Name" />
                         <input type="text" placeholder="School" />

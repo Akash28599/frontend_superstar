@@ -471,7 +471,7 @@ const ThankYou = ({ siteSettings }) => {
                                 }}>
 
                                     <h1 style={{
-                                        height: positions.titleHeight, width: positions.titleWidth, color: "#dd2120",
+                                        height: positions.titleHeight, width: positions.titleWidth, color: "#E41F35",
                                         lineHeight: positions.titleLineHeight, textAlign: "left", fontWeight: 600,
                                         fontSize: positions.titleFontSize,
                                         margin: 0, marginTop: positions.titleMarginTop

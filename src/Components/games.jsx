@@ -76,11 +76,11 @@ export default function PrintableGames() {
       .catch((err) => {
         console.error("Failed to load games:", err);
         setLoading(false);
-      })
-      .finally(
-    );
+      });
   }, []);
-  const constants = { gold: "#f3c720", red: "#dd2120", font: '"KelloggsSans", Arial, sans-serif' }
+  
+  const { constants } = require('../Utils/constants');
+  
   const getGridConfig = () => {
     if (screenWidth >= 1920) {
       return {
@@ -109,6 +109,16 @@ export default function PrintableGames() {
         borderWidth: isEdge ? '4px' : '6px'
       };
     }
+    // New block for 1000px - 1200px (handles 175% scale)
+    if (screenWidth >= 1000) {
+      return {
+        minWidth: '180px',
+        paddingLeft: '5%',
+        fontSize: '18px',
+        itemPadding: '8px',
+        borderWidth: '4px'
+      };
+    }
     return {
       minWidth: '200px',
       paddingLeft: '6%',
@@ -121,12 +131,13 @@ export default function PrintableGames() {
   const gridConfig = getGridConfig();
 
   const getGridStyle = () => {
-    if (screenWidth >= 1200) {
+    if (screenWidth >= 1000) {
       const columns = 5;
       return {
         display: 'grid',
         gridTemplateColumns: `repeat(${columns}, 1fr)`,
-        gap: isEdge ? '18px' : '20px',
+        // Reduce gap for tighter screens (1000-1200)
+        gap: screenWidth >= 1200 ? (isEdge ? '18px' : '20px') : '10px',
         marginBottom: '3rem',
         justifyItems: 'stretch',
         alignItems: 'stretch'
@@ -184,7 +195,7 @@ export default function PrintableGames() {
           fontSize: "2.4rem",
           marginBottom: ".5rem",
           fontWeight: 700,
-          color: "red"
+          color: constants.red
         }}>
           Printable games
         </h2>
@@ -221,7 +232,7 @@ export default function PrintableGames() {
           <h2 style={{
             fontSize: isEdge ? "3.2rem" : "3.4rem",
             margin: 0,
-            color: "red",
+            color: constants.red,
             fontWeight: "medium",
             letterSpacing: "0%",
           }}>
@@ -429,7 +440,7 @@ export default function PrintableGames() {
               gap: isEdge ? "10px" : "12px",
               padding: isEdge ? "10px 24px" : "12px 28px",
               borderRadius: "50px",
-              fontFamily: constants.font,
+              fontFamily: constants.fontFamily,
               transition: "all 0.3s ease",
               letterSpacing: "0%",
               position: 'relative',

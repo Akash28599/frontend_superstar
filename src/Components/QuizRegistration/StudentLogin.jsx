@@ -47,7 +47,7 @@ export const StudentLogin = ({ onClose }) => {
     )
 }
 
-const constants = { gold:'#FBCA05',red: '#dd2120' ,fontFamily:'"KelloggsSans", Arial, sans-serif'}
+const constants = { gold:'#FBCA05',red: '#F60945' ,fontFamily:'"KelloggsSans", Arial, sans-serif'}
 const modalContent = { backgroundColor: '#fff', padding: '40px', borderRadius: '30px', width: '90%', maxWidth: '400px', textAlign: 'center', position: 'relative', animation: 'popIn 0.3s ease-out' };
 const closeBtn = { position: 'absolute', top: '15px', right: '20px', fontSize: '28px', background: 'none', border: 'none', cursor: 'pointer', color: '#999' };
 const modalIcon = { width: '70px', height: '70px', backgroundColor: constants.gold, borderRadius: '50%', margin: '0 auto 15px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '30px' };

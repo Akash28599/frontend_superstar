@@ -84,46 +84,46 @@ const CocoHeads = ({dpr}) => {
         width: yellowWidth,
         backgroundColor: '#FBCA05',
         borderRadius: '32px',
-        padding: screenWidth >= 1440 ? '0.3rem 0.1rem 2rem 140px' : '0.3rem 1.1rem 2rem 120px',
+        padding: screenWidth >= 1440 ? '2rem' : '1.5rem',
         display: 'flex',
-        alignItems: 'flex-start',
+        flexDirection: 'row', 
+        alignItems: 'center', 
         position: 'relative',
         overflow: 'visible',
-        gap: '1rem',
-        minHeight: '260px',
-        height: screenWidth >= 1440 ? '320px' : '260px',
-        left: screenWidth >= 1440 ? '4%' : '2%',
-        marginTop: "10%"
+        boxSizing: 'border-box',
+        gap: screenWidth >= 1440 ? '2rem' : '1rem', // Gap between ALL 4 element
+        height: 'auto',
+        marginTop: "5%",
+        marginBottom: "5%"
       }}>
+        {/* COCO HEAD - NOW A FLEX ITEM */}
         {head?.thumbnail && (
           <div style={{
-            position: 'absolute',
-            left: screenWidth >= 1440 ? '-30px' : '-100px',
-            top: '-40px',
-            pointerEvents: 'none',
+            flex: '0 0 auto', // Don't shrink
+            width: screenWidth >= 1440 ? '25%' : '20%', // Adjusted width
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            position: 'relative', 
+            marginLeft: screenWidth >= 1440 ? '-2%' : '-1%', 
+            zIndex: 10
           }}>
             <img
               src={head.thumbnail.url}
               alt="Coco head"
               style={{
-                width: screenWidth >= 1440 ? '416.5469970703125px' : '520px',
-                height: screenWidth >= 1440 ? '354.79876708984375px' : '365px',
+                width: screenWidth >= 1440 ? '110%' : '100%', // Reduced width to prevent overlap
+                height: 'auto',
                 objectFit: 'contain',
                 display: 'block',
+                transform: screenWidth >= 1440 ? 'scale(1.1) translateY(-5%)' : 'scale(1.05) translateY(-5%)', // Reduced scale
               }}
             />
           </div>
         )}
 
-        <div style={{
-          display: 'flex',
-          gap: screenWidth >= 1440 ? '1.5rem' : '1rem',
-          justifyContent: 'center',
-          width: '70%',
-          boxSizing: 'border-box',
-          marginLeft: screenWidth >= 1440 ? '23%' : '28%',
-        }}>
-          {items.map(item => {
+        {/* ITEMS - DIRECTLY MAPPED (Flattened via Fragment if needed, or just map array) */}
+        {items.map(item => {
             const iconUrl = item.icons?.url || item.icon?.url || item.image?.url ||
               (item.icons && item.icons[0] && item.icons[0].url) || null;
             const title = item.icon_description?.title || item.title || '';
@@ -133,119 +133,75 @@ const CocoHeads = ({dpr}) => {
               <div key={item.id} style={{
                 display: 'flex',
                 flexDirection: 'column',
-                alignItems: 'center',
-                textAlign: 'center',
-                width: screenWidth >= 1440 ? '220px' : '180px',
-                boxSizing: 'border-box',
-                padding: '0.5rem',
-                flex: '1 1 0',
+                alignItems: 'flex-start',
+                textAlign: 'left',
+                flex: 1, // Distribute remaining space equally
+                minWidth: '0', // Allow text truncation/wrapping in flex
                 height: 'auto',
-                justifyContent: 'space-between',
+                padding: '0 1rem', // Internal padding
+                borderLeft: '1px solid rgba(0,0,0,0.1)' // Optional separator visually? Removed for now.
               }}>
                 {/* ICON SECTION */}
                 <div style={{
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
-                  height: '62px',
-                  width: '100%',
+                  justifyContent: 'flex-start',
+                  height: '80px',
                   marginBottom: '1rem',
+                  width: '100%'
                 }}>
                   {iconUrl ? (
                     <img
                       src={iconUrl}
                       alt={item.icon_description?.title || 'icon'}
                       style={{
-                        width: '75px',
-                        height: '62px',
+                        width: 'auto',
+                        height: '60px',
                         objectFit: 'contain',
                         display: 'block',
                       }}
                     />
-                  ) : (
-                    <div style={{
-                      width: '75px',
-                      height: '62px',
-                      borderRadius: '12px',
-                      backgroundColor: 'rgba(0,0,0,0.06)',
-                    }} />
-                  )}
+                  ) : null}
                 </div>
 
                 {/* TITLE SECTION */}
                 <div style={{
                   width: '100%',
-                  minHeight: '52px',
-                  height: '20%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'start',
-                  marginBottom: '0.6rem',
-                  padding: '4px 8px',
+                  marginBottom: '0.5rem',
                 }}>
                   <h4 style={{
                     fontFamily: "'Kellogg's Sans', sans-serif",
-                    fontWeight: 600,
-                    fontSize: screenWidth >= 1440 ? '20px' : '16px',
+                    fontWeight: 700,
+                    fontSize: screenWidth >= 1440 ? '1.5rem' : '1.2rem',
                     lineHeight: '1.2',
-                    letterSpacing: '0%',
-                    textAlign: 'center',
                     color: '#2A2F2F',
                     margin: 0,
-                    padding: 0,
-                    width: '100%',
-                    height: '100%',
-
+                    textAlign: 'left',
                   }}>
                     {title}
                   </h4>
                 </div>
 
-                {/* DESCRIPTION SECTION - FIXED ALIGNMENT */}
+                {/* DESCRIPTION SECTION */}
                 <div style={{
-                  width: '100%',
-                  flex: 1,
-                  display: 'flex',
-                  alignItems: 'start', // Changed from flex-start to center
-                  justifyContent: 'center',
-                  minHeight: '60px',
-                  margin: '2% 6%'
-
-                }}>
-                  {/* <div style={{
                     width: '100%',
-                    height: '100%',
-                    display: 'flex',
-                    alignItems: 'center', // Center vertically
-                    justifyContent: 'center', // Center horizontally
-                    position: 'relative',
-                    left: '8%',
-                    border: '2px solid black'
-
-                  }}> */}
+                }}>
                   <p style={{
                     fontFamily: "'Kellogg's Sans', sans-serif",
                     fontWeight: 400,
-                    fontSize: screenWidth >= 1440 ? '0.9rem' : '0.8rem',
-                    lineHeight: '1.4',
+                    fontSize: screenWidth >= 1440 ? '1rem' : '0.9rem',
+                    lineHeight: '1.5',
                     color: '#2A2F2F',
                     margin: 0,
                     textAlign: 'left',
                     width: '100%',
-                    wordWrap: 'break-word',
-                    display: 'flex',
-                    alignItems: 'center', // Add this for better vertical alignment
-                    justifyContent: 'center',
-                    minHeight: '60px',
                   }}>
                     {desc}
                   </p>
-                  {/* </div> */}
                 </div>
               </div>
             );
           })}
-        </div>
       </div>
     </div>
   );

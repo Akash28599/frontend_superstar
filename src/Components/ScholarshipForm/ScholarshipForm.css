@@ -1,5 +1,5 @@
 :root {
-    --red: #dd2120;
+    --red: #F60945;
     --white: #ffffff;
     --black: #000000;
     --gray: #f2f2f2;
@@ -55,7 +55,7 @@
 }
 
 .form h1 {
-    width: 80%;
+    width: 100%;
     font-size: 46px;
     margin-bottom: 22px;
     line-height: 45px;
@@ -238,8 +238,9 @@ textarea {
         top: 30px;
     }
 }
-@media (min-width: 1600px) and (max-width: 2000px){
-    
+
+@media (min-width: 1600px) and (max-width: 2000px) {
+
     .counter {
         top: 17px;
     }

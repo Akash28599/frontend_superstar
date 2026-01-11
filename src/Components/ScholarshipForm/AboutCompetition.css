@@ -1,6 +1,6 @@
 :root {
-    --red: #dd2120;
-    --gold:#FBCA05;
+    --red: #F60945;
+    --gold: #FBCA05;
     --font: "KelloggsSans", Arial, sans-serif;
 }
 
@@ -19,14 +19,16 @@
     position: relative;
 }
 
-.bg-img{
+.bg-img {
     z-index: -1;
 }
-.abt-kg{
+
+.abt-kg {
     z-index: 1;
     display: inline-block;
     max-width: 300px;
 }
+
 .img1 {
     width: 100%;
     margin-top: -4%;
@@ -46,7 +48,7 @@
 }
 
 .about-right h1 {
-    color:var(--red);
+    color: var(--red);
     font-size: 35px;
     margin: 0 0 10px 0;
 }
@@ -138,7 +140,7 @@
 }
 
 .abt-social-media {
-    margin-left:10px;
+    margin-left: 10px;
     align-items: center;
     flex: 0 0 auto;
     font-size: 1.5vw;

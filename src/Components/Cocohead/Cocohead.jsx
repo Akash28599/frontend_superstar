@@ -1,25 +1,14 @@
 import { useEffect, useState } from 'react';
 import './Cocohead.css'
-export const CocoHead = ({ dpr }) => {
+import { constants } from '../../Utils/constants';
+
+export const CocoHead = () => {
     const [items, setItems] = useState([]);
     const [head, setHead] = useState(null);
     const [starImage, setStarImage] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [scale, setScale] = useState(window.devicePixelRatio);
 
-    useEffect(() => {
-        const handleResize = () => {
-            setScale(window.devicePixelRatio);
-        };
-
-        window.addEventListener("resize", handleResize);
-
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    }, []);
-    const is100PercentScale = scale === 1;
-
+    const isEdge = /Edg/.test(navigator.userAgent);
     useEffect(() => {
         fetch(`${process.env.REACT_APP_STRAPI_URL}/api/coco-heads?populate=*`)
             .then(res => res.json())
@@ -45,8 +34,9 @@ export const CocoHead = ({ dpr }) => {
     }, []);
 
     return (
-        <div className='ch-container'>
-            <div className='ch-star'>
+        <div className={'ch-container' + (isEdge ? ' is-edge' : '')}>
+            <div className='ch-star' style={{display:'none'}}>
+                <img src={starImage} alt='stars' />
                 <img src={starImage} alt='stars' />
             </div>
             <div className='ch-yellow-banner'>
@@ -54,24 +44,21 @@ export const CocoHead = ({ dpr }) => {
                     {head?.thumbnail && <img src={head.thumbnail.url} alt='coco monkey' />}
                 </div>
                 <div className='ch-yellow-box'>
-                    {items.map(item => {
+                    {items.map((item, index) => {
                         const iconUrl = item.icons?.url || item.icon?.url || item.image?.url ||
                             (item.icons && item.icons[0] && item.icons[0].url) || null;
                         const title = item.icon_description?.title || item.title || '';
                         const desc = item.icon_description?.description || item.description || '';
                         return (
-                            <div className='ch-content'>
+                            <div className='ch-content' key={index}>
                                 <div className='ch-icon'>
                                     {iconUrl &&
                                         <img src={iconUrl} alt='item icon' />}
                                 </div>
-                                <div className='ch-title' style={{
-                                    fontSize: dpr ? '1.6rem' : '1rem',
-                                    width: title.split(" ").length < 4 ? "80%" : "100%"
-                                }}>
+                                <div className='ch-title'>
                                     {title}
                                 </div>
-                                <div className='ch-description' style={{ fontSize: dpr ? '1.3rem' : '.8rem' }}>
+                                <div className='ch-description'>
                                     {desc}
                                 </div>
                             </div>

@@ -20,6 +20,19 @@ const StudentRegister = ({ onClose }) => {
     student2: studentStruct
   })
   const navigate = useNavigate()
+  const handleFileChange = (e, studentKey, fieldKey) => {
+    const file = e.target.files[0];
+    if (file) {
+      setRegisterForm(prev => ({
+        ...prev,
+        [studentKey]: {
+          ...prev[studentKey],
+          [fieldKey]: file
+        }
+      }));
+    }
+  };
+
   const handleRegistraion = (e) => {
     e.preventDefault();
     if (true) {
@@ -56,15 +69,23 @@ const StudentRegister = ({ onClose }) => {
 
           <div className="sr-grid">
             <input required placeholder="Full Name" />
-            <label className="sr-upload">
-              <FaWpforms />
-              Upload Birth Certificate
-              <input required
-                type="file"
-                hidden
-                accept=".jpg,.jpeg,.png,.pdf"
-              />
-            </label>
+            <div>
+              <label className="sr-upload">
+                <FaWpforms />
+                {registerForm.student1.birthCertificate ? "Change File" : "Upload Birth Certificate"}
+                <input required={!registerForm.student1.birthCertificate}
+                  type="file"
+                  hidden
+                  accept=".jpg,.jpeg,.png,.pdf"
+                  onChange={(e) => handleFileChange(e, 'student1', 'birthCertificate')}
+                />
+              </label>
+              {registerForm.student1.birthCertificate && (
+                <div style={{ fontSize: '0.85rem', color: '#d20640', marginTop: '5px', display: 'flex', alignItems: 'center', gap: '5px' }}>
+                  ✅ Upload Successful: <strong>{registerForm.student1.birthCertificate.name}</strong>
+                </div>
+              )}
+            </div>
             {/* <label className="sr-upload">
               <HiIdentification />
               Upload School ID Card
@@ -80,15 +101,23 @@ const StudentRegister = ({ onClose }) => {
 
           <div className="sr-grid">
             <input required placeholder="Full Name" />
-            <label className="sr-upload">
-              <FaWpforms />
-              Upload Birth Certificate
-              <input required
-                type="file"
-                hidden
-                accept=".jpg,.jpeg,.png,.pdf"
-              />
-            </label>
+            <div>
+              <label className="sr-upload">
+                <FaWpforms />
+                {registerForm.student2.birthCertificate ? "Change File" : "Upload Birth Certificate"}
+                <input required={!registerForm.student2.birthCertificate}
+                  type="file"
+                  hidden
+                  accept=".jpg,.jpeg,.png,.pdf"
+                  onChange={(e) => handleFileChange(e, 'student2', 'birthCertificate')}
+                />
+              </label>
+              {registerForm.student2.birthCertificate && (
+                <div style={{ fontSize: '0.85rem', color: '#d20640', marginTop: '5px', display: 'flex', alignItems: 'center', gap: '5px' }}>
+                  ✅ Upload Successful: <strong>{registerForm.student2.birthCertificate.name}</strong>
+                </div>
+              )}
+            </div>
             {/* <label className="sr-upload">
               <HiIdentification />
               Upload School ID Card

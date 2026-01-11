@@ -1,9 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import { constants } from '../Utils/constants';
 
-const Navbar = () => {
+const Navbar = ({ customStyle = {} }) => {
   const [menu, setMenu] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setScreenWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const isConstrained = screenWidth < 1350;
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_STRAPI_URL}/api/navbars?populate=*`)
@@ -20,36 +30,39 @@ const Navbar = () => {
       });
   }, []);
 
-const constants= {gold: '#f3c720',red: '#dd2120',font: '"KelloggsSans", Arial, sans-serif'}
   const navbarStyle = {
     position: 'relative',
     top: '25px',
     left: '60%',
     transform: 'translateX(-50%)',
     background: 'white',
-    padding: '12px 24px',
-    height: '50px',
+    padding: isConstrained ? '8px 16px' : '10px 24px',
+    height: isConstrained ? '40px' : '45px',
     borderRadius: '30px',
     boxShadow: '0 6px 25px rgba(0,0,0,0.08)',
     display: 'flex',
     alignItems: 'center',
-    gap: '24px',
+    gap: isConstrained ? '16px' : '24px',
     zIndex: 1000,
     backdropFilter: 'blur(10px)',
     width: 'fit-content',
     maxWidth: '90vw',
+    transition: 'all 0.3s ease',
+    // Push items to the right as requested
+    paddingLeft: isConstrained ? '24px' : '40px', 
+    ...customStyle
   };
 
   // Regular (non-active) menu item style - JUST TEXT COLOR
   const navItemStyle = {
     fontFamily: "'Kellogg's Sans', sans-serif",
     fontWeight: 400,
-    fontSize: '18px',
+    fontSize: isConstrained ? '15px' : '18px',
     lineHeight: '100%',
     letterSpacing: '0%',
     color: '#807D7E', // Inactive text color
     textDecoration: 'none',
-    padding: '8px 16px',
+    padding: isConstrained ? '6px 12px' : '8px 16px',
     borderRadius: '16px',
     transition: 'all 0.3s ease',
     cursor: 'pointer',
@@ -60,12 +73,12 @@ const constants= {gold: '#f3c720',red: '#dd2120',font: '"KelloggsSans", Arial, s
   const activeItemStyle = {
     fontFamily: "'Kellogg's Sans', sans-serif",
     fontWeight: 700,
-    fontSize: '18px',
+    fontSize: isConstrained ? '15px' : '18px',
     lineHeight: '100%',
     letterSpacing: '0%',
     color: '#3C4242', // Active text color (NOT background)
     textDecoration: 'none',
-    padding: '8px 16px',
+    padding: isConstrained ? '6px 12px' : '8px 16px',
     borderRadius: '16px',
     transition: 'all 0.3s ease',
     cursor: 'pointer',
@@ -75,30 +88,30 @@ const constants= {gold: '#f3c720',red: '#dd2120',font: '"KelloggsSans", Arial, s
   const ButtonStyle = {
     fontFamily: "'Kellogg's Sans', sans-serif",
     fontWeight: 700,
-    fontSize: '18px',
+    fontSize: isConstrained ? '13px' : '15px',
     lineHeight: '100%',
     letterSpacing: '0%',
     backgroundColor: constants.red,
     color: 'white',
     textDecoration: 'none',
-    padding: '8px 20px',
-    borderRadius: '20px',
+    padding: isConstrained ? '6px 12px' : '8px 16px',
+    borderRadius: isConstrained ? '16px' : '20px',
     transition: 'all 0.3s ease',
     cursor: 'pointer',
-    boxShadow: '0 3px 12px rgba(246, 9, 69, 0.25)'
+    boxShadow: '0 3px 12px rgba(228, 31, 53, 0.25)'
   };
 
     const ActiveButtonStyle = {
     fontFamily: "'Kellogg's Sans', sans-serif",
     fontWeight: 700,
-    fontSize: '18px',
+    fontSize: isConstrained ? '15px' : '18px',
     lineHeight: '100%',
     letterSpacing: '0%',
     backgroundColor: constants.gold,
     color: 'black',
     textDecoration: 'none',
-    padding: '8px 20px',
-    borderRadius: '20px',
+    padding: isConstrained ? '6px 14px' : '8px 20px',
+    borderRadius: isConstrained ? '16px' : '20px',
     transition: 'all 0.3s ease',
     cursor: 'pointer',
     boxShadow: '0 3px 12px rgba(246, 9, 69, 0.25)',

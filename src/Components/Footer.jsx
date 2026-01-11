@@ -1,6 +1,7 @@
 import { Box, Grid, List, ListItem } from "@mui/material";
 import { useEffect, useState } from "react";
 import SocialIcons from "./SocialIcons/SocialIcons";
+import { constants } from "../Utils/constants";
 
 const FooterLayout = ({settingsData}) => {
   //const [settingsData, setSettingsData] = useState(null);
@@ -35,7 +36,7 @@ const FooterLayout = ({settingsData}) => {
   const addressLines = settingsData?.address?.split("\n") ?? [];
   return (
     <Box>
-      <Box sx={{ background: "#dd2120" }}>
+      <Box sx={{ background: constants.red }}>
         <Box sx={{ 
           p: { xs: 3, sm: 5, md: 8, lg: 10 }, // Responsive padding
           display: "flex", 
@@ -161,7 +162,7 @@ const FooterLayout = ({settingsData}) => {
 
       {/* COPYRIGHT */}
       <Box sx={{
-        background: "#c11b1bff",
+        background: constants.red,
         display: "flex",
         justifyContent: "center",
         p: { xs: 2, md: 3 },

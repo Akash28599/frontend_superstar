@@ -350,6 +350,6 @@ const ExamPage = () => {
 };
 
 // Styles remain exactly the same
-const constants = { gold: '#FBCA05', red: '#dd2120', fontFamily: '"KelloggsSans", Arial, sans-serif' }
+const constants = { gold: '#FBCA05', red: '#F60945', fontFamily: '"KelloggsSans", Arial, sans-serif' }
 
 export default ExamPage;

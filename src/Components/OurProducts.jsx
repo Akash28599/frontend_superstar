@@ -11,6 +11,8 @@ const OurProducts = () => {
 
   // ✅ MACBOOK DETECTION
   const isMacBook = screenWidth >= 1440 && screenWidth < 1920;
+  const isSmallScreen = screenWidth < 1200;
+  const isMediumScreen = screenWidth >= 1200 && screenWidth < 1400;
 
   useEffect(() => {
     let mounted = true;
@@ -138,14 +140,19 @@ const OurProducts = () => {
     const { product1, coco, product4, product5 } = positions;
 
     const s1 = `M ${product1.x} ${product1.y}
-                C ${product1.x} ${coco.y - 200},
-                  ${coco.x - 80} ${coco.y - 40},
-                  ${coco.x} ${coco.y}`;
+                C ${product1.x} ${isSmallScreen ? coco.y - 120 : coco.y - 200},
+                  ${isSmallScreen ? coco.x - 120 : coco.x - 80} ${isSmallScreen ? coco.y + 200 : coco.y - 40},
+                  ${coco.x} ${isSmallScreen ? coco.y + 200 : coco.y}`;
 
     const s2 = screenWidth >= 1900 ?
                 `C ${coco.x + 80} ${coco.y + 40},
                   ${product4.x +100} ${(coco.y + product4.y-10) / 2},
                   ${product4.x+100} ${product4.y }`
+                :
+                isSmallScreen ?
+                `C ${coco.x + 50} ${coco.y + 200},
+                  ${product4.x - 50} ${(coco.y + product4.y + 200) / 2},
+                  ${product4.x} ${product4.y + 250}`
                 :
                 `C ${coco.x + 80} ${coco.y + 40},
                   ${product4.x + 80} ${(coco.y + product4.y) / 2},
@@ -156,9 +163,19 @@ const OurProducts = () => {
                   ${product5.x + 20} ${product5.y - 57},
                   ${product5.x-10 } ${product5.y }` 
                  : 
-                 `C ${product4.x - 100} ${product4.y + 250},
+                 isSmallScreen ?
+                 `C ${product4.x - 200} ${product4.y + 550},
+                  ${product5.x + 200} ${product5.y + 50},
+                  ${product5.x + 20} ${product5.y + 450}`
+                 :
+                 isMediumScreen ?
+                 `C ${product4.x - 100} ${product4.y + 300},
+                  ${product5.x + 100} ${product5.y - 50},
+                  ${product5.x - 20} ${product5.y + 150}`
+                 :
+                 `C ${product4.x - 100} ${product4.y + 100},
                   ${product5.x + 20} ${product5.y - 57},
-                  ${product5.x -10} ${product5.y + 200}`;
+                  ${product5.x - 120} ${product5.y + 60}`;
 
     const s4 = //true?``:
     screenWidth >= 1900 ? 
@@ -356,8 +373,8 @@ const OurProducts = () => {
                   textAlign: "left",
                   maxWidth: 320,
                   position: "absolute",
-                  left: "40%",
-                  top: "-10%",
+                  left: isSmallScreen ? "45%" : "40%",
+                  top: isSmallScreen ? "-5%" : "-10%",
                 }}
               >
                 <h2
@@ -398,7 +415,7 @@ const OurProducts = () => {
                   maxWidth: 320,
                   position: "absolute",
                   bottom: "60%",
-                  left: isMacBook ? "19%" : "8%",
+                  left: isMacBook ? "6%" : isMediumScreen ? "-2%" : isSmallScreen ? "2%" : "8%",
                 }}
               >
                 <h2

@@ -1,5 +1,5 @@
 :root {
-    --red: #dd2120;
+    --red: #F60945;
     --white: #ffffff;
     --black: #000000;
     --gray: #f2f2f2;
@@ -96,7 +96,7 @@
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
-        font-family: var(--font);
+    font-family: var(--font);
 
 }
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import cloudImg from "../cloud1.png";
 import waveImage from "../cocobanner.png";
+import { constants } from '../Utils/constants';
 
 
 const CocoBanner = () => {
@@ -38,49 +39,62 @@ const CocoBanner = () => {
   const description = data.description;
   const charImg = data.image?.url ?? null;
 
-  // ✅ DYNAMIC POSITIONS FOR YOUR LAPTOPS
+  // Fluid positions using percentages where possible to avoid rigid breakpoints
   const getPositions = () => {
-    if (screenWidth >= 1920) return { // Large desktop - your "good" laptop
-      charBottom: '120%', charLeft: '14%',
-      cloudTop: '35%', cloudRight: '11%',
-      textTop: '42%', textLeft: '22%',
-      titleSize: '5.6rem', descSize: '2.1rem'
+    // Large screens (1600+)
+    if (screenWidth >= 1600) return {
+      charTop: '-5%', charLeft: '-2%',
+      cloudTop: '10%', cloudRight: '10%',
+      textTop: '38%',
+      maxWidth: '1200px',
+      titleSize: '6rem', descSize: '2.5rem',
+      charWidth: '50%' // Increased for 100% scale users
     };
 
-    if (screenWidth >= 1440) return { // Medium desktop 
-      charBottom: '22%', charLeft: '14%',
-      cloudTop: '38%', cloudRight: '13%',
-      textTop: '45%', textLeft: '25%',
-      titleSize: '4.8rem', descSize: '1.9rem'
+    // Standard desktops (1366 - 1599)
+    if (screenWidth >= 1366) return {
+      charTop: '-5%', charLeft: '-2%',
+      cloudTop: '15%', cloudRight: '8%',
+      textTop: '42%',
+      maxWidth: '1000px',
+      titleSize: '5.2rem', descSize: '1.8rem',
+      charWidth: '35%'
     };
 
-    if (screenWidth >= 1200) return { // Your smaller laptop - adjusted
-      charBottom: '15%', charLeft: '15%',
-      cloudTop: '39%', cloudRight: '10%',
-      textTop: '48%', textLeft: '28%',
-      titleSize: '4.2rem', descSize: '1.7rem'
+    // Laptops (1200 - 1365)
+    if (screenWidth >= 1200) return {
+      charTop: '-2%', charLeft: '0%',
+      cloudTop: '15%', cloudRight: '5%',
+      textTop: '45%',
+      maxWidth: '800px',
+      titleSize: '3.5rem', descSize: '1.5rem',
+      charWidth: '35%'
     };
 
-    return { // Fallback
-      charBottom: '28%', charLeft: '20%',
-      cloudTop: '45%', cloudRight: '17%',
-      textTop: '50%', textLeft: '30%',
-      titleSize: '3.8rem', descSize: '1.5rem'
+    // Smaller desktops/Tablets (1024 - 1199)
+    return {
+      charTop: '0%', charLeft: '0%',
+      cloudTop: '20%', cloudRight: '5%',
+      textTop: '50%',
+      maxWidth: '700px',
+      titleSize: '3rem', descSize: '1.3rem',
+      charWidth: '35%'
     };
   };
 
   const positions = getPositions();
-  console.log("cc", screenWidth, 'cc', positions.charLeft)
 
   return (
-    <div style={{ position: "relative", width: "100%", height: "auto", }}>
+    <div style={{ position: "relative", width: "100%", height: "auto" }}>
       {/* wave background */}
       <img
         src={waveImage}
         alt="wave background"
         style={{
           width: "100%", display: "block", position: "relative",
-          height: screenWidth >= 1900 ? "1000px" : "100%",
+          height: "auto",
+          minHeight: "500px", // Ensure minimum height
+          objectFit: "cover"
         }} />
 
       {/* character image */}
@@ -90,12 +104,11 @@ const CocoBanner = () => {
           alt="character"
           style={{
             position: "absolute",
-            bottom: positions.charBottom,
+            top: positions.charTop,
             left: positions.charLeft,
-            transform: screenWidth >= 1900 ? "translateX(-62.5%)" : "translateX(-50%)",
             zIndex: 2,
             pointerEvents: "none",
-            maxWidth: "100%",
+            maxWidth: positions.charWidth,
             height: "auto"
           }}
         />
@@ -112,7 +125,7 @@ const CocoBanner = () => {
             right: positions.cloudRight,
             zIndex: 1,
             pointerEvents: "none",
-            maxWidth: "100%",
+            maxWidth: "25%",
             height: "auto"
           }}
         />
@@ -126,21 +139,24 @@ const CocoBanner = () => {
           gap: "12px",
           position: "absolute",
           top: positions.textTop,
-          left: positions.textLeft,
+          left: "55%",
+          transform: "translateX(-50%)",
           textAlign: "center",
           color: "white",
           zIndex: 2,
-          maxWidth: "80%"
+          width: "100%",
+          maxWidth: positions.maxWidth, 
+          padding: "0 20px"
         }}
       >
         <h1
           style={{
             fontWeight: 700,
             marginBottom: "16px",
-            maxWidth: "72%",
             fontSize: positions.titleSize,
-            lineHeight: 1.2,
+            lineHeight: 1.1,
             letterSpacing: "0%",
+            fontFamily: constants.fontFamily
           }}
         >
           {title}
@@ -149,56 +165,18 @@ const CocoBanner = () => {
         <div
           dangerouslySetInnerHTML={{ __html: description }}
           style={{
-            fontFamily: "Kellogg's Sans",
+            fontFamily: constants.fontFamily,
             fontWeight: 400,
             fontStyle: "italic",
             opacity: 0.9,
-            maxWidth: "75%",
             position: 'relative',
             lineHeight: "1.2",
             fontSize: positions.descSize,
             letterSpacing: "0%",
-            right: "3%",
-            bottom: '3%'
           }}
         />
       </div>
 
-      {/* ✅ DESKTOP-ONLY RESPONSIVE STYLES */}
-      <style jsx>{`
-        @media (max-width: 1199px) {
-          /* Tablet/mobile - hide or simplify */
-          h1 { font-size: 3rem !important; }
-          div[style*="dangerouslySetInnerHTML"] { 
-            font-size: 1.3rem !important; 
-          }
-        }
-        
-        @media (min-width: 1200px) and (max-width: 1439px) {
-          /* Your smaller laptop - perfect fit */
-          img[alt="character"] { bottom: ${positions.charBottom} !important; left: ${positions.charLeft} !important; }
-          img[alt="cloud"] { top: ${positions.cloudTop} !important; right: ${positions.cloudRight} !important; }
-          div[style*="position: absolute"][style*="top: 42%"] { 
-            top: ${positions.textTop} !important; left: ${positions.textLeft} !important; 
-          }
-        }
-        
-        @media (min-width: 1440px) and (max-width: 1919px) {
-          /* Medium desktops */
-          img[alt="character"] { bottom: ${positions.charBottom} !important; left: ${positions.charLeft} !important; }
-          img[alt="cloud"] { top: ${positions.cloudTop} !important; right: ${positions.cloudRight} !important; }
-          div[style*="position: absolute"][style*="top: 42%"] { 
-            top: ${positions.textTop} !important; left: ${positions.textLeft} !important; 
-          }
-        }
-        
-        @media (min-width: 1920px) {
-          /* Your big "good" laptop - original positions */
-          img[alt="character"] { bottom: 19% !important; left: 14% !important; }
-          img[alt="cloud"] { top: 35% !important; right: 11% !important; }
-          div[style*="position: absolute"][style*="top: 42%"] { top: 42% !important; left: 22% !important; }
-        }
-      `}</style>
     </div>
   );
 };

@@ -37,20 +37,24 @@ export const PastWinners = () => {
     console.log("sam", pwData)
 
     return (
-        <div className='pw-container'>
+        <div className='pw-container' style={{ 
+            backgroundImage: bgUrl ? `url(${bgUrl})` : 'none',
+            backgroundSize: '100% auto', // tile vertically or cover
+            backgroundRepeat: 'repeat-y'
+        }}>
 
 
             {bgUrl && (
                 <div
                     className='pw-banner'
                     style={{
+                        // Banner still keeps it for alignment, but main bg covers rest
                         backgroundImage: `url(${bgUrl})`
                     }}
                 >
                     <div className='pw-btn'>
                         <button onClick={() => navigate('/scholarship')}>
-                            <FaArrowCircleLeft />
-                            back
+                            Back
                         </button>
                     </div>
                     <div
