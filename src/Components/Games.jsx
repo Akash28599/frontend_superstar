@@ -120,11 +120,11 @@ export default function PrintableGames() {
       };
     }
     return {
-      minWidth: '200px',
-      paddingLeft: '6%',
-      fontSize: '20px',
-      itemPadding: '12px',
-      borderWidth: '6px'
+      minWidth: '140px', // Reduced further to force 1 row
+      paddingLeft: '4%', // Reduce padding to save space
+      fontSize: '16px', // Slightly smaller font
+      itemPadding: '6px',
+      borderWidth: '4px'
     };
   };
 

@@ -1,0 +1,149 @@
+.sl-container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 30px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+    animation: popIn 0.3s ease-out;
+}
+
+.sl-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #999;
+}
+
+.sl-icon {
+    width: 70px;
+    height: 70px;
+    background-color: #FBCA05;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+}
+
+.sl-title {
+    font-size: 24px;
+    margin: 0 0 5px;
+    color: #333;
+}
+
+.sl-desc {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+.sl-form {
+    text-align: left;
+}
+
+.sl-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.sl-label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.sl-input {
+    font-family: "KelloggsSans", Arial, sans-serif;
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 2px solid #eee;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.sl-btn {
+    font-family: "KelloggsSans", Arial, sans-serif;
+    width: 100%;
+    padding: 15px;
+    background-color: #F60945;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-weight: 800;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* 200% Scale Fix (approx 960px) */
+@media (max-width: 1000px) {
+    .sl-container {
+        padding: 15px;
+        /* Minimal padding */
+        max-width: 330px;
+        /* Reduced width to match others */
+        border-radius: 16px;
+    }
+
+    .sl-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+        margin-bottom: 8px;
+    }
+
+    .sl-title {
+        font-size: 1.1rem;
+        margin-bottom: 2px;
+    }
+
+    .sl-desc {
+        font-size: 0.8rem;
+        margin-bottom: 15px;
+    }
+
+    .sl-group {
+        margin-bottom: 10px;
+    }
+
+    .sl-label {
+        font-size: 0.8rem;
+        margin-bottom: 2px;
+    }
+
+    .sl-input {
+        padding: 8px;
+        font-size: 0.85rem;
+    }
+
+    .sl-btn {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    .sl-close {
+        top: 8px;
+        right: 12px;
+        font-size: 24px;
+    }
+}

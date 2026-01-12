@@ -157,3 +157,73 @@
     margin-right: 10px;
     cursor: pointer;
 }
+
+/* 200% Scale Fix (approx 960px) */
+@media (max-width: 1250px) {
+
+    /* Keep Horizontal (Reverted vertical stack) */
+    .about-container {
+        flex-direction: row;
+        margin-top: 10%;
+    }
+
+    .about-left {
+        width: 45%;
+        /* Slightly smaller to fit */
+        margin-right: 20px;
+        /* Reduced margin */
+        display: block;
+    }
+
+    /* Criteria reduction to fix overflow */
+    .about-crit-cont {
+        flex-wrap: wrap;
+        display: flex;
+        /* Ensure flex is active */
+    }
+
+    .abt-criteria {
+        padding: 8px;
+        font-size: 13px;
+        margin: 5px;
+        /* Use margin for robust gap */
+        flex: 1 1 40%;
+        /* Reduced basis to fit with margins */
+        border-width: 1px;
+    }
+
+    .about-right h1,
+    .about-crit h1 {
+        font-size: 26px;
+        line-height: 30px;
+    }
+
+    .about-right-para p {
+        width: 100%;
+        /* Use full width of right col */
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 900px) {
+    .about-container {
+        flex-direction: column;
+        margin: 5% 2%;
+    }
+
+    .about-left {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 20px;
+        display: block;
+        /* Restore if hidden above */
+    }
+
+    .about-right {
+        width: 100%;
+    }
+
+    .abt-crit-cont {
+        flex-direction: column;
+    }
+}

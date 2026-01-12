@@ -72,13 +72,25 @@ const CocoBanner = () => {
     };
 
     // Smaller desktops/Tablets (1024 - 1199)
-    return {
+    if (screenWidth >= 1024) return {
       charTop: '0%', charLeft: '0%',
       cloudTop: '20%', cloudRight: '5%',
       textTop: '50%',
       maxWidth: '700px',
       titleSize: '3rem', descSize: '1.3rem',
       charWidth: '35%'
+    };
+
+    // 200% Scale / Small Desktop / Tablet (Under 1024px)
+    return {
+      charTop: '5%', charLeft: '0%', // Moved left slightly (from 2% to 0%)
+      cloudTop: '15%', cloudRight: '2%',
+      textTop: '45%',
+      maxWidth: '600px', // Increased width (was 450px)
+      titleSize: '2.8rem', // Increased font (was 2.5rem)
+      descSize: '1.4rem', // Increased font (was 1.2rem)
+      charWidth: '30%',
+      textLeft: '50%' 
     };
   };
 
@@ -139,7 +151,8 @@ const CocoBanner = () => {
           gap: "12px",
           position: "absolute",
           top: positions.textTop,
-          left: "55%",
+          top: positions.textTop,
+          left: positions.textLeft || "55%",
           transform: "translateX(-50%)",
           textAlign: "center",
           color: "white",

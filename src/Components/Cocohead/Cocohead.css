@@ -188,7 +188,7 @@
 
 
 
-@media (max-width: 1350px) and (min-width: 1001px) {
+@media (max-width: 1350px) and (min-width: 900px) {
     .ch-container {
         height: auto;
         min-height: 75vh;
@@ -267,7 +267,7 @@
     }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 899px) {
 
     .ch-container {
         flex-direction: column;

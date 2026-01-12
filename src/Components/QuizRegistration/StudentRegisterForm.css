@@ -210,6 +210,75 @@
         padding: 6px 20px;
         font-size: 0.85rem;
     }
+
+    .sr-submit {
+        padding: 6px 20px;
+        font-size: 0.85rem;
+    }
+}
+
+/* 200% Scale Fix (approx 960px width, ~540px height) */
+@media (max-width: 1000px) {
+    .sr-card {
+        max-width: 350px;
+        /* Reduced further from 380px */
+        margin: 5px 0;
+    }
+
+    .sr-header {
+        padding: 2px;
+    }
+
+    .sr-header h1 {
+        font-size: 0.95rem;
+    }
+
+    .sr-logo img {
+        height: 20px;
+        /* Smaller logo */
+    }
+
+    .sr-body {
+        padding: 0 10px 10px;
+        /* Minimal body padding */
+    }
+
+    .sr-body h2 {
+        font-size: 0.9rem;
+        /* Smaller section headers */
+        margin: 8px 0 6px;
+    }
+
+    .sr-grid {
+        grid-template-columns: 1fr 1fr;
+        /* Keep 2 columns to save vertical space if possible, or 1fr if too cramped. Let's try 1fr 1fr with smaller gap */
+        gap: 4px;
+    }
+
+    .sr-grid input {
+        padding: 4px;
+        font-size: 0.75rem;
+        /* Small text */
+    }
+
+    .sr-upload {
+        padding: 2px;
+        font-size: 0.75rem;
+    }
+
+    .sr-footer {
+        margin-top: 8px;
+    }
+
+    .sr-footer label {
+        font-size: 0.7rem;
+        margin-bottom: 4px;
+    }
+
+    .sr-submit {
+        padding: 5px 15px;
+        font-size: 0.8rem;
+    }
 }
 
 @media (max-width: 768px) {

@@ -218,6 +218,56 @@ textarea {
 }
 
 /* RESPONSIVE */
+@media (max-width: 1250px) and (min-width: 901px) {
+
+    /* 200% Scale Fix: Keep Horizontal but Compact */
+    .scholarship {
+        padding: 12% 1% 2%;
+        /* Prevent horizontal scroll */
+    }
+
+    .container {
+        gap: 10px;
+        /* Reduced gap */
+    }
+
+    .form h1 {
+        font-size: 32px;
+        /* Smaller title */
+        line-height: 36px;
+        margin-bottom: 12px;
+    }
+
+    .form input,
+    .form select {
+        padding: 4px 0;
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+
+    .content {
+        gap: 20px;
+    }
+
+    .right {
+        margin-top: 2%;
+    }
+
+    textarea {
+        min-width: 250px;
+        /* Allow smaller width */
+        padding: 40px 20px 10px;
+    }
+
+    .hang-monkey {
+        width: 8%;
+        /* Smaller monkey */
+        height: auto;
+        /* Fix aspect ratio stretching */
+        bottom: -50px;
+    }
+}
+
 @media (max-width: 900px) {
     .container {
         flex-direction: column;

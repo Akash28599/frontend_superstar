@@ -123,7 +123,7 @@ const HomeBanner = () => {
     alignSelf: 'flex-end',
     paddingLeft: '15%',
     paddingBottom: '10vh',
-    paddingTop: screenWidth < 1200 ? '20vh' : (isConstrained ? '15vh' : '12vh'), // Increased padding for all desktop sizes to prevent overlap
+    paddingTop: screenWidth < 1000 ? '25vh' : (screenWidth < 1200 ? '20vh' : (isConstrained ? '15vh' : '12vh')), // Increased padding for 200% scale
     maxWidth: 'none',
     className: 'left-section',
     transition: 'all 0.3s ease',
@@ -133,11 +133,11 @@ const HomeBanner = () => {
     height: 'auto',
     flex: 1,
     margin: isConstrained ? '0% 1%' : '0% 5%',
-    padding: '0 2%',
+    padding: screenWidth < 1000 ? '0 1%' : '0 2%', // Reduce side padding
     display: 'flex',
     alignItems: 'stretch',
     justifyContent: 'center',
-    gap: '5vw', 
+    gap: screenWidth < 1000 ? '2vw' : '5vw',  // Reduce gap 
     maxWidth: '1600px',
     marginLeft: 'auto',
     marginRight: 'auto',
@@ -167,16 +167,20 @@ const HomeBanner = () => {
         transform: 'none',
         // Granular left margin - Adjusted for robustness
         // Adjusted negative margins to prevent overlap on 1680px/etc
-        margin: screenWidth < 1200
-          ? '20px auto 0px 25%' // Removed negative margin for small screens
-          : (screenWidth < 1350 
-            ? '20px auto -20px 25%' 
-            : '20px auto -80px 25%'), // Reduced from -220px to -80px for safety
+        margin: screenWidth < 1000
+          ? '20px auto 0px 18%' // Increased from 12% to 18% for MORE gap
+          : (screenWidth < 1200
+            ? '20px auto 0px 25%' // Standard small screen (100% scale)
+            : (screenWidth < 1350 
+              ? '20px auto -20px 25%' 
+              : '20px auto -80px 25%')), // Reduced from -220px to -80px for safety
         
         // Adjust max-width to match margins
-        maxWidth: screenWidth < 1350 
-          ? '70vw' 
-          : '71vw',
+        maxWidth: screenWidth < 1000
+          ? '78vw' // Reduced from 82vw to fit with larger margin
+          : (screenWidth < 1350 
+            ? '70vw' 
+            : '71vw'),
           
         paddingRight: isConstrained ? '28px' : '40px',
         position: 'relative',

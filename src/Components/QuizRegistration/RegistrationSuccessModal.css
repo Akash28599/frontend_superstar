@@ -125,3 +125,63 @@
         opacity: 1;
     }
 }
+
+/* 200% Scale Fix (approx 960px) */
+/* 200% Scale Fix (approx 960px) */
+@media (max-width: 1000px) {
+    .rs-modal {
+        max-width: 300px;
+        /* Reduced to 300px (Extra Tiny) */
+    }
+
+    .rs-header {
+        padding: 8px;
+        /* Minimal padding */
+    }
+
+    .rs-logo {
+        height: 18px;
+        /* Tiny logo */
+    }
+
+    .rs-header h3 {
+        font-size: 0.85rem;
+    }
+
+    .rs-body {
+        padding: 8px;
+        /* Minimal padding */
+    }
+
+    .rs-check {
+        font-size: 32px;
+        /* Tiny checkmark */
+        margin: 4px 0;
+    }
+
+    .rs-body h1 {
+        font-size: 1rem;
+        /* Smaller heading */
+        margin-bottom: 2px;
+    }
+
+    .rs-sub {
+        font-size: 0.75rem;
+        margin-bottom: 8px;
+    }
+
+    .rs-body h2 {
+        font-size: 0.85rem;
+        margin-top: 8px;
+    }
+
+    .rs-body ol {
+        font-size: 0.75rem;
+        margin: 6px auto 10px;
+    }
+
+    .rs-btn {
+        padding: 6px 16px;
+        font-size: 0.8rem;
+    }
+}

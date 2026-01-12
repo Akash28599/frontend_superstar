@@ -13,6 +13,7 @@ const OurProducts = () => {
   const isMacBook = screenWidth >= 1440 && screenWidth < 1920;
   const isSmallScreen = screenWidth < 1200;
   const isMediumScreen = screenWidth >= 1200 && screenWidth < 1400;
+  const is200Scale = screenWidth < 1000;
 
   useEffect(() => {
     let mounted = true;
@@ -109,6 +110,7 @@ const OurProducts = () => {
     fontWeight: 700,
     lineHeight: 1.1,
     margin: 0,
+    fontSize: is200Scale ? 26 : 34, // Reduced font size for 200% scale
     letterSpacing: "0%",
   };
 
@@ -148,11 +150,20 @@ const OurProducts = () => {
                 `C ${coco.x + 80} ${coco.y + 40},
                   ${product4.x +100} ${(coco.y + product4.y-10) / 2},
                   ${product4.x+100} ${product4.y }`
-                :
+                  :
                 isSmallScreen ?
-                `C ${coco.x + 50} ${coco.y + 200},
-                  ${product4.x - 50} ${(coco.y + product4.y + 200) / 2},
-                  ${product4.x} ${product4.y + 250}`
+                (screenWidth < 1000 ?
+                  // 200% Scale: Push curve WAY DOWN on BOTH sides
+                  // Start: coco.y + 450, End: product4.y + 450
+                  `C ${coco.x + 40} ${coco.y + 450},
+                   ${product4.x - 40} ${(coco.y + product4.y + 250) / 2},
+                   ${product4.x} ${product4.y + 350}`
+                  :
+                  // Standard Small Screen
+                  `C ${coco.x + 50} ${coco.y + 200},
+                   ${product4.x - 50} ${(coco.y + product4.y + 200) / 2},
+                   ${product4.x} ${product4.y + 250}`
+                )
                 :
                 `C ${coco.x + 80} ${coco.y + 40},
                   ${product4.x + 80} ${(coco.y + product4.y) / 2},
@@ -164,9 +175,9 @@ const OurProducts = () => {
                   ${product5.x-10 } ${product5.y }` 
                  : 
                  isSmallScreen ?
-                 `C ${product4.x - 200} ${product4.y + 550},
-                  ${product5.x + 200} ${product5.y + 50},
-                  ${product5.x + 20} ${product5.y + 450}`
+                 `C ${product4.x - 200} ${product4.y + 800},
+                  ${product5.x + 200} ${product5.y + 30},
+                  ${product5.x + 20} ${product5.y + 670}`
                  :
                  isMediumScreen ?
                  `C ${product4.x - 100} ${product4.y + 300},
@@ -221,7 +232,6 @@ const OurProducts = () => {
             <h2
               style={{
                 ...productTitleStyle,
-                fontSize: 34,
                 color: "#333",
                 marginBottom: 10,
               }}
@@ -253,7 +263,6 @@ const OurProducts = () => {
             <h2
               style={{
                 ...productTitleStyle,
-                fontSize: 34,
                 color: "#333",
                 marginBottom: 10,
               }}
@@ -360,7 +369,7 @@ const OurProducts = () => {
                   src={imgUrl(product3)}
                   alt={product3.title_description?.title}
                   style={{
-                    maxWidth: 220,
+                    maxWidth: is200Scale ? 180 : 220, // Reduced from 220
                     width: "100%",
                     height: "auto",
                     objectFit: "contain",
@@ -373,14 +382,13 @@ const OurProducts = () => {
                   textAlign: "left",
                   maxWidth: 320,
                   position: "absolute",
-                  left: isSmallScreen ? "45%" : "40%",
+                  left: is200Scale ? "44%" : (isSmallScreen ? "45%" : "40%"), // Moved left for 200% scale
                   top: isSmallScreen ? "-5%" : "-10%",
                 }}
               >
                 <h2
                   style={{
                     ...productTitleStyle,
-                    fontSize: 34,
                     color: "#333",
                     marginBottom: 10,
                   }}
@@ -400,7 +408,7 @@ const OurProducts = () => {
               style={{
                 position: "absolute",
                 right: "6%",
-                top: 150,
+                top: is200Scale ? 110 : 150, // Moved up to align with Product 3 (Visual #1)
                 width: "44%",
                 display: "flex",
                 flexDirection: "row",
@@ -412,16 +420,15 @@ const OurProducts = () => {
               <div
                 style={{
                   textAlign: "left",
-                  maxWidth: 320,
+                  maxWidth: is200Scale ? 200 : 320, // Reduced width to force wrapping ("add more lines")
                   position: "absolute",
-                  bottom: "60%",
-                  left: isMacBook ? "6%" : isMediumScreen ? "-2%" : isSmallScreen ? "2%" : "8%",
+                  bottom: is200Scale ? "10%" : "60%", // Moved down significantly
+                  left: is200Scale ? "4%" : (isMacBook ? "6%" : isMediumScreen ? "-2%" : isSmallScreen ? "2%" : "8%"), // Moved way left for 200% scale
                 }}
               >
                 <h2
                   style={{
                     ...productTitleStyle,
-                    fontSize: 34,
                     color: "#333",
                     marginBottom: 10,
                   }}
@@ -438,7 +445,7 @@ const OurProducts = () => {
                   src={imgUrl(product2)}
                   alt={product2.title_description?.title}
                   style={{
-                    maxWidth: 280,
+                    maxWidth: is200Scale ? 200 : 280, // Reduced further to 200
                     width: "100%",
                     height: "auto",
                     objectFit: "contain",
@@ -497,13 +504,12 @@ const OurProducts = () => {
                   maxWidth: 320,
                   position: "relative",
                   top: "7%",
-                  left: "6%",
+                  left: is200Scale ? "7%" : "6%", // Removed offset for 200% scale to prevent overlap
                 }}
               >
                 <h2
                   style={{
                     ...productTitleStyle,
-                    fontSize: 34,
                     color: "#333",
                     marginBottom: 10,
                   }}
@@ -520,7 +526,7 @@ const OurProducts = () => {
                   src={imgUrl(product1)}
                   alt={product1.title_description?.title}
                   style={{
-                    maxWidth: 280,
+                    maxWidth: is200Scale ? 200 : 280, // Reduced further to 200
                     width: "100%",
                     height: "auto",
                     objectFit: "contain",
@@ -536,8 +542,8 @@ const OurProducts = () => {
             <div
               style={{
                 position: "absolute",
-                right: "7%",
-                top: 720,
+                right: is200Scale ? "12%" : "7%", // Moved Left (7% -> 12%) per correct request
+                top: is200Scale ? 760 : 720, // Moved down (720 -> 760)
                 width: "44%",
                 display: "flex",
                 flexDirection: "row",
@@ -551,13 +557,12 @@ const OurProducts = () => {
                   textAlign: "right",
                   maxWidth: 320,
                   position: "relative",
-                  left: isMacBook ? "-2%" : "8.7%", // ✅ MACBOOK: more right
+                  left: is200Scale ? "8%" : (isMacBook ? "-2%" : "8.7%"), // Moved Text Left (-10%) to fix overlap
                 }}
               >
                 <h2
                   style={{
                     ...productTitleStyle,
-                    fontSize: 34,
                     color: "#333",
                     marginBottom: 10,
                   }}
@@ -574,7 +579,7 @@ const OurProducts = () => {
                   src={imgUrl(product4)}
                   alt={product4.title_description?.title}
                   style={{
-                    maxWidth: 240,
+                    maxWidth: is200Scale ? 170 : 240, // Reduced further to 170
                     width: "100%",
                     height: "auto",
                     objectFit: "contain",
@@ -589,11 +594,11 @@ const OurProducts = () => {
           <ProductRow
             side="left"
             top={1130}
-            imgMaxWidth={220}
+            imgMaxWidth={is200Scale ? 180 : 220} // Reduced from 220
             product={product5}
             customTextStyle={{
               position: "relative",
-              top: isMacBook ? "-10px" : "-35px",  // ✅ MACBOOK: higher up
+              top: is200Scale ? "20px" : (isMacBook ? "-10px" : "-35px"), // Moved text down for 200% scale (20px)
               left: isMacBook ? "-3%" : "-5%",     // ✅ MACBOOK: less left
             }}
           />

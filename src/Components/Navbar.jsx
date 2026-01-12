@@ -62,6 +62,7 @@ const Navbar = ({ customStyle = {} }) => {
     letterSpacing: '0%',
     color: '#807D7E', // Inactive text color
     textDecoration: 'none',
+    whiteSpace: 'nowrap', // Prevent wrapping
     padding: isConstrained ? '6px 12px' : '8px 16px',
     borderRadius: '16px',
     transition: 'all 0.3s ease',
@@ -78,6 +79,7 @@ const Navbar = ({ customStyle = {} }) => {
     letterSpacing: '0%',
     color: '#3C4242', // Active text color (NOT background)
     textDecoration: 'none',
+    whiteSpace: 'nowrap', // Prevent wrapping
     padding: isConstrained ? '6px 12px' : '8px 16px',
     borderRadius: '16px',
     transition: 'all 0.3s ease',
