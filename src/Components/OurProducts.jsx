@@ -141,10 +141,21 @@ const OurProducts = () => {
   const createMainPath = () => {
     const { product1, coco, product4, product5 } = positions;
 
-    const s1 = `M ${product1.x} ${product1.y}
-                C ${product1.x} ${isSmallScreen ? coco.y - 120 : coco.y - 200},
-                  ${isSmallScreen ? coco.x - 120 : coco.x - 80} ${isSmallScreen ? coco.y + 200 : coco.y - 40},
-                  ${coco.x} ${isSmallScreen ? coco.y + 200 : coco.y}`;
+    const s1 = is200Scale ?
+                `M ${product1.x} ${product1.y}
+                 C ${product1.x} ${coco.y - 120},
+                   ${coco.x - 120} ${coco.y + 200},
+                   ${coco.x} ${coco.y + 200}`
+                : isSmallScreen ?
+                `M ${product1.x} ${product1.y}
+                 C ${product1.x} ${coco.y - 120},
+                   ${coco.x - 120} ${coco.y + 200},
+                   ${coco.x} ${coco.y + 200}`
+                :
+                `M ${product1.x} ${product1.y}
+                 C ${product1.x} ${coco.y - 200},
+                   ${coco.x - 80} ${coco.y - 40},
+                   ${coco.x} ${coco.y}`;
 
     const s2 = screenWidth >= 1900 ?
                 `C ${coco.x + 80} ${coco.y + 40},
@@ -174,10 +185,16 @@ const OurProducts = () => {
                   ${product5.x + 20} ${product5.y - 57},
                   ${product5.x-10 } ${product5.y }` 
                  : 
+                 is200Scale ?
+                 `C ${product4.x - 100} ${product4.y + 950},
+                  ${product5.x + 100} ${product5.y - 50},
+                  ${product5.x + 20} ${product5.y + 650}`
+                 :
                  isSmallScreen ?
-                 `C ${product4.x - 200} ${product4.y + 800},
-                  ${product5.x + 200} ${product5.y + 30},
-                  ${product5.x + 20} ${product5.y + 670}`
+                 // 175% Scale
+                 `C ${product4.x - 100} ${product4.y + 650},
+                  ${product5.x + 100} ${product5.y - 50},
+                  ${product5.x + 20} ${product5.y + 450}`
                  :
                  isMediumScreen ?
                  `C ${product4.x - 100} ${product4.y + 300},
