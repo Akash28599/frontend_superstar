@@ -14,6 +14,7 @@ const OurProducts = () => {
   const isSmallScreen = screenWidth < 1200;
   const isMediumScreen = screenWidth >= 1200 && screenWidth < 1400;
   const is200Scale = screenWidth < 1000;
+  const isFirefox = typeof navigator !== "undefined" && navigator.userAgent.toLowerCase().includes("firefox");
 
   useEffect(() => {
     let mounted = true;
@@ -124,7 +125,7 @@ const OurProducts = () => {
     coco: { x: centerX, y: 550 },
     product3: { x: containerWidth * 0.18, y: 690 },
     product4: { x: containerWidth * 0.78, y: 970 },
-    product5: { x: containerWidth * 0.16, y: 1115 },
+    product5: { x: containerWidth * (is200Scale ? 0.22 : 0.16), y: 1115 },
   };
 
   const createTopCurve = () => {
@@ -186,15 +187,15 @@ const OurProducts = () => {
                   ${product5.x-10 } ${product5.y }` 
                  : 
                  is200Scale ?
-                 `C ${product4.x - 100} ${product4.y + 950},
-                  ${product5.x + 100} ${product5.y - 50},
-                  ${product5.x + 20} ${product5.y + 650}`
+                 `C ${product4.x - 100} ${product4.y + 820},
+                  ${product5.x + 100} ${product5.y - 60},
+                  ${product5.x + 20} ${product5.y + 700}`
                  :
                  isSmallScreen ?
                  // 175% Scale
-                 `C ${product4.x - 100} ${product4.y + 650},
-                  ${product5.x + 100} ${product5.y - 50},
-                  ${product5.x + 20} ${product5.y + 450}`
+                 `C ${product4.x - 100} ${product4.y + 590},
+                  ${product5.x + 100} ${product5.y - 30},
+                  ${product5.x + 20} ${product5.y + 510}`
                  :
                  isMediumScreen ?
                  `C ${product4.x - 100} ${product4.y + 300},
@@ -226,6 +227,7 @@ const OurProducts = () => {
     imgMaxWidth,
     product,
     customTextStyle = {},
+    customImageStyle = {},
   }) => {
     if (!product) return null;
     const isLeft = side === "left";
@@ -234,7 +236,7 @@ const OurProducts = () => {
       <div
         style={{
           position: "absolute",
-          [isLeft ? "left" : "right"]: "6%",
+          [isLeft ? "left" : "right"]: is200Scale ? "12%" : "6%",
           top,
           width: "44%",
           display: "flex",
@@ -271,6 +273,7 @@ const OurProducts = () => {
               height: "auto",
               objectFit: "contain",
               pointerEvents: "none",
+              ...customImageStyle,
             }}
           />
         </div>
@@ -505,8 +508,8 @@ const OurProducts = () => {
             <div
               style={{
                 position: "absolute",
-                left: "6%",
-                top: 750,
+                left: is200Scale && isFirefox ? "4%" : "6%",
+                top: is200Scale && isFirefox ? 780 : 750,
                 width: "44%",
                 display: "flex",
                 flexDirection: "row",
@@ -616,7 +619,11 @@ const OurProducts = () => {
             customTextStyle={{
               position: "relative",
               top: is200Scale ? "20px" : (isMacBook ? "-10px" : "-35px"), // Moved text down for 200% scale (20px)
-              left: isMacBook ? "-3%" : "-5%",     // ✅ MACBOOK: less left
+              left: is200Scale ? "2%" : (isMacBook ? "-3%" : "-5%"),     // ✅ MACBOOK: less left, 200%: moved right
+            }}
+            customImageStyle={{
+              position: "relative",
+              left: is200Scale ? "15px" : "0px",
             }}
           />
         </div>
