@@ -123,7 +123,7 @@ const HomeBanner = () => {
     alignSelf: 'flex-end',
     paddingLeft: '15%',
     paddingBottom: '10vh',
-    paddingTop: screenWidth < 1200 ? '20vh' : (isConstrained ? '10vh' : '0'), // Push left section down for small screens
+    paddingTop: screenWidth < 1200 ? '20vh' : (isConstrained ? '15vh' : '12vh'), // Increased padding for all desktop sizes to prevent overlap
     maxWidth: 'none',
     className: 'left-section',
     transition: 'all 0.3s ease',
@@ -165,15 +165,13 @@ const HomeBanner = () => {
         top: '0',
         left: 'auto',
         transform: 'none',
-        // Granular left margin - Adjusted to be robust moving right for all scales
-        // <1350: 25%
-        // 1350-1600: 25% (Moved right from 22%)
-        // >1600: 25% (Moved right from 18% per user request)
+        // Granular left margin - Adjusted for robustness
+        // Adjusted negative margins to prevent overlap on 1680px/etc
         margin: screenWidth < 1200
-          ? '20px auto -10px 25%' // Negative margin to bring kid up, while left section is pushed down via padding
+          ? '20px auto 0px 25%' // Removed negative margin for small screens
           : (screenWidth < 1350 
-            ? '20px auto -30px 25%' 
-            : '20px auto -220px 25%'),
+            ? '20px auto -20px 25%' 
+            : '20px auto -80px 25%'), // Reduced from -220px to -80px for safety
         
         // Adjust max-width to match margins
         maxWidth: screenWidth < 1350 
