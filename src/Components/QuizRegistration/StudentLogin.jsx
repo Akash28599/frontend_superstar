@@ -9,7 +9,7 @@ export const StudentLogin = ({ onClose }) => {
     const handleLoginSubmit = (e) => {
         e.preventDefault();
         if (loginForm.username && loginForm.password) {
-            navigate('/exam-page');
+            navigate('/instructions');
         } else {
             alert("Please fill in both fields!");
         }

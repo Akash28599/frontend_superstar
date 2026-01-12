@@ -108,7 +108,7 @@ const ExamPage = () => {
           setTimeout(() => {
             localStorage.setItem('exam_progress', JSON.stringify(answers));
             alert("🚨 EXAM TERMINATED: 4+ violations detected!");
-            window.location.href = '/quiz';
+            window.location.href = '/thank-you';
           }, 1000);
         }
 
@@ -229,7 +229,7 @@ const ExamPage = () => {
             <p style={{ margin: 0 }}>Progress will be saved automatically.</p>
             <div style={{ display: 'flex', gap: 15, justifyContent: 'center', marginTop: 25 }}>
               <button className='cancelBtn' onClick={() => setShowConfirm(false)}>Continue</button>
-              <button className='confirmBtn' onClick={() => window.location.href = '/quiz'}>End Exam</button>
+              <button className='confirmBtn' onClick={() => window.location.href = '/thank-you'}>End Exam</button>
             </div>
           </div>
         </div>
