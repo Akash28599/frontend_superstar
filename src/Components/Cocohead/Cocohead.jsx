@@ -51,7 +51,7 @@ export const CocoHead = () => {
                         const title = item.icon_description?.title || item.title || '';
                         const desc = item.icon_description?.description || item.description || '';
                         return (
-                            <div className='ch-content' key={index}>
+                            <div className={`ch-content ${index === 1 ? 'ch-content-second' : ''}`} key={index}>
                                 <div className='ch-icon'>
                                     {iconUrl &&
                                         <img src={iconUrl} alt='item icon' />}

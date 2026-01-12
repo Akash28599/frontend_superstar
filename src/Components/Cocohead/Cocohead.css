@@ -185,6 +185,10 @@
     margin-top: 0.5rem;
 }
 
+.ch-content-second .ch-description {
+    padding-left: 15%;
+}
+
 
 
 
@@ -343,5 +347,17 @@
 @media (min-width: 1600px) {
     .ch-cocohead img {
         transform: scale(1.8);
+    }
+}
+
+@media (min-width: 1000px) and (max-width: 1350px) {
+    .is-edge .ch-title {
+        min-height: 5.5rem !important;
+        font-size: 1rem !important;
+    }
+
+    .ch-container:not(.is-edge) .ch-content:first-child .ch-description,
+    .ch-container:not(.is-edge) .ch-content:last-child .ch-description {
+        padding-left: 10%;
     }
 }
