@@ -231,7 +231,7 @@ const ThankYou = ({ siteSettings }) => {
                 paraFontSize: "20px", paraMarginTop: "20px", paraMarginBottom: "40px", paraLineHeight: "30px", // paragraph : description
                 paraHeight: "66px", paraWidth: "576px",
                 iconsSize: "30px",
-                winnerBtnWidth: "300px", winnerBtnHeight: "55px",  // past winners btn 
+                winnerBtnWidth: "300px",  // past winners btn 
                 winnerBtnPadding: "15px 22px", winnerBtnmarginTop: "10px",
                 shareHeight: "29px", shareGap: "2px", shareWidth: "576px",// share para content  and icons gap, height
                 monkeyTop: "5%", monkeyRight: "-40%", monkeyWidth: "750px", monkeyHeight: "710px",
@@ -497,25 +497,27 @@ const ThankYou = ({ siteSettings }) => {
                                     <div style={{
                                         display: "flex",
                                         gap: positions.socialIconsGap,
-                                        flexDirection: positions.socialIconsDisplay
+                                        flexDirection: positions.socialIconsDisplay,
+                                        alignItems:'center'
                                     }}>
 
                                         <p style={{
                                             fontWeight: 600, fontSize: positions.paraFontSize,
-                                            margin: 0,
+                                            margin: 0, textWrap: 'nowrap',
+
                                         }}>
                                             Share it to the world!
                                         </p>
 
                                         {/* Socialicons and link from props */}
-                                            <SocialIcons siteSettings={siteSettings} />
+                                        <SocialIcons siteSettings={siteSettings} />
 
                                     </div>
 
                                     <button className='btn'
                                         onClick={() => navigate('/past-winners')}
                                         style={{
-                                            display: "block", width: positions.winnerBtnWidth, height: positions.winnerBtnHeight,
+                                            display: "block", width: positions.winnerBtnWidth,
                                             borderRadius: "12px",
                                             fontWeight: 600,
                                             padding: positions.winnerBtnPadding, cursor: "pointer",
@@ -546,7 +548,7 @@ const ThankYou = ({ siteSettings }) => {
                                         transform: `translateY(${offsetY}px)`, // UPDATED: section-based parallax
                                         transition: "transform 0.25s ease-out", //  fast & smooth
                                         filter: 'blur(3px)',
-                                        scale:1.4
+                                        scale: 1.4
                                     }}
                                 >
                                     <img width={positions.blurWidth} height={positions.blurHeight} src={blurredCocoPops} alt="blurredCocoPops" />
@@ -556,7 +558,7 @@ const ThankYou = ({ siteSettings }) => {
                             {CocoPops && (
                                 <div style={{
                                     position: "absolute", bottom: positions.cocoBottom, right: positions.cocoRight, zIndex: 6,
-                                    transform: `translateY(${smallCocoOffsetY}px)`, willChange: "transform",scale:1.2
+                                    transform: `translateY(${smallCocoOffsetY}px)`, willChange: "transform", scale: 1.2
                                 }}>
                                     <img width={positions.cocoWidth} src={CocoPops} alt="CocoPops" />
                                 </div>

@@ -11,8 +11,8 @@
     font-family: var(--font);
     background-color: #E41F35;
     color: white;
-    border: 1px solid #E41F35;
-    /* optional but looks premium */
+    border: 2px solid #E41F35;
+    text-wrap: nowrap;
 
 }
 
@@ -22,5 +22,4 @@
     color: #E41F35;
     /* 🔴 red text */
     border: 2px solid #E41F35;
-    /* optional but looks premium */
 }
