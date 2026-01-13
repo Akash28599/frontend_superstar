@@ -47,7 +47,7 @@ const CocoBanner = () => {
               alt="character"
               className="
                 absolute z-20 pointer-events-none
-                w-[30%] tablet:w-[28%] desktop:w-[32%] wide:w-[30%]
+                w-[30%] tablet:w-[28%] desktop:w-[30%] wide:w-[30%]
                 -top-[10%] tablet:-top-[12%] wide:-top-[15%]
                 left-[-1%] tablet:left-[0%]
                 drop-shadow-2xl

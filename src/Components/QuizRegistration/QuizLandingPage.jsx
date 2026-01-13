@@ -102,7 +102,7 @@ const QuizLandingPage = () => {
         alt="Coco"
         className="hanging-monkey"
       />
-
+      
       <header style={headerStyle}>
         <div style={headerInner}>
           <div style={headerTextContainer}>
@@ -175,9 +175,6 @@ const QuizLandingPage = () => {
                 <div style={{ ...stepCardInner, borderBottom: `8px solid ${constants.gold}` }}>
                   <h4 style={stepCardTitle}>{data.second_component?.sections?.[2]?.title}</h4>
                   <p style={stepCardDesc}>{data.second_component?.sections?.[2]?.description}</p>
-                  <button style={{ ...redBtn, marginTop: '15px', padding: '10px 15px', fontSize: '14px', width: 'auto' }} onClick={() => setShowLogin(true)}>
-                    Start Exam
-                  </button>
 
                 </div>
               </div>

@@ -160,11 +160,24 @@
     color: var(--gold);
 }
 
-/* Responsive adjustments for 175% scale (approx 1200px or less on 1080p) */
-@media (max-width: 1200px) {
+/* 125% Scale / Medium-Small Desktop (approx 1536px) */
+@media (max-width: 1600px) {
+    .sr-container {
+        padding: 10px;
+        margin: 2% 0;
+    }
+
     .sr-card {
         max-width: 480px;
-        /* Slight reduction */
+        max-height: 95vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .sr-body {
+        padding: 0px 20px 15px;
+        overflow-y: auto;
+        /* Allow scrolling if it still overflows */
     }
 
     .sr-header {
@@ -175,17 +188,16 @@
         font-size: 1.2rem;
     }
 
-    .sr-logo img {
-        height: 24px;
-    }
-
-    .sr-body {
-        padding: 0px 16px 16px;
+    .sr-body p {
+        /* Intro text */
+        font-size: 13px !important;
+        margin-bottom: 10px !important;
+        line-height: 1.3 !important;
     }
 
     .sr-body h2 {
         font-size: 1.1rem;
-        margin: 14px 0 10px;
+        margin: 12px 0 8px;
     }
 
     .sr-grid {
@@ -198,17 +210,118 @@
     }
 
     .sr-upload {
-        padding: 3px;
+        padding: 4px;
         font-size: 0.85rem;
     }
 
     .sr-footer {
-        margin-top: 14px;
+        margin-top: 12px;
+    }
+}
+
+/* 150% Scale (approx 1280px) */
+@media (max-width: 1350px) {
+    .sr-container {
+        padding: 10px;
+        margin: 1% 0;
+    }
+
+    .sr-card {
+        max-width: 420px;
+        max-height: 98vh;
+        /* Force fit */
+    }
+
+    .sr-header {
+        padding: 4px;
+    }
+
+    .sr-header h1 {
+        font-size: 1.1rem;
+    }
+
+    .sr-logo img {
+        height: 22px;
+    }
+
+    .sr-body {
+        padding: 0px 16px 14px;
+    }
+
+    .sr-body p {
+        font-size: 12px !important;
+        margin-bottom: 8px !important;
+        line-height: 1.25 !important;
+    }
+
+    .sr-body h2 {
+        font-size: 1rem;
+        margin: 10px 0 6px;
+        padding-bottom: 4px;
+    }
+
+    .sr-grid {
+        gap: 5px;
+        grid-template-columns: 1fr 1fr;
+        /* Force 2 columns to save height */
+    }
+
+    .sr-grid input {
+        padding: 4px;
+        font-size: 0.8rem;
+    }
+
+    .sr-upload {
+        padding: 3px;
+        font-size: 0.8rem;
+    }
+
+    .sr-footer {
+        margin-top: 10px;
+    }
+
+    .sr-footer p {
+        font-size: 10px !important;
     }
 
     .sr-submit {
-        padding: 6px 20px;
+        padding: 6px 18px;
         font-size: 0.85rem;
+    }
+}
+
+/* 175% Scale (approx 1100px) */
+@media (max-width: 1100px) {
+    .sr-card {
+        max-width: 380px;
+        border-radius: 12px;
+        max-height: 95vh;
+        /* Ensure scroll container constraint */
+    }
+
+    .sr-body {
+        overflow-y: auto;
+        /* Ensure scrolling */
+    }
+
+    .sr-body p {
+        /* display: block; Restored */
+        font-size: 11px !important;
+        margin-bottom: 8px !important;
+    }
+
+    .sr-body h2:first-of-type {
+        margin-top: 10px;
+    }
+
+    .sr-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+    }
+
+    .sr-upload {
+        padding: 3px;
+        font-size: 0.8rem;
     }
 
     .sr-submit {
@@ -217,48 +330,45 @@
     }
 }
 
-/* 200% Scale Fix (approx 960px width, ~540px height) */
-@media (max-width: 1000px) {
-    .sr-card {
-        max-width: 350px;
-        /* Reduced further from 380px */
-        margin: 5px 0;
+/* 200% Scale / Tablets (approx 960px width or less) */
+@media (max-width: 960px) {
+    .sr-container {
+        padding: 5px;
+        margin: 0;
+        align-items: flex-start;
+        /* Align top so it's not cut off if too tall */
+        padding-top: 10px;
     }
 
-    .sr-header {
-        padding: 2px;
+    .sr-card {
+        max-width: 340px;
+        max-height: 90vh;
     }
 
     .sr-header h1 {
-        font-size: 0.95rem;
+        font-size: 1rem;
     }
 
     .sr-logo img {
-        height: 20px;
-        /* Smaller logo */
+        height: 18px;
     }
 
     .sr-body {
-        padding: 0 10px 10px;
-        /* Minimal body padding */
+        padding: 0 12px 12px;
     }
 
     .sr-body h2 {
         font-size: 0.9rem;
-        /* Smaller section headers */
-        margin: 8px 0 6px;
+        margin: 8px 0 5px;
     }
 
     .sr-grid {
-        grid-template-columns: 1fr 1fr;
-        /* Keep 2 columns to save vertical space if possible, or 1fr if too cramped. Let's try 1fr 1fr with smaller gap */
         gap: 4px;
     }
 
     .sr-grid input {
         padding: 4px;
         font-size: 0.75rem;
-        /* Small text */
     }
 
     .sr-upload {
