@@ -1,29 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { StudentLogin } from './StudentLogin';
 import StudentRegister from './StudentRegisterForm';
 
 const QuizLandingPage = () => {
-  const [pageData, setPageData] = useState(null);
   const [showLogin, setShowLogin] = useState(false);
   const [waitlistEmail, setWaitlistEmail] = useState('');
   const [showRegister, setShowRegister] = useState(false);
 
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_STRAPI_URL}/api/quiz-landing-page`)
-      .then((res) => res.json())
-      .then((json) => setPageData(json.data))
-      .catch((err) => console.error("Error fetching data:", err));
-  }, []);
+  // Removed API fetch as per new static content requirement
 
   const handleWaitlistSubmit = (e) => {
     e.preventDefault();
     alert(`Success! ${waitlistEmail} has been added to the waitlist.`);
     setWaitlistEmail('');
   };
-
-  if (!pageData) return <div style={loadingStyle}>Loading...</div>;
-
-  const { heading, sub_heading, first_component, second_component } = pageData;
 
   return (
     <div style={{ fontFamily: constants.fontFamily, backgroundColor: '#fff', minHeight: '100vh', overflowX: 'hidden', position: 'relative' }}>
@@ -41,7 +31,7 @@ const QuizLandingPage = () => {
             50% { transform: rotate(3deg); }
             100% { transform: rotate(-3deg); }
           }
-          /* Responsive Hanging Monkey */
+           /* Responsive Hanging Monkey */
           .hanging-monkey {
             position: absolute;
             left: 0;
@@ -53,12 +43,21 @@ const QuizLandingPage = () => {
             animation: swing 3s ease-in-out infinite;
             transform-origin: top left;
           }
+          /* 125% zoom or small laptops (1536px) */
           @media (max-width: 1536px) {
-             /* Adjust for 125% scale laptop or smaller desktops */
             .hanging-monkey { width: clamp(240px, 18vw, 320px); }
           }
-          @media (max-width: 768px) {
-            .hanging-monkey { width: 180px; }
+          /* 150% zoom (1280px) */
+          @media (max-width: 1280px) {
+            .hanging-monkey { width: clamp(200px, 16vw, 260px); }
+          }
+          /* 175% zoom (~1100px) */
+          @media (max-width: 1100px) {
+            .hanging-monkey { width: clamp(160px, 15vw, 220px); }
+          }
+          /* 200% zoom (~960px) and Tablets */
+          @media (max-width: 960px) {
+            .hanging-monkey { width: 140px; }
           }
         `}
       </style>
@@ -74,8 +73,9 @@ const QuizLandingPage = () => {
         </div>
       )}
       
+      {/* Placeholder for hanging monkey or image. User asked for blank divs in image places, primarily for the rewatch section, but standard images might be needed here too. keeping the class. */}
       <img 
-        src={first_component.student_exam_login.image} 
+        src="/assetss/hangingMonkey.png" 
         alt="Coco" 
         className="hanging-monkey"
       />
@@ -83,46 +83,49 @@ const QuizLandingPage = () => {
       <header style={headerStyle}>
         <div style={headerInner}>
           <div style={headerTextContainer}>
-            <h1 style={titleStyle}>{heading}</h1>
-            <p style={subtitleStyle}>{sub_heading}</p>
+            <h1 style={titleStyle}>Nigeria’s Biggest Platform Where Brightest Young Minds Become Superstars</h1>
+            <p style={subtitleStyle}>
+              The Kellogg’s Superstar Quiz Show is Nigeria’s premier inter-school academic competition—celebrating intelligence, confidence, teamwork and the joy of learning.
+            </p>
           </div>
+
           <div style={headerActionArea}>
-            <img src={first_component.daily_challenges.image} alt="Coco Head" style={cocoHeadIcon} />
+             {/* Action area empty or icon since login button moved to card */}
           </div>
         </div>
       </header>
 
       <main style={mainContent}>
+        
+        {/* Registration and Login Cards Section */}
         <div style={cardRow}>
-          <div className="card-anim" style={yellowCard}>
-            <div style={iconBox}>🏆</div>
-            <h3 style={cardTitle}>{first_component.daily_challenges.title}</h3>
-            <p style={cardDesc}>{first_component.daily_challenges.description}</p>
-            <button style={redBtn}>Start Daily Quiz</button>
-          </div>
+             <div className="card-anim" style={{ ...yellowCard, maxWidth: '400px', width: '100%', padding: '40px' }}>
+                <h3 style={cardTitle}>Want to Be a Part of the Kellogg’s Superstars Quiz Show?</h3>
+                <p style={{ ...cardDesc, height: 'auto', fontSize: '16px' }}>
+                  Ready to showcase your students' academic brilliance on a national stage? Register now to be a part of the most exciting educational quiz show.
+                </p>
+                <button
+                  style={redBtn}
+                  onClick={() => setShowRegister(true)}
+                >
+                  Register Now
+                </button>
+             </div>
 
-          <div className="card-anim" style={yellowCard}>
-            <div style={iconBox}>⭐</div>
-            <h3 style={cardTitle}>{first_component.school_registration.title}</h3>
-            <p style={cardDesc}>{first_component.school_registration.description}</p>
-            <button
-              style={redBtn}
-              onClick={() => setShowRegister(true)}
-            >
-              Register Now
-            </button>
-          </div>
-
-          <div className="card-anim" style={yellowCard}>
-            <div style={iconBox}>🔑</div>
-            <h3 style={cardTitle}>{first_component.student_exam_login.title}</h3>
-            <p style={cardDesc}>{first_component.student_exam_login.description}</p>
-            <button style={redBtn} onClick={() => setShowLogin(true)}>Start Exam</button>
-          </div>
+             <div className="card-anim" style={{ ...yellowCard, maxWidth: '400px', width: '100%', padding: '40px' }}>
+                <div style={iconBox}>🔑</div>
+                <h3 style={cardTitle}>Already Registered?</h3>
+                <p style={{ ...cardDesc, height: 'auto', fontSize: '16px' }}>
+                  Enter your credentials to access the exam portal and start your journey to becoming a Superstar.
+                </p>
+                <button style={redBtn} onClick={() => setShowLogin(true)}>
+                  Student Login
+                </button>
+             </div>
         </div>
 
         <section style={roadmapSection}>
-          <h2 style={sectionHeading}>How It Works</h2>
+          <h2 style={sectionHeading}>How to Participate</h2>
           <div style={roadmapContainer}>
             <svg style={roadmapSvg} viewBox="0 0 800 500" fill="none">
               <path d="M400 100 H700 C780 100 780 380 700 380 H100" stroke="#D3D3D3" strokeWidth="5" strokeDasharray="15 15" />
@@ -131,15 +134,15 @@ const QuizLandingPage = () => {
               <div style={stepWrapper}>
                 <div style={stepNumberBadge}>1</div>
                 <div style={{ ...stepCardInner, borderBottom: `8px solid ${constants.gold}` }}>
-                  <h4 style={stepCardTitle}>{second_component.sections[0]?.title}</h4>
-                  <p style={stepCardDesc}>{second_component.sections[0]?.description}</p>
+                  <h4 style={stepCardTitle}>Register your school</h4>
+                  <p style={stepCardDesc}>Complete the registration form to enroll your school.</p>
                 </div>
               </div>
               <div style={stepWrapper}>
                 <div style={stepNumberBadge}>2</div>
                 <div style={{ ...stepCardInner, borderBottom: `8px solid ${constants.red}` }}>
-                  <h4 style={stepCardTitle}>{second_component.sections[1]?.title}</h4>
-                  <p style={stepCardDesc}>{second_component.sections[1]?.description}</p>
+                  <h4 style={stepCardTitle}>Check Your Inbox</h4>
+                  <p style={stepCardDesc}>Receive confirmation and further instructions via email.</p>
                 </div>
               </div>
             </div>
@@ -147,12 +150,40 @@ const QuizLandingPage = () => {
               <div style={stepWrapper}>
                 <div style={stepNumberBadge}>3</div>
                 <div style={{ ...stepCardInner, borderBottom: `8px solid ${constants.gold}` }}>
-                  <h4 style={stepCardTitle}>{second_component.sections[2]?.title}</h4>
-                  <p style={stepCardDesc}>{second_component.sections[2]?.description}</p>
+                  <h4 style={stepCardTitle}>Take the Preliminary Exam</h4>
+                  <p style={stepCardDesc}>Participate in the qualifying round to reach the main show.</p>
+                  <button style={{ ...redBtn, marginTop: '15px', padding: '10px 15px', fontSize: '14px', width: 'auto' }} onClick={() => setShowLogin(true)}>
+                    Start Exam
+                  </button>
+
                 </div>
               </div>
             </div>
           </div>
+        </section>
+
+        {/* Rewatch Section */}
+        <section style={{ marginTop: '120px', textAlign: 'center' }}>
+            <h2 style={sectionHeading}>Missed an episode or two? Catch up with the Superstars</h2>
+            <p style={{ fontSize: '18px', color: '#555', maxWidth: '700px', margin: '0 auto 40px' }}>
+                Re-watch your favorite moments and exciting challenges from this season and past years. Every episode of the Kellogg’s Superstars Quiz Show is right here! Don’t miss a second.
+            </p>
+            
+            {/* Media Grid Placeholder - 3 images */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px', marginBottom: '30px' }}>
+                <div style={{ backgroundColor: '#e0e0e0', height: '200px', borderRadius: '15px' }}></div>
+                <div style={{ backgroundColor: '#e0e0e0', height: '200px', borderRadius: '15px' }}></div>
+                <div style={{ backgroundColor: '#e0e0e0', height: '200px', borderRadius: '15px' }}></div>
+            </div>
+             {/* Media Grid Placeholder - 2 videos */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px', marginBottom: '40px' }}>
+                <div style={{ backgroundColor: '#000', height: '250px', borderRadius: '15px' }}></div>
+                <div style={{ backgroundColor: '#000', height: '250px', borderRadius: '15px' }}></div>
+            </div>
+
+            <a href="https://www.youtube.com" target="_blank" rel="noreferrer" style={{...redBtn, display: 'inline-block', width: 'auto', padding: '15px 40px', textDecoration: 'none'}}>
+                Watch all episodes here
+            </a>
         </section>
 
         <section style={waitlistSection}>
@@ -160,8 +191,7 @@ const QuizLandingPage = () => {
             <div style={waitlistTextContent}>
               <h2 style={waitlistHeading}>Join the Waitlist</h2>
               <p style={waitlistSubtext}>
-                Be the first to know about upcoming exam dates, proctoring schedules,
-                and scholarship winner announcements.
+                Be the first to know when the registration is open, exam date and many more information.
               </p>
             </div>
             <form onSubmit={handleWaitlistSubmit} style={waitlistForm}>
@@ -184,24 +214,7 @@ const QuizLandingPage = () => {
 
 const constants = { gold:'#FBCA05', red: '#F60945', fontFamily:'"KelloggsSans", Arial, sans-serif' }
 
-const cocoStyle = { 
-  position: 'absolute', // Use absolute positioning
-  left: '0',
-  top: '0',
-  width: '320px', 
-  height: 'auto',
-  zIndex: 10, // Lower z-index than modals but above header
-  animation: 'swing 3s ease-in-out infinite',
-  transformOrigin: 'top left',
-  
-  '@media (max-width: 768px)': {
-    width: '180px',
-  },
-  '@media (max-width: 480px)': {
-    width: '150px',
-  }
-};
-
+// Keep existing styles or minimal updates
 const headerStyle = { 
   backgroundColor: constants.red, 
   color: '#fff', 
@@ -222,26 +235,28 @@ const headerInner = {
   position: 'relative' 
 };
 
-
 const headerTextContainer = { 
   textAlign: 'center', 
   flex: 1,
+  maxWidth: '800px',
+  margin: '0 auto' 
 };
 
 const titleStyle = { fontSize: '46px', margin: 0, fontWeight: '800' };
-const subtitleStyle = { fontSize: '20px', margin: '5px 0 0', opacity: 0.9 };
-const headerActionArea = { display: 'flex', alignItems: 'center', gap: '15px' };
-const cocoHeadIcon = { width: '45px', height: '45px', borderRadius: '50%', border: '2px solid #fff', backgroundColor: '#fff' };
-const helpCircle = { width: '40px', height: '40px', borderRadius: '50%', border: '2px solid #fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' };
-const mainContent = { maxWidth: '1100px', margin: '40px auto 0', padding: '0 20px' };
-const cardRow = { display: 'flex', gap: '25px', justifyContent: 'center' };
-const yellowCard = { backgroundColor: constants.gold, borderRadius: '30px', padding: '35px 25px', flex: 1, maxWidth: '320px', textAlign: 'center', boxShadow: '0 8px 25px rgba(0,0,0,0.08)' };
+const subtitleStyle = { fontSize: '20px', margin: '20px 0 0', opacity: 0.9, lineHeight: '1.5' };
+const cardRow = { display: 'flex', gap: '25px', justifyContent: 'center', marginBottom: '80px', flexWrap: 'wrap' };
 const iconBox = { backgroundColor: '#fff', width: '55px', height: '55px', borderRadius: '15px', margin: '0 auto 15px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '28px' };
+const headerActionArea = { display: 'flex', alignItems: 'center', gap: '15px' };
+
+const mainContent = { maxWidth: '1100px', margin: '40px auto 0', padding: '0 20px' };
+const yellowCard = { backgroundColor: constants.gold, borderRadius: '30px', padding: '35px 25px', textAlign: 'center', boxShadow: '0 8px 25px rgba(0,0,0,0.08)' };
 const cardTitle = { fontSize: '22px', fontWeight: '800', margin: '0 0 10px', color: '#333' };
-const cardDesc = { fontSize: '14px', color: '#444', lineHeight: '1.4', marginBottom: '25px', height: '50px' };
-const redBtn = { flex:1,backgroundColor: constants.red, color: '#fff', border: 'none', padding: '14px', borderRadius: '12px', width: '100%', fontWeight: '700', cursor: 'pointer' ,fontFamily:constants.fontFamily};
+const cardDesc = { fontSize: '14px', color: '#444', lineHeight: '1.4', marginBottom: '25px' };
+const redBtn = { backgroundColor: constants.red, color: '#fff', border: 'none', padding: '14px', borderRadius: '12px', fontWeight: '700', cursor: 'pointer' ,fontFamily:constants.fontFamily};
 const whiteBtn = { ...redBtn, backgroundColor: '#fff', color: constants.red };
-const roadmapSection = { marginTop: '160px', textAlign: 'center', position: 'relative' };
+
+
+const roadmapSection = { marginTop: '80px', textAlign: 'center', position: 'relative' };
 const sectionHeading = { fontSize: '34px', fontWeight: '800', color: '#333', marginBottom: '80px' };
 const roadmapContainer = { position: 'relative', maxWidth: '900px', margin: '0 auto' };
 const roadmapSvg = { position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 };
@@ -258,7 +273,6 @@ const waitlistHeading = { fontSize: '32px', fontWeight: '800', color: '#333', ma
 const waitlistSubtext = { fontSize: '16px', color: '#666', maxWidth: '600px', margin: '0 auto', lineHeight: '1.6' };
 const waitlistForm = { display: 'flex', gap: '10px', width: '100%', maxWidth: '500px' };
 const waitlistInput = { flex: 2, padding: '15px 20px', borderRadius: '15px', border: `2px solid ${constants.gold}`, outline: 'none', fontSize: '16px',fontFamily:constants.fontFamily };
-const loadingStyle = { textAlign: 'center', padding: '100px', fontSize: '24px', color: constants.red };
 const modalOverlay = { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(5px)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 2000 };
 
 export default QuizLandingPage;

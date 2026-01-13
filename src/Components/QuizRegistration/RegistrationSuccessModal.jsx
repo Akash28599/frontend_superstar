@@ -19,19 +19,11 @@ const RegistrationSuccessModal = ({ onClose }) => {
                 </div>
 
                 <div className="rs-body">
-                    <h1>Registration Successful!</h1>
-                    <p className="rs-sub">Your school is all set!</p>
+                    <h1>Congratulations! Your Registration is Complete!</h1>
+                    <p className="rs-sub">Check your mail for next steps.</p>
 
                     <FaCheckCircle className="rs-check" />
 
-                    <h2>What Happens Next?</h2>
-
-                    <ol>
-                        <li>Check your school email.</li>
-                        <li>
-                            We’ve sent login details and exam times for your students.
-                        </li>
-                    </ol>
                     <button className="rs-btn" onClick={onClose}>
                         Back
                     </button>

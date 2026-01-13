@@ -1,9 +1,9 @@
-/* Global reset */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global reset - partially handled by Tailwind Preflight, keeping specific overrides if needed */
+
 
 /* Modern Best Practices & Reset */
 img,
@@ -90,4 +90,17 @@ code {
   src: url('./fonts/kelloggssans-bold.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }

@@ -56,6 +56,10 @@ const StudentRegister = ({ onClose }) => {
           </div>
         </div>
         <div className="sr-body">
+          <p style={{ fontSize: '14px', lineHeight: '1.5', color: '#555', marginBottom: '20px' }}>
+            Welcome! Please complete all sections below accurately to register your school for consideration in the next season of the Kellogg's Superstars Quiz Show. Please note that registration does not guarantee participation in the show; qualified schools will be contacted for the final selection process. <br /><br />
+            <strong>Please note this Show is exclusively for junior kids category between the ages of 8-11 from Primary 5 to JSS1</strong>
+          </p>
           <h2>School Details</h2>
 
           <div className="sr-grid">
@@ -130,6 +134,9 @@ const StudentRegister = ({ onClose }) => {
           </div>
 
           <div className="sr-footer">
+             <p style={{ fontSize: '12px', color: '#666', marginBottom: '10px', textAlign: 'center' }}>
+              By submitting this form, I declare that the information provided is accurate and that I am authorized to represent the above-named school in the Kellogg’s Superstars Quiz Show registration process.
+            </p>
             <label>
               <input required type="checkbox" /> I agree to the Terms & Conditions
             </label>

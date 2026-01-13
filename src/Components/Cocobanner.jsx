@@ -3,18 +3,9 @@ import cloudImg from "../cloud1.png";
 import waveImage from "../cocobanner.png";
 import { constants } from '../Utils/constants';
 
-
 const CocoBanner = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-
-  // Responsive width tracking
-  useEffect(() => {
-    const handleResize = () => setScreenWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   const fetchBanner = async () => {
     try {
@@ -32,164 +23,76 @@ const CocoBanner = () => {
     fetchBanner();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
-  if (!data) return <div>No data available</div>;
+  if (loading) return <div className="min-h-[500px] flex items-center justify-center text-white">Loading...</div>;
+  if (!data) return <div className="min-h-[500px] flex items-center justify-center text-white">No data available</div>;
 
   const title = data.title;
   const description = data.description;
   const charImg = data.image?.url ?? null;
 
-  // Fluid positions using percentages where possible to avoid rigid breakpoints
-  const getPositions = () => {
-    // Large screens (1600+)
-    if (screenWidth >= 1600) return {
-      charTop: '-5%', charLeft: '-2%',
-      cloudTop: '10%', cloudRight: '10%',
-      textTop: '38%',
-      maxWidth: '1200px',
-      titleSize: '6rem', descSize: '2.5rem',
-      charWidth: '50%' // Increased for 100% scale users
-    };
-
-    // Standard desktops (1366 - 1599)
-    if (screenWidth >= 1366) return {
-      charTop: '-5%', charLeft: '-2%',
-      cloudTop: '15%', cloudRight: '8%',
-      textTop: '42%',
-      maxWidth: '1000px',
-      titleSize: '5.2rem', descSize: '1.8rem',
-      charWidth: '35%'
-    };
-
-    // Laptops (1200 - 1365)
-    if (screenWidth >= 1200) return {
-      charTop: '-2%', charLeft: '0%',
-      cloudTop: '15%', cloudRight: '5%',
-      textTop: '45%',
-      maxWidth: '800px',
-      titleSize: '3.5rem', descSize: '1.5rem',
-      charWidth: '35%'
-    };
-
-    // Smaller desktops/Tablets (1024 - 1199)
-    if (screenWidth >= 1024) return {
-      charTop: '0%', charLeft: '0%',
-      cloudTop: '20%', cloudRight: '5%',
-      textTop: '50%',
-      maxWidth: '700px',
-      titleSize: '3rem', descSize: '1.3rem',
-      charWidth: '35%'
-    };
-
-    // 200% Scale / Small Desktop / Tablet (Under 1024px)
-    return {
-      charTop: '5%', charLeft: '0%', // Moved left slightly (from 2% to 0%)
-      cloudTop: '15%', cloudRight: '2%',
-      textTop: '45%',
-      maxWidth: '600px', // Increased width (was 450px)
-      titleSize: '2.8rem', // Increased font (was 2.5rem)
-      descSize: '1.4rem', // Increased font (was 1.2rem)
-      charWidth: '30%',
-      textLeft: '50%' 
-    };
-  };
-
-  const positions = getPositions();
-
   return (
-    <div style={{ position: "relative", width: "100%", height: "auto" }}>
-      {/* wave background */}
-      <img
-        src={waveImage}
-        alt="wave background"
-        style={{
-          width: "100%", display: "block", position: "relative",
-          height: "auto",
-          minHeight: "500px", // Ensure minimum height
-          objectFit: "cover"
-        }} />
+    <div className="relative w-full h-auto min-h-[500px] overflow-visible font-kelloggs transform translate-y-[-1px]">
+      {/* Wave Background */}
+      <div className="relative w-full h-full"> 
+          <img
+            src={waveImage}
+            alt="wave background"
+            className="w-full h-auto min-h-[500px] object-cover block relative z-10"
+          />
+      
+          {/* Character Image - Hanging Effect */}
+          {charImg && (
+            <img
+              src={charImg}
+              alt="character"
+              className="
+                absolute z-20 pointer-events-none
+                w-[30%] tablet:w-[28%] wide:w-[25%]
+                -top-[10%] tablet:-top-[12%] wide:-top-[15%]
+                left-[-1%] tablet:left-[0%]
+                drop-shadow-2xl
+              "
+            />
+          )}
 
-      {/* character image */}
-      {charImg && (
-        <img
-          src={charImg}
-          alt="character"
-          style={{
-            position: "absolute",
-            top: positions.charTop,
-            left: positions.charLeft,
-            zIndex: 2,
-            pointerEvents: "none",
-            maxWidth: positions.charWidth,
-            height: "auto"
-          }}
-        />
-      )}
+          {/* Title Cloud - Right Side */}
+          {cloudImg && (
+            <img
+              src={cloudImg}
+              alt="cloud"
+              className="
+                absolute z-20 pointer-events-none
+                w-[25%] tablet:w-[15%]
+                top-[10%] right-[5%]
+                opacity-90
+              "
+            />
+          )}
 
-      {/* title cloud */}
-      {cloudImg && (
-        <img
-          src={cloudImg}
-          alt="cloud"
-          style={{
-            position: "absolute",
-            top: positions.cloudTop,
-            right: positions.cloudRight,
-            zIndex: 1,
-            pointerEvents: "none",
-            maxWidth: "25%",
-            height: "auto"
-          }}
-        />
-      )}
+          {/* Text Content - Centered but shifted right slightly on small screens */}
+          <div className="
+            absolute top-1/2 left-[55%] tablet:left-1/2 -translate-x-1/2 -translate-y-1/2 
+            flex flex-col items-center justify-center text-center 
+            w-full max-w-[85%] tablet:max-w-[70%] desktop:max-w-[60%] 
+            z-30 px-4 mt-[5%]
+            pl-[10%] tablet:pl-0
+          ">
+            <h1 className="
+              font-bold text-white leading-[1.0] drop-shadow-md mb-6
+              text-[clamp(2rem,5vw,6rem)]
+            ">
+              {title}
+            </h1>
 
-      {/* Text content */}
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "12px",
-          position: "absolute",
-          top: positions.textTop,
-          top: positions.textTop,
-          left: positions.textLeft || "55%",
-          transform: "translateX(-50%)",
-          textAlign: "center",
-          color: "white",
-          zIndex: 2,
-          width: "100%",
-          maxWidth: positions.maxWidth, 
-          padding: "0 20px"
-        }}
-      >
-        <h1
-          style={{
-            fontWeight: 700,
-            marginBottom: "16px",
-            fontSize: positions.titleSize,
-            lineHeight: 1.1,
-            letterSpacing: "0%",
-            fontFamily: constants.fontFamily
-          }}
-        >
-          {title}
-        </h1>
-
-        <div
-          dangerouslySetInnerHTML={{ __html: description }}
-          style={{
-            fontFamily: constants.fontFamily,
-            fontWeight: 400,
-            fontStyle: "italic",
-            opacity: 0.9,
-            position: 'relative',
-            lineHeight: "1.2",
-            fontSize: positions.descSize,
-            letterSpacing: "0%",
-          }}
-        />
+            <div
+              dangerouslySetInnerHTML={{ __html: description }}
+              className="
+                text-white font-normal italic opacity-95 leading-[1.3]
+                text-[clamp(0.9rem,2vw,2.2rem)]
+              "
+            />
+          </div>
       </div>
-
     </div>
   );
 };

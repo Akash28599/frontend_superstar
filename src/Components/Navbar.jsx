@@ -14,6 +14,7 @@ const Navbar = ({ customStyle = {} }) => {
   }, []);
 
   const isConstrained = screenWidth < 1350;
+  const isHighScale = screenWidth < 1050; // New breakpoint for high scale/low width
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_STRAPI_URL}/api/navbars?populate=*`)
@@ -36,20 +37,20 @@ const Navbar = ({ customStyle = {} }) => {
     left: '60%',
     transform: 'translateX(-50%)',
     background: 'white',
-    padding: isConstrained ? '8px 16px' : '10px 24px',
-    height: isConstrained ? '40px' : '45px',
+    padding: isHighScale ? '6px 12px' : isConstrained ? '8px 16px' : '10px 24px', // Tighter padding
+    height: isHighScale ? '36px' : isConstrained ? '40px' : '45px', // Smaller height
     borderRadius: '30px',
     boxShadow: '0 6px 25px rgba(0,0,0,0.08)',
     display: 'flex',
     alignItems: 'center',
-    gap: isConstrained ? '16px' : '24px',
+    gap: isHighScale ? '6px' : isConstrained ? '16px' : '24px', // Reduced gap significantly
     zIndex: 1000,
     backdropFilter: 'blur(10px)',
     width: 'fit-content',
     maxWidth: '90vw',
     transition: 'all 0.3s ease',
-    // Push items to the right as requested
-    paddingLeft: isConstrained ? '24px' : '40px', 
+    // Push items to the right as requested - Increased for high scale to prevent overlap
+    paddingLeft: isHighScale ? '62px' : isConstrained ? '24px' : '40px', 
     ...customStyle
   };
 
@@ -57,13 +58,13 @@ const Navbar = ({ customStyle = {} }) => {
   const navItemStyle = {
     fontFamily: "'Kellogg's Sans', sans-serif",
     fontWeight: 400,
-    fontSize: isConstrained ? '15px' : '18px',
+    fontSize: isHighScale ? '12px' : isConstrained ? '15px' : '18px', // Smaller font
     lineHeight: '100%',
     letterSpacing: '0%',
     color: '#807D7E', // Inactive text color
     textDecoration: 'none',
     whiteSpace: 'nowrap', // Prevent wrapping
-    padding: isConstrained ? '6px 12px' : '8px 16px',
+    padding: isHighScale ? '4px 8px' : isConstrained ? '6px 12px' : '8px 16px',
     borderRadius: '16px',
     transition: 'all 0.3s ease',
     cursor: 'pointer',
@@ -74,13 +75,13 @@ const Navbar = ({ customStyle = {} }) => {
   const activeItemStyle = {
     fontFamily: "'Kellogg's Sans', sans-serif",
     fontWeight: 700,
-    fontSize: isConstrained ? '15px' : '18px',
+    fontSize: isHighScale ? '13px' : isConstrained ? '15px' : '18px',
     lineHeight: '100%',
     letterSpacing: '0%',
     color: '#3C4242', // Active text color (NOT background)
     textDecoration: 'none',
     whiteSpace: 'nowrap', // Prevent wrapping
-    padding: isConstrained ? '6px 12px' : '8px 16px',
+    padding: isHighScale ? '4px 8px' : isConstrained ? '6px 12px' : '8px 16px',
     borderRadius: '16px',
     transition: 'all 0.3s ease',
     cursor: 'pointer',
@@ -90,13 +91,13 @@ const Navbar = ({ customStyle = {} }) => {
   const ButtonStyle = {
     fontFamily: "'Kellogg's Sans', sans-serif",
     fontWeight: 700,
-    fontSize: isConstrained ? '13px' : '15px',
+    fontSize: isHighScale ? '12px' : isConstrained ? '13px' : '15px',
     lineHeight: '100%',
     letterSpacing: '0%',
     backgroundColor: constants.red,
     color: 'white',
     textDecoration: 'none',
-    padding: isConstrained ? '6px 12px' : '8px 16px',
+    padding: isHighScale ? '5px 10px' : isConstrained ? '6px 12px' : '8px 16px',
     borderRadius: isConstrained ? '16px' : '20px',
     transition: 'all 0.3s ease',
     cursor: 'pointer',
@@ -106,13 +107,13 @@ const Navbar = ({ customStyle = {} }) => {
     const ActiveButtonStyle = {
     fontFamily: "'Kellogg's Sans', sans-serif",
     fontWeight: 700,
-    fontSize: isConstrained ? '15px' : '18px',
+    fontSize: isHighScale ? '13px' : isConstrained ? '15px' : '18px',
     lineHeight: '100%',
     letterSpacing: '0%',
     backgroundColor: constants.gold,
     color: 'black',
     textDecoration: 'none',
-    padding: isConstrained ? '6px 14px' : '8px 20px',
+    padding: isHighScale ? '5px 10px' : isConstrained ? '6px 14px' : '8px 20px',
     borderRadius: isConstrained ? '16px' : '20px',
     transition: 'all 0.3s ease',
     cursor: 'pointer',
