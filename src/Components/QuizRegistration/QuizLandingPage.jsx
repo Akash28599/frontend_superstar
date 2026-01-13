@@ -120,33 +120,6 @@ const QuizLandingPage = () => {
 
       <main style={mainContent}>
 
-        {/* Registration and Login Cards Section */}
-        <div style={cardRow}>
-          <div className="card-anim" style={{ ...yellowCard, maxWidth: '400px', width: '100%', padding: '40px' }}>
-            <h3 style={cardTitle}>Want to Be a Part of the Kellogg’s Superstars Quiz Show?</h3>
-            <p style={{ ...cardDesc, height: 'auto', fontSize: '16px' }}>
-              Ready to showcase your students' academic brilliance on a national stage? Register now to be a part of the most exciting educational quiz show.
-            </p>
-            <button
-              style={redBtn}
-              onClick={() => setShowRegister(true)}
-            >
-              Register Now
-            </button>
-          </div>
-
-          <div className="card-anim" style={{ ...yellowCard, maxWidth: '400px', width: '100%', padding: '40px' }}>
-            <div style={iconBox}>🔑</div>
-            <h3 style={cardTitle}>Already Registered?</h3>
-            <p style={{ ...cardDesc, height: 'auto', fontSize: '16px' }}>
-              Enter your credentials to access the exam portal and start your journey to becoming a Superstar.
-            </p>
-            <button style={redBtn} onClick={() => setShowLogin(true)}>
-              Student Login
-            </button>
-          </div>
-        </div>
-
         <section style={roadmapSection}>
           <h2 style={sectionHeading}>How to Participate</h2>
           <div style={roadmapContainer}>
@@ -181,6 +154,33 @@ const QuizLandingPage = () => {
             </div>
           </div>
         </section>
+
+        {/* Registration and Login Cards Section */}
+        <div style={cardRow}>
+          <div className="card-anim" style={{ ...yellowCard, maxWidth: '400px', width: '100%', padding: '40px' }}>
+            <h3 style={cardTitle}>Want to Be a Part of the Kellogg’s Superstars Quiz Show?</h3>
+            <p style={{ ...cardDesc, height: 'auto', fontSize: '16px' }}>
+              Ready to showcase your students' academic brilliance on a national stage? Register now to be a part of the most exciting educational quiz show.
+            </p>
+            <button
+              style={redBtn}
+              onClick={() => setShowRegister(true)}
+            >
+              Register Now
+            </button>
+          </div>
+
+          <div className="card-anim" style={{ ...yellowCard, maxWidth: '400px', width: '100%', padding: '40px' }}>
+            <div style={iconBox}>🔑</div>
+            <h3 style={cardTitle}>Already Registered?</h3>
+            <p style={{ ...cardDesc, height: 'auto', fontSize: '16px' }}>
+              Enter your credentials to access the exam portal and start your journey to becoming a Superstar.
+            </p>
+            <button style={redBtn} onClick={() => setShowLogin(true)}>
+              Student Login
+            </button>
+          </div>
+        </div>
 
         {/* Rewatch Section */}
         <section style={{ marginTop: '120px', textAlign: 'center' }}>
@@ -291,7 +291,7 @@ const headerTextContainer = {
 
 const titleStyle = { fontSize: '46px', margin: 0, fontWeight: '800' };
 const subtitleStyle = { fontSize: '20px', margin: '20px 0 0', opacity: 0.9, lineHeight: '1.5' };
-const cardRow = { display: 'flex', gap: '25px', justifyContent: 'center', marginBottom: '80px', flexWrap: 'wrap' };
+const cardRow = { display: 'flex', gap: '25px', justifyContent: 'center', marginBottom: '80px', flexWrap: 'wrap', marginTop: '80px' };
 const iconBox = { backgroundColor: '#fff', width: '55px', height: '55px', borderRadius: '15px', margin: '0 auto 15px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '28px' };
 const headerActionArea = { display: 'flex', alignItems: 'center', gap: '15px' };
 
@@ -303,7 +303,7 @@ const redBtn = { backgroundColor: constants.red, color: '#fff', border: 'none', 
 const whiteBtn = { ...redBtn, backgroundColor: '#fff', color: constants.red };
 
 
-const roadmapSection = { marginTop: '80px', textAlign: 'center', position: 'relative' };
+const roadmapSection = { marginTop: '0', textAlign: 'center', position: 'relative' };
 const sectionHeading = { fontSize: '34px', fontWeight: '800', color: '#333', marginBottom: '80px' };
 const roadmapContainer = { position: 'relative', maxWidth: '900px', margin: '0 auto' };
 const roadmapSvg = { position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 };
