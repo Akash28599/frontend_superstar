@@ -77,29 +77,6 @@ const HomeBanner = () => {
   return (
     <div className="relative min-h-screen bg-kelloggs-red overflow-visible w-full m-0 p-0 flex flex-col font-kelloggs">
       
-      {/* Navbar Container - Adjusted for gap */}
-      <div 
-        className={`
-            relative z-20 
-            pt-[30px] 
-            ml-[22%] tablet:ml-[25%] desktop:ml-[28%] mr-auto
-            wide:-mb-[60px] 
-            max-w-[80vw] tablet:max-w-[70vw] wide:max-w-[71vw]
-            pr-[5px] tablet:pr-[28px] wide:pr-[40px]
-        `}
-      >
-        <Navbar customStyle={{
-            top: '0',
-            left: 'auto',
-            transform: 'none',
-            margin: '0',
-            width: '100%',
-            maxWidth: '100%',
-            background: 'white',
-         }} 
-        />
-      </div>
-
 
       {logoImage && (
         <div className="
