@@ -134,7 +134,7 @@ const HomeBanner = () => {
             ${isEdge ? 'self-start wide:self-auto' : ''}
             pl-[8%] tablet:pl-[10%] wide:pl-[15%] 
             ${isEdge ? 'pb-0 wide:pb-[14vh]' : 'pb-[12vh] tablet:pb-[10vh] wide:pb-[8vh]'}
-            ${isEdge ? 'pt-[25vh] tablet:pt-[25vh] wide:pt-[27vh]' : 'pt-[22vh] tablet:pt-[22vh] wide:pt-[12vh]'}
+            ${isEdge ? 'pt-[23vh] tablet:pt-[23vh] wide:pt-[27vh]' : 'pt-[25vh] tablet:pt-[25vh] wide:pt-[12vh]'}
         `}>
               {/* Badge */}
               <div className="mb-[1.5rem] bg-kelloggs-gold py-[0.6rem] px-[1.5rem] tablet:py-[0.8rem] tablet:px-[2rem] rounded-full inline-flex items-center justify-center shadow-md">
