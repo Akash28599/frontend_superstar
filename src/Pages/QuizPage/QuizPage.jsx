@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import { StudentLogin } from './StudentLoginPopup/StudentLogin';
-import StudentRegister from './StudentRegisterForm';
-import './QuizLandingPage.css'
-import QuizHeader from './QuizHeader/QuizHeader';
-import QuizCardContainer from './QuizCards/QuizCardContainer';
-import RoadMap from './RoadMap/RoadMap';
-import QuizWaitList from './QuizWaitList/QuizWaitList';
-const QuizLandingPage = () => {
+import './QuizPage.css'
+import StudentLogin from '../../Components/QuizRegistration/StudentLoginPopup/StudentLogin';
+import StudentRegister from '../../Components/QuizRegistration/StudentRegisterForm';
+import QuizHeader from '../../Components/QuizRegistration/QuizHeader/QuizHeader';
+import QuizCardContainer from '../../Components/QuizRegistration/QuizCards/QuizCardContainer';
+import RoadMap from '../../Components/QuizRegistration/RoadMap/RoadMap';
+import QuizWaitList from '../../Components/QuizRegistration/QuizWaitList/QuizWaitList';
+
+const QuizPage = () => {
   const [pageData, setPageData] = useState(null);
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
@@ -56,4 +57,4 @@ const QuizLandingPage = () => {
 };
 
 
-export default QuizLandingPage;
+export default QuizPage;

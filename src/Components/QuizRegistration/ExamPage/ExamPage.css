@@ -1,16 +1,10 @@
-:root {
-    --gold: #FBCA05;
-    --red: #dd2120;
-    --font: "KelloggsSans", Arial, sans-serif;
-}
-
-.containerStyle {
+.ep-containerStyle {
     background-color: #F5F7FA;
     min-height: 100vh;
     font-family: var(--font);
 }
 
-.modalOverlay {
+.ep-modalOverlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -23,7 +17,7 @@
     z-index: 9999;
 }
 
-.modalContent {
+.ep-modalContent {
     background: white;
     padding: 40px;
     border-radius: 16px;
@@ -31,7 +25,7 @@
     text-align: center;
 }
 
-.cancelBtn {
+.ep-cancelBtn {
     padding: 12px 24px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -39,7 +33,7 @@
     cursor: pointer;
 }
 
-.confirmBtn {
+.ep-confirmBtn {
     padding: 12px 24px;
     background: var(--red);
     color: white;
@@ -49,7 +43,7 @@
     font-weight: 600;
 }
 
-.navStyle {
+.ep-navStyle {
     background: var(--red);
     padding: 20px 40px;
     color: white;
@@ -58,33 +52,33 @@
     align-items: center;
 }
 
-.navLeft {
+.ep-navLeft {
     display: flex;
     align-items: center;
     gap: 40px;
 }
 
-.logoStyle {
+.ep-logoStyle {
     font-size: 28px;
     font-weight: bold;
     font-style: italic;
 }
 
-.timerBox {
+.ep-timerBox {
     text-align: center;
 }
 
-.timerLabel {
+.ep-timerLabel {
     font-size: 12px;
     opacity: 0.9;
 }
 
-.timerValue {
+.ep-timerValue {
     font-size: 32px;
     font-weight: bold;
 }
 
-.subHeader {
+.ep-subHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -93,13 +87,13 @@
     position: relative;
 }
 
-.warningText {
+.ep-warningText {
     color: var(--red);
     font-weight: bold;
     font-size: 14px;
 }
 
-.toastStyle {
+.ep-toastStyle {
     position: absolute;
     left: 50%;
     top: 100%;
@@ -111,7 +105,7 @@
     white-space: nowrap;
 }
 
-.endExamBtn {
+.ep-endExamBtn {
     padding: 10px 20px;
     border-radius: 6px;
     border: 1px solid #ddd;
@@ -120,7 +114,7 @@
     font-family: var(--font);
 }
 
-.mainLayout {
+.ep-mainLayout {
     display: grid;
     grid-template-columns: 220px 1fr 300px;
     gap: 25px;
@@ -129,27 +123,27 @@
     margin: 0 auto;
 }
 
-.leftPanel {
+.ep-leftPanel {
     background: white;
     padding: 25px;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.panelTitle {
+.ep-panelTitle {
     margin: 0 0 20px 0;
     font-size: 18px;
     color: #333;
 }
 
-.gridContainer {
+.ep-gridContainer {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 8px;
     justify-content: center;
 }
 
-.gridItem {
+.ep-gridItem {
     width: 30px;
     height: 35px;
     border-radius: 8px;
@@ -160,13 +154,13 @@
     font-weight: bold;
 }
 
-.centerPanel {
+.ep-centerPanel {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.questionHeader {
+.ep-questionHeader {
     background: var(--red);
     color: white;
     padding: 15px 25px;
@@ -174,42 +168,43 @@
     font-size: 18px;
 }
 
-.questionCard {
+.ep-questionCard {
     background: white;
     padding: 40px;
     border-radius: 0 0 12px 12px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
-.questionTitle {
+.ep-questionTitle {
     font-size: 20px;
     margin: 0 0 30px 0;
-    line-height: 1.4;
+    line-height: 1.-4;
 }
 
-.optionsGrid {
+.ep-optionsGrid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px;
     margin-bottom: 40px;
 }
 
-.optionBox {
+.ep-optionBox {
     padding: 20px;
     border-radius: 10px;
     display: flex;
     align-items: center;
     cursor: pointer;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: var(--white);
 }
 
-.actionButtons {
+.ep-actionButtons {
     display: flex;
     justify-content: space-between;
     font-family: var(--font);
 }
 
-.prevBtn {
+.ep-prevBtn {
     padding: 12px 24px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -219,7 +214,7 @@
 
 }
 
-.nextBtn {
+.ep-nextBtn {
     padding: 12px 24px;
     background: var(--red);
     color: white;
@@ -231,14 +226,14 @@
 
 }
 
-.rightPanel {
+.ep-rightPanel {
     background: white;
     padding: 25px;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.webcamContainer {
+.ep-webcamContainer {
     position: relative;
     width: 100%;
     height: 220px;
@@ -247,23 +242,66 @@
     overflow: hidden;
 }
 
-.videoStyle {
+.ep-videoStyle {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transform: scaleX(-1);
 }
 
-.monitorInfo {
+.ep-monitorInfo {
     font-size: 13px;
     line-height: 1.5;
 }
 
-.centerStyle {
+.ep-centerStyle {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     font-size: 18px;
     color: #666;
+}
+
+.ep-q-shade {
+    background-color: #E0E0E0;
+    color: #5f5f5f;
+}
+
+.ep-q-safe {
+    background-color: var(--green);
+    color: var(--white);
+}
+
+.ep-q-done {
+    background-color: var(--gold);
+    color: var(--white);
+}
+
+.ep-safe {
+    color: var(--green);
+}
+
+.ep-warn {
+    color: var(--gold);
+}
+
+.ep-danger {
+    color: var(--red);
+}
+
+.ep-opt {
+    border: 3px solid #2196F3;
+}
+
+.ep-opt-select {
+    border: 3px solid var(--gold);
+}
+
+.ep-opt-unselect {
+    border: 3px solid #2196F3;
+}
+
+.ep-opt-select {
+    border: 3px solid var(--gold);
 }

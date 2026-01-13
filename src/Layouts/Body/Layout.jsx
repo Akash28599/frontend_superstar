@@ -2,10 +2,10 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar'
 import HomePage from '../../Pages/HomePage';
 import ScholarshipPage from '../../Pages/ScholarshipPage';
-import QuizLandingPage from '../../Components/QuizRegistration/QuizLandingPage';
 import PastWinners from '../../Pages/PastWinners/PastWinners'
 import ExamPage from '../../Components/QuizRegistration/ExamPage/ExamPage';
 import Footer from '../Footer/Footer';
+import QuizPage from '../../Pages/QuizPage/QuizPage';
 export function LayoutComponent({ settingsData, dpr }) {
   const location = useLocation();
   const hidePathsNav = ['/past-winners', '/student-register', '/exam-page']
@@ -24,7 +24,7 @@ export function LayoutComponent({ settingsData, dpr }) {
       <Routes>
         <Route path='/' element={<HomePage dpr={dpr} />} />
         <Route path='/scholarship' element={<ScholarshipPage settingsData={settingsData} />} />
-        <Route path='/quiz' element={<QuizLandingPage />} />
+        <Route path='/quiz' element={<QuizPage />} />
         <Route path='/past-winners' element={<PastWinners />} />
         <Route path='/exam-page' element={<ExamPage />} />
       </Routes>

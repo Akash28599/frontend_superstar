@@ -1,0 +1,54 @@
+
+.qw-waitlist-section {
+    margin: 120px 0;
+    padding: 60px 20px;
+    background-color: #fff7d6ff;
+    border-radius: 40px;
+    text-align: center;
+}
+
+.qw-waitlist-container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.qw-waitlist-text-content {
+    text-align: center;
+}
+
+.qw-waitlist-heading {
+    font-size: 32px;
+    font-weight: 800;
+    color: #333;
+    margin: 0 0 10px;
+}
+
+.qw-waitlist-subtext {
+    font-size: 16px;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.qw-waitlist-form {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.qw-waitlist-input {
+
+    flex: 2;
+    padding: 15px 20px;
+    border-radius: 15px;
+    border: 2px solid var(--gold);
+    outline: none;
+    font-size: 16px;
+    font-family: var(--font);
+}

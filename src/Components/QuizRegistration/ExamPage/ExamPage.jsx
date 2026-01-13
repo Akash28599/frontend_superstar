@@ -217,63 +217,60 @@ const ExamPage = () => {
     return `${m}:${s.toString().padStart(2, '0')}`;
   };
 
-  if (loading) return <div className='centerStyle'>Loading Exam Questions...</div>;
+  if (loading) return <div className='ep-centerStyle'>Loading Exam Questions...</div>;
   const currentQuestion = questions[currentIdx];
 
   return (
-    <div className='containerStyle'>
+    <div className='ep-containerStyle'>
       {showConfirm && (
-        <div className='modalOverlay'>
-          <div className='modalContent'>
+        <div className='ep-modalOverlay'>
+          <div className='ep-modalContent'>
             <h2 style={{ color: constants.red, margin: '0 0 15px' }}>End Exam?</h2>
             <p style={{ margin: 0 }}>Progress will be saved automatically.</p>
             <div style={{ display: 'flex', gap: 15, justifyContent: 'center', marginTop: 25 }}>
-              <button className='cancelBtn' onClick={() => setShowConfirm(false)}>Continue</button>
-              <button className='confirmBtn' onClick={() => window.location.href = '/quiz'}>End Exam</button>
+              <button className='ep-cancelBtn' onClick={() => setShowConfirm(false)}>Continue</button>
+              <button className='ep-confirmBtn' onClick={() => window.location.href = '/quiz'}>End Exam</button>
             </div>
           </div>
         </div>
       )}
 
-      <nav className='navStyle'>
-        <div className='navLeft'>
-          <div className='logoStyle'>Kellogg's</div>
-          <div className='timerBox'>
-            <span className='timerLabel'>Time Left:</span>
-            <span className='timerValue'>{formatTime(timeLeft)}</span>
+      <nav className='ep-navStyle'>
+        <div className='ep-navLeft'>
+          <div className='ep-logoStyle'>Kellogg's</div>
+          <div className='ep-timerBox'>
+            <span className='ep-timerLabel'>Time Left:</span>
+            <span className='ep-timerValue'>{formatTime(timeLeft)}</span>
           </div>
         </div>
       </nav>
 
-      <div className='subHeader'>
-        <span className='warningText'>
+      <div className='ep-subHeader'>
+        <span className='ep-warningText'>
           Warnings: {warnings}/4 |
-          <span style={{
-            color: faceStatus.includes('OK') ? '#4CAF50' :
-              currentViolation ? constants.red : constants.gold,
-            fontWeight: 'bold'
-          }}>
+          <span
+            className={` ${faceStatus.includes('OK') ? 'ep-safe' :
+              currentViolation ? 'ep-danger' : 'ep-warn'}`}
+            style={{
+              fontWeight: 'bold'
+            }}>
             {faceStatus}
           </span>
         </span>
-        {proctorMessage && <span className='toastStyle'>{proctorMessage}</span>}
-        <button className='endExamBtn' onClick={() => setShowConfirm(true)}>End Exam</button>
+        {proctorMessage && <span className='ep-toastStyle'>{proctorMessage}</span>}
+        <button className='ep-endExamBtn' onClick={() => setShowConfirm(true)}>End Exam</button>
       </div>
 
-      <div className='mainLayout'>
-        <aside className='leftPanel'>
-          <h3 className='panelTitle'>Questions ({questions.length})</h3>
-          <div className='gridContainer'>
+      <div className='ep-mainLayout'>
+        <aside className='ep-leftPanel'>
+          <h3 className='ep-panelTitle'>Questions ({questions.length})</h3>
+          <div className='ep-gridContainer'>
             {questions.map((q, idx) => (
               <div
                 key={idx}
                 onClick={() => setCurrentIdx(idx)}
-                className='gridItem'
-                style={{
-                  backgroundColor: currentIdx === idx ? constants.gold :
-                    answers[q.id] ? '#4CAF50' : '#E0E0E0',
-                  color: answers[q.id] || currentIdx === idx ? '#fff' : '#666'
-                }}
+                className={`ep-gridItem ${currentIdx === idx ? 'ep-q-done' :
+                  answers[q.id] ? 'ep-q-safe' : 'ep-q-shade'}`}
               >
                 {idx + 1}
               </div>
@@ -281,24 +278,20 @@ const ExamPage = () => {
           </div>
         </aside>
 
-        <main className='centerPanel'>
-          <div className='questionHeader'>
+        <main className='ep-centerPanel'>
+          <div className='ep-questionHeader'>
             Q{currentIdx + 1} / {questions.length}
           </div>
-          <div className='questionCard'>
+          <div className='ep-questionCard'>
             {currentQuestion ? (
               <>
-                <h2 className='questionTitle'>{currentQuestion.question}</h2>
-                <div className='optionsGrid'>
+                <h2 className='ep-questionTitle'>{currentQuestion.question}</h2>
+                <div className='ep-optionsGrid'>
                   {currentQuestion.options.map((opt, i) => (
                     <div
                       key={i}
                       onClick={() => setAnswers(prev => ({ ...prev, [currentQuestion.id]: opt }))}
-                      className='optionBox'
-                      style={{
-                        border: answers[currentQuestion.id] === opt ? '3px solid #2196F3' : `2px solid ${constants.gold}`,
-                        backgroundColor: answers[currentQuestion.id] === opt ? '#E3F2FD' : '#fff'
-                      }}
+                      className={`ep-optionBox ${answers[currentQuestion.id] === opt ? 'ep-opt-unselect' : 'ep-opt-select'}`}
                     >
                       <input type="radio" checked={answers[currentQuestion.id] === opt} readOnly />
                       <span style={{ marginLeft: 12 }}>{opt}</span>
@@ -307,21 +300,21 @@ const ExamPage = () => {
                 </div>
               </>
             ) : <div>No questions loaded</div>}
-            <div className='actionButtons'>
-              <button disabled={currentIdx === 0} className='prevBtn' onClick={() => setCurrentIdx(c => c - 1)}>
+            <div className='ep-actionButtons'>
+              <button disabled={currentIdx === 0} className='ep-prevBtn' onClick={() => setCurrentIdx(c => c - 1)}>
                 Previous
               </button>
-              <button className='nextBtn' onClick={() => setCurrentIdx(c => Math.min(questions.length - 1, c + 1))}>
+              <button className='ep-nextBtn' onClick={() => setCurrentIdx(c => Math.min(questions.length - 1, c + 1))}>
                 {currentIdx === questions.length - 1 ? 'Finish' : 'Next'}
               </button>
             </div>
           </div>
         </main>
 
-        <aside className='rightPanel'>
-          <h3 className='panelTitle'>Live Proctoring</h3>
-          <div className='webcamContainer'>
-            <video ref={videoRef} autoPlay playsInline muted className='videoStyle' />
+        <aside className='ep-rightPanel'>
+          <h3 className='ep-panelTitle'>Live Proctoring</h3>
+          <div className='ep-webcamContainer'>
+            <video ref={videoRef} autoPlay playsInline muted className='ep-videoStyle' />
             <canvas
               ref={canvasRef}
               style={{
@@ -330,15 +323,18 @@ const ExamPage = () => {
               }}
             />
           </div>
-          <div className='monitorInfo'>
-            <p style={{ color: warnings < 4 ? '#4CAF50' : constants.red, margin: '0 0 8px' }}>
+          <div className='ep-monitorInfo'>
+            <p
+              className={warnings < 4 ? 'ep-safe' : 'ep-danger'}
+              style={{ margin: '0 0 8px' }}>
               📹 Camera: {modelsLoaded ? 'Active' : 'Loading'}
             </p>
-            <p style={{
-              color: faceStatus.includes('OK') ? '#4CAF50' :
-                currentViolation ? constants.red : constants.gold,
-              margin: 0
-            }}>
+            <p
+              className={faceStatus.includes('OK') ? 'ep-safe' :
+                currentViolation ? 'ep-danger' : 'ep-warn'}
+              style={{
+                margin: 0
+              }}>
               👤 {faceStatus}
             </p>
             <p style={{ fontSize: 11, color: '#666', marginTop: 12 }}>4 warnings = Exam ends</p>

@@ -1,0 +1,107 @@
+.q-container {
+    background-color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.q-coco {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 230px;
+    height: auto;
+    z-index: 10;
+    animation: swing 3s ease-in-out infinite;
+    transform-origin: top left;
+}
+
+@media (max-width: 768px) {
+    .q-coco {
+        width: 180px;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .q-coco {
+        width: 150px;
+    }
+}
+
+.q-main-content {
+    max-width: 1100px;
+    margin: 40px auto 0;
+    padding: 0 20px;
+}
+
+
+.q-redbtn,
+.q-whitebtn {
+
+    flex: 1;
+    background-color: var(--red);
+    color: var(--white);
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    width: 100%;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: var(--font);
+}
+
+.q-whitebtn {
+    background-color: var(--white);
+    color: var(--red);
+}
+
+
+.q-loading {
+    text-align: center;
+    padding: 100px;
+    font-size: 24px;
+    color: var(--red);
+}
+
+.q-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+
+
+@keyframes popIn {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes swing {
+    0% {
+        transform: rotate(-3deg);
+    }
+
+    50% {
+        transform: rotate(3deg);
+    }
+
+    100% {
+        transform: rotate(-3deg);
+    }
+}

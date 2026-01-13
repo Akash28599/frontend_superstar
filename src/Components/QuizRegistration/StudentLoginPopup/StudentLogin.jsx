@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './StudentLogin.css'
-export const StudentLogin = ({ onClose }) => {
+ const StudentLogin = ({ onClose }) => {
     const [loginForm, setLoginForm] = useState({ username: '', password: '' });
     const navigate = useNavigate();
 
@@ -46,3 +46,4 @@ export const StudentLogin = ({ onClose }) => {
         </div>
     )
 }
+export default StudentLogin
