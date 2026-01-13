@@ -214,23 +214,6 @@ const QuizLandingPage = () => {
 
 
           {/* Media Grid Placeholder - 2 videos */}
-          {/* <div className="grid grid-cols-2 gap-5 mb-10">
-            <div className="bg-black h-[250px] rounded-2xl overflow-hidden">
-              <video
-                src="/assetss/vid1.mp4"
-                className="w-full h-full object-cover"
-                controls
-              />
-            </div>
-
-            <div className="bg-black h-[250px] rounded-2xl overflow-hidden">
-              <video
-                src="/assetss/vid2.mp4"
-                className="w-full h-full object-cover"
-                controls
-              />
-            </div>
-          </div> */}
 
           <div>
             <div className="grid grid-cols-2 gap-5 mb-10">
@@ -240,6 +223,7 @@ const QuizLandingPage = () => {
                   url={video}
                   onClick={setActiveVideo}
                   className="h-[250px]"
+                  playIconSize='large'
                 />
               ))}
             </div>
@@ -251,7 +235,7 @@ const QuizLandingPage = () => {
           </div>
 
 
-          <a href="https://www.youtube.com" target="_blank" rel="noreferrer" style={{ ...redBtn, display: 'inline-block', width: 'auto', padding: '15px 40px', textDecoration: 'none' }}>
+          <a href="https://www.youtube.com/@kelloggsnigeria2248" target="_blank" rel="noreferrer" style={{ ...redBtn, display: 'inline-block', width: 'auto', padding: '15px 40px', textDecoration: 'none' }}>
             Watch all episodes here
           </a>
         </section>
