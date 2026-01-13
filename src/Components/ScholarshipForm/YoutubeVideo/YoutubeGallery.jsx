@@ -79,23 +79,23 @@ const YoutubeGallery = () => {
                     {`${data.editionName} Edition Winners`}
                 </h1>
                 <div className="flex flex-row justify-end gap-[2%] mx-[10%]">
-                    <div className="w-[40%] flex flex-col gap-[2%] border-l border-r border-kelloggs-red px-[2%]">
+                    <div className="w-[40%] flex flex-col gap-4 border-l border-r border-kelloggs-red px-[2%]">
                         {data.editionWinnersLink.slice(1).map((url, i) => (
                             <VideoThumbnail
                                 key={i}
                                 url={url}
                                 onClick={setActiveVideo}
-                                className="w-full h-[122.5px]"
-                                playIconSize='mid'
-
+                                className="w-full h-[22vh]"
+                                playIconSize="mid"
                             />
                         ))}
                     </div>
+
                     <div className="w-full gap-[2%]">
                         <VideoThumbnail
                             url={data.editionWinnersLink[0]}
                             onClick={setActiveVideo}
-                            className="w-full h-auto"
+                            className="w-full h-full"
                             playIconSize='large'
                         />
                     </div>
