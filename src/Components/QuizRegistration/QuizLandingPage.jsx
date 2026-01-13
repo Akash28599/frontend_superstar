@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StudentLogin } from './StudentLogin';
 import StudentRegister from './StudentRegisterForm';
 
@@ -6,15 +6,34 @@ const QuizLandingPage = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [waitlistEmail, setWaitlistEmail] = useState('');
   const [showRegister, setShowRegister] = useState(false);
+  const [isLoading, setLoading] = useState(true)
+  const [isError, setError] = useState(false)
+  const [data, setData] = useState(null)
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(
+          `${process.env.REACT_APP_STRAPI_URL}/api/quiz-landing-page?populate=*`
+        );
+        const json = await res.json();
+        setData(json.data);
+      } catch (e) {
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  // Removed API fetch as per new static content requirement
+    fetchData();
+  }, []);
 
   const handleWaitlistSubmit = (e) => {
     e.preventDefault();
     alert(`Success! ${waitlistEmail} has been added to the waitlist.`);
     setWaitlistEmail('');
   };
-
+  if (isError) return <div className="min-h-screen bg-kelloggs-red text-white flex items-center justify-center text-[1.2rem]">No data</div>;
+  if (isLoading) return <div className="min-h-screen bg-kelloggs-red text-white flex items-center justify-center text-[1.2rem]">Loading...</div>;
   return (
     <div style={{ fontFamily: constants.fontFamily, backgroundColor: '#fff', minHeight: '100vh', overflowX: 'hidden', position: 'relative' }}>
 
@@ -64,7 +83,7 @@ const QuizLandingPage = () => {
 
       {showLogin && (
         <div style={modalOverlay}>
-         <StudentLogin onClose={() => setShowLogin(false)} />
+          <StudentLogin onClose={() => setShowLogin(false)} />
         </div>
       )}
       {showRegister && (
@@ -72,56 +91,56 @@ const QuizLandingPage = () => {
           <StudentRegister onClose={() => setShowRegister(false)} />
         </div>
       )}
-      
+
       {/* Placeholder for hanging monkey or image. User asked for blank divs in image places, primarily for the rewatch section, but standard images might be needed here too. keeping the class. */}
-      <img 
-        src="/assetss/hangingMonkey.png" 
-        alt="Coco" 
+      <img
+        src="/assetss/hangingMonkey.png"
+        alt="Coco"
         className="hanging-monkey"
       />
-      
+
       <header style={headerStyle}>
         <div style={headerInner}>
           <div style={headerTextContainer}>
-            <h1 style={titleStyle}>Nigeria’s Biggest Platform Where Brightest Young Minds Become Superstars</h1>
+            <h1 style={titleStyle}>{data.heading}</h1>
             <p style={subtitleStyle}>
-              The Kellogg’s Superstar Quiz Show is Nigeria’s premier inter-school academic competition—celebrating intelligence, confidence, teamwork and the joy of learning.
+              {data.sub_heading}
             </p>
           </div>
 
           <div style={headerActionArea}>
-             {/* Action area empty or icon since login button moved to card */}
+            {/* Action area empty or icon since login button moved to card */}
           </div>
         </div>
       </header>
 
       <main style={mainContent}>
-        
+
         {/* Registration and Login Cards Section */}
         <div style={cardRow}>
-             <div className="card-anim" style={{ ...yellowCard, maxWidth: '400px', width: '100%', padding: '40px' }}>
-                <h3 style={cardTitle}>Want to Be a Part of the Kellogg’s Superstars Quiz Show?</h3>
-                <p style={{ ...cardDesc, height: 'auto', fontSize: '16px' }}>
-                  Ready to showcase your students' academic brilliance on a national stage? Register now to be a part of the most exciting educational quiz show.
-                </p>
-                <button
-                  style={redBtn}
-                  onClick={() => setShowRegister(true)}
-                >
-                  Register Now
-                </button>
-             </div>
+          <div className="card-anim" style={{ ...yellowCard, maxWidth: '400px', width: '100%', padding: '40px' }}>
+            <h3 style={cardTitle}>Want to Be a Part of the Kellogg’s Superstars Quiz Show?</h3>
+            <p style={{ ...cardDesc, height: 'auto', fontSize: '16px' }}>
+              Ready to showcase your students' academic brilliance on a national stage? Register now to be a part of the most exciting educational quiz show.
+            </p>
+            <button
+              style={redBtn}
+              onClick={() => setShowRegister(true)}
+            >
+              Register Now
+            </button>
+          </div>
 
-             <div className="card-anim" style={{ ...yellowCard, maxWidth: '400px', width: '100%', padding: '40px' }}>
-                <div style={iconBox}>🔑</div>
-                <h3 style={cardTitle}>Already Registered?</h3>
-                <p style={{ ...cardDesc, height: 'auto', fontSize: '16px' }}>
-                  Enter your credentials to access the exam portal and start your journey to becoming a Superstar.
-                </p>
-                <button style={redBtn} onClick={() => setShowLogin(true)}>
-                  Student Login
-                </button>
-             </div>
+          <div className="card-anim" style={{ ...yellowCard, maxWidth: '400px', width: '100%', padding: '40px' }}>
+            <div style={iconBox}>🔑</div>
+            <h3 style={cardTitle}>Already Registered?</h3>
+            <p style={{ ...cardDesc, height: 'auto', fontSize: '16px' }}>
+              Enter your credentials to access the exam portal and start your journey to becoming a Superstar.
+            </p>
+            <button style={redBtn} onClick={() => setShowLogin(true)}>
+              Student Login
+            </button>
+          </div>
         </div>
 
         <section style={roadmapSection}>
@@ -134,15 +153,15 @@ const QuizLandingPage = () => {
               <div style={stepWrapper}>
                 <div style={stepNumberBadge}>1</div>
                 <div style={{ ...stepCardInner, borderBottom: `8px solid ${constants.gold}` }}>
-                  <h4 style={stepCardTitle}>Register your school</h4>
-                  <p style={stepCardDesc}>Complete the registration form to enroll your school.</p>
+                  <h4 style={stepCardTitle}>{data.second_component?.sections?.[0]?.title}</h4>
+                  <p style={stepCardDesc}>{data.second_component?.sections?.[0]?.description}</p>
                 </div>
               </div>
               <div style={stepWrapper}>
                 <div style={stepNumberBadge}>2</div>
                 <div style={{ ...stepCardInner, borderBottom: `8px solid ${constants.red}` }}>
-                  <h4 style={stepCardTitle}>Check Your Inbox</h4>
-                  <p style={stepCardDesc}>Receive confirmation and further instructions via email.</p>
+                  <h4 style={stepCardTitle}>{data.second_component?.sections?.[1]?.title}</h4>
+                  <p style={stepCardDesc}>{data.second_component?.sections?.[1]?.description}</p>
                 </div>
               </div>
             </div>
@@ -150,8 +169,8 @@ const QuizLandingPage = () => {
               <div style={stepWrapper}>
                 <div style={stepNumberBadge}>3</div>
                 <div style={{ ...stepCardInner, borderBottom: `8px solid ${constants.gold}` }}>
-                  <h4 style={stepCardTitle}>Take the Preliminary Exam</h4>
-                  <p style={stepCardDesc}>Participate in the qualifying round to reach the main show.</p>
+                  <h4 style={stepCardTitle}>{data.second_component?.sections?.[2]?.title}</h4>
+                  <p style={stepCardDesc}>{data.second_component?.sections?.[2]?.description}</p>
                   <button style={{ ...redBtn, marginTop: '15px', padding: '10px 15px', fontSize: '14px', width: 'auto' }} onClick={() => setShowLogin(true)}>
                     Start Exam
                   </button>
@@ -164,26 +183,41 @@ const QuizLandingPage = () => {
 
         {/* Rewatch Section */}
         <section style={{ marginTop: '120px', textAlign: 'center' }}>
-            <h2 style={sectionHeading}>Missed an episode or two? Catch up with the Superstars</h2>
-            <p style={{ fontSize: '18px', color: '#555', maxWidth: '700px', margin: '0 auto 40px' }}>
-                Re-watch your favorite moments and exciting challenges from this season and past years. Every episode of the Kellogg’s Superstars Quiz Show is right here! Don’t miss a second.
-            </p>
-            
-            {/* Media Grid Placeholder - 3 images */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px', marginBottom: '30px' }}>
-                <div style={{ backgroundColor: '#e0e0e0', height: '200px', borderRadius: '15px' }}></div>
-                <div style={{ backgroundColor: '#e0e0e0', height: '200px', borderRadius: '15px' }}></div>
-                <div style={{ backgroundColor: '#e0e0e0', height: '200px', borderRadius: '15px' }}></div>
-            </div>
-             {/* Media Grid Placeholder - 2 videos */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px', marginBottom: '40px' }}>
-                <div style={{ backgroundColor: '#000', height: '250px', borderRadius: '15px' }}></div>
-                <div style={{ backgroundColor: '#000', height: '250px', borderRadius: '15px' }}></div>
-            </div>
+          <h2 style={sectionHeading}>Missed an episode or two? Catch up with the Superstars</h2>
+          <p style={{ fontSize: '18px', color: '#555', maxWidth: '700px', margin: '0 auto 40px' }}>
+            Re-watch your favorite moments and exciting challenges from this season and past years. Every episode of the Kellogg’s Superstars Quiz Show is right here! Don’t miss a second.
+          </p>
 
-            <a href="https://www.youtube.com" target="_blank" rel="noreferrer" style={{...redBtn, display: 'inline-block', width: 'auto', padding: '15px 40px', textDecoration: 'none'}}>
-                Watch all episodes here
-            </a>
+          {/* Media Grid Placeholder - 3 images */}
+          <div className="flex flex-wrap justify-center gap-8 mb-10">
+            {data.third_component?.images?.map((image) =>
+              <div className="w-[300px] h-[200px] bg-gray-300 rounded-2xl overflow-hidden">
+                <img
+                  src={image}
+                  alt="alt image"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+            )}
+            {/* <div className="w-[300px] h-[200px] bg-gray-300 rounded-2xl"></div>
+            <div className="w-[300px] h-[200px] bg-gray-300 rounded-2xl"></div>
+            <div className="w-[300px] h-[200px] bg-gray-300 rounded-2xl"></div>
+            <div className="w-[300px] h-[200px] bg-gray-300 rounded-2xl"></div> */}
+          </div>
+
+
+
+
+          {/* Media Grid Placeholder - 2 videos */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px', marginBottom: '40px' }}>
+            <div style={{ backgroundColor: '#000', height: '250px', borderRadius: '15px' }}></div>
+            <div style={{ backgroundColor: '#000', height: '250px', borderRadius: '15px' }}></div>
+          </div>
+
+          <a href="https://www.youtube.com" target="_blank" rel="noreferrer" style={{ ...redBtn, display: 'inline-block', width: 'auto', padding: '15px 40px', textDecoration: 'none' }}>
+            Watch all episodes here
+          </a>
         </section>
 
         <section style={waitlistSection}>
@@ -212,34 +246,34 @@ const QuizLandingPage = () => {
   );
 };
 
-const constants = { gold:'#FBCA05', red: '#F60945', fontFamily:'"KelloggsSans", Arial, sans-serif' }
+const constants = { gold: '#FBCA05', red: '#F60945', fontFamily: '"KelloggsSans", Arial, sans-serif' }
 
 // Keep existing styles or minimal updates
-const headerStyle = { 
-  backgroundColor: constants.red, 
-  color: '#fff', 
-  padding: '140px 20px 100px', 
-  borderBottomLeftRadius: '50% 12%', 
-  borderBottomRightRadius: '50% 12%', 
+const headerStyle = {
+  backgroundColor: constants.red,
+  color: '#fff',
+  padding: '140px 20px 100px',
+  borderBottomLeftRadius: '50% 12%',
+  borderBottomRightRadius: '50% 12%',
   position: 'relative',
   overflow: 'hidden',
   marginTop: '0',
   paddingTop: '140px'
 };
 
-const headerInner = { 
-  maxWidth: '1200px', 
-  margin: '0 auto', 
-  display: 'flex', 
-  alignItems: 'center', 
-  position: 'relative' 
+const headerInner = {
+  maxWidth: '1200px',
+  margin: '0 auto',
+  display: 'flex',
+  alignItems: 'center',
+  position: 'relative'
 };
 
-const headerTextContainer = { 
-  textAlign: 'center', 
+const headerTextContainer = {
+  textAlign: 'center',
   flex: 1,
   maxWidth: '800px',
-  margin: '0 auto' 
+  margin: '0 auto'
 };
 
 const titleStyle = { fontSize: '46px', margin: 0, fontWeight: '800' };
@@ -252,7 +286,7 @@ const mainContent = { maxWidth: '1100px', margin: '40px auto 0', padding: '0 20p
 const yellowCard = { backgroundColor: constants.gold, borderRadius: '30px', padding: '35px 25px', textAlign: 'center', boxShadow: '0 8px 25px rgba(0,0,0,0.08)' };
 const cardTitle = { fontSize: '22px', fontWeight: '800', margin: '0 0 10px', color: '#333' };
 const cardDesc = { fontSize: '14px', color: '#444', lineHeight: '1.4', marginBottom: '25px' };
-const redBtn = { backgroundColor: constants.red, color: '#fff', border: 'none', padding: '14px', borderRadius: '12px', fontWeight: '700', cursor: 'pointer' ,fontFamily:constants.fontFamily};
+const redBtn = { backgroundColor: constants.red, color: '#fff', border: 'none', padding: '14px', borderRadius: '12px', fontWeight: '700', cursor: 'pointer', fontFamily: constants.fontFamily };
 const whiteBtn = { ...redBtn, backgroundColor: '#fff', color: constants.red };
 
 
@@ -272,7 +306,7 @@ const waitlistTextContent = { textAlign: 'center' };
 const waitlistHeading = { fontSize: '32px', fontWeight: '800', color: '#333', margin: '0 0 10px' };
 const waitlistSubtext = { fontSize: '16px', color: '#666', maxWidth: '600px', margin: '0 auto', lineHeight: '1.6' };
 const waitlistForm = { display: 'flex', gap: '10px', width: '100%', maxWidth: '500px' };
-const waitlistInput = { flex: 2, padding: '15px 20px', borderRadius: '15px', border: `2px solid ${constants.gold}`, outline: 'none', fontSize: '16px',fontFamily:constants.fontFamily };
+const waitlistInput = { flex: 2, padding: '15px 20px', borderRadius: '15px', border: `2px solid ${constants.gold}`, outline: 'none', fontSize: '16px', fontFamily: constants.fontFamily };
 const modalOverlay = { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(5px)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 2000 };
 
 export default QuizLandingPage;
