@@ -497,18 +497,20 @@ const ThankYou = ({ siteSettings }) => {
                                     <div style={{
                                         display: "flex",
                                         gap: positions.socialIconsGap,
-                                        flexDirection: positions.socialIconsDisplay
+                                        flexDirection: positions.socialIconsDisplay,
+                                        alignItems:'center'
                                     }}>
 
                                         <p style={{
                                             fontWeight: 600, fontSize: positions.paraFontSize,
-                                            margin: 0,
+                                            margin: 0, textWrap: 'nowrap',
+
                                         }}>
                                             Share it to the world!
                                         </p>
 
                                         {/* Socialicons and link from props */}
-                                            <SocialIcons siteSettings={siteSettings} />
+                                        <SocialIcons siteSettings={siteSettings} />
 
                                     </div>
 
@@ -546,7 +548,7 @@ const ThankYou = ({ siteSettings }) => {
                                         transform: `translateY(${offsetY}px)`, // UPDATED: section-based parallax
                                         transition: "transform 0.25s ease-out", //  fast & smooth
                                         filter: 'blur(3px)',
-                                        scale:1.4
+                                        scale: 1.4
                                     }}
                                 >
                                     <img width={positions.blurWidth} height={positions.blurHeight} src={blurredCocoPops} alt="blurredCocoPops" />
@@ -556,7 +558,7 @@ const ThankYou = ({ siteSettings }) => {
                             {CocoPops && (
                                 <div style={{
                                     position: "absolute", bottom: positions.cocoBottom, right: positions.cocoRight, zIndex: 6,
-                                    transform: `translateY(${smallCocoOffsetY}px)`, willChange: "transform",scale:1.2
+                                    transform: `translateY(${smallCocoOffsetY}px)`, willChange: "transform", scale: 1.2
                                 }}>
                                     <img width={positions.cocoWidth} src={CocoPops} alt="CocoPops" />
                                 </div>
