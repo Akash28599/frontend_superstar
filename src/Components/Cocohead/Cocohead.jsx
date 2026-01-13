@@ -41,9 +41,9 @@ export const CocoHead = () => {
             {/* Yellow Banner */}
             <div className="
                 relative bg-kelloggs-gold 
-                w-[85%] tablet:w-[80%] desktop:w-[75%] wide:w-[70%] max-w-[1200px]
-                min-h-[250px] tablet:min-h-[300px] rounded-[32px] 
-                p-4 tablet:p-8 
+                w-[95%] tablet:w-[95%] desktop:w-[92%] wide:w-[90%] max-w-[1400px]
+                min-h-[220px] tablet:min-h-[260px] rounded-[32px] 
+                p-4 tablet:p-6 
                 flex flex-row items-center 
                 ml-[2%] tablet:ml-[5%] desktop:ml-[8%]
                 shadow-sm
@@ -55,7 +55,7 @@ export const CocoHead = () => {
                     tablet:relative tablet:top-auto tablet:left-auto
                     tablet:w-[40%] desktop:w-[38%] wide:w-[36%]
                     tablet:-ml-[8%] desktop:-ml-[8%] wide:-ml-[6%]
-                    tablet:scale-[1.6] desktop:scale-[1.5] wide:scale-[1.4]
+                    tablet:scale-[1.35] desktop:scale-[1.3] wide:scale-[1.4]
                     tablet:flex-none origin-center
                     hidden tablet:block
                 ">
@@ -73,9 +73,9 @@ export const CocoHead = () => {
 
                 {/* Content Box */}
                 <div className="
-                    flex flex-row flex-1 justify-between gap-2 tablet:gap-4 
+                    flex flex-row flex-1 justify-between items-start gap-2 tablet:gap-4 
                     w-full 
-                    pl-[22%] tablet:pl-[15%] desktop:pl-[14%] wide:pl-[10%]
+                    pl-[22%] tablet:pl-[12%] desktop:pl-[10%]
                 ">
                     {items.map((item, index) => {
                         const iconUrl = item.icons?.url || item.icon?.url || item.image?.url ||
@@ -86,7 +86,7 @@ export const CocoHead = () => {
                         return (
                             <div className="flex flex-col flex-1 items-start justify-start text-left px-1 tablet:px-2" key={index}>
                                 {/* Icon */}
-                                <div className="h-[60px] tablet:h-[80px] w-full flex items-center justify-start mb-2">
+                                <div className="h-[60px] tablet:h-[80px] w-full flex items-center justify-center mb-2">
                                     {iconUrl &&
                                         <img src={iconUrl} alt='item icon' className="max-w-[45px] tablet:max-w-[60px] max-h-[60px] tablet:max-h-[80px] w-auto h-auto object-contain" />
                                     }
@@ -104,13 +104,23 @@ export const CocoHead = () => {
                                 </div>
                                 
                                 {/* Description */}
-                                <div className="
-                                    text-left w-full 
-                                    text-[clamp(0.7rem,1vw,1.1rem)] 
-                                    leading-[1.4] text-[#333] mt-2
-                                    max-w-[98%] tablet:max-w-[95%]
-                                    flex justify-start
-                                ">
+                                <div 
+                                    className="
+                                        text-left w-full 
+                                        text-[clamp(0.7rem,1vw,1.1rem)] 
+                                        leading-[1.4] text-[#333] mt-2
+                                        max-w-[98%] tablet:max-w-[95%]
+                                        flex justify-start
+                                        overflow-hidden
+                                    "
+                                    style={{
+                                        display: '-webkit-box',
+                                        WebkitLineClamp: 7,
+                                        WebkitBoxOrient: 'vertical',
+                                        overflow: 'hidden',
+                                        textOverflow: 'ellipsis'
+                                    }}
+                                >
                                     {desc}
                                 </div>
                             </div>

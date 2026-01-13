@@ -77,7 +77,8 @@
 .rs-check {
     font-size: 64px;
     color: var(--green);
-    margin: 14px 0;
+    margin: 14px auto;
+    display: block;
 }
 
 .rs-body h2 {
@@ -156,7 +157,7 @@
     .rs-check {
         font-size: 32px;
         /* Tiny checkmark */
-        margin: 4px 0;
+        margin: 4px auto;
     }
 
     .rs-body h1 {

@@ -10,7 +10,7 @@ const HomeBanner = () => {
   const [starImage, setStarImage] = useState(null);
 
   // Unused detection for edge, but keeping it if needed later
-  // const isEdge = /Edg|Edge/.test(navigator.userAgent);
+  const isEdge = /Edg|Edge/.test(navigator.userAgent);
 
   useEffect(() => {
     // Fetch banner data
@@ -128,29 +128,30 @@ const HomeBanner = () => {
       ">
         
         {/* Left Section - Text Content */}
-        <div className="
+        <div className={`
             flex-1 z-[20] 
             flex flex-col justify-center items-start
+            ${isEdge ? 'self-start wide:self-auto' : ''}
             pl-[8%] tablet:pl-[10%] wide:pl-[15%] 
-            pb-[12vh] tablet:pb-[10vh] wide:pb-[8vh]
-            pt-[15vh] tablet:pt-[15vh] wide:pt-[12vh]
-        ">
+            ${isEdge ? 'pb-0 wide:pb-[14vh]' : 'pb-[12vh] tablet:pb-[10vh] wide:pb-[8vh]'}
+            ${isEdge ? 'pt-[320px] tablet:pt-[320px] wide:pt-[25vh]' : 'pt-[22vh] tablet:pt-[22vh] wide:pt-[12vh]'}
+        `}>
               {/* Badge */}
               <div className="mb-[1.5rem] bg-kelloggs-gold py-[0.6rem] px-[1.5rem] tablet:py-[0.8rem] tablet:px-[2rem] rounded-full inline-flex items-center justify-center shadow-md">
                 <h3 className="
                     m-0 font-medium leading-none tracking-normal text-kelloggs-red whitespace-nowrap
-                    text-[clamp(1rem,1.3vw,1.4rem)]
+                    ${isEdge ? 'text-[clamp(1.2rem,1.5vw,1.6rem)]' : 'text-[clamp(1rem,1.3vw,1.4rem)]'}
                 ">
                     {banner.topheading}
                 </h3>
               </div>
 
               {/* H1 Title */}
-              <h1 className="
+              <h1 className={`
                 font-bold text-white text-left mb-[1.5rem] leading-[1.0]
-                text-[clamp(3rem,4.5vw,5.5rem)] 
+                ${isEdge ? 'text-[clamp(3.5rem,5vw,6rem)]' : 'text-[clamp(3rem,4.5vw,5.5rem)]'}
                 drop-shadow-sm w-full
-              ">
+              `}>
                 {banner.title && banner.title.split(' ').length > 1 ? (
                   <>
                     {banner.title.split(' ')[0]}
@@ -165,10 +166,10 @@ const HomeBanner = () => {
               </h1>
 
               {/* Description */}
-              <p className="
+              <p className={`
                 text-white font-medium leading-[1.4] mb-[2rem] text-left max-w-none
-                text-[clamp(1rem,1.5vw,1.6rem)]
-              ">
+                ${isEdge ? 'text-[clamp(1.2rem,1.7vw,1.8rem)]' : 'text-[clamp(1rem,1.5vw,1.6rem)]'}
+              `}>
                 {banner.description}
               </p>
 
@@ -206,14 +207,14 @@ const HomeBanner = () => {
               <img 
                 src={heroImage} 
                 alt="Hero" 
-                className="
+                className={`
                     relative object-contain object-bottom
                     max-w-none
                     w-auto
-                    h-[clamp(80vh,115vh,130vh)]
+                    ${isEdge ? 'h-[clamp(72vh,96vh,108vh)]' : 'h-[clamp(85vh,115vh,130vh)] wide:h-[clamp(75vh,100vh,115vh)]'}
                     min-w-[300px] tablet:min-w-[500px]
                     mr-[5%] mb-0
-                " 
+                `} 
               />
               
               {/* Right Cloud - Bigger & Lower */}

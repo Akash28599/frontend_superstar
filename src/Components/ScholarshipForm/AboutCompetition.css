@@ -48,7 +48,7 @@
 }
 
 .about-right h1 {
-    color: var(--red);
+    color: #F60945;
     font-size: 35px;
     margin: 0 0 10px 0;
 }
@@ -121,7 +121,7 @@
     margin: 5px;
     padding: 20px;
     flex: 0 0 auto;
-    border: 1.5px solid var(--red);
+    border: 1.5px solid #F60945;
     border-radius: 10px;
     font-size: 15px;
     font-weight: 500;

@@ -22,9 +22,9 @@
 /* MAIN SECTION */
 .sub-container {
     margin: 8% 10% 2%;
-    border: 4px solid var(--red);
+    border: 4px solid #F60945;
     border-radius: var(--radius);
-    background: var(--red);
+    background: #F60945;
     color: var(--white);
     padding: 4% 2%;
     min-height: 100vh;
