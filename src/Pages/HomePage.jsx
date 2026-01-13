@@ -10,7 +10,7 @@ import { constants } from "../Utils/constants"
 export default function HomePage({dpr}) {
     return (
         <>
-            <div style={{ overflowX: "hidden", width: "100%" }}>
+            <div style={{  width: "100%" }}>
                 
                 {/* Red background ONLY for HomeBanner */}
                 <div

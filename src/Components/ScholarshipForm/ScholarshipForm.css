@@ -151,26 +151,27 @@ textarea:focus {
 /* ESSAY */
 .essay {
     position: relative;
+    color: #000;
 }
 
 .counter {
     position: absolute;
+    top: 0%;
     right: 8%;
     background: var(--black);
     color: var(--white);
     padding: 7px 12px;
     border-radius: 0 0 12px 12px;
     font-size: 12px;
-    transform: translate(-10%, 120%);
 }
 
-textarea {
-    margin-top: 10%;
+.essay textarea {
     width: 100%;
-    resize: both;
+    max-width: 100%;
+    resize: vertical;
     font-family: var(--font);
     min-width: 380px;
-    padding: 60px 30px 12px;
+    padding: 40px 30px 12px;
     border: 1px solid #ebebeb;
     border-radius: 30px;
     background-color: #ebebeb;
