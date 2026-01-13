@@ -143,76 +143,76 @@ const OurProducts = () => {
     const { product1, coco, product4, product5 } = positions;
 
     const s1 = is200Scale ?
-                `M ${product1.x} ${product1.y}
+      `M ${product1.x} ${product1.y}
                  C ${product1.x} ${coco.y - 120},
                    ${coco.x - 120} ${coco.y + 200},
                    ${coco.x} ${coco.y + 200}`
-                : isSmallScreen ?
-                `M ${product1.x} ${product1.y}
+      : isSmallScreen ?
+        `M ${product1.x} ${product1.y}
                  C ${product1.x} ${coco.y - 120},
                    ${coco.x - 120} ${coco.y + 200},
                    ${coco.x} ${coco.y + 200}`
-                :
-                `M ${product1.x} ${product1.y}
+        :
+        `M ${product1.x} ${product1.y}
                  C ${product1.x} ${coco.y - 200},
                    ${coco.x - 80} ${coco.y - 40},
                    ${coco.x} ${coco.y}`;
 
     const s2 = screenWidth >= 1900 ?
-                `C ${coco.x + 80} ${coco.y + 40},
-                  ${product4.x +100} ${(coco.y + product4.y-10) / 2},
-                  ${product4.x+100} ${product4.y }`
-                  :
-                isSmallScreen ?
-                (screenWidth < 1000 ?
-                  // 200% Scale: Push curve WAY DOWN on BOTH sides
-                  // Start: coco.y + 450, End: product4.y + 450
-                  `C ${coco.x + 40} ${coco.y + 450},
+      `C ${coco.x + 80} ${coco.y + 40},
+                  ${product4.x + 100} ${(coco.y + product4.y - 10) / 2},
+                  ${product4.x + 100} ${product4.y}`
+      :
+      isSmallScreen ?
+        (screenWidth < 1000 ?
+          // 200% Scale: Push curve WAY DOWN on BOTH sides
+          // Start: coco.y + 450, End: product4.y + 450
+          `C ${coco.x + 40} ${coco.y + 450},
                    ${product4.x - 40} ${(coco.y + product4.y + 250) / 2},
                    ${product4.x} ${product4.y + 350}`
-                  :
-                  // Standard Small Screen
-                  `C ${coco.x + 50} ${coco.y + 200},
+          :
+          // Standard Small Screen
+          `C ${coco.x + 50} ${coco.y + 200},
                    ${product4.x - 50} ${(coco.y + product4.y + 200) / 2},
                    ${product4.x} ${product4.y + 250}`
-                )
-                :
-                `C ${coco.x + 80} ${coco.y + 40},
+        )
+        :
+        `C ${coco.x + 80} ${coco.y + 40},
                   ${product4.x + 80} ${(coco.y + product4.y) / 2},
                   ${product4.x} ${product4.y + 50}`;
 
     const s3 = screenWidth >= 1900 ?
-                 `C ${product4.x - 100} ${product4.y + 50},
+      `C ${product4.x - 100} ${product4.y + 50},
                   ${product5.x + 20} ${product5.y - 57},
-                  ${product5.x-10 } ${product5.y }` 
-                 : 
-                 is200Scale ?
-                 `C ${product4.x - 100} ${product4.y + 820},
+                  ${product5.x - 10} ${product5.y}`
+      :
+      is200Scale ?
+        `C ${product4.x - 100} ${product4.y + 820},
                   ${product5.x + 100} ${product5.y - 60},
                   ${product5.x + 20} ${product5.y + 700}`
-                 :
-                 isSmallScreen ?
-                 // 175% Scale
-                 `C ${product4.x - 100} ${product4.y + 590},
+        :
+        isSmallScreen ?
+          // 175% Scale
+          `C ${product4.x - 100} ${product4.y + 590},
                   ${product5.x + 100} ${product5.y - 30},
                   ${product5.x + 20} ${product5.y + 510}`
-                 :
-                 isMediumScreen ?
-                 `C ${product4.x - 100} ${product4.y + 300},
+          :
+          isMediumScreen ?
+            `C ${product4.x - 100} ${product4.y + 300},
                   ${product5.x + 100} ${product5.y - 50},
                   ${product5.x - 20} ${product5.y + 150}`
-                 :
-                 `C ${product4.x - 100} ${product4.y + 100},
+            :
+            `C ${product4.x - 100} ${product4.y + 100},
                   ${product5.x + 20} ${product5.y - 57},
                   ${product5.x - 120} ${product5.y + 60}`;
 
     const s4 = //true?``:
-    screenWidth >= 1900 ? 
-                  `${product4.x -950} ${product5.y +40},
-                  ${product4.x -900} ${product5.y +100},
-                  ${product4.x -900} ${product5.y +100}`
-                :
-                 ``;
+      screenWidth >= 1900 ?
+        `${product4.x - 950} ${product5.y + 40},
+                  ${product4.x - 900} ${product5.y + 100},
+                  ${product4.x - 900} ${product5.y + 100}`
+        :
+        ``;
 
 
     //  return `${s1} ${s2} ${s3}`;
@@ -562,8 +562,8 @@ const OurProducts = () => {
             <div
               style={{
                 position: "absolute",
-                right: is200Scale ? "12%" : "7%", // Moved Left (7% -> 12%) per correct request
-                top: is200Scale ? 760 : 720, // Moved down (720 -> 760)
+                right: is200Scale ? "12%" : "8%", // Moved Left (7% -> 12%) per correct request
+                top: is200Scale ? 760 : 740, // Moved down (720 -> 760)
                 width: "44%",
                 display: "flex",
                 flexDirection: "row",
