@@ -105,8 +105,6 @@ const ScholarshipForm = ({ data }) => {
                             )}
                         </div>
 
-
-
                         <div className="essay">
                             <div className="counter">{wordCount} words remaining</div>
                             <textarea rows="12" onChange={(e) => handleWordCount(e)}></textarea>
