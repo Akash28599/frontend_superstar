@@ -201,10 +201,6 @@ const QuizLandingPage = () => {
               </div>
 
             )}
-            {/* <div className="w-[300px] h-[200px] bg-gray-300 rounded-2xl"></div>
-            <div className="w-[300px] h-[200px] bg-gray-300 rounded-2xl"></div>
-            <div className="w-[300px] h-[200px] bg-gray-300 rounded-2xl"></div>
-            <div className="w-[300px] h-[200px] bg-gray-300 rounded-2xl"></div> */}
           </div>
 
 
