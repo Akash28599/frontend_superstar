@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { StudentLogin } from './StudentLogin';
 import StudentRegister from './StudentRegisterForm';
+import VideoPopup from '../ScholarshipForm/YoutubeVideo/VideoPopup';
+import VideoThumbnail from '../ScholarshipForm/YoutubeVideo/VideoThumbnail';
 
 const QuizLandingPage = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -9,6 +11,8 @@ const QuizLandingPage = () => {
   const [isLoading, setLoading] = useState(true)
   const [isError, setError] = useState(false)
   const [data, setData] = useState(null)
+  const [activeVideo, setActiveVideo] = useState(null)
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -26,7 +30,7 @@ const QuizLandingPage = () => {
 
     fetchData();
   }, []);
-
+  const videos = ['/assetss/vid1.mp4', '/assetss/vid2.mp4']
   const handleWaitlistSubmit = (e) => {
     e.preventDefault();
     alert(`Success! ${waitlistEmail} has been added to the waitlist.`);
@@ -210,10 +214,42 @@ const QuizLandingPage = () => {
 
 
           {/* Media Grid Placeholder - 2 videos */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px', marginBottom: '40px' }}>
-            <div style={{ backgroundColor: '#000', height: '250px', borderRadius: '15px' }}></div>
-            <div style={{ backgroundColor: '#000', height: '250px', borderRadius: '15px' }}></div>
+          {/* <div className="grid grid-cols-2 gap-5 mb-10">
+            <div className="bg-black h-[250px] rounded-2xl overflow-hidden">
+              <video
+                src="/assetss/vid1.mp4"
+                className="w-full h-full object-cover"
+                controls
+              />
+            </div>
+
+            <div className="bg-black h-[250px] rounded-2xl overflow-hidden">
+              <video
+                src="/assetss/vid2.mp4"
+                className="w-full h-full object-cover"
+                controls
+              />
+            </div>
+          </div> */}
+
+          <div>
+            <div className="grid grid-cols-2 gap-5 mb-10">
+              {videos.map((video, i) => (
+                <VideoThumbnail
+                  key={i}
+                  url={video}
+                  onClick={setActiveVideo}
+                  className="h-[250px]"
+                />
+              ))}
+            </div>
+
+            <VideoPopup
+              url={activeVideo}
+              onClose={() => setActiveVideo(null)}
+            />
           </div>
+
 
           <a href="https://www.youtube.com" target="_blank" rel="noreferrer" style={{ ...redBtn, display: 'inline-block', width: 'auto', padding: '15px 40px', textDecoration: 'none' }}>
             Watch all episodes here
