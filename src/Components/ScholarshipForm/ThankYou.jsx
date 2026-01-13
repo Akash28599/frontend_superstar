@@ -378,7 +378,7 @@ const ThankYou = ({ siteSettings }) => {
             style={{
                 position: "relative",
                 width: "100%",
-                padding: "40px 0px", overflow: "hidden",
+                padding: `40px 0px ${screenWidth > 1600 ? '350px' : screenWidth > 1350 ? '250px' : '150px'} 0px`, overflow: "hidden",
                 // height: "auto", 
                 minHeight: "800px",
                 margin: "0px",
@@ -443,7 +443,7 @@ const ThankYou = ({ siteSettings }) => {
 
                         {/* first parent div */}
                         <div style={{
-                            width: "100%", maxWidth: "546px", height: "620px", position: "relative",
+                            width: "100%", maxWidth: "546px", minHeight: "620px", position: "relative",
                             display: "flex",
                         }}>
 
