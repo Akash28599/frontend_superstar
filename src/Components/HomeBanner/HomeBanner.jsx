@@ -133,7 +133,7 @@ const HomeBanner = () => {
             flex flex-col justify-center items-start
             ${isEdge ? 'self-start wide:self-auto' : ''}
             pl-[8%] tablet:pl-[10%] wide:pl-[15%] 
-            ${isEdge ? 'pb-0 wide:pb-[14vh]' : 'pb-[12vh] tablet:pb-[10vh] wide:pb-[8vh]'}
+            ${isEdge ? 'pb-[10vh] wide:pb-[14vh]' : 'pb-[12vh] tablet:pb-[10vh] wide:pb-[8vh]'}
             ${isEdge ? 'pt-[23vh] tablet:pt-[23vh] wide:pt-[27vh]' : 'pt-[24vh] tablet:pt-[25vh] wide:pt-[12vh]'}
         `}>
               {/* Badge */}

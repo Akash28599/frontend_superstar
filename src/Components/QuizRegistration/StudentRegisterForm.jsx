@@ -33,6 +33,16 @@ const StudentRegister = ({ onClose }) => {
     }
   };
 
+  const handleFileRemove = (studentKey, fieldKey) => {
+    setRegisterForm(prev => ({
+      ...prev,
+      [studentKey]: {
+        ...prev[studentKey],
+        [fieldKey]: ''
+      }
+    }));
+  };
+
   const handleRegistraion = (e) => {
     e.preventDefault();
     if (true) {
@@ -85,8 +95,24 @@ const StudentRegister = ({ onClose }) => {
                 />
               </label>
               {registerForm.student1.birthCertificate && (
-                <div style={{ fontSize: '0.85rem', color: '#d20640', marginTop: '5px', display: 'flex', alignItems: 'center', gap: '5px' }}>
-                  ✅ Upload Successful: <strong>{registerForm.student1.birthCertificate.name}</strong>
+                <div style={{ fontSize: '0.85rem', color: '#d20640', marginTop: '5px', display: 'flex', alignItems: 'center', gap: '5px', flexWrap: 'wrap' }}>
+                  <span>✅ Upload Successful: <strong>{registerForm.student1.birthCertificate.name}</strong></span>
+                  <button 
+                    type="button"
+                    onClick={() => handleFileRemove('student1', 'birthCertificate')}
+                    style={{ 
+                        cursor: 'pointer', 
+                        color: '#fff', 
+                        backgroundColor: '#d20640', 
+                        border: 'none',
+                        padding: '4px 10px', 
+                        borderRadius: '4px', 
+                        fontSize: '0.75rem',
+                        marginLeft: 'auto'
+                    }}
+                  >
+                    Cancel
+                  </button>
                 </div>
               )}
             </div>
@@ -117,8 +143,24 @@ const StudentRegister = ({ onClose }) => {
                 />
               </label>
               {registerForm.student2.birthCertificate && (
-                <div style={{ fontSize: '0.85rem', color: '#d20640', marginTop: '5px', display: 'flex', alignItems: 'center', gap: '5px' }}>
-                  ✅ Upload Successful: <strong>{registerForm.student2.birthCertificate.name}</strong>
+                <div style={{ fontSize: '0.85rem', color: '#d20640', marginTop: '5px', display: 'flex', alignItems: 'center', gap: '5px', flexWrap: 'wrap' }}>
+                  <span>✅ Upload Successful: <strong>{registerForm.student2.birthCertificate.name}</strong></span>
+                   <button 
+                    type="button"
+                    onClick={() => handleFileRemove('student2', 'birthCertificate')}
+                    style={{ 
+                        cursor: 'pointer', 
+                        color: '#fff', 
+                        backgroundColor: '#d20640', 
+                        border: 'none',
+                        padding: '4px 10px', 
+                        borderRadius: '4px', 
+                        fontSize: '0.75rem',
+                        marginLeft: 'auto'
+                    }}
+                  >
+                    Cancel
+                  </button>
                 </div>
               )}
             </div>

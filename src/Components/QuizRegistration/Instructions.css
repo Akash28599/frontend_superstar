@@ -262,3 +262,65 @@
         padding: 1rem;
     }
 }
+
+.preview-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.overlay-status {
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 8px;
+    font-weight: 600;
+    color: #fff;
+    font-size: 0.9rem;
+}
+
+.status-ok {
+    background-color: rgba(76, 175, 80, 0.8);
+    /* Green */
+}
+
+.status-warn {
+    background-color: rgba(255, 193, 7, 0.8);
+    /* Yellow/Orange */
+    color: #000;
+}
+
+.audio-check-container {
+    margin-top: 1.5rem;
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.audio-label {
+    font-weight: bold;
+    color: #333;
+}
+
+.audio-bar-bg {
+    flex: 1;
+    height: 12px;
+    background-color: #eee;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+}
+
+.audio-bar-fill {
+    height: 100%;
+    background-color: #4CAF50;
+    width: 0%;
+    transition: width 0.05s ease-out;
+}
