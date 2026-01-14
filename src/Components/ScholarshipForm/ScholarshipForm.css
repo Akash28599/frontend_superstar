@@ -10,14 +10,16 @@
 .scholarship {
     background: #F60945;
     color: var(--white);
-    padding: 6% 2% 4%;
+    padding: 6% 6% 4% 6%;
     position: relative;
+    border: 4px solid black;
 }
 
 .container {
     display: flex;
     gap: 20px;
     align-items: flex-start;
+    
 }
 
 
@@ -156,7 +158,8 @@ textarea:focus {
 
 .counter {
     position: absolute;
-    top: 0%;
+    top: -10%;
+    
     right: 8%;
     background: var(--black);
     color: var(--white);
@@ -170,7 +173,6 @@ textarea:focus {
     max-width: 100%;
     resize: vertical;
     font-family: var(--font);
-    min-width: 380px;
     padding: 40px 30px 12px;
     border: 1px solid #ebebeb;
     border-radius: 30px;
