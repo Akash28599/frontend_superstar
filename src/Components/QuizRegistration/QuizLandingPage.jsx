@@ -12,7 +12,6 @@ const QuizLandingPage = () => {
   const [isError, setError] = useState(false)
   const [data, setData] = useState(null)
   const [activeVideo, setActiveVideo] = useState(null)
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -21,6 +20,7 @@ const QuizLandingPage = () => {
         );
         const json = await res.json();
         setData(json.data);
+
       } catch (e) {
         setError(true);
       } finally {
@@ -36,6 +36,8 @@ const QuizLandingPage = () => {
     alert(`Success! ${waitlistEmail} has been added to the waitlist.`);
     setWaitlistEmail('');
   };
+
+
   if (isError) return <div className="min-h-screen bg-kelloggs-red text-white flex items-center justify-center text-[1.2rem]">No data</div>;
   if (isLoading) return <div className="min-h-screen bg-kelloggs-red text-white flex items-center justify-center text-[1.2rem]">Loading...</div>;
   return (
@@ -102,7 +104,7 @@ const QuizLandingPage = () => {
         alt="Coco"
         className="hanging-monkey"
       />
-      
+
       <header style={headerStyle}>
         <div style={headerInner}>
           <div style={headerTextContainer}>
@@ -121,7 +123,7 @@ const QuizLandingPage = () => {
       <main style={mainContent}>
 
         <section style={roadmapSection}>
-          <h2 style={sectionHeading}>How to Participate</h2>
+          <h2 style={sectionHeading}>{data.first_component?.title}</h2>
           <div style={roadmapContainer}>
             <svg style={roadmapSvg} viewBox="0 0 800 500" fill="none">
               <path d="M400 100 H700 C780 100 780 380 700 380 H100" stroke="#D3D3D3" strokeWidth="5" strokeDasharray="15 15" />
@@ -130,15 +132,15 @@ const QuizLandingPage = () => {
               <div style={stepWrapper}>
                 <div style={stepNumberBadge}>1</div>
                 <div style={{ ...stepCardInner, borderBottom: `8px solid ${constants.gold}` }}>
-                  <h4 style={stepCardTitle}>{data.second_component?.sections?.[0]?.title}</h4>
-                  <p style={stepCardDesc}>{data.second_component?.sections?.[0]?.description}</p>
+                  <h4 style={stepCardTitle}>{data.first_component?.sections?.[0]?.title}</h4>
+                  <p style={stepCardDesc}>{data.first_component?.sections?.[0]?.description}</p>
                 </div>
               </div>
               <div style={stepWrapper}>
                 <div style={stepNumberBadge}>2</div>
                 <div style={{ ...stepCardInner, borderBottom: `8px solid ${constants.red}` }}>
-                  <h4 style={stepCardTitle}>{data.second_component?.sections?.[1]?.title}</h4>
-                  <p style={stepCardDesc}>{data.second_component?.sections?.[1]?.description}</p>
+                  <h4 style={stepCardTitle}>{data.first_component?.sections?.[1]?.title}</h4>
+                  <p style={stepCardDesc}>{data.first_component?.sections?.[1]?.description}</p>
                 </div>
               </div>
             </div>
@@ -146,8 +148,8 @@ const QuizLandingPage = () => {
               <div style={stepWrapper}>
                 <div style={stepNumberBadge}>3</div>
                 <div style={{ ...stepCardInner, borderBottom: `8px solid ${constants.gold}` }}>
-                  <h4 style={stepCardTitle}>{data.second_component?.sections?.[2]?.title}</h4>
-                  <p style={stepCardDesc}>{data.second_component?.sections?.[2]?.description}</p>
+                  <h4 style={stepCardTitle}>{data.first_component?.sections?.[2]?.title}</h4>
+                  <p style={stepCardDesc}>{data.first_component?.sections?.[2]?.description}</p>
 
                 </div>
               </div>
@@ -155,43 +157,46 @@ const QuizLandingPage = () => {
           </div>
         </section>
 
+
         {/* Registration and Login Cards Section */}
         <div style={cardRow}>
           <div className="card-anim" style={{ ...yellowCard, maxWidth: '400px', width: '100%', padding: '40px' }}>
-            <h3 style={cardTitle}>Want to Be a Part of the Kellogg’s Superstars Quiz Show?</h3>
+            <h3 style={cardTitle}>{data.second_component?.school_registration?.title}</h3>
             <p style={{ ...cardDesc, height: 'auto', fontSize: '16px' }}>
-              Ready to showcase your students' academic brilliance on a national stage? Register now to be a part of the most exciting educational quiz show.
+              {data.second_component?.school_registration?.description}
             </p>
             <button
               style={redBtn}
               onClick={() => setShowRegister(true)}
             >
-              Register Now
+              {data.second_component?.school_registration?.button_text}
             </button>
           </div>
 
           <div className="card-anim" style={{ ...yellowCard, maxWidth: '400px', width: '100%', padding: '40px' }}>
             <div style={iconBox}>🔑</div>
-            <h3 style={cardTitle}>Already Registered?</h3>
+            <h3 style={cardTitle}>{data.second_component?.student_exam_login?.title}</h3>
             <p style={{ ...cardDesc, height: 'auto', fontSize: '16px' }}>
-              Enter your credentials to access the exam portal and start your journey to becoming a Superstar.
+              {data.second_component?.student_exam_login?.description}
             </p>
             <button style={redBtn} onClick={() => setShowLogin(true)}>
-              Student Login
+              {data.second_component?.student_exam_login?.button_text}
             </button>
           </div>
         </div>
 
         {/* Rewatch Section */}
         <section style={{ marginTop: '120px', textAlign: 'center' }}>
-          <h2 style={sectionHeading}>Missed an episode or two? Catch up with the Superstars</h2>
+          <h2 style={sectionHeading}>
+            {data.third_component?.image_section?.title}
+          </h2>
           <p style={{ fontSize: '18px', color: '#555', maxWidth: '700px', margin: '0 auto 40px' }}>
-            Re-watch your favorite moments and exciting challenges from this season and past years. Every episode of the Kellogg’s Superstars Quiz Show is right here! Don’t miss a second.
+            {data.third_component?.image_section?.description}
           </p>
 
           {/* Media Grid Placeholder - 3 images */}
           <div className="flex flex-wrap justify-center gap-8 mb-10">
-            {data.third_component?.images?.map((image) =>
+            {data.third_component?.image_section?.images?.map((image) =>
               <div className="w-[300px] h-[200px] bg-gray-300 rounded-2xl overflow-hidden">
                 <img
                   src={image}
@@ -228,29 +233,31 @@ const QuizLandingPage = () => {
           </div>
 
 
-          <a href="https://www.youtube.com/@kelloggsnigeria2248" target="_blank" rel="noreferrer" style={{ ...redBtn, display: 'inline-block', width: 'auto', padding: '15px 40px', textDecoration: 'none' }}>
-            Watch all episodes here
+          <a href={data.third_component?.image_section?.youtube_url} target="_blank" rel="noreferrer" style={{ ...redBtn, display: 'inline-block', width: 'auto', padding: '15px 40px', textDecoration: 'none' }}>
+            {data.third_component?.image_section?.button_text}
           </a>
         </section>
 
         <section style={waitlistSection}>
           <div style={waitlistContainer}>
             <div style={waitlistTextContent}>
-              <h2 style={waitlistHeading}>Join the Waitlist</h2>
+              <h2 style={waitlistHeading}>{data.third_component?.wishlist_section?.title}</h2>
               <p style={waitlistSubtext}>
-                Be the first to know when the registration is open, exam date and many more information.
+                {data.third_component?.wishlist_section?.description}
               </p>
             </div>
             <form onSubmit={handleWaitlistSubmit} style={waitlistForm}>
               <input
                 type="email"
-                placeholder="Enter School Email"
+                placeholder={data.third_component?.wishlist_section?.input_text}
                 style={waitlistInput}
                 required
                 value={waitlistEmail}
                 onChange={(e) => setWaitlistEmail(e.target.value)}
               />
-              <button type="submit" style={redBtn}>Join</button>
+              <button type="submit" style={redBtn}>
+                {data.third_component?.wishlist_section?.button_text}
+              </button>
             </form>
           </div>
         </section>

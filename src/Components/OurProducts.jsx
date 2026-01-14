@@ -147,7 +147,7 @@ const OurProducts = () => {
                    ${coco.x - 120} ${coco.y + 200},
                    ${coco.x} ${coco.y + 200}`
       : isSmallScreen ?
-        `M ${product1.x} ${product1.y}
+        `M ${product1.x + 4} ${product1.y + 5}
                  C ${product1.x} ${coco.y - 120},
                    ${coco.x - 120} ${coco.y + 200},
                    ${coco.x} ${coco.y + 200}`
@@ -509,9 +509,9 @@ const OurProducts = () => {
                   textAlign: "left",
                   maxWidth: 320,
                   position: "relative",
-                  bottom:'20px',
+                  bottom: '20px',
                   left: is200Scale ? "7%" : "6%", // Removed offset for 200% scale to prevent overlap
-                  
+
 
                 }}
               >
@@ -566,8 +566,8 @@ const OurProducts = () => {
                   maxWidth: 320,
                   position: "relative",
                   left: is200Scale ? "8%" : (isMacBook ? "-2%" : "8.7%"),
-                  bottom:'30px',
-                  
+                  bottom: '30px',
+
                 }}
               >
                 <h2
