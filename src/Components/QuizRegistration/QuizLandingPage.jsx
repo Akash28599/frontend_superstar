@@ -3,6 +3,8 @@ import { StudentLogin } from './StudentLogin';
 import StudentRegister from './StudentRegisterForm';
 import VideoPopup from '../ScholarshipForm/YoutubeVideo/VideoPopup';
 import VideoThumbnail from '../ScholarshipForm/YoutubeVideo/VideoThumbnail';
+import RedButton from '../RedButton';
+import { openUrl } from '../../Utils/Utilities';
 
 const QuizLandingPage = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -165,23 +167,16 @@ const QuizLandingPage = () => {
             <p style={{ ...cardDesc, height: 'auto', fontSize: '16px' }}>
               {data.second_component?.school_registration?.description}
             </p>
-            <button
-              style={redBtn}
-              onClick={() => setShowRegister(true)}
-            >
-              {data.second_component?.school_registration?.button_text}
-            </button>
+            <RedButton onClick={() => setShowRegister(true)} buttonText={data.second_component?.school_registration?.button_text} />
           </div>
 
-          <div className="card-anim" style={{ ...yellowCard, maxWidth: '400px', width: '100%', padding: '40px' }}>
+          <div className="card-anim" style={{ ...yellowCard, maxWidth: '400px', width: '100%', padding: '40px', }}>
             <div style={iconBox}>🔑</div>
             <h3 style={cardTitle}>{data.second_component?.student_exam_login?.title}</h3>
             <p style={{ ...cardDesc, height: 'auto', fontSize: '16px' }}>
               {data.second_component?.student_exam_login?.description}
             </p>
-            <button style={redBtn} onClick={() => setShowLogin(true)}>
-              {data.second_component?.student_exam_login?.button_text}
-            </button>
+            <RedButton onClick={() => setShowLogin(true)} buttonText={data.second_component?.student_exam_login?.button_text} />
           </div>
         </div>
 
@@ -232,10 +227,7 @@ const QuizLandingPage = () => {
             />
           </div>
 
-
-          <a href={data.third_component?.image_section?.youtube_url} target="_blank" rel="noreferrer" style={{ ...redBtn, display: 'inline-block', width: 'auto', padding: '15px 40px', textDecoration: 'none' }}>
-            {data.third_component?.image_section?.button_text}
-          </a>
+          <RedButton onClick={() => openUrl(data.third_component?.image_section?.youtube_url)} buttonText={data.third_component?.image_section?.button_text} />
         </section>
 
         <section style={waitlistSection}>
@@ -255,9 +247,8 @@ const QuizLandingPage = () => {
                 value={waitlistEmail}
                 onChange={(e) => setWaitlistEmail(e.target.value)}
               />
-              <button type="submit" style={redBtn}>
-                {data.third_component?.wishlist_section?.button_text}
-              </button>
+
+              <RedButton buttonText={data.third_component?.wishlist_section?.button_text} />
             </form>
           </div>
         </section>
@@ -307,7 +298,6 @@ const yellowCard = { backgroundColor: constants.gold, borderRadius: '30px', padd
 const cardTitle = { fontSize: '22px', fontWeight: '800', margin: '0 0 10px', color: '#333' };
 const cardDesc = { fontSize: '14px', color: '#444', lineHeight: '1.4', marginBottom: '25px' };
 const redBtn = { backgroundColor: constants.red, color: '#fff', border: 'none', padding: '14px', borderRadius: '12px', fontWeight: '700', cursor: 'pointer', fontFamily: constants.fontFamily };
-const whiteBtn = { ...redBtn, backgroundColor: '#fff', color: constants.red };
 
 
 const roadmapSection = { marginTop: '0', textAlign: 'center', position: 'relative' };

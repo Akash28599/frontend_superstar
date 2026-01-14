@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef, useCallback } from 'react'; //  ADDED useRef
-import "./ThankYou.css";
 import SocialIcons from '../SocialIcons/SocialIcons';
 import { useNavigate } from 'react-router-dom';
+import RedButton from '../RedButton';
 
 // images static
 // import cocoMonkey from "/assetss/flying-monkey.png"
@@ -513,18 +513,7 @@ const ThankYou = ({ siteSettings }) => {
                                         <SocialIcons siteSettings={siteSettings} />
 
                                     </div>
-
-                                    <button className='btn'
-                                        onClick={() => navigate('/past-winners')}
-                                        style={{
-                                            display: "block", width: positions.winnerBtnWidth,
-                                            borderRadius: "12px",
-                                            fontWeight: 600,
-                                            padding: positions.winnerBtnPadding, cursor: "pointer",
-                                            marginTop: positions.winnerBtnmarginTop,
-                                        }}>
-                                        Click here to view the past winners
-                                    </button>
+                                    <RedButton buttonStyle={'block mt-8'} buttonText={"Click here to view the past winners"} onClick={() => navigate('/past-winners')}/>
                                 </div>
                             </div>
                         </div>

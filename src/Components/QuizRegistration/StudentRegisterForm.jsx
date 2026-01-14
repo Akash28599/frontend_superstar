@@ -4,6 +4,7 @@ import { FaWpforms } from "react-icons/fa";
 import RegistrationSuccessModal from './RegistrationSuccessModal';
 import { useNavigate } from 'react-router-dom';
 import './StudentRegisterForm.css'
+import RedButton from '../RedButton';
 
 const studentStruct = {
   fullName: '',
@@ -182,13 +183,7 @@ const StudentRegister = ({ onClose }) => {
             <label>
               <input required type="checkbox" /> I agree to the Terms & Conditions
             </label>
-
-            <button
-              className="sr-submit"
-              onClick={handleRegistraion}
-            >
-              Submit Registration
-            </button>
+            <RedButton buttonStyle={'py-2'} onClick={handleRegistraion} buttonText='Submit Registration'/>
           </div>
         </div>
       </div>

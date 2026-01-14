@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './StudentLogin.css';
+import RedButton from "../RedButton";
 
 export const StudentLogin = ({ onClose }) => {
     const [loginForm, setLoginForm] = useState({ username: '', password: '' });
@@ -42,7 +43,7 @@ export const StudentLogin = ({ onClose }) => {
                         onChange={(e) => setLoginForm({ ...loginForm, password: e.target.value })}
                     />
                 </div>
-                <button type="submit" className="sl-btn">Login & Start Exam</button>
+                <RedButton buttonText='Login & Start Exam' buttonStyle={'w-full py-3 mt-3'}/>
             </form>
         </div>
     )

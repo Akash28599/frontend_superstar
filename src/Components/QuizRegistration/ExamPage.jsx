@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import * as faceapi from 'face-api.js';
 import './ExamPage.css'
+import RedButton from '../RedButton';
 const ExamPage = () => {
   const [questions, setQuestions] = useState([]);
   const [currentIdx, setCurrentIdx] = useState(0);
@@ -229,7 +230,7 @@ const ExamPage = () => {
             <p style={{ margin: 0 }}>Progress will be saved automatically.</p>
             <div style={{ display: 'flex', gap: 15, justifyContent: 'center', marginTop: 25 }}>
               <button className='cancelBtn' onClick={() => setShowConfirm(false)}>Continue</button>
-              <button className='confirmBtn' onClick={() => window.location.href = '/thank-you'}>End Exam</button>
+              <RedButton buttonStyle={'py-3'} onClick={() => window.location.href = '/thank-you'} buttonText='End Exam' />
             </div>
           </div>
         </div>
@@ -311,9 +312,9 @@ const ExamPage = () => {
               <button disabled={currentIdx === 0} className='prevBtn' onClick={() => setCurrentIdx(c => c - 1)}>
                 Previous
               </button>
-              <button className='nextBtn' onClick={() => setCurrentIdx(c => Math.min(questions.length - 1, c + 1))}>
-                {currentIdx === questions.length - 1 ? 'Finish' : 'Next'}
-              </button>
+              <RedButton buttonStyle={'py-2 px-6'} onClick={() => setCurrentIdx(c => Math.min(questions.length - 1, c + 1))}
+                buttonText={currentIdx === questions.length - 1 ? 'Finish' : 'Next'} />
+
             </div>
           </div>
         </main>

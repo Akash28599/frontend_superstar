@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { constants } from '../Utils/constants';
+import GoldButton from "./GoldButton";
 
 export default function PrintableGames() {
   const [items, setItems] = useState([]);
@@ -80,7 +81,7 @@ export default function PrintableGames() {
   return (
     <section className="bg-white py-16 px-6 overflow-hidden font-kelloggs">
       <div className="w-full max-w-[1600px] mx-auto">
-        
+
         {/* Title */}
         <div className="text-center mb-12">
           <h2 className="text-[3rem] tablet:text-[3.4rem] text-kelloggs-red font-medium tracking-normal leading-tight">
@@ -109,8 +110,8 @@ export default function PrintableGames() {
             const hasPdf = !!(printable || printable.url);
 
             return (
-              <div 
-                key={item.id} 
+              <div
+                key={item.id}
                 className="
                     flex-none snap-center
                     w-[280px] tablet:w-[320px] 
@@ -141,76 +142,16 @@ export default function PrintableGames() {
                 </div>
 
                 {/* Download Area */}
-                <div
-                  className="
-                    w-full flex items-center justify-between gap-2 mt-auto relative cursor-pointer
-                    py-3 px-2 rounded-[22px]
-                    transition-all duration-300
-                    hover:bg-kelloggs-gold/10
-                  "
-                  onClick={() => hasPdf && downloadPrintable(item)}
-                >
-                  {/* Hover Background Pill Effect */}
-                  <div className="absolute inset-0 rounded-[22px] bg-transparent group-hover:bg-kelloggs-gold transition-colors duration-300 -z-0" />
+                <GoldButton buttonStyle={'text-xl w-[90%] h-[30%]'} buttonText='Download' onClick={() => hasPdf && downloadPrintable(item)} />
 
-                  {/* Text */}
-                  <div className="text-left flex-1 min-w-0 z-10 pl-2">
-                    <div className="text-[20px] tablet:text-[22px] text-kelloggs-red font-extrabold capitalize truncate">
-                      Download
-                    </div>
-                  </div>
-
-                  {/* Play Button */}
-                  <div className="flex z-10">
-                    <button
-                      className={`
-                        w-[46px] h-[46px] tablet:w-[50px] tablet:h-[50px]
-                        rounded-full border-none outline-none flex items-center justify-center
-                        text-white text-[16px] tablet:text-[18px]
-                        shadow-[2px_3px_0px_#E41F35,0_6px_18px_rgba(0,0,0,0.18)]
-                        transition-transform duration-300
-                        ${hasPdf ? 'bg-gradient-to-b from-[#ffb366] to-[#ff8a2b] cursor-pointer group-hover:scale-110' : 'bg-[#eee] cursor-not-allowed'}
-                      `}
-                      disabled={!hasPdf || downloadingId === item.id}
-                      title={hasPdf ? "Download printable" : "Printable not available"}
-                    >
-                      {downloadingId === item.id ? "..." : (
-                         <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff">
-                            <polygon points="8,5 8,19 19,12" />
-                         </svg>
-                      )}
-                    </button>
-                  </div>
-                </div>
               </div>
             );
           })}
         </div>
 
         {/* See More Button */}
-        <div className="text-center mt-8 w-full">
-          <button className="
-            inline-flex items-center gap-3 
-            px-7 py-3 rounded-full 
-            text-kelloggs-red font-bold text-[1.4rem] 
-            transition-all duration-300 
-            hover:bg-kelloggs-gold 
-            cursor-pointer group
-          ">
-            See more
-            <div className="
-                w-9 h-9 rounded-full 
-                bg-gradient-to-b from-[#ffb366] to-[#ff8a2b] 
-                flex items-center justify-center 
-                shadow-[2px_3px_0px_#E41F35,0_4px_12px_rgba(0,0,0,0.1)]
-                group-hover:scale-110 transition-transform duration-300
-            ">
-              <svg width="16" height="16" fill="#FFFFFF" viewBox="0 0 24 24">
-                <polygon points="5,3 19,12 5,21 5,3" />
-              </svg>
-            </div>
-          </button>
-        </div>
+                        <GoldButton buttonText='See More' />
+
 
       </div>
     </section>
