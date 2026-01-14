@@ -10,7 +10,7 @@ import Instructions from './Components/QuizRegistration/Instructions';
 import ThankYou from './Components/QuizRegistration/ThankYou';
 import FooterLayout from './Components/Footer';
 
-export function LayoutComponent({ settingsData, dpr }) {
+export function LayoutComponent({ settingsData, scalePercentage }) {
   const location = useLocation();
   const hidePathsNav = ['/past-winners', '/student-register', '/exam-page', '/instructions','/']
   const hideNavbar = hidePathsNav.includes(location.pathname);
@@ -26,7 +26,7 @@ export function LayoutComponent({ settingsData, dpr }) {
       )}
 
       <Routes>
-        <Route path='/' element={<HomePage dpr={dpr} />} />
+        <Route path='/' element={<HomePage scalePercentage={scalePercentage} />} />
         <Route path='/scholarship' element={<ScholarshipPage settingsData={settingsData} />} />
         <Route path='/quiz' element={<QuizPage />} />
         <Route path='/past-winners' element={<PastWinners />} />
