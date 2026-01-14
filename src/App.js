@@ -5,20 +5,6 @@ import { LayoutComponent } from './Layout';
 
 function App() {
   const [settingsData, setSettingsData] = useState(null);
-      const [scale, setScale] = useState(window.devicePixelRatio);
-
-     useEffect(() => {
-        const handleResize = () => {
-            setScale(window.devicePixelRatio);
-        };
-
-        window.addEventListener("resize", handleResize);
-
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    }, []);
-    const is100PercentScale = scale === 1;
 
   useEffect(() => {
     const getFooterData = async () => {
@@ -38,7 +24,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <LayoutComponent settingsData={settingsData} dpr={is100PercentScale}/>
+        <LayoutComponent settingsData={settingsData} />
       </BrowserRouter>
 
     </div>

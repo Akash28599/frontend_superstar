@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as faceapi from 'face-api.js';
 import './Instructions.css';
+import RedButton from '../RedButton';
 
 const Instructions = () => {
     const videoRef = useRef(null);
@@ -38,11 +39,11 @@ const Instructions = () => {
     useEffect(() => {
         const startMedia = async () => {
             try {
-                const stream = await navigator.mediaDevices.getUserMedia({ 
+                const stream = await navigator.mediaDevices.getUserMedia({
                     video: { width: 640, height: 480, facingMode: 'user' },
-                    audio: true 
+                    audio: true
                 });
-                
+
                 if (videoRef.current) {
                     videoRef.current.srcObject = stream;
                     setCameraAllowed(true);
@@ -52,7 +53,7 @@ const Instructions = () => {
                 const audioCtx = new AudioContext();
                 const analyser = audioCtx.createAnalyser();
                 const source = audioCtx.createMediaStreamSource(stream);
-                
+
                 source.connect(analyser);
                 analyser.fftSize = 256;
                 const bufferLength = analyser.frequencyBinCount;
@@ -66,11 +67,11 @@ const Instructions = () => {
                     if (!analyserRef.current) return;
                     analyserRef.current.getByteFrequencyData(dataArray);
                     let sum = 0;
-                    for(let i = 0; i < bufferLength; i++) {
+                    for (let i = 0; i < bufferLength; i++) {
                         sum += dataArray[i];
                     }
                     const average = sum / bufferLength;
-                    setAudioLevel(Math.min(100, average * 2)); 
+                    setAudioLevel(Math.min(100, average * 2));
                     requestAnimationFrame(updateAudioLevel);
                 };
                 updateAudioLevel();
@@ -87,7 +88,7 @@ const Instructions = () => {
         }
 
         return () => {
-             // Cleanup
+            // Cleanup
             if (videoRef.current && videoRef.current.srcObject) {
                 videoRef.current.srcObject.getTracks().forEach(t => t.stop());
             }
@@ -107,21 +108,21 @@ const Instructions = () => {
         }
 
         const video = videoRef.current;
-        
+
         if (video.readyState !== 4) {
-             animationRef.current = requestAnimationFrame(detectFaces);
-             return;
+            animationRef.current = requestAnimationFrame(detectFaces);
+            return;
         }
 
         const displaySize = { width: video.videoWidth, height: video.videoHeight };
         faceapi.matchDimensions(canvasRef.current, displaySize);
 
         const detections = await faceapi.detectAllFaces(video, new faceapi.SsdMobilenetv1Options({ minConfidence: 0.5 })).withFaceLandmarks();
-        
+
         if (!canvasRef.current || !videoRef.current) return;
 
         const resizedDetections = faceapi.resizeResults(detections, displaySize);
-        
+
         const ctx = canvasRef.current.getContext('2d');
         ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
 
@@ -139,25 +140,25 @@ const Instructions = () => {
         } else {
             const face = resizedDetections[0];
             const { box } = face.detection;
-             const boxArea = box.width * box.height;
-             const videoArea = displaySize.width * displaySize.height;
+            const boxArea = box.width * box.height;
+            const videoArea = displaySize.width * displaySize.height;
 
-             if (boxArea < videoArea * 0.04) {
-                 setFaceStatus("Move closer");
-                 setIsFaceValid(false);
-             } else {
-                 const centerX = box.x + box.width / 2;
-                 const videoCenterX = displaySize.width / 2;
-                 if (Math.abs(centerX - videoCenterX) > displaySize.width * 0.3) {
-                     setFaceStatus("Please center your face");
-                     setIsFaceValid(false);
-                 } else {
-                     setFaceStatus("Face Visible - Ready to Start");
-                     setIsFaceValid(true);
-                 }
-             }
+            if (boxArea < videoArea * 0.04) {
+                setFaceStatus("Move closer");
+                setIsFaceValid(false);
+            } else {
+                const centerX = box.x + box.width / 2;
+                const videoCenterX = displaySize.width / 2;
+                if (Math.abs(centerX - videoCenterX) > displaySize.width * 0.3) {
+                    setFaceStatus("Please center your face");
+                    setIsFaceValid(false);
+                } else {
+                    setFaceStatus("Face Visible - Ready to Start");
+                    setIsFaceValid(true);
+                }
+            }
         }
-        
+
         animationRef.current = requestAnimationFrame(detectFaces);
     }, [modelsLoaded, cameraAllowed]);
 
@@ -217,7 +218,7 @@ const Instructions = () => {
 
                     <div className="camera-section">
                         <h3><span className="icon">📷</span> System Check</h3>
-                        
+
                         <div className="video-wrapper">
                             {error ? (
                                 <div className="camera-error">{error}</div>
@@ -235,8 +236,8 @@ const Instructions = () => {
                         <div className="audio-check-container">
                             <span className="audio-label">🎤 Audio Input:</span>
                             <div className="audio-bar-bg">
-                                <div 
-                                    className="audio-bar-fill" 
+                                <div
+                                    className="audio-bar-fill"
                                     style={{ width: `${Math.min(audioLevel, 100)}%` }}
                                 ></div>
                             </div>
@@ -247,13 +248,11 @@ const Instructions = () => {
                 </div>
 
                 <div className="action-section">
-                    <button 
-                        className={`start-btn ${(!isFaceValid || !cameraAllowed) ? 'disabled' : ''}`} 
-                        onClick={handleStartExam}
+                    <RedButton onClick={handleStartExam}
+                        buttonStyle={`${(!isFaceValid || !cameraAllowed) ? 'bg-gray-300 px-10 cursor-not-allowed' : ''}`}
                         disabled={!isFaceValid || !cameraAllowed}
-                    >
-                        {isFaceValid ? "I Accept & Start Exam" : "Checking System..."}
-                    </button>
+                        buttonText={(isFaceValid ? "I Accept & Start Exam" : "Checking System...").toUpperCase()}
+                    />
                     {!cameraAllowed && !error && <p className="loading-text">Waiting for permissions...</p>}
                 </div>
             </div>

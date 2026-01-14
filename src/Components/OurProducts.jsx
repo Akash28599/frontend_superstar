@@ -111,11 +111,10 @@ const OurProducts = () => {
     fontWeight: 700,
     lineHeight: 1.1,
     margin: 0,
-    fontSize: is200Scale ? 26 : 34, // Reduced font size for 200% scale
+    fontSize: is200Scale ? 26 : 34,
     letterSpacing: "0%",
   };
 
-  // SVG dimensions and product anchor positions
   const SVG_WIDTH = containerWidth;
   const centerX = containerWidth / 2;
 
@@ -143,76 +142,76 @@ const OurProducts = () => {
     const { product1, coco, product4, product5 } = positions;
 
     const s1 = is200Scale ?
-                `M ${product1.x} ${product1.y}
+      `M ${product1.x} ${product1.y}
                  C ${product1.x} ${coco.y - 120},
                    ${coco.x - 120} ${coco.y + 200},
                    ${coco.x} ${coco.y + 200}`
-                : isSmallScreen ?
-                `M ${product1.x} ${product1.y}
+      : isSmallScreen ?
+        `M ${product1.x + 4} ${product1.y + 5}
                  C ${product1.x} ${coco.y - 120},
                    ${coco.x - 120} ${coco.y + 200},
                    ${coco.x} ${coco.y + 200}`
-                :
-                `M ${product1.x} ${product1.y}
+        :
+        `M ${product1.x} ${product1.y}
                  C ${product1.x} ${coco.y - 200},
                    ${coco.x - 80} ${coco.y - 40},
                    ${coco.x} ${coco.y}`;
 
     const s2 = screenWidth >= 1900 ?
-                `C ${coco.x + 80} ${coco.y + 40},
-                  ${product4.x +100} ${(coco.y + product4.y-10) / 2},
-                  ${product4.x+100} ${product4.y }`
-                  :
-                isSmallScreen ?
-                (screenWidth < 1000 ?
-                  // 200% Scale: Push curve WAY DOWN on BOTH sides
-                  // Start: coco.y + 450, End: product4.y + 450
-                  `C ${coco.x + 40} ${coco.y + 450},
+      `C ${coco.x + 80} ${coco.y + 40},
+                  ${product4.x + 100} ${(coco.y + product4.y - 10) / 2},
+                  ${product4.x + 100} ${product4.y}`
+      :
+      isSmallScreen ?
+        (screenWidth < 1000 ?
+          // 200% Scale: Push curve WAY DOWN on BOTH sides
+          // Start: coco.y + 450, End: product4.y + 450
+          `C ${coco.x + 40} ${coco.y + 450},
                    ${product4.x - 40} ${(coco.y + product4.y + 250) / 2},
                    ${product4.x} ${product4.y + 350}`
-                  :
-                  // Standard Small Screen
-                  `C ${coco.x + 50} ${coco.y + 200},
+          :
+          // Standard Small Screen
+          `C ${coco.x + 50} ${coco.y + 200},
                    ${product4.x - 50} ${(coco.y + product4.y + 200) / 2},
                    ${product4.x} ${product4.y + 250}`
-                )
-                :
-                `C ${coco.x + 80} ${coco.y + 40},
+        )
+        :
+        `C ${coco.x + 80} ${coco.y + 40},
                   ${product4.x + 80} ${(coco.y + product4.y) / 2},
                   ${product4.x} ${product4.y + 50}`;
 
     const s3 = screenWidth >= 1900 ?
-                 `C ${product4.x - 100} ${product4.y + 50},
+      `C ${product4.x - 100} ${product4.y + 50},
                   ${product5.x + 20} ${product5.y - 57},
-                  ${product5.x-10 } ${product5.y }` 
-                 : 
-                 is200Scale ?
-                 `C ${product4.x - 100} ${product4.y + 820},
+                  ${product5.x - 10} ${product5.y}`
+      :
+      is200Scale ?
+        `C ${product4.x - 100} ${product4.y + 820},
                   ${product5.x + 100} ${product5.y - 60},
                   ${product5.x + 20} ${product5.y + 700}`
-                 :
-                 isSmallScreen ?
-                 // 175% Scale
-                 `C ${product4.x - 100} ${product4.y + 590},
+        :
+        isSmallScreen ?
+          // 175% Scale
+          `C ${product4.x - 100} ${product4.y + 590},
                   ${product5.x + 100} ${product5.y - 30},
                   ${product5.x + 20} ${product5.y + 510}`
-                 :
-                 isMediumScreen ?
-                 `C ${product4.x - 100} ${product4.y + 300},
+          :
+          isMediumScreen ?
+            `C ${product4.x - 100} ${product4.y + 300},
                   ${product5.x + 100} ${product5.y - 50},
-                  ${product5.x - 20} ${product5.y + 150}`
-                 :
-                 `C ${product4.x - 100} ${product4.y + 100},
+                  ${product5.x - 20} ${product5.y + 175}`
+            :
+            `C ${product4.x - 100} ${product4.y + 100},
                   ${product5.x + 20} ${product5.y - 57},
                   ${product5.x - 120} ${product5.y + 60}`;
 
     const s4 = //true?``:
-    screenWidth >= 1900 ? 
-                  `${product4.x -950} ${product5.y +40},
-                  ${product4.x -900} ${product5.y +100},
-                  ${product4.x -900} ${product5.y +100}`
-                :
-                 ``;
+      screenWidth >= 1900 ?
+        `${product4.x - 950} ${product5.y + 40},
+                  ${product4.x - 900} ${product5.y + 100},
+                  ${product4.x - 900} ${product5.y + 100}`
+        :
+        ``;
 
 
     //  return `${s1} ${s2} ${s3}`;
@@ -314,19 +313,6 @@ const OurProducts = () => {
           minHeight: "100vh",
         }}
       >
-        {/* <svg
-          width="100%"
-          height={1200}
-          viewBox={`0 0 ${SVG_WIDTH} ${1200}`}
-          preserveAspectRatio="xMidYMin slice"
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            pointerEvents: "none",
-            zIndex: 0,
-          }}
-        > */}
         <svg
           width="100%"
           height={1200}
@@ -509,7 +495,7 @@ const OurProducts = () => {
               style={{
                 position: "absolute",
                 left: is200Scale && isFirefox ? "4%" : "6%",
-                top: is200Scale && isFirefox ? 780 : 750,
+                top: is200Scale && isFirefox ? 790 : 780,
                 width: "44%",
                 display: "flex",
                 flexDirection: "row",
@@ -523,8 +509,10 @@ const OurProducts = () => {
                   textAlign: "left",
                   maxWidth: 320,
                   position: "relative",
-                  top: "7%",
+                  bottom: '20px',
                   left: is200Scale ? "7%" : "6%", // Removed offset for 200% scale to prevent overlap
+
+
                 }}
               >
                 <h2
@@ -562,8 +550,8 @@ const OurProducts = () => {
             <div
               style={{
                 position: "absolute",
-                right: is200Scale ? "12%" : "7%", // Moved Left (7% -> 12%) per correct request
-                top: is200Scale ? 760 : 720, // Moved down (720 -> 760)
+                right: is200Scale ? "12%" : "8%", // Moved Left (7% -> 12%) per correct request
+                top: is200Scale ? 800 : 780, // Moved down (720 -> 760)
                 width: "44%",
                 display: "flex",
                 flexDirection: "row",
@@ -577,7 +565,9 @@ const OurProducts = () => {
                   textAlign: "right",
                   maxWidth: 320,
                   position: "relative",
-                  left: is200Scale ? "8%" : (isMacBook ? "-2%" : "8.7%"), // Moved Text Left (-10%) to fix overlap
+                  left: is200Scale ? "8%" : (isMacBook ? "-2%" : "8.7%"),
+                  bottom: '30px',
+
                 }}
               >
                 <h2

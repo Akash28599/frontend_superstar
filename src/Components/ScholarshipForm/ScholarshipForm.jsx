@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./ScholarshipForm.css";
 import { intArrayBuilder } from "../../Utils/Array";
 import KelloggIcon from "../KelloggIcon/KelloggIcon";
@@ -7,9 +7,17 @@ const ScholarshipForm = ({ data }) => {
     const fileRef = useRef(null);
     const [wordCount, setWordCount] = useState(100)
     const [showTooltip, setShowTooltip] = useState(false)
-
     const [fileName, setFileName] = useState("");
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+    const [dpr, setDpr] = useState(window.devicePixelRatio)
+    useEffect(() => {
+        const handler = () => {
+            setDpr(window.devicePixelRatio)
+        }
+
+        window.addEventListener("resize", handler)
+        return () => window.removeEventListener("resize", handler)
+    }, [])
 
     const handleWordCount = (e) => {
         const text = e.target.value
@@ -22,7 +30,6 @@ const ScholarshipForm = ({ data }) => {
             setWordCount(0)
         }
     }
-
 
     return (
         <section className="scholarship">
@@ -43,7 +50,7 @@ const ScholarshipForm = ({ data }) => {
 
                         <div className="row">
                             <input type="text" placeholder="City/Location" />
-                            <select  style={{paddingLeft:'8px'}}>
+                            <select style={{ paddingLeft: '8px' }}>
                                 <option value="">Age</option>
                                 {intArrayBuilder(5, 18).map(age => (
                                     <option key={age} value={age}>{age}</option>
@@ -89,7 +96,6 @@ const ScholarshipForm = ({ data }) => {
                                 }}
                             />
 
-
                             Snap and upload photos of 5 packs of your favorite Kellogg’s cereal along with your essay.
 
                             {showTooltip && (
@@ -106,7 +112,7 @@ const ScholarshipForm = ({ data }) => {
                         </div>
 
                         <div className="essay">
-                            <div className="counter">{wordCount} words remaining</div>
+                            <div className="counter" style={{ transform: dpr === 1 ? 'translate(0, -50%)' : 'none' }}>{wordCount} words remaining</div>
                             <textarea rows="12" onChange={(e) => handleWordCount(e)}></textarea>
                         </div>
 

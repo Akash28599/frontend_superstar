@@ -7,7 +7,7 @@ import CocoBanner from "../Components/Cocobanner"
 import { CocoHead } from "../Components/Cocohead/Cocohead"
 import { constants } from "../Utils/constants"
 
-export default function HomePage({dpr}) {
+export default function HomePage() {
     return (
         <>
             <div style={{  width: "100%" }}>
@@ -23,9 +23,9 @@ export default function HomePage({dpr}) {
                 </div>
 
                 {/* Other components */}
-                <CocoHead dpr={dpr}/>
-                 <CocoBanner dpr={dpr}/>
-                <OurProducts />
+                <CocoHead />
+                 <CocoBanner />
+                <OurProducts/>
                 {/* <TrendingStories/> */}
                 <PrintableGames />
                

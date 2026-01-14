@@ -1,3 +1,4 @@
+import RedButton from '../RedButton';
 import './RegistrationSuccessModal.css';
 import { FaCheckCircle } from 'react-icons/fa';
 
@@ -23,10 +24,7 @@ const RegistrationSuccessModal = ({ onClose }) => {
                     <p className="rs-sub">Check your mail for next steps.</p>
 
                     <FaCheckCircle className="rs-check" />
-
-                    <button className="rs-btn" onClick={onClose}>
-                        Back
-                    </button>
+                    <RedButton buttonStyle={'py-2 px-6'} onClick={onClose} buttonText='Back'/>
                 </div>
             </div>
         </div>
