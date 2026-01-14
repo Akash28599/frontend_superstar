@@ -125,7 +125,7 @@ const QuizLandingPage = () => {
       <main style={mainContent}>
 
         <section style={roadmapSection}>
-          <h2 style={sectionHeading}>{data.first_component?.title}</h2>
+          <h2 style={sectionHeading}>{data.second_component?.title}</h2>
           <div style={roadmapContainer}>
             <svg style={roadmapSvg} viewBox="0 0 800 500" fill="none">
               <path d="M400 100 H700 C780 100 780 380 700 380 H100" stroke="#D3D3D3" strokeWidth="5" strokeDasharray="15 15" />
@@ -134,15 +134,15 @@ const QuizLandingPage = () => {
               <div style={stepWrapper}>
                 <div style={stepNumberBadge}>1</div>
                 <div style={{ ...stepCardInner, borderBottom: `8px solid ${constants.gold}` }}>
-                  <h4 style={stepCardTitle}>{data.first_component?.sections?.[0]?.title}</h4>
-                  <p style={stepCardDesc}>{data.first_component?.sections?.[0]?.description}</p>
+                  <h4 style={stepCardTitle}>{data.second_component?.sections?.[0]?.title}</h4>
+                  <p style={stepCardDesc}>{data.second_component?.sections?.[0]?.description}</p>
                 </div>
               </div>
               <div style={stepWrapper}>
                 <div style={stepNumberBadge}>2</div>
                 <div style={{ ...stepCardInner, borderBottom: `8px solid ${constants.red}` }}>
-                  <h4 style={stepCardTitle}>{data.first_component?.sections?.[1]?.title}</h4>
-                  <p style={stepCardDesc}>{data.first_component?.sections?.[1]?.description}</p>
+                  <h4 style={stepCardTitle}>{data.second_component?.sections?.[1]?.title}</h4>
+                  <p style={stepCardDesc}>{data.second_component?.sections?.[1]?.description}</p>
                 </div>
               </div>
             </div>
@@ -150,8 +150,8 @@ const QuizLandingPage = () => {
               <div style={stepWrapper}>
                 <div style={stepNumberBadge}>3</div>
                 <div style={{ ...stepCardInner, borderBottom: `8px solid ${constants.gold}` }}>
-                  <h4 style={stepCardTitle}>{data.first_component?.sections?.[2]?.title}</h4>
-                  <p style={stepCardDesc}>{data.first_component?.sections?.[2]?.description}</p>
+                  <h4 style={stepCardTitle}>{data.second_component?.sections?.[2]?.title}</h4>
+                  <p style={stepCardDesc}>{data.second_component?.sections?.[2]?.description}</p>
 
                 </div>
               </div>
@@ -163,20 +163,20 @@ const QuizLandingPage = () => {
         {/* Registration and Login Cards Section */}
         <div style={cardRow}>
           <div className="card-anim" style={{ ...yellowCard, maxWidth: '400px', width: '100%', padding: '40px' }}>
-            <h3 style={cardTitle}>{data.second_component?.school_registration?.title}</h3>
+            <h3 style={cardTitle}>{data.first_component?.school_registration?.title}</h3>
             <p style={{ ...cardDesc, height: 'auto', fontSize: '16px' }}>
-              {data.second_component?.school_registration?.description}
+              {data.first_component?.school_registration?.description}
             </p>
-            <RedButton onClick={() => setShowRegister(true)} buttonText={data.second_component?.school_registration?.button_text} />
+            <RedButton onClick={() => setShowRegister(true)} buttonText={data.first_component?.school_registration?.button_text} />
           </div>
 
           <div className="card-anim" style={{ ...yellowCard, maxWidth: '400px', width: '100%', padding: '40px', }}>
             <div style={iconBox}>🔑</div>
-            <h3 style={cardTitle}>{data.second_component?.student_exam_login?.title}</h3>
+            <h3 style={cardTitle}>{data.first_component?.student_exam_login?.title}</h3>
             <p style={{ ...cardDesc, height: 'auto', fontSize: '16px' }}>
-              {data.second_component?.student_exam_login?.description}
+              {data.first_component?.student_exam_login?.description}
             </p>
-            <RedButton onClick={() => setShowLogin(true)} buttonText={data.second_component?.student_exam_login?.button_text} />
+            <RedButton onClick={() => setShowLogin(true)} buttonText={data.first_component?.student_exam_login?.button_text} />
           </div>
         </div>
 
@@ -191,7 +191,7 @@ const QuizLandingPage = () => {
 
           {/* Media Grid Placeholder - 3 images */}
           <div className="flex flex-wrap justify-center gap-8 mb-10">
-            {data.third_component?.image_section?.images?.map((image) =>
+            {data.third_component?.images?.map((image) =>
               <div className="w-[300px] h-[200px] bg-gray-300 rounded-2xl overflow-hidden">
                 <img
                   src={image}
