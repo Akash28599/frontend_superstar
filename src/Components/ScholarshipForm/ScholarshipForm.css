@@ -12,7 +12,6 @@
     color: var(--white);
     padding: 6% 6% 4% 6%;
     position: relative;
-    border: 4px solid black;
 }
 
 .container {
@@ -158,8 +157,7 @@ textarea:focus {
 
 .counter {
     position: absolute;
-    top: -10%;
-    
+    top: 0%;
     right: 8%;
     background: var(--black);
     color: var(--white);
