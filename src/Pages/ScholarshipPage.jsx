@@ -6,6 +6,37 @@ import ThankYou from '../Components/ScholarshipForm/ThankYou';
 import ScholarshipWishlist from '../Components/ScholarshipForm/ScholarshipWishlist';
 
 
+const sample = {
+    IconImage: { url: "/assetss/iconNoHeader.png" },
+    groupKellogs: { url: "/assetss/group.png" },
+    bg: { url: "/assetss/cloud.png" },
+    groupKellogs2: { url: "/assetss/group2.png" },
+    hangingMonkey: { url: "/assetss/hangingMonkey.png" },
+    competitionTitle: "About the competition",
+    competitionDescription: [
+        {
+            title: "Kellogg’s Super Stars",
+            des: "is our dream for the future generation in Nigeria: a generation of well-nurtured, healthy children."
+        },
+        {
+            title: "Kellogg’s Super Stars Scholarship",
+            des: "Competition is an initiative to bring out the best expressions from our Super Stars and motivate them by sponsoring their school expenses worth N150,000.This year, we are launching the 6th edition of our competition. It’s a lot easier with a simple 2-step process."
+        }
+
+    ],
+    competitionSteps: [
+        "Share your Breakfast to Greatness story with us: How breakfast habits Lead to Greatness?",
+        "Fill in the necessary details, Snap and upload 5 packs of your favorite Kellogg’s cereal."
+    ],
+    shouldShowForm: true,
+    criteria: ["Creativity", "Story-telling",
+        "Grammar",
+        "Vocabulary"],
+    socialLinkText: "Follow us on",
+    siteSettings: {
+    }
+}
+
 const ScholarshipPage = ({settingsData}) => {
     const [data, setData] = useState({
         IconImage: { url: "" },
@@ -28,36 +59,6 @@ const ScholarshipPage = ({settingsData}) => {
         }
     });
     const [isLoading,setIsLoading]=useState(true);
-    const sample = {
-        IconImage: { url: "/assetss/iconNoHeader.png" },
-        groupKellogs: { url: "/assetss/group.png" },
-        bg: { url: "/assetss/cloud.png" },
-        groupKellogs2: { url: "/assetss/group2.png" },
-        hangingMonkey: { url: "/assetss/hangingMonkey.png" },
-        competitionTitle: "About the competition",
-        competitionDescription: [
-            {
-                title: "Kellogg’s Super Stars",
-                des: "is our dream for the future generation in Nigeria: a generation of well-nurtured, healthy children."
-            },
-            {
-                title: "Kellogg’s Super Stars Scholarship",
-                des: "Competition is an initiative to bring out the best expressions from our Super Stars and motivate them by sponsoring their school expenses worth N150,000.This year, we are launching the 6th edition of our competition. It’s a lot easier with a simple 2-step process."
-            }
-
-        ],
-        competitionSteps: [
-            "Share your Breakfast to Greatness story with us: How breakfast habits Lead to Greatness?",
-            "Fill in the necessary details, Snap and upload 5 packs of your favorite Kellogg’s cereal."
-        ],
-        shouldShowForm: true,
-        criteria: ["Creativity", "Story-telling",
-            "Grammar",
-            "Vocabulary"],
-        socialLinkText: "Follow us on",
-        siteSettings: {
-        }
-    }
    useEffect(() => {
     const fetchURLs = async () => {
         try {

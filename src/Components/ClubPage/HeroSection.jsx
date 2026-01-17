@@ -103,10 +103,6 @@ const HeroSection = ({ data }) => {
 };
 
 // Helper to return icon component based on string
-const getIcon = (iconName) => {
-  if (iconName === 'PersonAddAltIcon') return <PersonAddAltIcon />;
-  if (iconName === 'LoginIcon') return <LoginIcon />;
-  return null;
-};
+
 
 export default HeroSection;

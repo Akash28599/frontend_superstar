@@ -191,11 +191,11 @@ const QuizLandingPage = () => {
 
           {/* Media Grid Placeholder - 3 images */}
           <div className="flex flex-wrap justify-center gap-8 mb-10">
-            {data.third_component?.images?.map((image) =>
-              <div className="w-[300px] h-[200px] bg-gray-300 rounded-2xl overflow-hidden">
+            {data.third_component?.images?.map((image, index) =>
+              <div className="w-[300px] h-[200px] bg-gray-300 rounded-2xl overflow-hidden" key={index}>
                 <img
                   src={image}
-                  alt="alt image"
+                  alt={`Gallery moment ${index + 1}`}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -300,7 +300,6 @@ const yellowCard = { backgroundColor: constants.gold, borderRadius: '30px', padd
 const cardTitle = { fontSize: '22px', fontWeight: '800', margin: '0 0 10px', color: '#333' };
 const cardDesc = { fontSize: '14px', color: '#444', lineHeight: '1.4', marginBottom: '25px' };
 const redBtn = { backgroundColor: constants.red, color: '#fff', border: 'none', padding: '14px', borderRadius: '12px', fontWeight: '700', cursor: 'pointer', fontFamily: constants.fontFamily };
-const whiteBtn = { ...redBtn, backgroundColor: '#fff', color: constants.red };
 
 
 const roadmapSection = { marginTop: '0', textAlign: 'center', position: 'relative' };
