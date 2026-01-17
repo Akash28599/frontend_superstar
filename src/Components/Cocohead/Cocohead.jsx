@@ -1,11 +1,9 @@
+
 import { useEffect, useState } from 'react';
-import { constants } from '../../Utils/constants';
 
 export const CocoHead = () => {
     const [items, setItems] = useState([]);
     const [head, setHead] = useState(null);
-    const [starImage, setStarImage] = useState(null);
-    const [loading, setLoading] = useState(true);
 
     // const isEdge = /Edg|Edge/.test(navigator.userAgent); // Tailwind handles browser inconsistencies better, removing usage
 
@@ -15,22 +13,13 @@ export const CocoHead = () => {
             .then(json => {
                 const data = json.data || [];
                 const headItem = data.find(d => d.thumbnail);
-                const starItem = data.find(d => !(d.icon_description && d.icons));
                 const iconItems = data.filter(d => d.icon_description && d.icon_description.title);
 
                 setHead(headItem || null);
 
-                if (starItem?.icons) {
-                    const starUrl = starItem.icons.formats?.small?.url ||
-                        starItem.icons.formats?.thumbnail?.url ||
-                        starItem.icons.url;
-                    setStarImage(starUrl);
-                }
-
                 setItems(iconItems);
-                setLoading(false);
             })
-            .catch(() => setLoading(false));
+            .catch(() => {});
     }, []);
 
     return (
