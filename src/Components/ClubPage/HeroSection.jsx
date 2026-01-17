@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Navbar from '../Navbar';
+
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import LoginIcon from '@mui/icons-material/Login';
 import AuthModal from './AuthModal';
@@ -30,8 +30,6 @@ const HeroSection = ({ data }) => {
 
   return (
     <section className="py-10 bg-kelloggs-red text-center relative overflow-hidden min-h-[80vh] flex flex-col items-center">
-      
-      {/* Navbar Integration */}
       
 
       {/* Decorative Blob for depth */}
