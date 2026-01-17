@@ -88,8 +88,9 @@ const Instructions = () => {
 
         return () => {
              // Cleanup
-            if (videoRef.current && videoRef.current.srcObject) {
-                videoRef.current.srcObject.getTracks().forEach(t => t.stop());
+             const currentVideo = videoRef.current;
+            if (currentVideo && currentVideo.srcObject) {
+                currentVideo.srcObject.getTracks().forEach(t => t.stop());
             }
             if (audioContextRef.current) {
                 audioContextRef.current.close();

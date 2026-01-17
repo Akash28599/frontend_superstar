@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { constants } from '../../Utils/constants';
 import Navbar from '../Navbar';
 
 const HomeBanner = () => {
@@ -138,10 +137,10 @@ const HomeBanner = () => {
         `}>
               {/* Badge */}
               <div className="mb-[1.5rem] bg-kelloggs-gold py-[0.6rem] px-[1.5rem] tablet:py-[0.8rem] tablet:px-[2rem] rounded-full inline-flex items-center justify-center shadow-md">
-                <h3 className="
+                <h3 className={`
                     m-0 font-medium leading-none tracking-normal text-kelloggs-red whitespace-nowrap
                     ${isEdge ? 'text-[clamp(1.2rem,1.5vw,1.6rem)]' : 'text-[clamp(1rem,1.3vw,1.4rem)]'}
-                ">
+                `}>
                     {banner.topheading}
                 </h3>
               </div>
