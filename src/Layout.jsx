@@ -8,19 +8,21 @@ import { PastWinners } from './Pages/PastWinners/PastWinners';
 import ExamPage from './Components/QuizRegistration/ExamPage';
 import Instructions from './Components/QuizRegistration/Instructions';
 import ThankYou from './Components/QuizRegistration/ThankYou';
+import ClubPage from './Pages/ClubPage';
 import FooterLayout from './Components/Footer';
 
 export function LayoutComponent({ settingsData, dpr }) {
   const location = useLocation();
-  const hidePathsNav = ['/past-winners', '/student-register', '/exam-page', '/instructions','/']
+  const hidePathsNav = ['/past-winners', '/student-register', '/exam-page', '/instructions','/', '/club']
   const hideNavbar = hidePathsNav.includes(location.pathname);
-  const hidePathsFooter = ['/exam-page', '/instructions']
+  const hidePathsFooter = ['/exam-page', '/instructions', '/club']
   const hideFooter = hidePathsFooter.includes(location.pathname);
+  const isClubPage = location.pathname === '/club';
 
   return (
     <>
       {!hideNavbar && (
-        <div style={{ backgroundColor: '#E41F35', height: '0px' }}>
+        <div style={{ backgroundColor: '#F60945', height: isClubPage ? '110px' : '0px', transition: 'height 0.3s ease' }}>
           <Navbar />
         </div>
       )}
@@ -28,6 +30,7 @@ export function LayoutComponent({ settingsData, dpr }) {
       <Routes>
         <Route path='/' element={<HomePage dpr={dpr} />} />
         <Route path='/scholarship' element={<ScholarshipPage settingsData={settingsData} />} />
+        <Route path='/club' element={<ClubPage />} />
         <Route path='/quiz' element={<QuizPage />} />
         <Route path='/past-winners' element={<PastWinners />} />
         <Route path='/exam-page' element={<ExamPage />} />
