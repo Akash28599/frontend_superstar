@@ -32,15 +32,13 @@ const HeroSection = ({ data }) => {
     <section className="py-10 bg-kelloggs-red text-center relative overflow-hidden min-h-[80vh] flex flex-col items-center">
       
       {/* Navbar Integration */}
-      <div className="w-full relative z-50 mb-10">
-         <Navbar customStyle={{ top: '0', left: '60%', transform: 'translateX(-50%)', position: 'relative' }} />
-      </div>
+      
 
       {/* Decorative Blob for depth */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-white opacity-10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
       
       {/* Monkey Image - Decorative (Absolute Positioned for "hanging" look or side placement) */}
-      <div className="hidden lg:block absolute right-0 bottom-0 z-50 opacity-90 w-24 xl:w-32 2xl:w-80 pointer-events-none">
+      <div className="hidden lg:block absolute right-0 bottom-0 z-50 opacity-90 w-24 xl:w-32 2xl:w-60 pointer-events-none">
          <img 
             src="https://static.wixstatic.com/media/2bc50d_b973282d09b64a5887aab8ba319849af~mv2.png/v1/fill/w_355,h_530,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/cocoo.png"  
             alt="Coco Monkey" 

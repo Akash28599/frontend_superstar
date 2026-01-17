@@ -78,7 +78,7 @@ const Navbar = ({ customStyle = {} }) => {
     fontSize: isHighScale ? '13px' : isConstrained ? '15px' : '18px',
     lineHeight: '100%',
     letterSpacing: '0%',
-    color: '#3C4242', // Active text color (NOT background)
+    color: '#000000', // Active text color (NOT background)
     textDecoration: 'none',
     whiteSpace: 'nowrap', // Prevent wrapping
     padding: isHighScale ? '4px 8px' : isConstrained ? '6px 12px' : '8px 16px',
