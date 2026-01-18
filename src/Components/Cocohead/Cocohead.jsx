@@ -84,9 +84,9 @@ export const CocoHead = () => {
                                 {/* Title */}
                                 <div className="
                                     font-bold text-left w-full 
-                                    min-h-[2.5rem] tablet:min-h-[4.5rem] 
-                                    flex items-center justify-start
-                                    text-[clamp(0.75rem,1.1vw,1.3rem)] 
+                                    min-h-[2.5em] tablet:min-h-[3.5em] 
+                                    flex items-start justify-start
+                                    text-[clamp(0.75rem,1.1vw,1.3rem)]  
                                     leading-tight text-black
                                 ">
                                     {title}
@@ -99,16 +99,8 @@ export const CocoHead = () => {
                                         text-[clamp(0.7rem,1vw,1.1rem)] 
                                         leading-[1.4] text-[#333] mt-2
                                         max-w-[98%] tablet:max-w-[95%]
-                                        flex justify-start
-                                        overflow-hidden
+                                        coco-desc-clamp
                                     "
-                                    style={{
-                                        display: '-webkit-box',
-                                        WebkitLineClamp: 7,
-                                        WebkitBoxOrient: 'vertical',
-                                        overflow: 'hidden',
-                                        textOverflow: 'ellipsis'
-                                    }}
                                 >
                                     {desc}
                                 </div>
