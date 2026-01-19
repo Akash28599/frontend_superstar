@@ -15,10 +15,6 @@ const sample = [
   { name: "Game5", thumbnail: '', printable: '/assetss/BrainGameVol5.pdf' }
 ];
 
-export default function PrintableGames() {
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [downloadingId, setDownloadingId] = useState(null);
 
   useEffect(() => {
     const url = `${process.env.REACT_APP_STRAPI_URL}/api/games?populate=*`;
