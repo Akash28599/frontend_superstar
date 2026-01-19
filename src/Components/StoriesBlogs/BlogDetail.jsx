@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Heart, MessageCircle, Share2, Facebook, Twitter, Linkedin, Link as LinkIcon, Download, FileText } from 'lucide-react';
+import { useParams } from 'react-router-dom';
+import { Heart, Facebook, Twitter, Linkedin, Link as LinkIcon, Download, FileText } from 'lucide-react';
 import Episode1 from '../QuizRegistration/Episode1.pdf';
 
 const BlogDetail = () => {
@@ -26,14 +26,9 @@ const BlogDetail = () => {
         setCommentText("");
     };
 
-    const API_URL = `https://strapi-superstar.onrender.com/api/blogs/${id}?fields[0]=blog_body&populate=blog_thumbail`;
-    // Note: The user also provided a generic endpoint for details that seemed to return title/etc as well, 
-    // but the specific detail endpoint provided only had blog_body fields in the query. 
-    // I might need to fetch the main metadata again or pass it via state. 
-    // However, usually detail endpoints return full data. Let's try to fetch standard fields too to display the title.
-    const API_URL_FULL = `https://strapi-superstar.onrender.com/api/blogs/${id}?fields[0]=blog_title&fields[1]=sub_title&fields[2]=user_name&fields[3]=post_date&fields[4]=short_display_description&fields[5]=read_time&fields[6]=views&fields[7]=likes&fields[8]=comments&fields[9]=blog_body&populate=blog_thumbail`;
-
     useEffect(() => {
+        const API_URL_FULL = `https://strapi-superstar.onrender.com/api/blogs/${id}?fields[0]=blog_title&fields[1]=sub_title&fields[2]=user_name&fields[3]=post_date&fields[4]=short_display_description&fields[5]=read_time&fields[6]=views&fields[7]=likes&fields[8]=comments&fields[9]=blog_body&populate=blog_thumbail`;
+
         const fetchBlog = async () => {
             try {
                 const response = await fetch(API_URL_FULL);
