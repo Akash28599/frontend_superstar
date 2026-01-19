@@ -1,6 +1,6 @@
 import React from "react";
 import SocialIcons from "./SocialIcons/SocialIcons";
-import { constants } from "../Utils/constants";
+
 
 const FooterLayout = ({ settingsData }) => {
   const addressLines = settingsData?.address?.split("\n") ?? [];

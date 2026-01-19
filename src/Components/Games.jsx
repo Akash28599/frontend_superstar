@@ -7,13 +7,18 @@ export default function PrintableGames() {
   const [loading, setLoading] = useState(true);
   const [downloadingId, setDownloadingId] = useState(null);
 
-  const sample = [
-    { name: "Game1", thumbnail: '', printable: '/assetss/BrainGameVol1.pdf' },
-    { name: "Game2", thumbnail: '', printable: '/assetss/BrainGameVol2.pdf' },
-    { name: "Game3", thumbnail: '', printable: '/assetss/BrainGameVol3.pdf' },
-    { name: "Game4", thumbnail: '', printable: '/assetss/BrainGameVol4.pdf' },
-    { name: "Game5", thumbnail: '', printable: '/assetss/BrainGameVol5.pdf' }
-  ];
+const sample = [
+  { name: "Game1", thumbnail: '', printable: '/assetss/BrainGameVol1.pdf' },
+  { name: "Game2", thumbnail: '', printable: '/assetss/BrainGameVol2.pdf' },
+  { name: "Game3", thumbnail: '', printable: '/assetss/BrainGameVol3.pdf' },
+  { name: "Game4", thumbnail: '', printable: '/assetss/BrainGameVol4.pdf' },
+  { name: "Game5", thumbnail: '', printable: '/assetss/BrainGameVol5.pdf' }
+];
+
+export default function PrintableGames() {
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [downloadingId, setDownloadingId] = useState(null);
 
   useEffect(() => {
     const url = `${process.env.REACT_APP_STRAPI_URL}/api/games?populate=*`;

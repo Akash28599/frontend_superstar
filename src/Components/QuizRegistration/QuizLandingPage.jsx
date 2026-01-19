@@ -191,11 +191,11 @@ const QuizLandingPage = () => {
 
           {/* Media Grid Placeholder - 3 images */}
           <div className="flex flex-wrap justify-center gap-8 mb-10">
-            {data.third_component?.images?.map((image) =>
-              <div className="w-[300px] h-[200px] bg-gray-300 rounded-2xl overflow-hidden">
+            {data.third_component?.images?.map((image, index) =>
+              <div className="w-[300px] h-[200px] bg-gray-300 rounded-2xl overflow-hidden" key={index}>
                 <img
                   src={image}
-                  alt="alt image"
+                  alt={`Gallery moment ${index + 1}`}
                   className="w-full h-full object-cover"
                 />
               </div>

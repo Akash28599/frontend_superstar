@@ -87,10 +87,12 @@ const Instructions = () => {
             startMedia();
         }
 
+        const currentVideo = videoRef.current;
+
         return () => {
-            // Cleanup
-            if (videoRef.current && videoRef.current.srcObject) {
-                videoRef.current.srcObject.getTracks().forEach(t => t.stop());
+             // Cleanup
+            if (currentVideo && currentVideo.srcObject) {
+                currentVideo.srcObject.getTracks().forEach(t => t.stop());
             }
             if (audioContextRef.current) {
                 audioContextRef.current.close();

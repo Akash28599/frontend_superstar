@@ -1,11 +1,9 @@
+
 import { useEffect, useState } from 'react';
-import { constants } from '../../Utils/constants';
 
 export const CocoHead = () => {
     const [items, setItems] = useState([]);
     const [head, setHead] = useState(null);
-    const [starImage, setStarImage] = useState(null);
-    const [loading, setLoading] = useState(true);
 
     // const isEdge = /Edg|Edge/.test(navigator.userAgent); // Tailwind handles browser inconsistencies better, removing usage
 
@@ -15,22 +13,13 @@ export const CocoHead = () => {
             .then(json => {
                 const data = json.data || [];
                 const headItem = data.find(d => d.thumbnail);
-                const starItem = data.find(d => !(d.icon_description && d.icons));
                 const iconItems = data.filter(d => d.icon_description && d.icon_description.title);
 
                 setHead(headItem || null);
 
-                if (starItem?.icons) {
-                    const starUrl = starItem.icons.formats?.small?.url ||
-                        starItem.icons.formats?.thumbnail?.url ||
-                        starItem.icons.url;
-                    setStarImage(starUrl);
-                }
-
                 setItems(iconItems);
-                setLoading(false);
             })
-            .catch(() => setLoading(false));
+            .catch(() => {});
     }, []);
 
     return (
@@ -95,9 +84,9 @@ export const CocoHead = () => {
                                 {/* Title */}
                                 <div className="
                                     font-bold text-left w-full 
-                                    min-h-[2.5rem] tablet:min-h-[4.5rem] 
-                                    flex items-center justify-start
-                                    text-[clamp(0.75rem,1.1vw,1.3rem)] 
+                                    min-h-[2.5em] tablet:min-h-[3.5em] 
+                                    flex items-start justify-start
+                                    text-[clamp(0.75rem,1.1vw,1.3rem)]  
                                     leading-tight text-black
                                 ">
                                     {title}
@@ -110,16 +99,8 @@ export const CocoHead = () => {
                                         text-[clamp(0.7rem,1vw,1.1rem)] 
                                         leading-[1.4] text-[#333] mt-2
                                         max-w-[98%] tablet:max-w-[95%]
-                                        flex justify-start
-                                        overflow-hidden
+                                        coco-desc-clamp
                                     "
-                                    style={{
-                                        display: '-webkit-box',
-                                        WebkitLineClamp: 7,
-                                        WebkitBoxOrient: 'vertical',
-                                        overflow: 'hidden',
-                                        textOverflow: 'ellipsis'
-                                    }}
                                 >
                                     {desc}
                                 </div>

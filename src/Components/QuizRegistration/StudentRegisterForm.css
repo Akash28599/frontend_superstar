@@ -292,57 +292,20 @@
 
 /* 175% Scale (approx 1100px) */
 @media (max-width: 1100px) {
+    .sr-container {
+        padding-top: 5px;
+        margin: 1% 0;
+    }
+
     .sr-card {
         max-width: 380px;
         border-radius: 12px;
-        max-height: 95vh;
-        /* Ensure scroll container constraint */
+        max-height: 98vh;
+        /* Maximize vertical space */
     }
 
-    .sr-body {
-        overflow-y: auto;
-        /* Ensure scrolling */
-    }
-
-    .sr-body p {
-        /* display: block; Restored */
-        font-size: 11px !important;
-        margin-bottom: 8px !important;
-    }
-
-    .sr-body h2:first-of-type {
-        margin-top: 10px;
-    }
-
-    .sr-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 6px;
-    }
-
-    .sr-upload {
-        padding: 3px;
-        font-size: 0.8rem;
-    }
-
-    .sr-submit {
-        padding: 6px 20px;
-        font-size: 0.85rem;
-    }
-}
-
-/* 200% Scale / Tablets (approx 960px width or less) */
-@media (max-width: 960px) {
-    .sr-container {
+    .sr-header {
         padding: 5px;
-        margin: 0;
-        align-items: flex-start;
-        /* Align top so it's not cut off if too tall */
-        padding-top: 10px;
-    }
-
-    .sr-card {
-        max-width: 340px;
-        max-height: 90vh;
     }
 
     .sr-header h1 {
@@ -350,16 +313,100 @@
     }
 
     .sr-logo img {
-        height: 18px;
+        height: 20px;
     }
 
     .sr-body {
-        padding: 0 12px 12px;
+        padding: 0 14px 10px;
+        overflow-y: auto;
+    }
+
+    .sr-body p {
+        font-size: 11px !important;
+        margin-bottom: 6px !important;
+        line-height: 1.2 !important;
     }
 
     .sr-body h2 {
-        font-size: 0.9rem;
-        margin: 8px 0 5px;
+        font-size: 0.95rem;
+        margin: 8px 0 4px;
+        padding-bottom: 2px;
+    }
+
+    .sr-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 5px;
+    }
+
+    .sr-grid input {
+        padding: 4px;
+        font-size: 0.8rem;
+    }
+
+    .sr-upload {
+        padding: 2px;
+        font-size: 0.8rem;
+    }
+
+    .sr-footer {
+        margin-top: 8px;
+    }
+
+    .sr-footer p {
+        font-size: 9px !important;
+        margin-bottom: 4px !important;
+    }
+
+    .sr-footer label {
+        font-size: 0.75rem;
+    }
+
+    .sr-submit {
+        padding: 5px 16px;
+        font-size: 0.8rem;
+    }
+}
+
+/* 200% Scale / Tablets (approx 960px width or less) */
+@media (max-width: 960px) {
+    .sr-container {
+        padding: 2px;
+        margin: 0;
+        align-items: flex-start;
+        padding-top: 5px;
+    }
+
+    .sr-card {
+        max-width: 320px;
+        /* Reduced from 340px */
+        max-height: 98vh;
+        border-radius: 8px;
+    }
+
+    .sr-header {
+        padding: 4px;
+    }
+
+    .sr-header h1 {
+        font-size: 0.95rem;
+    }
+
+    .sr-logo img {
+        height: 16px;
+    }
+
+    .sr-body {
+        padding: 0 10px 10px;
+    }
+
+    .sr-body p {
+        font-size: 10px !important;
+        margin-bottom: 5px !important;
+    }
+
+    .sr-body h2 {
+        font-size: 0.85rem;
+        margin: 6px 0 4px;
     }
 
     .sr-grid {
@@ -367,7 +414,7 @@
     }
 
     .sr-grid input {
-        padding: 4px;
+        padding: 3px;
         font-size: 0.75rem;
     }
 
@@ -377,17 +424,17 @@
     }
 
     .sr-footer {
-        margin-top: 8px;
+        margin-top: 6px;
     }
 
     .sr-footer label {
         font-size: 0.7rem;
-        margin-bottom: 4px;
+        margin-bottom: 2px;
     }
 
     .sr-submit {
-        padding: 5px 15px;
-        font-size: 0.8rem;
+        padding: 6px 14px;
+        font-size: 0.75rem;
     }
 }
 

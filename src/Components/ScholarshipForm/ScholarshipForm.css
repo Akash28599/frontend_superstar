@@ -27,7 +27,7 @@
     left: -5px;
     top: auto;
     right: auto;
-    bottom: -100px;
+    bottom: -130px;
     z-index: 1;
     width: 10%;
     height: 60%;
@@ -115,6 +115,23 @@ textarea:focus {
 .right {
     margin-top: 4%;
     width: 46%;
+}
+
+/* 100% Desktop Scale Optimization */
+@media (min-width: 1600px) {
+    .content {
+        gap: 20px;
+    }
+
+    .form {
+        flex: 0 0 32%;
+        width: auto;
+    }
+
+    .right {
+        width: auto;
+        flex: 1;
+    }
 }
 
 /* UPLOAD */

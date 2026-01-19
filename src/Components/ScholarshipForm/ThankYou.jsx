@@ -9,6 +9,24 @@ import RedButton from '../RedButton';
 // import leftCocoPops from "/assets/CocoPops.png"
 // import blurredCocoPops from "/assets/CocoPops-pack-blurred.png"
 
+const sample = {
+    cocoPopsImage:
+    {
+        url: '/assetss/CocoPops.png'
+    },
+    cocoPopBlur: {
+        url: '/assetss/CocoPops-pack-blurred.png'
+    },
+    title: 'Thank you for your participation',
+    description: "We wish you a healthy family with nutritious and tasty Kellogg's cereals.",
+    leftKelloggImage: {
+        url: '/assetss/CocoPops.png'
+    },
+    cocoMonkey: {
+        url: "/assetss/flying-monkey.png"
+    },
+}
+
 const ThankYou = ({ siteSettings }) => {
     // console.log(socialLinks)
     const img = {
@@ -41,23 +59,6 @@ const ThankYou = ({ siteSettings }) => {
     const [loading, setLoading] = useState(true);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
     const navigate = useNavigate()
-    const sample = {
-        cocoPopsImage:
-        {
-            url: '/assetss/CocoPops.png'
-        },
-        cocoPopBlur: {
-            url: '/assetss/CocoPops-pack-blurred.png'
-        },
-        title: 'Thank you for your participation',
-        description: "We wish you a healthy family with nutritious and tasty Kellogg's cereals.",
-        leftKelloggImage: {
-            url: '/assetss/CocoPops.png'
-        },
-        cocoMonkey: {
-            url: "/assetss/flying-monkey.png"
-        },
-    }
 
     //  ADDED: refs for section & blurred image
     const sectionRef = useRef(null);
@@ -101,7 +102,7 @@ const ThankYou = ({ siteSettings }) => {
 
     useEffect(() => {
         fetchParticipation();
-    }, []);
+    }, [fetchParticipation]);
 
     //  ADDED: IntersectionObserver (Option 4 core logic)
     useEffect(() => {
