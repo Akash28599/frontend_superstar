@@ -5,13 +5,11 @@ import Episode1 from '../QuizRegistration/Episode1.pdf';
 import Episode5 from '../QuizRegistration/Episode5.pdf';
 import RecentBlogs from './RecentBlogs';
 import { openUrl } from '../../Utils/Utilities';
-import SocialIcons from '../SocialIcons/SocialIcons';
 
 const BlogDetail = ({ siteSettings }) => {
     const { id } = useParams();
     const [blog, setBlog] = useState(null);
     const [loading, setLoading] = useState(true);
-
     const [commentsList, setCommentsList] = useState([]);
     const [commentText, setCommentText] = useState("");
     const [copied, setCopied] = useState(false);
