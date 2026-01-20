@@ -49,7 +49,6 @@ const RecentBlogs = ({ id }) => {
             likes,
             documentId,
             blog_thumbail,
-            short_display_description,
         } = post;
 
         const imageUrl = blog_thumbail?.url;
@@ -58,7 +57,7 @@ const RecentBlogs = ({ id }) => {
             <div
                 onClick={() => {
                     navigate(`/blog/${documentId}`);
-                    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+                    window.scrollTo({ top: 0, left: 0 });
                 }}
 
                 className="
@@ -108,8 +107,18 @@ const RecentBlogs = ({ id }) => {
 
     return (
         <div>
-            <h3 className="font-semibold">Recent Posts</h3>
-
+            <div className="flex justify-between">
+                <h3 className="font-semibold">Recent Posts</h3>
+                <h3 className="font-semibold cursor-pointer hover:underline"
+                    onClick={() => {
+                        window.scrollTo({ top: 0, left: 0 })
+                        navigate('/blog')
+                    }
+                    }
+                >
+                    See All
+                </h3>
+            </div>
             {loading && <p className="mt-2 text-sm text-gray-500">Loading...</p>}
 
             {!loading && (
