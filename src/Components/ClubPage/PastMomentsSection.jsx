@@ -44,8 +44,8 @@ const PastMomentsSection = ({ data }) => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl text-center flex flex-col items-center">
         
         <div className="mb-12 text-center w-full">
-             <h2 className="font-kelloggs text-3xl sm:text-4xl text-gray-900 mb-2 uppercase">
-                {title}
+             <h2 className="font-kelloggs text-2xl sm:text-3xl font-bold text-gray-900 mb-2 uppercase">
+                {title.toUpperCase()}
              </h2>
              <h3 className="text-xl text-kelloggs-red font-bold mb-4">
                 {sub_title}

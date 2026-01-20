@@ -27,7 +27,7 @@ const BlogDetail = () => {
     };
 
     useEffect(() => {
-        const API_URL_FULL = `https://strapi-superstar.onrender.com/api/blogs/${id}?fields[0]=blog_title&fields[1]=sub_title&fields[2]=user_name&fields[3]=post_date&fields[4]=short_display_description&fields[5]=read_time&fields[6]=views&fields[7]=likes&fields[8]=comments&fields[9]=blog_body&populate=blog_thumbail`;
+        const API_URL_FULL = `${process.env.REACT_APP_STRAPI_URL}/api/blogs/${id}?fields[0]=blog_title&fields[1]=sub_title&fields[2]=user_name&fields[3]=post_date&fields[4]=short_display_description&fields[5]=read_time&fields[6]=views&fields[7]=likes&fields[8]=comments&fields[9]=blog_body&populate=blog_thumbail`;
 
         const fetchBlog = async () => {
             try {

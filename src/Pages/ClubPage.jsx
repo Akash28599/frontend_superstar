@@ -14,7 +14,7 @@ const ClubPage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await fetch('https://strapi-superstar.onrender.com/api/clubs-landing-page?populate=*');
+                const res = await fetch(`${process.env.REACT_APP_STRAPI_URL}/api/clubs-landing-page?populate=*`);
                 if (res.ok) {
                     const json = await res.json();
                     setPageData(json.data);

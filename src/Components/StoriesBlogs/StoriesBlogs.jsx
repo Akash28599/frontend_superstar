@@ -6,10 +6,9 @@ const StoriesBlogs = ({ type = 'blogs' }) => {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+    const API_URL_ALL = `${process.env.REACT_APP_STRAPI_URL}/api/blogs?fields[0]=blog_title&fields[1]=sub_title&fields[2]=user_name&fields[3]=post_date&fields[4]=short_display_description&fields[5]=read_time&fields[6]=views&fields[7]=likes&fields[8]=comments&fields[9]=createdAt&fields[10]=updatedAt&fields[11]=publishedAt&populate=blog_thumbail`;
 
-    const API_URL_ALL = "https://strapi-superstar.onrender.com/api/blogs?fields[0]=blog_title&fields[1]=sub_title&fields[2]=user_name&fields[3]=post_date&fields[4]=short_display_description&fields[5]=read_time&fields[6]=views&fields[7]=likes&fields[8]=comments&fields[9]=createdAt&fields[10]=updatedAt&fields[11]=publishedAt&populate=blog_thumbail";
-    
-    const API_URL_STORIES = "https://strapi-superstar.onrender.com/api/blogs?fields[0]=blog_title&fields[1]=sub_title&fields[2]=user_name&fields[3]=post_date&fields[4]=short_display_description&fields[5]=read_time&fields[6]=views&fields[7]=likes&fields[8]=comments&fields[9]=createdAt&fields[10]=updatedAt&fields[11]=publishedAt&filters[sub_title][$eq]=story&populate=blog_thumbail";
+    const API_URL_STORIES = `${process.env.REACT_APP_STRAPI_URL}/api/blogs?fields[0]=blog_title&fields[1]=sub_title&fields[2]=user_name&fields[3]=post_date&fields[4]=short_display_description&fields[5]=read_time&fields[6]=views&fields[7]=likes&fields[8]=comments&fields[9]=createdAt&fields[10]=updatedAt&fields[11]=publishedAt&filters[sub_title][$eq]=story&populate=blog_thumbail`;
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -47,18 +46,18 @@ const StoriesBlogs = ({ type = 'blogs' }) => {
                 <div className="flex justify-center py-20">Loading...</div>
             ) : (
                 <div className="space-y-8">
-                    {posts.map((post) => (
-                        <div 
-                            key={post.id} 
+                    {posts?.map((post) => (
+                        <div
+                            key={post.id}
                             className="bg-white rounded-lg overflow-hidden flex flex-col md:flex-row border border-gray-100 hover:shadow-lg transition-shadow cursor-pointer"
                             onClick={() => navigate(type === 'stories' ? `/stories/${post.documentId}` : `/blog/${post.documentId}`)}
                         >
                             {/* Image Section */}
                             <div className="md:w-1/3 h-64 md:h-auto relative bg-gray-100">
                                 {post.blog_thumbail ? (
-                                    <img 
-                                        src={post.blog_thumbail.url} 
-                                        alt={post.blog_title} 
+                                    <img
+                                        src={post.blog_thumbail.url}
+                                        alt={post.blog_title}
                                         className="w-full h-full object-cover"
                                     />
                                 ) : (
@@ -76,11 +75,11 @@ const StoriesBlogs = ({ type = 'blogs' }) => {
                                         <span>•</span>
                                         <div>{post.read_time}</div>
                                     </div>
-                                    
+
                                     <h2 className="text-2xl font-bold text-gray-900 mb-4 line-clamp-2 text-left">
                                         {post.blog_title}
                                     </h2>
-                                    
+
                                     <p className="text-gray-600 mb-6 line-clamp-3 text-left">
                                         {post.short_display_description}
                                     </p>

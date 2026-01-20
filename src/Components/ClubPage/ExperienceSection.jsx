@@ -17,8 +17,8 @@ const ExperienceSection = ({ data }) => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col">
         
         <div className="text-center mb-16 max-w-4xl mx-auto">
-            <h2 className="font-kelloggs text-5xl sm:text-6xl text-kelloggs-red mb-6 leading-none">
-                {title}
+            <h2 className="font-bold font-kelloggs text-3xl sm:text-4xl text-kelloggs-red mb-6 leading-none">
+                {title.toUpperCase()}
             </h2>
             <div className="w-20 h-2 bg-kelloggs-gold mx-auto mb-8 rounded-full"></div>
             <p className="text-2xl text-gray-500 font-light font-sans tracking-wide">

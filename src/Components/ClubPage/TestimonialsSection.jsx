@@ -32,11 +32,11 @@ const TestimonialsSection = ({ data }) => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl text-center flex flex-col">
         
         <div className="mb-12 text-center w-full">
-             <h2 className="font-kelloggs text-3xl sm:text-4xl text-gray-900 mb-2 uppercase">
-               {title}
+             <h2 className="font-kelloggs text-2xl sm:text-3xl font-bold text-gray-900 mb-2 uppercase">
+               {title.toUpperCase()}
              </h2>
 
-             <h3 className="text-xl text-gray-600 font-medium">
+             <h3 className="text-lg text-gray-600 font-medium">
                {description}
              </h3>
         </div>
@@ -52,7 +52,7 @@ const TestimonialsSection = ({ data }) => {
                   {testimonials?.map((t, index) => (
                     <div className="flex-[0_0_100%] min-w-0" key={index}>
                       <div className="px-4 text-center">
-                          <p className="text-xl sm:text-2xl font-serif italic text-gray-800 mb-8 leading-relaxed">
+                          <p className="text-lg sm:text-xl font-serif italic text-gray-800 mb-8 leading-relaxed">
                             "{t.comment}"
                           </p>
                           <p className="font-bold text-kelloggs-red uppercase tracking-wide text-sm">

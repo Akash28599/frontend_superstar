@@ -22,8 +22,8 @@ const WaitlistSection = ({ data }) => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-4xl text-center flex flex-col items-center">
         
         <div className="mb-10 text-center w-full">
-          <h2 className="font-kelloggs text-4xl sm:text-5xl text-kelloggs-red mb-4 uppercase tracking-wide">
-            {title}
+          <h2 className="font-kelloggs text-2xl sm:text-3xl font-bold text-kelloggs-red mb-4 uppercase tracking-wide">
+            {title.toUpperCase()}
           </h2>
           <p className="text-gray-600 text-lg">
             {description}

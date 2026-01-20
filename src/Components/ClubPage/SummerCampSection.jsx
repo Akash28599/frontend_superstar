@@ -11,8 +11,8 @@ const SummerCampSection = ({ data }) => {
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl flex flex-col items-center text-center">
         
-         <h2 className="font-kelloggs text-3xl sm:text-4xl lg:text-5xl text-gray-900 uppercase mb-10 tracking-tight">
-            {title}
+         <h2 className="font-bold font-kelloggs text-xl sm:text-2xl lg:text-3xl text-gray-900 uppercase mb-10 tracking-tight">
+            {title.toUpperCase()}
         </h2>
 
         {/* 2. Image (1200x600) */}

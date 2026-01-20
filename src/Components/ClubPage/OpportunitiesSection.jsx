@@ -9,8 +9,8 @@ const OpportunitiesSection = ({ data }) => {
     <section className="py-24 bg-kelloggs-red text-white relative">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 max-w-6xl flex flex-col items-center">
         
-        <h2 className="font-kelloggs text-4xl sm:text-5xl lg:text-6xl mb-6 text-white uppercase tracking-tight">
-          {title}
+        <h2 className="font-kelloggs text-2xl sm:text-3xl lg:text-4xl font-bold mb-6 text-white uppercase tracking-tight">
+          {title.toUpperCase()}
         </h2>
         
         <p className="text-lg sm:text-xl text-gray-300 mb-12 leading-relaxed">
