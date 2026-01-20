@@ -4,6 +4,7 @@ import { Heart, Facebook, Twitter, Linkedin, Link as LinkIcon, Download, FileTex
 import Episode1 from '../QuizRegistration/Episode1.pdf';
 import Episode5 from '../QuizRegistration/Episode5.pdf';
 import RecentBlogs from './RecentBlogs';
+import StoryBookViewer from './StoryBookViewer';
 
 const BlogDetail = () => {
     const { id } = useParams();
@@ -75,30 +76,21 @@ const BlogDetail = () => {
 
                 {/* PDF Link */}
                 {/* PDF Link */}
+                {/* PDF Story Book Viewer */}
                 {section.pdf && (
-                    <div className="mb-12 border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer">
-                        <a
-                            href={blog.blog_title?.toLowerCase().includes('episode 5') ? Episode5 : (blog.sub_title?.toLowerCase() === 'story' ? Episode1 : section.pdf)}
-                            download={blog.blog_title?.toLowerCase().includes('episode 5') ? "Episode 5.pdf" : (blog.sub_title?.toLowerCase() === 'story' ? "Episode 1.pdf" : true)}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-between w-full text-decoration-none group"
-                        >
-                            <div className="flex items-center space-x-4">
-                                <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center text-red-500">
-                                    <FileText size={28} />
-                                </div>
-                                <div className="flex flex-col text-left">
-                                    <span className="font-bold text-gray-900 text-lg">
-                                        {blog.blog_title?.toLowerCase().includes('episode 5') ? "Episode 5.pdf" : (blog.sub_title?.toLowerCase() === 'story' ? "Episode 1.pdf" : "Attached Document")}
-                                    </span>
-                                    <span className="text-sm text-gray-500">
-                                        {blog.blog_title?.toLowerCase().includes('episode 5') ? "Download PDF" : (blog.sub_title?.toLowerCase() === 'story' ? "Download PDF • 58.70MB" : "Download PDF")}
-                                    </span>
-                                </div>
-                            </div>
-                            <Download className="text-gray-400 group-hover:text-gray-600" size={24} />
-                        </a>
+                    <div className="mb-12 w-full">
+                        <StoryBookViewer 
+                            pdfUrl={
+                                blog.blog_title?.toLowerCase().includes('episode 5') 
+                                ? Episode5 
+                                : (blog.sub_title?.toLowerCase() === 'story' ? Episode1 : section.pdf)
+                            }
+                            title={
+                                blog.blog_title?.toLowerCase().includes('episode 5') 
+                                ? "Episode 5: The Grand Finale" 
+                                : (blog.sub_title?.toLowerCase() === 'story' ? "Episode 1: The Beginning" : "Story Book")
+                            }
+                        />
                     </div>
                 )}
 
