@@ -78,7 +78,7 @@ const HeroSection = ({ data }) => {
               key={index}
               onClick={() => handleOpenModal(index === 0 ? 'join' : 'login')}
               className={`
-                 flex items-center justify-center gap-3 px-8 py-4 font-bold text-lg transition-all duration-300 rounded-full shadow-lg bg-white text-kelloggs-red hover:bg-gray-100 hover:scale-105
+                 flex items-center justify-center gap-3 px-8 py-4 font-bold text-lg transition-all duration-300 rounded-full shadow-lg bg-white text-kelloggs-red hover:bg-kelloggs-gold hover:scale-105
                `}
             >
               {getIcon(btn.icon)}
