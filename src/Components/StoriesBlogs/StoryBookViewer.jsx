@@ -29,14 +29,18 @@ const StoryBookViewer = ({ pdfUrl, title, onClose }) => {
   const flipBookRef = useRef(null);
   
   const [dimensions, setDimensions] = useState({ width: 400, height: 570 }); 
+  const [shouldScroll, setShouldScroll] = useState(false);
 
   useEffect(() => {
     const updateDimensions = () => {
       let width, height;
       
+      // Check for high zoom levels (approx 175%+)
+      setShouldScroll(window.devicePixelRatio >= 1.74);
+
       if (isFullScreen) {
-          // Prioritize height to use full screen real estate
-          const maxHeight = window.innerHeight * 0.8;
+          // Prioritize height to use full screen real estate, ensuring header clearance
+          const maxHeight = window.innerHeight - 80;
           height = maxHeight;
           
           // Calculate proportional width based on REAL ratio
@@ -104,8 +108,11 @@ const StoryBookViewer = ({ pdfUrl, title, onClose }) => {
 
   return (
     <div className={`
-      flex flex-col items-center justify-center rounded-xl transition-all duration-300 overflow-hidden
-      ${isFullScreen ? 'fixed inset-0 z-50 p-4 bg-gray-900' : 'relative w-full p-4 border border-white/20 shadow-xl bg-kelloggs-red'}
+      flex flex-col items-center rounded-xl transition-all duration-300
+      ${isFullScreen 
+          ? `fixed inset-0 z-50 p-2 sm:p-4 bg-gray-900 ${shouldScroll ? 'overflow-y-auto' : 'overflow-hidden justify-center'}` 
+          : 'relative w-full p-4 border border-white/20 shadow-xl bg-kelloggs-red overflow-hidden'
+      }
     `}>
       
       {/* Decorative Blobs for depth (Only in normal view) */}
@@ -136,7 +143,7 @@ const StoryBookViewer = ({ pdfUrl, title, onClose }) => {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 w-full flex items-center justify-center relative overflow-hidden">
+      <div className={`flex-1 w-full flex items-center justify-center relative ${shouldScroll ? 'my-auto' : ''}`}>
         
          {/* Navigation Buttons */}
          <button 
@@ -174,9 +181,9 @@ const StoryBookViewer = ({ pdfUrl, title, onClose }) => {
                         width={Math.floor(dimensions.width)}
                         height={Math.floor(dimensions.height)}
                         size="fixed"
-                        minWidth={200}
+                        minWidth={100}
                         maxWidth={1000}
-                        minHeight={300}
+                        minHeight={100}
                         maxHeight={1533}
                         maxShadowOpacity={0.5}
                         showCover={true}
