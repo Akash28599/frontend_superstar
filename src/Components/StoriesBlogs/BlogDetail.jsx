@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Heart, Facebook, Twitter, Linkedin, Link as LinkIcon } from 'lucide-react';
 import Episode1 from '../QuizRegistration/Episode1.pdf';
+import Episode2 from '../QuizRegistration/Episode2.pdf';
+import Episode4 from '../QuizRegistration/Episode4.pdf';
 import Episode5 from '../QuizRegistration/Episode5.pdf';
 import RecentBlogs from './RecentBlogs';
 import StoryBookViewer from './StoryBookViewer';
@@ -65,7 +67,34 @@ const BlogDetail = ({ siteSettings }) => {
 
     // Helper to render body content
     const renderBodySection = (key, section) => {
+        // Determine PDF to show
+        let pdfToDisplay = section.pdf;
+        let pdfTitle = "Story Book";
+        
+        if (pdfToDisplay) {
+            const lowerBlogTitle = blog.blog_title?.toLowerCase() || "";
+            const lowerSubTitle = blog.sub_title?.toLowerCase() || "";
+
+            if (lowerBlogTitle.includes('episode 5')) {
+                pdfToDisplay = Episode5;
+                pdfTitle = "Episode 5: The Grand Finale";
+            } else if (lowerBlogTitle.includes('episode 4')) {
+                pdfToDisplay = Episode4;
+                pdfTitle = "Episode 4";
+            } else if (lowerBlogTitle.includes('episode 3')) {
+                pdfToDisplay = null; // Not available
+            } else if (lowerBlogTitle.includes('episode 2')) {
+                pdfToDisplay = Episode2;
+                pdfTitle = "Episode 2";
+            } else if (lowerSubTitle === 'story') {
+                // Fallback for generic story -> Episode 1
+                pdfToDisplay = Episode1;
+                pdfTitle = "Episode 1: The Beginning";
+            }
+        }
+
         return (
+
             <div key={key} className="mb-12">
                 {/* Section Image */}
                 {section.image && (
@@ -82,19 +111,11 @@ const BlogDetail = ({ siteSettings }) => {
                 {/* PDF Link */}
                 {/* PDF Link */}
                 {/* PDF Story Book Viewer */}
-                {section.pdf && (
+                {pdfToDisplay && (
                     <div className="mb-12 w-full">
                         <StoryBookViewer 
-                            pdfUrl={
-                                blog.blog_title?.toLowerCase().includes('episode 5') 
-                                ? Episode5 
-                                : (blog.sub_title?.toLowerCase() === 'story' ? Episode1 : section.pdf)
-                            }
-                            title={
-                                blog.blog_title?.toLowerCase().includes('episode 5') 
-                                ? "Episode 5: The Grand Finale" 
-                                : (blog.sub_title?.toLowerCase() === 'story' ? "Episode 1: The Beginning" : "Story Book")
-                            }
+                            pdfUrl={pdfToDisplay}
+                            title={pdfTitle}
                         />
                     </div>
                 )}

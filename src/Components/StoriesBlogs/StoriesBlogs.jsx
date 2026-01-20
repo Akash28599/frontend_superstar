@@ -16,7 +16,27 @@ const StoriesBlogs = ({ type = 'blogs' }) => {
                 const url = type === 'stories' ? API_URL_STORIES : API_URL_ALL;
                 const response = await fetch(url);
                 const data = await response.json();
-                setPosts(data.data || []);
+                let fetchedPosts = data.data || [];
+
+                if (type === 'stories') {
+                    fetchedPosts.sort((a, b) => {
+                        const getEpisodeNum = (post) => {
+                            const title = post.blog_title || "";
+                            // Check for explicit "Episode X"
+                            const match = title.match(/Episode\s+(\d+)/i);
+                            if (match) return parseInt(match[1], 10);
+                            
+                            // Fallback: If subtitle is 'story' and no Episode # found, treat as Episode 1
+                            const sub = post.sub_title || "";
+                            if (sub.toLowerCase().trim() === 'story') return 1;
+                            
+                            return 9999;
+                        };
+                        return getEpisodeNum(a) - getEpisodeNum(b);
+                    });
+                }
+
+                setPosts(fetchedPosts);
             } catch (error) {
                 console.error("Error fetching posts:", error);
             } finally {

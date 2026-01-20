@@ -39,16 +39,26 @@ const StoryBookViewer = ({ pdfUrl, title, onClose }) => {
       setShouldScroll(window.devicePixelRatio >= 1.74);
 
       if (isFullScreen) {
-          // Prioritize height to use full screen real estate, ensuring header clearance
-          const maxHeight = window.innerHeight - 80;
-          height = maxHeight;
+          // Calculate available space
+          // Buffer for header/margins. 
+          const availHeight = window.innerHeight - 80; 
+          const availWidth = window.innerWidth - 40; 
           
-          // Calculate proportional width based on REAL ratio
-          width = height / bookRatio;
+          const maxPageHeight = availHeight;
+          const maxPageWidth = availWidth / 2;
+
+          // Maximize height first
+          height = maxPageHeight;
           
-          if (width > (window.innerWidth - 60) / 2) {
-              width = (window.innerWidth - 60) / 2;
-              height = width * bookRatio;
+          // User Request: "increase the width more only width"
+          // We intentionally stretch the width by 25% beyond the aspect ratio
+          width = (height / bookRatio) * 1.25;
+
+          // Cap at screen width
+          if (width > maxPageWidth) {
+              width = maxPageWidth;
+              // We do NOT reduce height here, allowing the book to fill the screen 
+              // even if it means further distortion, as per user request.
           }
 
       } else {
@@ -110,7 +120,7 @@ const StoryBookViewer = ({ pdfUrl, title, onClose }) => {
     <div className={`
       flex flex-col items-center rounded-xl transition-all duration-300
       ${isFullScreen 
-          ? `fixed inset-0 z-50 p-2 sm:p-4 bg-gray-900 ${shouldScroll ? 'overflow-y-auto' : 'overflow-hidden justify-center'}` 
+          ? `fixed inset-0 z-50 p-0 bg-gray-900 ${shouldScroll ? 'overflow-y-auto' : 'overflow-hidden justify-center'}` 
           : 'relative w-full p-4 border border-white/20 shadow-xl bg-kelloggs-red overflow-hidden'
       }
     `}>
@@ -178,13 +188,14 @@ const StoryBookViewer = ({ pdfUrl, title, onClose }) => {
              >
                 {numPages && (
                     <HTMLFlipBook 
+                        key={isFullScreen ? 'fullscreen' : 'normal'}
                         width={Math.floor(dimensions.width)}
                         height={Math.floor(dimensions.height)}
                         size="fixed"
                         minWidth={100}
-                        maxWidth={1000}
+                        maxWidth={3000}
                         minHeight={100}
-                        maxHeight={1533}
+                        maxHeight={3000}
                         maxShadowOpacity={0.5}
                         showCover={true}
                         mobileScrollSupport={true}
@@ -202,7 +213,7 @@ const StoryBookViewer = ({ pdfUrl, title, onClose }) => {
                                     onLoadSuccess={index === 0 ? onPageLoadSuccess : undefined}
                                     renderTextLayer={false}
                                     renderAnnotationLayer={false}
-                                    className="h-full w-full flex items-center justify-center [&_canvas]:!h-full [&_canvas]:!w-full [&_canvas]:object-contain"
+                                    className="h-full w-full flex items-center justify-center [&_canvas]:!h-full [&_canvas]:!w-full"
                                 />
                             </PageCover>
                         ))}
