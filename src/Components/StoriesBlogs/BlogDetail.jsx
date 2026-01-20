@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Heart, Facebook, Twitter, Linkedin, Link as LinkIcon, Download, FileText } from 'lucide-react';
 import Episode1 from '../QuizRegistration/Episode1.pdf';
+import Episode5 from '../QuizRegistration/Episode5.pdf';
 import RecentBlogs from './RecentBlogs';
 
 const BlogDetail = () => {
@@ -77,8 +78,8 @@ const BlogDetail = () => {
                 {section.pdf && (
                     <div className="mb-12 border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer">
                         <a
-                            href={blog.sub_title?.toLowerCase() === 'story' ? Episode1 : section.pdf}
-                            download={blog.sub_title?.toLowerCase() === 'story' ? "Episode 1.pdf" : true}
+                            href={blog.blog_title?.toLowerCase().includes('episode 5') ? Episode5 : (blog.sub_title?.toLowerCase() === 'story' ? Episode1 : section.pdf)}
+                            download={blog.blog_title?.toLowerCase().includes('episode 5') ? "Episode 5.pdf" : (blog.sub_title?.toLowerCase() === 'story' ? "Episode 1.pdf" : true)}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center justify-between w-full text-decoration-none group"
@@ -89,10 +90,10 @@ const BlogDetail = () => {
                                 </div>
                                 <div className="flex flex-col text-left">
                                     <span className="font-bold text-gray-900 text-lg">
-                                        {blog.sub_title?.toLowerCase() === 'story' ? "Episode 1.pdf" : "Attached Document"}
+                                        {blog.blog_title?.toLowerCase().includes('episode 5') ? "Episode 5.pdf" : (blog.sub_title?.toLowerCase() === 'story' ? "Episode 1.pdf" : "Attached Document")}
                                     </span>
                                     <span className="text-sm text-gray-500">
-                                        {blog.sub_title?.toLowerCase() === 'story' ? "Download PDF • 58.70MB" : "Download PDF"}
+                                        {blog.blog_title?.toLowerCase().includes('episode 5') ? "Download PDF" : (blog.sub_title?.toLowerCase() === 'story' ? "Download PDF • 58.70MB" : "Download PDF")}
                                     </span>
                                 </div>
                             </div>
