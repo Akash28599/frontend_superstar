@@ -45,9 +45,9 @@ export function LayoutComponent({ settingsData, dpr }) {
         <Route path='/instructions' element={<Instructions />} />
         <Route path='/thank-you' element={<ThankYou />} />
         <Route path='/stories' element={<StoriesBlogs type="stories" />} />
-        <Route path='/stories/:id' element={<BlogDetail />} /> 
+        <Route path='/stories/:id' element={<BlogDetail siteSettings={settingsData}/>} /> 
         <Route path='/blog' element={<StoriesBlogs type="blogs" />} />
-        <Route path='/blog/:id' element={<BlogDetail />} />
+        <Route path='/blog/:id' element={<BlogDetail siteSettings={settingsData}/>} />
       </Routes>
       {!hideFooter && (
         <FooterLayout settingsData={settingsData} />

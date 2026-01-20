@@ -5,14 +5,15 @@ import Episode1 from '../QuizRegistration/Episode1.pdf';
 import Episode5 from '../QuizRegistration/Episode5.pdf';
 import RecentBlogs from './RecentBlogs';
 import StoryBookViewer from './StoryBookViewer';
+import { openUrl } from '../../Utils/Utilities';
 
-const BlogDetail = () => {
+const BlogDetail = ({ siteSettings }) => {
     const { id } = useParams();
     const [blog, setBlog] = useState(null);
     const [loading, setLoading] = useState(true);
-
     const [commentsList, setCommentsList] = useState([]);
     const [commentText, setCommentText] = useState("");
+    const [copied, setCopied] = useState(false);
 
     const handlePostComment = () => {
         if (!commentText.trim()) return;
@@ -28,7 +29,11 @@ const BlogDetail = () => {
         setCommentsList([newComment, ...commentsList]);
         setCommentText("");
     };
-
+    const handleCopy = async () => {
+        await navigator.clipboard.writeText(window.location.href);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1500);
+    };
     useEffect(() => {
         const API_URL_FULL = `${process.env.REACT_APP_STRAPI_URL}/api/blogs/${id}?fields[0]=blog_title&fields[1]=sub_title&fields[2]=user_name&fields[3]=post_date&fields[4]=short_display_description&fields[5]=read_time&fields[6]=views&fields[7]=likes&fields[8]=comments&fields[9]=blog_body&populate=blog_thumbail`;
 
@@ -173,6 +178,7 @@ const BlogDetail = () => {
     // Parse blog_body keys
     const sortedBodyKeys = blog.blog_body ? Object.keys(blog.blog_body).sort((a, b) => parseInt(a) - parseInt(b)) : [];
 
+
     return (
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-12 font-sans">
             {/* Header Info */}
@@ -200,10 +206,15 @@ const BlogDetail = () => {
             {/* Social Share (Placeholder) */}
             <div className="flex items-center justify-between border-t border-b border-gray-100 py-4 mb-10">
                 <div className="flex space-x-4">
-                    <button className="text-gray-400 hover:text-gray-600"><Facebook size={20} /></button>
-                    <button className="text-gray-400 hover:text-gray-600"><Twitter size={20} /></button>
-                    <button className="text-gray-400 hover:text-gray-600"><Linkedin size={20} /></button>
-                    <button className="text-gray-400 hover:text-gray-600"><LinkIcon size={20} /></button>
+                    <button className="text-gray-400 hover:text-gray-600" onClick={() => openUrl(siteSettings?.facebookurl)}><Facebook size={20} /></button>
+                    <button className="text-gray-400 hover:text-gray-600" onClick={() => openUrl(siteSettings?.twitterurl)}><Twitter size={20} /></button>
+                    <button className="text-gray-400 hover:text-gray-600" ><Linkedin size={20} /></button>
+                    <button className="text-gray-400 hover:text-gray-600 relative" onClick={handleCopy}><LinkIcon size={20} />
+                        {copied && (
+                            <span className="absolute -top-8 left-1/2 -translate-x-1/2 text-xs bg-black text-white px-2 py-1 rounded">
+                                Copied!
+                            </span>
+                        )}</button>
                 </div>
                 <div className="flex space-x-4 text-gray-500 text-sm">
                     {/* <span>{blog.views} views</span>
@@ -228,7 +239,7 @@ const BlogDetail = () => {
                 </div>
             </div>
             <div className='mt-12'>
-                <RecentBlogs id={id}/>
+                <RecentBlogs id={id} />
             </div>
             {/* Comment Section */}
             <div className="mt-12">
