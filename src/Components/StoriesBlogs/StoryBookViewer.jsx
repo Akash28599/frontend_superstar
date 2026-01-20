@@ -188,7 +188,7 @@ const StoryBookViewer = ({ pdfUrl, title, onClose }) => {
              >
                 {numPages && (
                     <HTMLFlipBook 
-                        key={isFullScreen ? 'fullscreen' : 'normal'}
+                        key={`${isFullScreen ? 'fullscreen' : 'normal'}-${bookRatio}`}
                         width={Math.floor(dimensions.width)}
                         height={Math.floor(dimensions.height)}
                         size="fixed"
