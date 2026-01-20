@@ -25,13 +25,13 @@ const SummerCampSection = ({ data }) => {
         </div>
 
         {/* 3. Description */}
-        <p className="text-gray-700 text-lg sm:text-xl leading-relaxed mb-8 max-w-4xl">
+        <p className="text-gray-700 text-lg sm:text-xl leading-relaxed mb-8 max-w-4xl text-left self-start">
             {description}
         </p>
 
         {/* 4. Badge */}
          {block_text && (
-            <div className="inline-flex items-center justify-center gap-3 px-8 py-4 border-2 border-kelloggs-red text-kelloggs-red font-bold text-lg bg-red-50 rounded-full shadow-sm">
+            <div className="inline-flex items-center justify-center gap-3 px-8 py-4 border-2 border-kelloggs-red text-kelloggs-red font-bold text-lg bg-red-50 rounded-full shadow-sm self-start">
                 <span className="text-xl">✓</span>
                 <span>{block_text.replace(/^✓\s*/, '')}</span>
             </div>
