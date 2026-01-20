@@ -35,42 +35,42 @@ const AuthModal = ({ isOpen, onClose, type }) => {
         ></div>
 
         {/* Modal Card */}
-        <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden animate-fade-in-up">
+        <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-xs 2xl:max-w-md overflow-hidden animate-fade-in-up max-h-[95vh] overflow-y-auto custom-scrollbar">
             
             {/* Header */}
-            <div className="bg-kelloggs-red p-6 text-white text-center relative">
+            <div className="bg-kelloggs-red px-4 py-3 2xl:p-6 text-white text-center relative sticky top-0 z-10">
                 <button 
                     onClick={onClose} 
-                    className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
+                    className="absolute top-2 right-2 2xl:top-4 2xl:right-4 text-white/80 hover:text-white transition-colors"
                 >
                     <CloseIcon />
                 </button>
-                <h2 className="font-kelloggs text-3xl mb-1">{title}</h2>
-                <p className="text-red-100 text-sm">{subTitle}</p>
+                <h2 className="font-kelloggs text-lg 2xl:text-3xl mb-0.5">{title}</h2>
+                <p className="text-red-100 text-[10px] 2xl:text-sm">{subTitle}</p>
             </div>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="p-8 flex flex-col gap-4">
+            <form onSubmit={handleSubmit} className="px-4 py-3 2xl:p-8 flex flex-col gap-2 2xl:gap-4">
                 
                 {isJoin && (
                     <>
                         <div>
-                            <label className="block text-gray-700 text-sm font-bold mb-2">Student Name</label>
+                            <label className="block text-gray-700 text-xs 2xl:text-sm font-bold mb-0.5 2xl:mb-2">Student Name</label>
                             <input 
                                 type="text" 
                                 name="name"
-                                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-kelloggs-red focus:ring-2 focus:ring-red-100 outline-none transition-all"
+                                className="w-full px-4 py-1.5 2xl:py-3 text-sm 2xl:text-base rounded-lg border border-gray-300 focus:border-kelloggs-red focus:ring-2 focus:ring-red-100 outline-none transition-all"
                                 placeholder="Enter your name"
                                 onChange={handleChange}
                                 required
                             />
                         </div>
                          <div>
-                            <label className="block text-gray-700 text-sm font-bold mb-2">Parent's Name</label>
+                            <label className="block text-gray-700 text-xs 2xl:text-sm font-bold mb-0.5 2xl:mb-2">Parent's Name</label>
                             <input 
                                 type="text" 
                                 name="parentName"
-                                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-kelloggs-red focus:ring-2 focus:ring-red-100 outline-none transition-all"
+                                className="w-full px-4 py-1.5 2xl:py-3 text-sm 2xl:text-base rounded-lg border border-gray-300 focus:border-kelloggs-red focus:ring-2 focus:ring-red-100 outline-none transition-all"
                                 placeholder="Enter parent's name"
                                 onChange={handleChange}
                                 required
@@ -80,11 +80,11 @@ const AuthModal = ({ isOpen, onClose, type }) => {
                 )}
 
                 <div>
-                    <label className="block text-gray-700 text-sm font-bold mb-2">Email Address</label>
+                    <label className="block text-gray-700 text-xs 2xl:text-sm font-bold mb-0.5 2xl:mb-2">Email Address</label>
                     <input 
                         type="email" 
                         name="email"
-                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-kelloggs-red focus:ring-2 focus:ring-red-100 outline-none transition-all"
+                        className="w-full px-4 py-1.5 2xl:py-3 text-sm 2xl:text-base rounded-lg border border-gray-300 focus:border-kelloggs-red focus:ring-2 focus:ring-red-100 outline-none transition-all"
                         placeholder="john@example.com"
                         onChange={handleChange}
                         required
@@ -93,11 +93,11 @@ const AuthModal = ({ isOpen, onClose, type }) => {
 
                  {isJoin && (
                     <div>
-                        <label className="block text-gray-700 text-sm font-bold mb-2">Phone Number</label>
+                        <label className="block text-gray-700 text-xs 2xl:text-sm font-bold mb-0.5 2xl:mb-2">Phone Number</label>
                         <input 
                             type="tel" 
                             name="phone"
-                            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-kelloggs-red focus:ring-2 focus:ring-red-100 outline-none transition-all"
+                            className="w-full px-4 py-1.5 2xl:py-3 text-sm 2xl:text-base rounded-lg border border-gray-300 focus:border-kelloggs-red focus:ring-2 focus:ring-red-100 outline-none transition-all"
                             placeholder="+234..."
                             onChange={handleChange}
                             required
@@ -107,11 +107,11 @@ const AuthModal = ({ isOpen, onClose, type }) => {
 
                 {!isJoin && (
                      <div>
-                        <label className="block text-gray-700 text-sm font-bold mb-2">Password</label>
+                        <label className="block text-gray-700 text-xs 2xl:text-sm font-bold mb-0.5 2xl:mb-2">Password</label>
                         <input 
                             type="password" 
                             name="password"
-                            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-kelloggs-red focus:ring-2 focus:ring-red-100 outline-none transition-all"
+                            className="w-full px-4 py-1.5 2xl:py-3 text-sm 2xl:text-base rounded-lg border border-gray-300 focus:border-kelloggs-red focus:ring-2 focus:ring-red-100 outline-none transition-all"
                             placeholder="••••••••"
                             onChange={handleChange}
                             required
@@ -121,7 +121,7 @@ const AuthModal = ({ isOpen, onClose, type }) => {
 
                 <button 
                     type="submit" 
-                    className="w-full bg-kelloggs-red text-white font-bold py-4 rounded-xl shadow-lg hover:bg-red-700 transform hover:scale-[1.02] transition-all mt-4"
+                    className="w-full bg-kelloggs-red text-white font-bold py-2 2xl:py-4 rounded-xl shadow-lg hover:bg-red-700 transform hover:scale-[1.02] transition-all mt-2 text-sm 2xl:text-base"
                 >
                     {isJoin ? 'Join Now' : 'Log In'}
                 </button>
