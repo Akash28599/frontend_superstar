@@ -7,7 +7,7 @@ const StoriesBlogs = ({ type = 'blogs' }) => {
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     useEffect(() => {
-        const API_URL_ALL = `${process.env.REACT_APP_STRAPI_URL}/api/blogs?fields[0]=blog_title&fields[1]=sub_title&fields[2]=user_name&fields[3]=post_date&fields[4]=short_display_description&fields[5]=read_time&fields[6]=views&fields[7]=likes&fields[8]=comments&fields[9]=createdAt&fields[10]=updatedAt&fields[11]=publishedAt&populate=blog_thumbail`;
+        const API_URL_ALL = `${process.env.REACT_APP_STRAPI_URL}/api/blogs?fields[0]=blog_title&fields[1]=sub_title&fields[2]=user_name&fields[3]=post_date&fields[4]=short_display_description&fields[5]=read_time&fields[6]=views&fields[7]=likes&fields[8]=comments&fields[9]=createdAt&fields[10]=updatedAt&fields[11]=publishedAt&populate=blog_thumbail&filters[sub_title][$ne]=story`;
         const API_URL_STORIES = `${process.env.REACT_APP_STRAPI_URL}/api/blogs?fields[0]=blog_title&fields[1]=sub_title&fields[2]=user_name&fields[3]=post_date&fields[4]=short_display_description&fields[5]=read_time&fields[6]=views&fields[7]=likes&fields[8]=comments&fields[9]=createdAt&fields[10]=updatedAt&fields[11]=publishedAt&filters[sub_title][$eq]=story&populate=blog_thumbail&sort=post_date:asc`;
 
         const fetchPosts = async () => {
