@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Heart, Facebook, Twitter, Linkedin, Link as LinkIcon, Download, FileText } from 'lucide-react';
+import { Heart, Facebook, Twitter, Linkedin, Link as LinkIcon } from 'lucide-react';
 import Episode1 from '../QuizRegistration/Episode1.pdf';
 import Episode5 from '../QuizRegistration/Episode5.pdf';
 import RecentBlogs from './RecentBlogs';
