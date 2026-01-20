@@ -104,7 +104,7 @@ const Navbar = ({ customStyle = {} }) => {
     boxShadow: '0 3px 12px rgba(228, 31, 53, 0.25)'
   };
 
-    const ActiveButtonStyle = {
+  const ActiveButtonStyle = {
     fontFamily: "'Kellogg's Sans', sans-serif",
     fontWeight: 700,
     fontSize: isHighScale ? '13px' : isConstrained ? '15px' : '18px',

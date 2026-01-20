@@ -10,6 +10,8 @@ import Instructions from './Components/QuizRegistration/Instructions';
 import ThankYou from './Components/QuizRegistration/ThankYou';
 import ClubPage from './Pages/ClubPage';
 import FooterLayout from './Components/Footer';
+import StoriesBlogs from './Components/StoriesBlogs/StoriesBlogs';
+import BlogDetail from './Components/StoriesBlogs/BlogDetail';
 
 export function LayoutComponent({ settingsData, dpr }) {
   const location = useLocation();
@@ -19,10 +21,16 @@ export function LayoutComponent({ settingsData, dpr }) {
   const hideFooter = hidePathsFooter.includes(location.pathname);
   const isClubPage = location.pathname === '/club';
 
+  const isRedHeader = location.pathname.startsWith('/stories') || location.pathname.startsWith('/blog');
+
   return (
     <>
       {!hideNavbar && (
-        <div style={{ backgroundColor: '#F60945', height: isClubPage ? '110px' : '0px', transition: 'height 0.3s ease' }}>
+        <div style={{ 
+          backgroundColor: isClubPage ? '#F60945' : '#E41F35', 
+          height: isClubPage ? '110px' : (isRedHeader ? '100px' : '0px'),
+          transition: 'height 0.3s ease'
+        }}>
           <Navbar />
         </div>
       )}
@@ -36,6 +44,10 @@ export function LayoutComponent({ settingsData, dpr }) {
         <Route path='/exam-page' element={<ExamPage />} />
         <Route path='/instructions' element={<Instructions />} />
         <Route path='/thank-you' element={<ThankYou />} />
+        <Route path='/stories' element={<StoriesBlogs type="stories" />} />
+        <Route path='/stories/:id' element={<BlogDetail />} /> 
+        <Route path='/blog' element={<StoriesBlogs type="blogs" />} />
+        <Route path='/blog/:id' element={<BlogDetail />} />
       </Routes>
       {!hideFooter && (
         <FooterLayout settingsData={settingsData} />
