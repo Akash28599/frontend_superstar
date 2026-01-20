@@ -47,11 +47,23 @@ const HeroSection = ({ data }) => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl flex flex-col items-center relative z-10 w-full">
 
         <div className="w-full flex justify-center mb-6 animate-fade-in-up">
-          <img
-            src="https://static.wixstatic.com/media/2bc50d_5084462691044c3695807bbf13840130~mv2.png/v1/fill/w_133,h_137,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/KSS%20Logo_2.png"
-            alt="Kelloggs Superstars Club Logo"
-            className="w-24 h-24 sm:w-32 sm:h-32 object-contain"
-          />
+          <div className="relative w-24 h-24 sm:w-32 sm:h-32">
+            <img
+              src="https://res.cloudinary.com/dogdsavuf/image/upload/v1767182080/large_Kellogg_s_superstars_red_1_78e77d51bc.png"
+              alt="Kelloggs Superstars Club Logo"
+              className="w-full h-full object-contain"
+            />
+            {/* Overlay Image - White Text (Clipped to top part) */}
+            <img
+              src="https://res.cloudinary.com/dogdsavuf/image/upload/v1767182080/large_Kellogg_s_superstars_red_1_78e77d51bc.png"
+              alt=""
+              className="absolute inset-0 w-full h-full object-contain pointer-events-none"
+              style={{
+                clipPath: 'inset(0 0 70% 0)', // Show only top 30% where text is
+                filter: 'brightness(0) invert(1)' // Make it white
+              }}
+            />
+          </div>
         </div>
 
         <h1 className="font-bold font-kelloggs text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-white mb-6 tracking-normal drop-shadow-sm whitespace-nowrap">
