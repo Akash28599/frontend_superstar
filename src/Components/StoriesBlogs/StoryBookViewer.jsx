@@ -35,34 +35,48 @@ const StoryBookViewer = ({ pdfUrl, title, onClose }) => {
     const updateDimensions = () => {
       let width, height;
       
-      // Check for high zoom levels (approx 175%+)
-      setShouldScroll(window.devicePixelRatio >= 1.74);
+      const pixelRatio = window.devicePixelRatio || 1;
+      // User specific: 175% usually maps to varying pixel ratios depending on OS scaling
+      // standard 100% is 1.25 on some laptops, so 1.75 threshold acts as 175% zoom approx
+      const isHighZoom = pixelRatio >= 1.74; 
 
       if (isFullScreen) {
-          // Calculate available space
-          // Buffer for header/margins. 
-          const availHeight = window.innerHeight - 80; 
-          const availWidth = window.innerWidth - 40; 
-          
-          const maxPageHeight = availHeight;
-          const maxPageWidth = availWidth / 2;
+          const availWidth = window.innerWidth - 20; // Minimal side padding
+          const maxPageWidth = availWidth / 2; // Two pages
 
-          // Maximize height first
-          height = maxPageHeight;
-          
-          // User Request: "increase the width more only width"
-          // We intentionally stretch the width by 25% beyond the aspect ratio
-          width = (height / bookRatio) * 1.25;
+          if (isHighZoom) {
+               // Case: 175% and above -> "Fit Width", Scroll Allowed
+               setShouldScroll(true);
+               
+               // Maximize width to fill screen
+               width = maxPageWidth;
+               height = width * bookRatio;
 
-          // Cap at screen width
-          if (width > maxPageWidth) {
-              width = maxPageWidth;
-              // We do NOT reduce height here, allowing the book to fill the screen 
-              // even if it means further distortion, as per user request.
+          } else {
+               // Case: 100%, 125%, 150% -> "Fit Inside", No Scrolling
+               setShouldScroll(false);
+
+               // Calculate strict max height to fit in viewport
+               // Reduced buffer from 100 to 60 to increase size/width while keeping "good padding" (30px top/bottom)
+               const availHeight = window.innerHeight - 60; 
+               
+               // 1. Try fitting to Max Width first
+               let possibleWidth = maxPageWidth;
+               let possibleHeight = possibleWidth * bookRatio;
+
+               if (possibleHeight > availHeight) {
+                   // If fitting to width makes it too tall, fit to height instead
+                   possibleHeight = availHeight;
+                   possibleWidth = possibleHeight / bookRatio;
+               }
+
+               width = possibleWidth;
+               height = possibleHeight;
           }
 
       } else {
-          // Normal mode
+          // Normal interactive mode
+          setShouldScroll(false);
           width = window.innerWidth < 768 ? window.innerWidth - 40 : 400;
           height = width * bookRatio;
       }
@@ -153,7 +167,7 @@ const StoryBookViewer = ({ pdfUrl, title, onClose }) => {
       </div>
 
       {/* Main Content */}
-      <div className={`flex-1 w-full flex items-center justify-center relative ${shouldScroll ? 'my-auto' : ''}`}>
+      <div className={`flex-1 w-full flex items-center justify-center relative ${shouldScroll ? 'my-auto py-10' : ''}`}>
         
          {/* Navigation Buttons */}
          <button 
