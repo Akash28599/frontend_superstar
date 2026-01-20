@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Heart, Facebook, Twitter, Linkedin, Link as LinkIcon, Download, FileText } from 'lucide-react';
 import Episode1 from '../QuizRegistration/Episode1.pdf';
+import RecentBlogs from './RecentBlogs';
 
 const BlogDetail = () => {
     const { id } = useParams();
@@ -75,8 +76,8 @@ const BlogDetail = () => {
                 {/* PDF Link */}
                 {section.pdf && (
                     <div className="mb-12 border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer">
-                        <a 
-                            href={blog.sub_title?.toLowerCase() === 'story' ? Episode1 : section.pdf} 
+                        <a
+                            href={blog.sub_title?.toLowerCase() === 'story' ? Episode1 : section.pdf}
                             download={blog.sub_title?.toLowerCase() === 'story' ? "Episode 1.pdf" : true}
                             target="_blank"
                             rel="noopener noreferrer"
@@ -104,28 +105,28 @@ const BlogDetail = () => {
                 {section.description && Array.isArray(section.description) ? (
                     section.description.map((descItem, index) => {
                         if (typeof descItem === 'string') {
-                           return <p key={index} className="text-lg text-gray-700 leading-relaxed mb-4">{descItem}</p>;
+                            return <p key={index} className="text-lg text-gray-700 leading-relaxed mb-4">{descItem}</p>;
                         }
-                        
+
                         // Handle object content
                         if (descItem.content_type === 'text') {
                             if (Array.isArray(descItem.content)) {
-                                 // Sometimes content might be array of strings? Or handled differently?
-                                 // Based on sample: "content": "..." (string)
-                                 return <p key={index} className="text-lg text-gray-700 leading-relaxed mb-4 text-left">{descItem.content}</p>;
+                                // Sometimes content might be array of strings? Or handled differently?
+                                // Based on sample: "content": "..." (string)
+                                return <p key={index} className="text-lg text-gray-700 leading-relaxed mb-4 text-left">{descItem.content}</p>;
                             }
                             return <p key={index} className="text-lg text-gray-700 leading-relaxed mb-4 text-left">{descItem.content}</p>;
                         }
-                        
+
                         if (descItem.content_type === 'points' || descItem.content_type === 'point') {
-                             return (
+                            return (
                                 <ol key={index} className="list-decimal pl-5 space-y-4 mb-6 text-left">
                                     {Array.isArray(descItem.content) && descItem.content.map((point, pIndex) => {
                                         if (typeof point === 'object') {
                                             const displayTitle = (!point.title || (typeof point.title === 'string' && point.title.startsWith('http'))) ? point.value : point.title;
                                             const isReferences = section.title && section.title.toLowerCase().includes('references');
-                                            const linkClass = isReferences 
-                                                ? "text-blue-600 font-bold underline" 
+                                            const linkClass = isReferences
+                                                ? "text-blue-600 font-bold underline"
                                                 : "text-gray-900 font-bold hover:text-blue-600 hover:underline";
 
                                             // Handle complex points like links
@@ -160,16 +161,16 @@ const BlogDetail = () => {
                                         return <li key={pIndex} className="text-lg text-gray-700 text-left">{point.value || point}</li>;
                                     })}
                                 </ol>
-                             );
+                            );
                         }
 
                         // Fallback for simple string in content array
-                        return null; 
+                        return null;
                     })
                 ) : (
                     // specific case where description is just a string
                     typeof section.description === 'string' && (
-                         <p className="text-lg text-gray-700 leading-relaxed mb-4">{section.description}</p>
+                        <p className="text-lg text-gray-700 leading-relaxed mb-4">{section.description}</p>
                     )
                 )}
             </div>
@@ -196,7 +197,7 @@ const BlogDetail = () => {
                 <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-6 leading-tight text-left">
                     {blog.blog_title}
                 </h1>
-                
+
                 {/* Optional: Add "Updated" date if available */}
                 {/* <div className="text-sm text-gray-500 mb-8">Updated Sep 10, 2026</div> */}
 
@@ -205,16 +206,16 @@ const BlogDetail = () => {
 
             {/* Social Share (Placeholder) */}
             <div className="flex items-center justify-between border-t border-b border-gray-100 py-4 mb-10">
-                 <div className="flex space-x-4">
-                    <button className="text-gray-400 hover:text-gray-600"><Facebook size={20}/></button>
-                    <button className="text-gray-400 hover:text-gray-600"><Twitter size={20}/></button>
-                    <button className="text-gray-400 hover:text-gray-600"><Linkedin size={20}/></button>
-                    <button className="text-gray-400 hover:text-gray-600"><LinkIcon size={20}/></button>
-                 </div>
-                 <div className="flex space-x-4 text-gray-500 text-sm">
+                <div className="flex space-x-4">
+                    <button className="text-gray-400 hover:text-gray-600"><Facebook size={20} /></button>
+                    <button className="text-gray-400 hover:text-gray-600"><Twitter size={20} /></button>
+                    <button className="text-gray-400 hover:text-gray-600"><Linkedin size={20} /></button>
+                    <button className="text-gray-400 hover:text-gray-600"><LinkIcon size={20} /></button>
+                </div>
+                <div className="flex space-x-4 text-gray-500 text-sm">
                     {/* <span>{blog.views} views</span>
                     <span>{blog.comments} comments</span> */}
-                 </div>
+                </div>
             </div>
 
             {/* Main Content */}
@@ -233,23 +234,25 @@ const BlogDetail = () => {
                     <Heart className="text-red-500 cursor-pointer hover:fill-current" />
                 </div>
             </div>
-
+            <div className='mt-12'>
+                <RecentBlogs id={id}/>
+            </div>
             {/* Comment Section */}
-             <div className="mt-12">
+            <div className="mt-12">
                 <h3 className="text-2xl font-bold mb-6">Drop your answer in the comment section below</h3>
                 <div className="flex flex-col space-y-4">
                     <div className="flex space-x-4">
                         <div className="w-10 h-10 rounded-full bg-gray-200 flex-shrink-0 flex items-center justify-center font-bold text-gray-500">G</div>
-                         <textarea 
+                        <textarea
                             className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition-all"
                             rows="3"
                             placeholder="Add a comment..."
                             value={commentText}
                             onChange={(e) => setCommentText(e.target.value)}
-                         ></textarea>
+                        ></textarea>
                     </div>
                     <div className="flex justify-end">
-                        <button 
+                        <button
                             onClick={handlePostComment}
                             disabled={!commentText.trim()}
                             className="bg-red-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
@@ -263,10 +266,10 @@ const BlogDetail = () => {
                 <div className="mt-10 space-y-8">
                     {commentsList.map((comment) => (
                         <div key={comment.id} className="flex space-x-4">
-                             <div className="w-10 h-10 rounded-full bg-gray-200 flex-shrink-0 flex items-center justify-center font-bold text-gray-500">
+                            <div className="w-10 h-10 rounded-full bg-gray-200 flex-shrink-0 flex items-center justify-center font-bold text-gray-500">
                                 {comment.user.charAt(0)}
-                             </div>
-                             <div className="flex-1">
+                            </div>
+                            <div className="flex-1">
                                 <div className="flex items-center justify-between mb-1">
                                     <span className="font-bold text-gray-900">{comment.user}</span>
                                     <span className="text-sm text-gray-500">{formatDate(comment.date)}</span>
@@ -279,11 +282,11 @@ const BlogDetail = () => {
                                     </button>
                                     <button className="hover:text-blue-600 transition-colors">Reply</button>
                                 </div>
-                             </div>
+                            </div>
                         </div>
                     ))}
                 </div>
-             </div>
+            </div>
         </div>
     );
 };
