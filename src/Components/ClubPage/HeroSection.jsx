@@ -29,7 +29,7 @@ const HeroSection = ({ data }) => {
   const { mainHeading, mainSubHeading, mainDescription, mainButtonData } = data;
 
   return (
-    <section className="py-10 bg-kelloggs-red text-center relative overflow-hidden min-h-[80vh] flex flex-col items-center">
+    <section className="py-10 2xl:pb-20 bg-kelloggs-red text-center relative overflow-hidden min-h-[80vh] flex flex-col items-center">
 
 
       {/* Decorative Blob for depth */}
@@ -40,18 +40,18 @@ const HeroSection = ({ data }) => {
         {/* SECTION 1: Logo (Left - 2 Cols) */}
         <div className="lg:col-span-2 flex justify-center lg:justify-start w-full min-w-0">
           <div className="relative w-48 h-48 sm:w-56 sm:h-56 lg:w-48 lg:h-48 xl:w-64 xl:h-64 2xl:w-80 2xl:h-80 transition-transform hover:scale-105 duration-300">
-             <img
+            <img
               src="https://res.cloudinary.com/dogdsavuf/image/upload/v1767182080/large_Kellogg_s_superstars_red_1_78e77d51bc.png"
               alt="Kelloggs Superstars Club Logo"
               className="w-full h-full object-contain drop-shadow-2xl"
             />
-             <img
+            <img
               src="https://res.cloudinary.com/dogdsavuf/image/upload/v1767182080/large_Kellogg_s_superstars_red_1_78e77d51bc.png"
               alt=""
               className="absolute inset-0 w-full h-full object-contain pointer-events-none"
               style={{
-                clipPath: 'inset(0 0 70% 0)', 
-                filter: 'brightness(0) invert(1)' 
+                clipPath: 'inset(0 0 70% 0)',
+                filter: 'brightness(0) invert(1)'
               }}
             />
           </div>
@@ -59,7 +59,7 @@ const HeroSection = ({ data }) => {
 
         {/* SECTION 2: Content (Middle - 8 Cols) - PERFECTLY CENTERED */}
         <div className="lg:col-span-8 flex flex-col items-center justify-center text-center z-20 px-2 lg:px-0 2xl:translate-y-12">
-          
+
           <h1 className="font-bold font-kelloggs text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl 2xl:text-7xl text-white mb-6 tracking-tight drop-shadow-md leading-tight">
             {mainHeading || "Kellogg's Superstars Club"}
           </h1>
@@ -69,9 +69,9 @@ const HeroSection = ({ data }) => {
             {mainSubHeading}
           </h2>
 
-           {/* Description Box */}
-          <div className="mb-8 2xl:mb-12 w-full max-w-2xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-5xl mx-auto">
-             <p className="font-sans text-white text-lg lg:text-lg xl:text-xl 2xl:text-2xl font-medium leading-relaxed opacity-100 drop-shadow-sm">
+          {/* Description Box */}
+          <div className="mb-8 2xl:mb-12 w-full max-w-2xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-4xl mx-auto">
+            <p className="font-sans text-white text-lg lg:text-lg xl:text-xl 2xl:text-2xl font-medium leading-relaxed opacity-100 drop-shadow-sm">
               {mainDescription}
             </p>
           </div>
@@ -96,14 +96,27 @@ const HeroSection = ({ data }) => {
 
         {/* SECTION 3: Coco Image (Right - 2 Cols) - Corner aligned */}
         <div className="lg:col-span-2 flex justify-center lg:justify-end relative h-full items-end mt-10 lg:mt-0 overflow-visible">
-             {/* Background Glow */}
-             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-white/20 blur-3xl rounded-full pointer-events-none"></div>
-             
-             <img
-              src="https://static.wixstatic.com/media/2bc50d_b973282d09b64a5887aab8ba319849af~mv2.png/v1/fill/w_355,h_530,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/cocoo.png"
-              alt="Coco Monkey"
-              className="w-[70%] sm:w-[60%] lg:w-[220px] xl:w-[220px] 2xl:w-[140%] max-w-none h-auto object-contain drop-shadow-2xl transform rotate-3 origin-bottom-right transition-transform lg:translate-x-8 lg:translate-y-16 xl:translate-y-16 2xl:translate-y-24"
-            />
+          {/* Background Glow */}
+
+          <img
+            src="https://static.wixstatic.com/media/2bc50d_b973282d09b64a5887aab8ba319849af~mv2.png/v1/fill/w_355,h_530,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/cocoo.png"
+            alt="Coco Monkey"
+           className="
+  block
+  w-[clamp(28vh,44vh,60vh)]
+  max-w-none
+  h-auto
+  object-contain
+  drop-shadow-2xl
+  rotate-3
+  origin-bottom-right
+  transition-transform
+  lg:translate-x-8 lg:translate-y-16
+  xl:translate-y-16
+  2xl:translate-y-24
+"
+
+          />
         </div>
 
       </div>
