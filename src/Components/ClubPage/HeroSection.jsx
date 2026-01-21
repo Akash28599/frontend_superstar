@@ -102,7 +102,7 @@ const HeroSection = ({ data }) => {
              <img
               src="https://static.wixstatic.com/media/2bc50d_b973282d09b64a5887aab8ba319849af~mv2.png/v1/fill/w_355,h_530,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/cocoo.png"
               alt="Coco Monkey"
-              className="w-[70%] sm:w-[60%] lg:w-[220px] xl:w-[220px] 2xl:w-[140%] max-w-none h-auto object-contain drop-shadow-2xl transform rotate-3 origin-bottom-right transition-transform lg:translate-x-8 lg:translate-y-16 xl:translate-y-16 2xl:translate-y-24"
+              className="w-[40vh] sm:w-[20vh] lg:w-[45vh] xl:w-[45vh] 2xl:w-[65vh] max-w-none h-auto object-contain drop-shadow-2xl transform rotate-3 origin-bottom-right transition-transform lg:translate-x-8 lg:translate-y-16 xl:translate-y-16 2xl:translate-y-24"
             />
         </div>
 
