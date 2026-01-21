@@ -31,13 +31,16 @@ const PastMomentsSection = ({ data }) => {
   const { title, sub_title, description, images } = data;
 
   // Fallback images (mapped to image_urls)
-  const image_urls = data.images || images && images.length > 0 && images[0] !== ""
-    ? images
-    : [
-      "https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=1200",
-      "https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&q=80&w=1200",
-      "https://images.unsplash.com/photo-1511632765486-a01980968a0c?auto=format&fit=crop&q=80&w=1200"
-    ];
+  const image_urls =
+    (data?.images && data.images.length > 0)
+      ? data.images
+      : (images && images.length > 0 && images[0] !== "")
+        ? images
+        : [
+          "https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=1200",
+          "https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&q=80&w=1200",
+          "https://images.unsplash.com/photo-1511632765486-a01980968a0c?auto=format&fit=crop&q=80&w=1200"
+        ];
 
   return (
     <section className="py-20 bg-white">
