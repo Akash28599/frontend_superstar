@@ -18,7 +18,7 @@ const SummerCampSection = ({ data }) => {
         {/* 2. Image (1200x600) */}
         <div className="w-full bg-gray-100 mb-10 shadow-lg border-4 border-kelloggs-gold rounded-xl overflow-hidden">
              <img 
-                src={imageUrl} 
+                src={data.image||imageUrl} 
                 alt="Summer Camp" 
                 className="w-full h-auto object-cover aspect-[2/1]"
             />
