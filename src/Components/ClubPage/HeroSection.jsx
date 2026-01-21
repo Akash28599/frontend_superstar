@@ -35,69 +35,77 @@ const HeroSection = ({ data }) => {
       {/* Decorative Blob for depth */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-white opacity-10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
 
-      {/* Monkey Image - Decorative (Absolute Positioned for "hanging" look or side placement) */}
-      <div className="hidden lg:block absolute right-0 bottom-0 z-50 opacity-90 w-24 xl:w-32 2xl:w-60 pointer-events-none">
-        <img
-          src="https://static.wixstatic.com/media/2bc50d_b973282d09b64a5887aab8ba319849af~mv2.png/v1/fill/w_355,h_530,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/cocoo.png"
-          alt="Coco Monkey"
-          className="w-full h-auto object-contain"
-        />
-      </div>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1800px] relative z-10 w-full h-full grid grid-cols-1 lg:grid-cols-12 items-center gap-4 lg:gap-8 pt-10 lg:pt-0">
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl flex flex-col items-center relative z-10 w-full">
-
-        <div className="w-full flex justify-center mb-6 animate-fade-in-up">
-          <div className="relative w-24 h-24 sm:w-32 sm:h-32">
-            <img
+        {/* SECTION 1: Logo (Left - 2 Cols) */}
+        <div className="lg:col-span-2 flex justify-center lg:justify-start w-full min-w-0">
+          <div className="relative w-48 h-48 sm:w-56 sm:h-56 lg:w-48 lg:h-48 xl:w-64 xl:h-64 2xl:w-80 2xl:h-80 transition-transform hover:scale-105 duration-300">
+             <img
               src="https://res.cloudinary.com/dogdsavuf/image/upload/v1767182080/large_Kellogg_s_superstars_red_1_78e77d51bc.png"
               alt="Kelloggs Superstars Club Logo"
-              className="w-full h-full object-contain"
+              className="w-full h-full object-contain drop-shadow-2xl"
             />
-            {/* Overlay Image - White Text (Clipped to top part) */}
-            <img
+             <img
               src="https://res.cloudinary.com/dogdsavuf/image/upload/v1767182080/large_Kellogg_s_superstars_red_1_78e77d51bc.png"
               alt=""
               className="absolute inset-0 w-full h-full object-contain pointer-events-none"
               style={{
-                clipPath: 'inset(0 0 70% 0)', // Show only top 30% where text is
-                filter: 'brightness(0) invert(1)' // Make it white
+                clipPath: 'inset(0 0 70% 0)', 
+                filter: 'brightness(0) invert(1)' 
               }}
             />
           </div>
         </div>
 
-        <h1 className="font-bold font-kelloggs text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-white mb-6 tracking-normal drop-shadow-sm whitespace-nowrap">
-          {mainHeading || "Kellogg's Superstars Club"}
-        </h1>
+        {/* SECTION 2: Content (Middle - 8 Cols) - PERFECTLY CENTERED */}
+        <div className="lg:col-span-8 flex flex-col items-center justify-center text-center z-20 px-2 lg:px-0 2xl:translate-y-12">
+          
+          <h1 className="font-bold font-kelloggs text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl 2xl:text-7xl text-white mb-6 tracking-tight drop-shadow-md leading-tight">
+            {mainHeading || "Kellogg's Superstars Club"}
+          </h1>
 
+          {/* Sub Heading */}
+          <h2 className="font-bold text-xl sm:text-2xl lg:text-2xl 2xl:text-3xl text-white mb-6 2xl:mb-8 max-w-2xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-5xl tracking-wide opacity-95">
+            {mainSubHeading}
+          </h2>
 
-        {/* Sub Heading */}
-        <h2 className="font-bold text-xl sm:text-2xl text-white mb-10 max-w-3xl tracking-wide text-center mx-auto">
-          {mainSubHeading}
-        </h2>
+           {/* Description Box */}
+          <div className="mb-8 2xl:mb-12 w-full max-w-2xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-5xl mx-auto">
+             <p className="font-sans text-white text-lg lg:text-lg xl:text-xl 2xl:text-2xl font-medium leading-relaxed opacity-100 drop-shadow-sm">
+              {mainDescription}
+            </p>
+          </div>
 
-        {/* Description Box */}
-        <div className="border border-white/40 bg-white/10 backdrop-blur-sm p-8 sm:p-10 mb-12 w-full max-w-5xl mx-auto rounded-xl">
-          <p className="font-sans text-white text-lg sm:text-xl leading-relaxed">
-            {mainDescription}
-          </p>
+          {/* Buttons */}
+          <div className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto justify-center">
+            {mainButtonData?.map((btn, index) => (
+              <button
+                key={index}
+                onClick={() => handleOpenModal(index === 0 ? 'join' : 'login')}
+                className={`
+                   flex items-center justify-center gap-3 px-8 py-3 2xl:px-10 2xl:py-4 font-bold text-lg 2xl:text-xl transition-all duration-300 rounded-full shadow-lg bg-white text-kelloggs-red hover:bg-kelloggs-gold hover:text-kelloggs-red hover:-translate-y-1 hover:shadow-2xl min-w-[200px] 2xl:min-w-[220px]
+                 `}
+              >
+                {getIcon(btn.icon)}
+                <span>{btn.button_text}</span>
+              </button>
+            ))}
+          </div>
+
         </div>
 
-        {/* Buttons */}
-        <div className="flex flex-col sm:flex-row gap-6 justify-center w-full relative z-20">
-          {mainButtonData?.map((btn, index) => (
-            <button
-              key={index}
-              onClick={() => handleOpenModal(index === 0 ? 'join' : 'login')}
-              className={`
-                 flex items-center justify-center gap-3 px-8 py-4 font-bold text-lg transition-all duration-300 rounded-full shadow-lg bg-white text-kelloggs-red hover:bg-kelloggs-gold hover:scale-105
-               `}
-            >
-              {getIcon(btn.icon)}
-              <span>{btn.button_text}</span>
-            </button>
-          ))}
+        {/* SECTION 3: Coco Image (Right - 2 Cols) - Corner aligned */}
+        <div className="lg:col-span-2 flex justify-center lg:justify-end relative h-full items-end mt-10 lg:mt-0 overflow-visible">
+             {/* Background Glow */}
+             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-white/20 blur-3xl rounded-full pointer-events-none"></div>
+             
+             <img
+              src="https://static.wixstatic.com/media/2bc50d_b973282d09b64a5887aab8ba319849af~mv2.png/v1/fill/w_355,h_530,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/cocoo.png"
+              alt="Coco Monkey"
+              className="w-[70%] sm:w-[60%] lg:w-[220px] xl:w-[220px] 2xl:w-[140%] max-w-none h-auto object-contain drop-shadow-2xl transform rotate-3 origin-bottom-right transition-transform lg:translate-x-8 lg:translate-y-16 xl:translate-y-16 2xl:translate-y-24"
+            />
         </div>
+
       </div>
 
       {/* Auth Modal */}

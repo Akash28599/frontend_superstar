@@ -35,21 +35,45 @@ const WaitlistSection = ({ data }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 mb-10">
             {label_texts?.map((label, index) => {
               const isFullWidth = label.toLowerCase().includes('email') || label.toLowerCase().includes('name') || label.toLowerCase().includes('school');
-              const type = label.toLowerCase().includes('email') ? 'email' : 
-                           label.toLowerCase().includes('age') ? 'number' : 'text';
+              const labelLower = label.toLowerCase();
+              const isAge = labelLower.includes('age');
+              
+              const displayLabel = isAge ? "Date of Birth" : label;
+              const inputType = labelLower.includes('email') ? 'email' : 
+                                isAge ? 'date' : 'text';
               
               return (
                 <div key={index} className={`flex flex-col ${isFullWidth ? 'md:col-span-2' : ''}`}>
                   <label className="text-xs font-bold uppercase tracking-wider mb-2 text-gray-700">
-                    {label} *
+                    {displayLabel} *
                   </label>
-                  <input
-                    type={type}
-                    name={label}
-                    required
-                    onChange={handleChange}
-                    className="w-full bg-gray-50 border border-gray-300 text-gray-900 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-kelloggs-red/20 focus:border-kelloggs-red transition-all font-sans"
-                  />
+                  {labelLower.includes('state') ? (
+                     <select
+                      name={displayLabel}
+                      required
+                      defaultValue=""
+                      onChange={handleChange}
+                      className="w-full bg-gray-50 border border-gray-300 text-gray-900 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-kelloggs-red/20 focus:border-kelloggs-red transition-all font-sans appearance-none"
+                    >
+                      <option value="" disabled>Select State</option>
+                      {[
+                        "Abia", "Adamawa", "Akwa Ibom", "Anambra", "Bauchi", "Bayelsa", "Benue", "Borno", 
+                        "Cross River", "Delta", "Ebonyi", "Edo", "Ekiti", "Enugu", "Gombe", "Imo", "Jigawa", 
+                        "Kaduna", "Kano", "Katsina", "Kebbi", "Kogi", "Kwara", "Lagos", "Nasarawa", "Niger", 
+                        "Ogun", "Ondo", "Osun", "Oyo", "Plateau", "Rivers", "Sokoto", "Taraba", "Yobe", "Zamfara", "FCT"
+                      ].map((state) => (
+                        <option key={state} value={state}>{state}</option>
+                      ))}
+                    </select>
+                  ) : (
+                    <input
+                      type={inputType}
+                      name={displayLabel} // Ensure name matches the displayed label for clarity in form data
+                      required
+                      onChange={handleChange}
+                      className="w-full bg-gray-50 border border-gray-300 text-gray-900 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-kelloggs-red/20 focus:border-kelloggs-red transition-all font-sans"
+                    />
+                  )}
                 </div>
               );
             })}

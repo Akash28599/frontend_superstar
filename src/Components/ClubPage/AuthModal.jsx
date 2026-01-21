@@ -52,53 +52,97 @@ const AuthModal = ({ isOpen, onClose, type }) => {
             {/* Form */}
             <form onSubmit={handleSubmit} className="px-4 py-3 2xl:p-8 flex flex-col gap-2 2xl:gap-4">
                 
-                {isJoin && (
+                {isJoin ? (
                     <>
                         <div>
-                            <label className="block text-gray-700 text-xs 2xl:text-sm font-bold mb-0.5 2xl:mb-2">Student Name</label>
-                            <input 
-                                type="text" 
-                                name="name"
-                                className="w-full px-4 py-1.5 2xl:py-3 text-sm 2xl:text-base rounded-lg border border-gray-300 focus:border-kelloggs-red focus:ring-2 focus:ring-red-100 outline-none transition-all"
-                                placeholder="Enter your name"
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
-                         <div>
-                            <label className="block text-gray-700 text-xs 2xl:text-sm font-bold mb-0.5 2xl:mb-2">Parent's Name</label>
+                            <label className="block text-gray-700 text-xs 2xl:text-sm font-bold mb-0.5 2xl:mb-2">Parent/Guardian Full Name</label>
                             <input 
                                 type="text" 
                                 name="parentName"
                                 className="w-full px-4 py-1.5 2xl:py-3 text-sm 2xl:text-base rounded-lg border border-gray-300 focus:border-kelloggs-red focus:ring-2 focus:ring-red-100 outline-none transition-all"
-                                placeholder="Enter parent's name"
+                                placeholder="Enter parent/guardian name"
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+
+                         <div>
+                            <label className="block text-gray-700 text-xs 2xl:text-sm font-bold mb-0.5 2xl:mb-2">Parent/Guardian Email</label>
+                            <input 
+                                type="email" 
+                                name="parentEmail"
+                                className="w-full px-4 py-1.5 2xl:py-3 text-sm 2xl:text-base rounded-lg border border-gray-300 focus:border-kelloggs-red focus:ring-2 focus:ring-red-100 outline-none transition-all"
+                                placeholder="parent@example.com"
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-gray-700 text-xs 2xl:text-sm font-bold mb-0.5 2xl:mb-2">Child's Name</label>
+                            <input 
+                                type="text" 
+                                name="childName"
+                                className="w-full px-4 py-1.5 2xl:py-3 text-sm 2xl:text-base rounded-lg border border-gray-300 focus:border-kelloggs-red focus:ring-2 focus:ring-red-100 outline-none transition-all"
+                                placeholder="Enter child's name"
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-4">
+                             <div>
+                                <label className="block text-gray-700 text-xs 2xl:text-sm font-bold mb-0.5 2xl:mb-2">Date of Birth</label>
+                                <input 
+                                    type="date" 
+                                    name="dob"
+                                    className="w-full px-4 py-1.5 2xl:py-3 text-sm 2xl:text-base rounded-lg border border-gray-300 focus:border-kelloggs-red focus:ring-2 focus:ring-red-100 outline-none transition-all"
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                             <div>
+                                <label className="block text-gray-700 text-xs 2xl:text-sm font-bold mb-0.5 2xl:mb-2">State</label>
+                                <select 
+                                    name="state"
+                                    className="w-full px-4 py-1.5 2xl:py-3 text-sm 2xl:text-base rounded-lg border border-gray-300 focus:border-kelloggs-red focus:ring-2 focus:ring-red-100 outline-none transition-all appearance-none bg-white"
+                                    onChange={handleChange}
+                                    defaultValue=""
+                                    required
+                                >
+                                    <option value="" disabled>Select State</option>
+                                    {[
+                                        "Abia", "Adamawa", "Akwa Ibom", "Anambra", "Bauchi", "Bayelsa", "Benue", "Borno", 
+                                        "Cross River", "Delta", "Ebonyi", "Edo", "Ekiti", "Enugu", "Gombe", "Imo", "Jigawa", 
+                                        "Kaduna", "Kano", "Katsina", "Kebbi", "Kogi", "Kwara", "Lagos", "Nasarawa", "Niger", 
+                                        "Ogun", "Ondo", "Osun", "Oyo", "Plateau", "Rivers", "Sokoto", "Taraba", "Yobe", "Zamfara", "FCT"
+                                    ].map((state) => (
+                                        <option key={state} value={state}>{state}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        </div>
+
+                         <div>
+                            <label className="block text-gray-700 text-xs 2xl:text-sm font-bold mb-0.5 2xl:mb-2">School</label>
+                            <input 
+                                type="text" 
+                                name="school"
+                                className="w-full px-4 py-1.5 2xl:py-3 text-sm 2xl:text-base rounded-lg border border-gray-300 focus:border-kelloggs-red focus:ring-2 focus:ring-red-100 outline-none transition-all"
+                                placeholder="Enter school name"
                                 onChange={handleChange}
                                 required
                             />
                         </div>
                     </>
-                )}
-
-                <div>
-                    <label className="block text-gray-700 text-xs 2xl:text-sm font-bold mb-0.5 2xl:mb-2">Email Address</label>
-                    <input 
-                        type="email" 
-                        name="email"
-                        className="w-full px-4 py-1.5 2xl:py-3 text-sm 2xl:text-base rounded-lg border border-gray-300 focus:border-kelloggs-red focus:ring-2 focus:ring-red-100 outline-none transition-all"
-                        placeholder="john@example.com"
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-
-                 {isJoin && (
+                ) : (
                     <div>
-                        <label className="block text-gray-700 text-xs 2xl:text-sm font-bold mb-0.5 2xl:mb-2">Phone Number</label>
+                        <label className="block text-gray-700 text-xs 2xl:text-sm font-bold mb-0.5 2xl:mb-2">Email Address</label>
                         <input 
-                            type="tel" 
-                            name="phone"
+                            type="email" 
+                            name="email"
                             className="w-full px-4 py-1.5 2xl:py-3 text-sm 2xl:text-base rounded-lg border border-gray-300 focus:border-kelloggs-red focus:ring-2 focus:ring-red-100 outline-none transition-all"
-                            placeholder="+234..."
+                            placeholder="john@example.com"
                             onChange={handleChange}
                             required
                         />
