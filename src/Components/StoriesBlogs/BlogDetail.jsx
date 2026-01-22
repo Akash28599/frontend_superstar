@@ -70,7 +70,7 @@ const BlogDetail = ({ siteSettings }) => {
         // Determine PDF to show
         let pdfToDisplay = section.pdf;
         let pdfTitle = "Story Book";
-        
+
         if (pdfToDisplay) {
             const lowerBlogTitle = blog.blog_title?.toLowerCase() || "";
             const lowerSubTitle = blog.sub_title?.toLowerCase() || "";
@@ -113,7 +113,7 @@ const BlogDetail = ({ siteSettings }) => {
                 {/* PDF Story Book Viewer */}
                 {pdfToDisplay && (
                     <div className="mb-12 w-full">
-                        <StoryBookViewer 
+                        <StoryBookViewer
                             pdfUrl={pdfToDisplay}
                             title={pdfTitle}
                         />
@@ -137,53 +137,167 @@ const BlogDetail = ({ siteSettings }) => {
                             return <p key={index} className="text-lg text-gray-700 leading-relaxed mb-4 text-left">{descItem.content}</p>;
                         }
 
-                        if (descItem.content_type === 'points' || descItem.content_type === 'point') {
-                            return (
-                                <ol key={index} className="list-decimal pl-5 space-y-4 mb-6 text-left">
-                                    {Array.isArray(descItem.content) && descItem.content.map((point, pIndex) => {
-                                        if (typeof point === 'object') {
-                                            const displayTitle = (!point.title || (typeof point.title === 'string' && point.title.startsWith('http'))) ? point.value : point.title;
-                                            const isReferences = section.title && section.title.toLowerCase().includes('references');
-                                            const linkClass = isReferences
-                                                ? "text-blue-600 font-bold underline"
-                                                : "text-gray-900 font-bold hover:text-blue-600 hover:underline";
+                        // if (descItem.content_type === 'points' || descItem.content_type === 'point') {
+                        //     if(descItem.content.length>1){
+                        //     return (
+                        //         <ol key={index} className="list-decimal pl-5 space-y-4 mb-6 text-left">
+                        //             {Array.isArray(descItem.content) && descItem.content.map((point, pIndex) => {
+                        //                 if (typeof point === 'object') {
+                        //                     const displayTitle = (!point.title || (typeof point.title === 'string' && point.title.startsWith('http'))) ? point.value : point.title;
+                        //                     const isReferences = section.title && section.title.toLowerCase().includes('references');
+                        //                     const linkClass = isReferences
+                        //                         ? "text-blue-600 font-bold underline"
+                        //                         : "text-gray-900 font-bold hover:text-blue-600 hover:underline";
 
-                                            // Handle complex points like links
-                                            /*
-                                              {
-                                                "link": "...",
-                                                "title": "...",
-                                                "value": "...",
-                                                "Skills Developed": "..."
-                                              }
-                                            */
+                        //                     // Handle complex points like links
+                        //                     /*
+                        //                       {
+                        //                         "link": "...",
+                        //                         "title": "...",
+                        //                         "value": "...",
+                        //                         "Skills Developed": "..."
+                        //                       }
+                        //                     */
+                        //                     return (
+                        //                         <li key={pIndex} className="text-lg text-gray-700 text-left">
+                        //                             {point.link ? (
+                        //                                 <a href={point.link} target="_blank" rel="noopener noreferrer" className={linkClass}>
+                        //                                     {displayTitle}
+                        //                                 </a>
+                        //                             ) : (
+                        //                                 <span className="font-bold text-gray-900">{displayTitle}</span>
+                        //                             )}
+                        //                             {point.value && point.value !== displayTitle && <span className="block mt-1">{point.value}</span>}
+                        //                             {/* Display extra fields like Skills Developed if present */}
+                        //                             {Object.entries(point).map(([k, v]) => {
+                        //                                 if (k !== 'link' && k !== 'title' && k !== 'value' && k !== 'content_type') {
+                        //                                     return <div key={k} className="mt-1 text-sm text-gray-600"><span className="font-semibold">{k}:</span> {v}</div>
+                        //                                 }
+                        //                                 return null;
+                        //                             })}
+                        //                         </li>
+                        //                     );
+                        //                 }
+                        //                 return <li key={pIndex} className="text-lg text-gray-700 text-left">{point.value || point}</li>;
+                        //             })}
+                        //         </ol>
+                        //     );
+                        // }
+                        // return (
+                        //         <ul key={index} className="pl-5 space-y-4 mb-6 text-left">
+                        //             {Array.isArray(descItem.content) && descItem.content.map((point, pIndex) => {
+                        //                 if (typeof point === 'object') {
+                        //                     const displayTitle = (!point.title || (typeof point.title === 'string' && point.title.startsWith('http'))) ? point.value : point.title;
+                        //                     const isReferences = section.title && section.title.tulowerCase().includes('references');
+                        //                     const linkClass = isReferences
+                        //                         ? "text-blue-600 font-bold underline"
+                        //                         : "text-gray-900 font-bold hover:text-blue-600 hover:underline";
+
+                        //                     // Handle complex points like links
+                        //                     /*
+                        //                       {
+                        //                         "link": "...",
+                        //                         "title": "...",
+                        //                         "value": "...",
+                        //                         "Skills Developed": "..."
+                        //                       }
+                        //                     */
+                        //                     return (
+                        //                         <li key={pIndex} className="text-lg text-gray-700 text-left">
+                        //                             {point.link ? (
+                        //                                 <a href={point.link} target="_blank" rel="noopener noreferrer" className={linkClass}>
+                        //                                     {displayTitle}
+                        //                                 </a>
+                        //                             ) : (
+                        //                                 <span className="font-bold text-gray-900">{displayTitle}</span>
+                        //                             )}
+                        //                             {point.value && point.value !== displayTitle && <span className="block mt-1">{point.value}</span>}
+                        //                             {/* Display extra fields like Skills Developed if present */}
+                        //                             {Object.entries(point).map(([k, v]) => {
+                        //                                 if (k !== 'link' && k !== 'title' && k !== 'value' && k !== 'content_type') {
+                        //                                     return <div key={k} className="mt-1 text-sm text-gray-600"><span className="font-semibold">{k}:</span> {v}</div>
+                        //                                 }
+                        //                                 return null;
+                        //                             })}
+                        //                         </li>
+                        //                     );
+                        //                 }
+                        //                 return <li key={pIndex} className="text-lg text-gray-700 text-left">{point.value || point}</li>;
+                        //             })}
+                        //         </ul>
+                        //     );
+                        // }
+
+                        // Fallback for simple string in content array
+
+                        if (descItem.content_type === 'points' || descItem.content_type === 'point') {
+
+                            const isOrdered = Array.isArray(descItem.content) && descItem.content.length > 1;
+                            const ListTag = isOrdered ? 'ol' : 'ul';
+
+                            const isReferences =
+                                typeof section?.title === 'string' &&
+                                section.title.toLowerCase().includes('references');
+
+                            const linkClass = isReferences
+                                ? "text-blue-600 font-bold underline"
+                                : "text-gray-900 font-bold hover:text-blue-600 hover:underline";
+
+                            return (
+                                <ListTag
+                                    key={index}
+                                    className={`${isOrdered ? 'list-decimal' : ''} pl-5 space-y-4 mb-6 text-left`}
+                                >
+                                    {Array.isArray(descItem.content) &&
+                                        descItem.content.map((point, pIndex) => {
+
+                                            if (typeof point === 'object' && point !== null) {
+
+                                                const displayTitle =
+                                                    (!point.title || (typeof point.title === 'string' && point.title.startsWith('http')))
+                                                        ? point.value
+                                                        : point.title;
+
+                                                return (
+                                                    <li key={pIndex} className="text-lg text-gray-700 text-left">
+
+                                                        {point.link ? (
+                                                            <a href={point.link} target="_blank" rel="noopener noreferrer" className={linkClass}>
+                                                                {displayTitle}
+                                                            </a>
+                                                        ) : (
+                                                            <span className="font-bold text-gray-900">{displayTitle}</span>
+                                                        )}
+
+                                                        {point.value && point.value !== displayTitle && (
+                                                            <span className="block mt-1">{point.value}</span>
+                                                        )}
+
+                                                        {Object.entries(point).map(([k, v]) => {
+                                                            if (!['link', 'title', 'value', 'content_type'].includes(k)) {
+                                                                return (
+                                                                    <div key={k} className="mt-1 text-sm text-gray-600">
+                                                                        <span className="font-semibold">{k}:</span> {v}
+                                                                    </div>
+                                                                );
+                                                            }
+                                                            return null;
+                                                        })}
+
+                                                    </li>
+                                                );
+                                            }
+
                                             return (
                                                 <li key={pIndex} className="text-lg text-gray-700 text-left">
-                                                    {point.link ? (
-                                                        <a href={point.link} target="_blank" rel="noopener noreferrer" className={linkClass}>
-                                                            {displayTitle}
-                                                        </a>
-                                                    ) : (
-                                                        <span className="font-bold text-gray-900">{displayTitle}</span>
-                                                    )}
-                                                    {point.value && point.value !== displayTitle && <span className="block mt-1">{point.value}</span>}
-                                                    {/* Display extra fields like Skills Developed if present */}
-                                                    {Object.entries(point).map(([k, v]) => {
-                                                        if (k !== 'link' && k !== 'title' && k !== 'value' && k !== 'content_type') {
-                                                            return <div key={k} className="mt-1 text-sm text-gray-600"><span className="font-semibold">{k}:</span> {v}</div>
-                                                        }
-                                                        return null;
-                                                    })}
+                                                    {point?.value || point}
                                                 </li>
                                             );
-                                        }
-                                        return <li key={pIndex} className="text-lg text-gray-700 text-left">{point.value || point}</li>;
-                                    })}
-                                </ol>
+                                        })}
+                                </ListTag>
                             );
                         }
 
-                        // Fallback for simple string in content array
                         return null;
                     })
                 ) : (

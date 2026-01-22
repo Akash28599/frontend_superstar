@@ -1,13 +1,16 @@
 import { CommentOutlined, VisibilityOutlined } from "@mui/icons-material";
 import { Heart } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
-const RecentBlogs = ({ id }) => {
+const RecentBlogs = ({ id, }) => {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+    const location = useLocation();
+    const type = location.pathname.includes('/blog') ? 'blog' : 'story';
 
+    console.log(location)
     useEffect(() => {
         const fetchPosts = async () => {
             setLoading(true);
@@ -26,6 +29,7 @@ const RecentBlogs = ({ id }) => {
                     `&populate=blog_thumbail` +
                     `&pagination[limit]=3` +
                     `&filters[documentId][$ne]=${id}` +
+                    `&filters[sub_title][$eq]=${type}` +
                     `&sort=post_date:desc`;
 
                 const response = await fetch(url);
@@ -39,7 +43,7 @@ const RecentBlogs = ({ id }) => {
         };
 
         if (id) fetchPosts();
-    }, [id]);
+    }, [id, type]);
 
     const BlogCard = ({ post }) => {
         const {
@@ -108,11 +112,11 @@ const RecentBlogs = ({ id }) => {
     return (
         <div>
             <div className="flex justify-between">
-                <h3 className="font-semibold">Recent Posts</h3>
+                <h3 className="font-semibold">{type === "blog" ? 'Recent Blogs' : "Recent Stories"}</h3>
                 <h3 className="font-semibold cursor-pointer hover:underline"
                     onClick={() => {
                         window.scrollTo({ top: 0, left: 0 })
-                        navigate('/blog')
+                        type === "blog" ? navigate('/blog') : navigate('/stories')
                     }
                     }
                 >
