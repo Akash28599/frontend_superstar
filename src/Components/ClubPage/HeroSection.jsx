@@ -71,8 +71,21 @@ const HeroSection = ({ data }) => {
 
           {/* Description Box */}
           <div className="mb-8 2xl:mb-12 w-full max-w-2xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-4xl mx-auto">
-            <p className="font-sans text-white text-lg lg:text-lg xl:text-xl 2xl:text-2xl font-medium leading-relaxed opacity-100 drop-shadow-sm">
-              {mainDescription}
+            <p className="font-sans text-white text-lg lg:text-lg xl:text-xl 2xl:text-2xl font-medium leading-relaxed opacity-90 drop-shadow-sm italic">
+              {mainDescription ? (
+                mainDescription.split("Kellogg's-led").map((part, index, arr) => (
+                  <React.Fragment key={index}>
+                    {part}
+                    {index < arr.length - 1 && (
+                      <span className="inline-block">
+                        <span className="font-kelloggs text-2xl lg:text-3xl relative top-1 mx-1 opacity-100">Kellogg's</span>-led
+                      </span>
+                    )}
+                  </React.Fragment>
+                ))
+              ) : (
+                mainDescription
+              )}
             </p>
           </div>
 
