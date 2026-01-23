@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react';
 
-export const CocoHead = () => {
+const CocoHead = () => {
     const [items, setItems] = useState([]);
     const [head, setHead] = useState(null);
 

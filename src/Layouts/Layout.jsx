@@ -14,7 +14,7 @@ import BlogDetail from '../Pages/Blogs/BlogDetail';
 
 export function LayoutComponent({ settingsData, dpr }) {
   const location = useLocation();
-  const hidePathsNav = ['/past-winners', '/student-register', '/exam-page', '/instructions','/']
+  const hidePathsNav = ['/past-winners', '/student-register', '/exam-page', '/instructions']
   const hideNavbar = hidePathsNav.includes(location.pathname);
   const hidePathsFooter = ['/exam-page', '/instructions', '/club']
   const hideFooter = hidePathsFooter.includes(location.pathname);
@@ -49,7 +49,7 @@ export function LayoutComponent({ settingsData, dpr }) {
         <Route path='/blog/:id' element={<BlogDetail siteSettings={settingsData}/>} />
       </Routes>
       {!hideFooter && (
-        <FooterLayout settingsData={settingsData} />
+        <FooterLayout />
       )}
 
     </>

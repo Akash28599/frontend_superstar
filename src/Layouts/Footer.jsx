@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SocialIcons from "../Components/SocialIcons/SocialIcons";
+import { useAppStore } from "../store/appStore";
 
 
-const FooterLayout = ({ settingsData }) => {
-  const addressLines = settingsData?.address?.split("\n") ?? [];
+const FooterLayout = () => {
+  const { siteSettings } = useAppStore();
+
+  const addressLines = siteSettings?.address?.split("\n") ?? [];
 
   return (
     <div className="w-full bg-kelloggs-red font-kelloggs text-white">
@@ -15,13 +18,13 @@ const FooterLayout = ({ settingsData }) => {
         justify-between items-start 
         gap-10
       ">
-        
+
         {/* Logo Section */}
         <div className="w-full md:w-[25%] flex justify-center md:justify-start">
-          {settingsData?.logo?.url ? (
+          {siteSettings?.logo?.url ? (
             <img
-              src={settingsData.logo.url}
-              alt={settingsData.sitename}
+              src={siteSettings.logo.url}
+              alt={siteSettings.sitename}
               className="
                 w-[180px] tablet:w-[200px] wide:w-[220px] 
                 h-auto object-cover 
@@ -47,7 +50,7 @@ const FooterLayout = ({ settingsData }) => {
             justify-between gap-10 tablet:gap-4 
             text-center md:text-left
         ">
-          
+
           {/* Company Column */}
           <div className="flex flex-col flex-1 gap-2">
             <h3 className="text-[20px] wide:text-[22px] font-bold mb-2">Company</h3>
@@ -62,7 +65,7 @@ const FooterLayout = ({ settingsData }) => {
           <div className="flex flex-col flex-1 gap-2">
             <h3 className="text-[20px] wide:text-[22px] font-bold mb-2">More Info</h3>
             <ul className="text-[16px] wide:text-[18px] leading-[2.2] space-y-1">
-              <li className="cursor-pointer hover:underline">{settingsData?.contactphone}</li>
+              <li className="cursor-pointer hover:underline">{siteSettings?.contactphone}</li>
               <li className="cursor-pointer hover:underline">Privacy Policy</li>
               <li className="cursor-pointer hover:underline">Sitemap</li>
             </ul>
@@ -72,14 +75,14 @@ const FooterLayout = ({ settingsData }) => {
           <div className="flex flex-col flex-1 gap-2 text-center md:text-left">
             <h3 className="text-[20px] wide:text-[22px] font-bold mb-2">Location</h3>
             <ul className="text-[16px] wide:text-[18px] leading-[2.2] space-y-1">
-              <li>{settingsData?.contactemail ?? "—"}</li>
+              <li>{siteSettings?.contactemail ?? "—"}</li>
               <li>{addressLines[0] ?? "—"}</li>
               <li>{addressLines[1] ?? ""}</li>
             </ul>
 
             {/* Social Icons */}
             <div className="mt-6 flex justify-center md:justify-start">
-              <SocialIcons siteSettings={settingsData} />
+              <SocialIcons siteSettings={siteSettings} />
             </div>
           </div>
 
@@ -94,7 +97,7 @@ const FooterLayout = ({ settingsData }) => {
         border-t border-white/20
         font-normal
       ">
-        {settingsData?.copyright}
+        {siteSettings?.copyright}
       </div>
     </div>
   );
