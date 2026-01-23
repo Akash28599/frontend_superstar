@@ -1,4 +1,3 @@
-import Navbar from '../../Layouts/Navbar';
 import { useHomeStore } from '../../store/homeStore';
 
 const HomeBanner = () => {

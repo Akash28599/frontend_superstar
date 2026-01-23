@@ -7,7 +7,7 @@ import { useHomeStore } from "../store/homeStore";
 import { useEffect } from "react";
 
 export default function HomePage({ dpr }) {
-    const { loading, error, fetchHomePage } = useHomeStore();
+    const { loading, fetchHomePage } = useHomeStore();
 
     useEffect(() => {
         async function fetchData() {

@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import SocialIcons from "../Components/SocialIcons/SocialIcons";
 import { useAppStore } from "../store/appStore";
 

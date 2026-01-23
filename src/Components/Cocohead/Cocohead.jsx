@@ -1,9 +1,8 @@
 
-import { useEffect, useState } from 'react';
 import { useHomeStore } from '../../store/homeStore';
 
 const CocoHead = () => {
-    const { cocoHead: data, cocoHeadLoading: loading } = useHomeStore();
+    const { cocoHead: data } = useHomeStore();
 
     const head = data?.find(d => d.thumbnail) || null;
     const items = data?.filter(d => d.icon_description && d.icon_description.title) || null;

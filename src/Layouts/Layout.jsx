@@ -11,7 +11,6 @@ import ClubPage from '../Pages/ClubPage';
 import FooterLayout from './Footer';
 import StoriesBlogs from '../Pages/Blogs/StoriesBlogs';
 import BlogDetail from '../Pages/Blogs/BlogDetail';
-import { useAppStore } from '../store/appStore';
 
 export function LayoutComponent({ dpr }) {
   const location = useLocation();

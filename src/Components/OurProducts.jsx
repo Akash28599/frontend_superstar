@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useRef } from "react";
+import{ useEffect, useState, useRef } from "react";
 import "../fonts.css";
-import { useHomeStore } from "../store/homeStore";
 
 const OurProducts = () => {
   const [products, setProducts] = useState([]);

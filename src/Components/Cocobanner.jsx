@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import cloudImg from "../cloud1.png";
 import waveImage from "../cocobanner.png";
 import { useHomeStore } from '../store/homeStore';
