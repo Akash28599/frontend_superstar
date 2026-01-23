@@ -11,8 +11,9 @@ import ClubPage from '../Pages/ClubPage';
 import FooterLayout from './Footer';
 import StoriesBlogs from '../Pages/Blogs/StoriesBlogs';
 import BlogDetail from '../Pages/Blogs/BlogDetail';
+import { useAppStore } from '../store/appStore';
 
-export function LayoutComponent({ settingsData, dpr }) {
+export function LayoutComponent({ dpr }) {
   const location = useLocation();
   const hidePathsNav = ['/past-winners', '/student-register', '/exam-page', '/instructions']
   const hideNavbar = hidePathsNav.includes(location.pathname);
@@ -25,8 +26,8 @@ export function LayoutComponent({ settingsData, dpr }) {
   return (
     <>
       {!hideNavbar && (
-        <div style={{ 
-          backgroundColor: isClubPage ? '#F60945' : '#E41F35', 
+        <div style={{
+          backgroundColor: isClubPage ? '#F60945' : '#E41F35',
           height: isClubPage ? '110px' : (isRedHeader ? '100px' : '0px'),
           transition: 'height 0.3s ease'
         }}>
@@ -36,7 +37,7 @@ export function LayoutComponent({ settingsData, dpr }) {
 
       <Routes>
         <Route path='/' element={<HomePage dpr={dpr} />} />
-        <Route path='/scholarship' element={<ScholarshipPage settingsData={settingsData} />} />
+        <Route path='/scholarship' element={<ScholarshipPage />} />
         <Route path='/club' element={<ClubPage />} />
         <Route path='/quiz' element={<QuizPage />} />
         <Route path='/past-winners' element={<PastWinners />} />
@@ -44,9 +45,9 @@ export function LayoutComponent({ settingsData, dpr }) {
         <Route path='/instructions' element={<Instructions />} />
         <Route path='/thank-you' element={<ThankYou />} />
         <Route path='/stories' element={<StoriesBlogs type="stories" />} />
-        <Route path='/stories/:id' element={<BlogDetail siteSettings={settingsData}/>} /> 
+        <Route path='/stories/:id' element={<BlogDetail />} />
         <Route path='/blog' element={<StoriesBlogs type="blogs" />} />
-        <Route path='/blog/:id' element={<BlogDetail siteSettings={settingsData}/>} />
+        <Route path='/blog/:id' element={<BlogDetail />} />
       </Routes>
       {!hideFooter && (
         <FooterLayout />

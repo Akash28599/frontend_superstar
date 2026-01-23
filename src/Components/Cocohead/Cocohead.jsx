@@ -1,30 +1,16 @@
 
 import { useEffect, useState } from 'react';
+import { useHomeStore } from '../../store/homeStore';
 
 const CocoHead = () => {
-    const [items, setItems] = useState([]);
-    const [head, setHead] = useState(null);
+    const { cocoHead: data, cocoHeadLoading: loading } = useHomeStore();
 
-    // const isEdge = /Edg|Edge/.test(navigator.userAgent); // Tailwind handles browser inconsistencies better, removing usage
-
-    useEffect(() => {
-        fetch(`${process.env.REACT_APP_STRAPI_URL}/api/coco-heads?populate=*`)
-            .then(res => res.json())
-            .then(json => {
-                const data = json.data || [];
-                const headItem = data.find(d => d.thumbnail);
-                const iconItems = data.filter(d => d.icon_description && d.icon_description.title);
-
-                setHead(headItem || null);
-
-                setItems(iconItems);
-            })
-            .catch(() => {});
-    }, []);
+    const head = data?.find(d => d.thumbnail) || null;
+    const items = data?.filter(d => d.icon_description && d.icon_description.title) || null;
 
     return (
         <div className="relative flex flex-col tablet:flex-row items-center justify-center w-full mt-20 mb-[10%] px-[2%] tablet:px-[5%] gap-4 font-kelloggs">
-            
+
             {/* Star Section Removed */}
 
             {/* Yellow Banner */}
@@ -37,7 +23,7 @@ const CocoHead = () => {
                 ml-[2%] tablet:ml-[5%] desktop:ml-[8%]
                 shadow-sm
             ">
-                
+
                 {/* Coco Monkey Head - Desktop/Tablet */}
                 <div className="
                     absolute -top-[50px] left-[-10px] w-[120px] z-30
@@ -52,7 +38,7 @@ const CocoHead = () => {
                 </div>
 
                 {/* Mobile/High Scale Monkey Head (Absolute positioned to save space) */}
-                 <div className="
+                <div className="
                     absolute -left-[5%] top-[50%] -translate-y-1/2 w-[22%] z-30
                     tablet:hidden
                 ">
@@ -66,12 +52,12 @@ const CocoHead = () => {
                     w-full 
                     pl-[22%] tablet:pl-[12%] desktop:pl-[10%]
                 ">
-                    {items.map((item, index) => {
+                    {items?.map((item, index) => {
                         const iconUrl = item.icons?.url || item.icon?.url || item.image?.url ||
                             (item.icons && item.icons[0] && item.icons[0].url) || null;
                         const title = item.icon_description?.title || item.title || '';
                         const desc = item.icon_description?.description || item.description || '';
-                        
+
                         return (
                             <div className="flex flex-col flex-1 items-start justify-start text-left px-1 tablet:px-2" key={index}>
                                 {/* Icon */}
@@ -80,7 +66,7 @@ const CocoHead = () => {
                                         <img src={iconUrl} alt='item icon' className="max-w-[45px] tablet:max-w-[60px] max-h-[60px] tablet:max-h-[80px] w-auto h-auto object-contain" />
                                     }
                                 </div>
-                                
+
                                 {/* Title */}
                                 <div className="
                                     font-bold text-left w-full 
@@ -91,9 +77,9 @@ const CocoHead = () => {
                                 ">
                                     {title}
                                 </div>
-                                
+
                                 {/* Description */}
-                                <div 
+                                <div
                                     className="
                                         text-left w-full 
                                         text-[clamp(0.7rem,1vw,1.1rem)] 

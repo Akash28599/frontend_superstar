@@ -13,7 +13,8 @@ export const useAppStore = create((set) => ({
     set({ siteSettingsLoading: true, siteSettingsError: null });
     try {
       const res = await fetchSiteSettingsAPI();
-      set({ siteSettings: res.data.data, siteSettingsLoading: false });
+      console.log(res)
+      set({ siteSettings: res.data.data[0], siteSettingsLoading: false });
     } catch (e) {
       console.error(e);
       set({ siteSettingsError: e.message, siteSettingsLoading: false });

@@ -8,8 +8,9 @@ import { Heart, Facebook, Twitter, Linkedin, Link as LinkIcon } from 'lucide-rea
 import RecentBlogs from '../../Components/StoriesBlogs/RecentBlogs';
 import StoryBookViewer from '../../Components/StoriesBlogs/StoryBookViewer';
 import { openUrl } from '../../Utils/Utilities';
+import { useAppStore } from '../../store/appStore';
 
-const BlogDetail = ({ siteSettings }) => {
+const BlogDetail = () => {
     const { id } = useParams();
     const [blog, setBlog] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -36,6 +37,8 @@ const BlogDetail = ({ siteSettings }) => {
         setCopied(true);
         setTimeout(() => setCopied(false), 1500);
     };
+      const { siteSettings } = useAppStore();
+    
     useEffect(() => {
         const API_URL_FULL = `${process.env.REACT_APP_STRAPI_URL}/api/blogs/${id}?fields[0]=blog_title&fields[1]=sub_title&fields[2]=user_name&fields[3]=post_date&fields[4]=short_display_description&fields[5]=read_time&fields[6]=views&fields[7]=likes&fields[8]=comments&fields[9]=blog_body&populate=blog_thumbail`;
 

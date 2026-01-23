@@ -1,26 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import cloudImg from "../cloud1.png";
 import waveImage from "../cocobanner.png";
+import { useHomeStore } from '../store/homeStore';
 
 const CocoBanner = () => {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  const fetchBanner = async () => {
-    try {
-      const res = await fetch(`${process.env.REACT_APP_STRAPI_URL}/api/cocobanners?populate=*`);
-      const resData = await res.json();
-      setData(resData.data ? resData.data[0] : null);
-    } catch (error) {
-      console.error('Error fetching banner:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchBanner();
-  }, []);
+  const {cocoBanner:data,cocBannerLoading:loading}=useHomeStore()
 
   if (loading) return <div className="min-h-[500px] flex items-center justify-center text-white">Loading...</div>;
   if (!data) return <div className="min-h-[500px] flex items-center justify-center text-white">No data available</div>;

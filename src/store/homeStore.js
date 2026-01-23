@@ -53,20 +53,29 @@ export const useHomeStore = create((set, get) => ({
         set({ cocoBannerLoading: true, cocoBannerError: null });
         try {
             const res = await fetchCocoBannerAPI();
-            set({ cocoBanner: res.data.data, cocoBannerLoading: false });
+            console.log('cb', res)
+            set({ cocoBanner: res.data.data[0], cocoBannerLoading: false });
         } catch (e) {
             console.error(e);
             set({ cocoBannerError: e.message, cocoBannerLoading: false });
         }
     },
     fetchOurProducts: async () => {
+        let mounted = true
         set({ ourProductsLoading: true, ourProductsError: null });
         try {
             const res = await fetchOurProductsAPI();
-            set({ ourProducts: res.data.data, ourProductsLoading: false });
+            console.log('op', res)
+            if (!mounted) return;
+            set({ ourProducts: res.data.data });
         } catch (e) {
             console.error(e);
             set({ ourProductsError: e.message, ourProductsLoading: false });
+        }
+        finally {
+            mounted = false
+            set({ ourProductsLoading: mounted });
+
         }
     },
     fetchPrintableGames: async () => {

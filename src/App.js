@@ -2,45 +2,33 @@ import './App.css';
 import { BrowserRouter } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { LayoutComponent } from './Layouts/Layout';
+import { useAppStore } from './store/appStore';
 
 function App() {
-  const [settingsData, setSettingsData] = useState(null);
-      const [scale, setScale] = useState(window.devicePixelRatio);
+  const [scale, setScale] = useState(window.devicePixelRatio);
 
-     useEffect(() => {
-        const handleResize = () => {
-            setScale(window.devicePixelRatio);
-        };
-
-        window.addEventListener("resize", handleResize);
-
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    }, []);
-    const is100PercentScale = scale === 1;
+  const { siteSettings: settingsData, fetchSiteSettings } = useAppStore();
 
   useEffect(() => {
-    const getFooterData = async () => {
-      try {
-        const res = await fetch(
-          `${process.env.REACT_APP_STRAPI_URL}/api/sitesettings?populate=*`
-        );
-        const json = await res.json();
-        setSettingsData(json?.data?.[0]);
-      } catch (error) {
-        console.error("Error fetching footer data:", error);
-      }
+    const handleResize = () => {
+      setScale(window.devicePixelRatio);
     };
-    getFooterData();
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  const is100PercentScale = scale === 1;
+
+  useEffect(() => {
+    fetchSiteSettings();
+  }, [fetchSiteSettings]);
 
   return (
     <div className="App">
       <BrowserRouter>
-        <LayoutComponent settingsData={settingsData} dpr={is100PercentScale}/>
+        <LayoutComponent settingsData={settingsData} dpr={is100PercentScale} />
       </BrowserRouter>
-
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useHomeStore } from "../store/homeStore";
 
 const sample = [
   { name: "Game1", thumbnail: '', printable: '/assetss/BrainGameVol1.pdf' },
@@ -9,19 +10,9 @@ const sample = [
 ];
 
 export default function PrintableGames() {
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [downloadingId, setDownloadingId] = useState(null);
-
-  useEffect(() => {
-    const url = `${process.env.REACT_APP_STRAPI_URL}/api/games?populate=*`;
-
-    fetch(url)
-      .then((r) => r.json())
-      .then((json) => {
-        const data = json?.data ?? [];
-
-        const dataWithPrintable = data.map((item) => {
+  const { printableGames: data, printableGamesLoading: loading } = useHomeStore()
+const dataWithPrintable = data?.map((item) => {
           if (true) {          // if (!item.printable) {
 
             const fallback = sample.find((s) => s.name === item.name);
@@ -32,14 +23,7 @@ export default function PrintableGames() {
           }
           return item;
         });
-        setItems(dataWithPrintable);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Failed to load games:", err);
-        setLoading(false);
-      });
-  }, []);
+        const items=dataWithPrintable;
 
   async function downloadPrintable(item) {
     let fileUrl = null;
@@ -97,7 +81,7 @@ export default function PrintableGames() {
             scrollbar-hide
             justify-start wide:justify-center
         ">
-          {items.map((item) => {
+          {items?.map((item) => {
             const thumb =
               (item.thumbnail &&
                 item.thumbnail.formats &&

@@ -5,9 +5,7 @@ import { useAppStore } from "../store/appStore";
 
 const FooterLayout = () => {
   const { siteSettings } = useAppStore();
-
   const addressLines = siteSettings?.address?.split("\n") ?? [];
-
   return (
     <div className="w-full bg-kelloggs-red font-kelloggs text-white">
       {/* Main Content Area */}
