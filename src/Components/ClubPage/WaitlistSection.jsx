@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import SendIcon from '@mui/icons-material/Send';
+import { useState } from 'react';
+import { Send } from 'lucide-react';
 
 const WaitlistSection = ({ data }) => {
   const [formData, setFormData] = useState({});
@@ -14,13 +14,13 @@ const WaitlistSection = ({ data }) => {
   };
 
   const handleChange = (e) => {
-     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   return (
     <section className="py-24 bg-white relative">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-4xl text-center flex flex-col items-center">
-        
+
         <div className="mb-10 text-center w-full">
           <h2 className="font-kelloggs text-2xl sm:text-3xl font-bold text-kelloggs-red mb-4 uppercase tracking-wide">
             {title.toUpperCase()}
@@ -37,18 +37,18 @@ const WaitlistSection = ({ data }) => {
               const isFullWidth = label.toLowerCase().includes('email') || label.toLowerCase().includes('name') || label.toLowerCase().includes('school');
               const labelLower = label.toLowerCase();
               const isAge = labelLower.includes('age');
-              
+
               const displayLabel = isAge ? "Date of Birth" : label;
-              const inputType = labelLower.includes('email') ? 'email' : 
-                                isAge ? 'date' : 'text';
-              
+              const inputType = labelLower.includes('email') ? 'email' :
+                isAge ? 'date' : 'text';
+
               return (
                 <div key={index} className={`flex flex-col ${isFullWidth ? 'md:col-span-2' : ''}`}>
                   <label className="text-xs font-bold uppercase tracking-wider mb-2 text-gray-700">
                     {displayLabel} *
                   </label>
                   {labelLower.includes('state') ? (
-                     <select
+                    <select
                       name={displayLabel}
                       required
                       defaultValue=""
@@ -57,9 +57,9 @@ const WaitlistSection = ({ data }) => {
                     >
                       <option value="" disabled>Select State</option>
                       {[
-                        "Abia", "Adamawa", "Akwa Ibom", "Anambra", "Bauchi", "Bayelsa", "Benue", "Borno", 
-                        "Cross River", "Delta", "Ebonyi", "Edo", "Ekiti", "Enugu", "Gombe", "Imo", "Jigawa", 
-                        "Kaduna", "Kano", "Katsina", "Kebbi", "Kogi", "Kwara", "Lagos", "Nasarawa", "Niger", 
+                        "Abia", "Adamawa", "Akwa Ibom", "Anambra", "Bauchi", "Bayelsa", "Benue", "Borno",
+                        "Cross River", "Delta", "Ebonyi", "Edo", "Ekiti", "Enugu", "Gombe", "Imo", "Jigawa",
+                        "Kaduna", "Kano", "Katsina", "Kebbi", "Kogi", "Kwara", "Lagos", "Nasarawa", "Niger",
                         "Ogun", "Ondo", "Osun", "Oyo", "Plateau", "Rivers", "Sokoto", "Taraba", "Yobe", "Zamfara", "FCT"
                       ].map((state) => (
                         <option key={state} value={state}>{state}</option>
@@ -80,12 +80,12 @@ const WaitlistSection = ({ data }) => {
           </div>
 
           <div className="w-full">
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               className="w-full bg-kelloggs-red text-white font-bold text-lg py-4 px-8 hover:bg-red-700 transition-all flex items-center justify-center gap-3 uppercase tracking-wider rounded-lg shadow-lg"
             >
               <span>{button_data?.button_text || "JOIN NOW"}</span>
-              <SendIcon fontSize="small" className="-rotate-45 mb-1" />
+              <Send fontSize="small" className="-rotate-45 mb-1" />
             </button>
           </div>
         </form>

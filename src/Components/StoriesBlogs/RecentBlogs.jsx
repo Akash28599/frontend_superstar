@@ -1,5 +1,4 @@
-import { CommentOutlined, VisibilityOutlined } from "@mui/icons-material";
-import { Heart } from "lucide-react";
+import { Eye, HeartIcon, MessageSquareMore } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -93,15 +92,15 @@ const RecentBlogs = ({ id, }) => {
                     <div className="mt-3 flex justify-between text-xs text-gray-600">
                         <div className="flex gap-3">
                             <span className="flex items-center gap-1">
-                                <VisibilityOutlined fontSize="small" /> {views}
+                                <Eye fontSize="small" /> {views}
                             </span>
                             <span className="flex items-center gap-1">
-                                <CommentOutlined fontSize="small" /> {comments}
+                                <MessageSquareMore fontSize="small" /> {comments}
                             </span>
                         </div>
 
                         <span className="flex items-center gap-1">
-                            <Heart size={14} /> {likes}
+                            <HeartIcon size={14} /> {likes}
                         </span>
                     </div>
                 </div>

@@ -1,17 +1,16 @@
-import './App.css';
-import HomePage from './Pages/HomePage';
-import ScholarshipPage from './Pages/ScholarshipPage';
-import Navbar from "./Components/Navbar"
+import HomePage from '../Pages/HomePage';
+import ScholarshipPage from '../Pages/ScholarshipPage';
+import Navbar from "./Navbar"
 import { Route, Routes, useLocation } from 'react-router-dom';
-import QuizPage from './Pages/QuizPage';
-import { PastWinners } from './Pages/PastWinners/PastWinners';
-import ExamPage from './Components/QuizRegistration/ExamPage';
-import Instructions from './Components/QuizRegistration/Instructions';
-import ThankYou from './Components/QuizRegistration/ThankYou';
-import ClubPage from './Pages/ClubPage';
-import FooterLayout from './Components/Footer';
-import StoriesBlogs from './Components/StoriesBlogs/StoriesBlogs';
-import BlogDetail from './Components/StoriesBlogs/BlogDetail';
+import QuizPage from '../Pages/QuizPage';
+import { PastWinners } from '../Pages/PastWinners/PastWinners';
+import ExamPage from '../Components/QuizRegistration/ExamPage';
+import Instructions from '../Components/QuizRegistration/Instructions';
+import ThankYou from '../Components/QuizRegistration/ThankYou';
+import ClubPage from '../Pages/ClubPage';
+import FooterLayout from './Footer';
+import StoriesBlogs from '../Pages/Blogs/StoriesBlogs';
+import BlogDetail from '../Pages/Blogs/BlogDetail';
 
 export function LayoutComponent({ settingsData, dpr }) {
   const location = useLocation();

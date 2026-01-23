@@ -1,6 +1,6 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
+import { useState, useCallback, useEffect } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
+import { Quote } from 'lucide-react';
 
 const TestimonialsSection = ({ data }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'center' });
@@ -44,7 +44,7 @@ const TestimonialsSection = ({ data }) => {
         {/* Carousel Container */}
         <div className="border-4 border-kelloggs-gold p-8 sm:p-12 md:p-16 relative bg-white shadow-2xl rounded-sm max-w-3xl mx-auto flex flex-col items-center">
              <div className="mb-8 flex justify-center text-kelloggs-red">
-                <FormatQuoteIcon sx={{ fontSize: 60 }} className="p-1" />
+                <Quote sx={{ fontSize: 60 }} className="p-1" />
              </div>
 
              <div className="overflow-hidden w-full" ref={emblaRef}>

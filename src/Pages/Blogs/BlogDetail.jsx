@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Heart, Facebook, Twitter, Linkedin, Link as LinkIcon } from 'lucide-react';
-import Episode1 from '../QuizRegistration/Episode1.pdf';
-import Episode2 from '../QuizRegistration/Episode2.pdf';
-import Episode4 from '../QuizRegistration/Episode4.pdf';
-import Episode5 from '../QuizRegistration/Episode5.pdf';
-import RecentBlogs from './RecentBlogs';
-import StoryBookViewer from './StoryBookViewer';
+// import Episode1 from '/assetss/Episode1.pdf';
+// import Episode2 from '/assetss/Episode2.pdf';
+// import Episode4 from '/assetss/Episode4.pdf';
+// import Episode5 from '/assetss/Episode5.pdf';
+import RecentBlogs from '../../Components/StoriesBlogs/RecentBlogs';
+import StoryBookViewer from '../../Components/StoriesBlogs/StoryBookViewer';
 import { openUrl } from '../../Utils/Utilities';
 
 const BlogDetail = ({ siteSettings }) => {
@@ -76,19 +76,19 @@ const BlogDetail = ({ siteSettings }) => {
             const lowerSubTitle = blog.sub_title?.toLowerCase() || "";
 
             if (lowerBlogTitle.includes('episode 5')) {
-                pdfToDisplay = Episode5;
+                pdfToDisplay = '/assetss/Episode5.pdf';
                 pdfTitle = "Episode 5: The Grand Finale";
             } else if (lowerBlogTitle.includes('episode 4')) {
-                pdfToDisplay = Episode4;
+                pdfToDisplay = '/assetss/Episode4.pdf';
                 pdfTitle = "Episode 4";
             } else if (lowerBlogTitle.includes('episode 3')) {
                 pdfToDisplay = null; // Not available
             } else if (lowerBlogTitle.includes('episode 2')) {
-                pdfToDisplay = Episode2;
+                pdfToDisplay = '/assetss/Episode2.pdf';
                 pdfTitle = "Episode 2";
             } else if (lowerSubTitle === 'story') {
                 // Fallback for generic story -> Episode 1
-                pdfToDisplay = Episode1;
+                pdfToDisplay = '/assetss/Episode1.pdf';
                 pdfTitle = "Episode 1: The Beginning";
             }
         }
@@ -136,100 +136,6 @@ const BlogDetail = ({ siteSettings }) => {
                             }
                             return <p key={index} className="text-lg text-gray-700 leading-relaxed mb-4 text-left">{descItem.content}</p>;
                         }
-
-                        // if (descItem.content_type === 'points' || descItem.content_type === 'point') {
-                        //     if(descItem.content.length>1){
-                        //     return (
-                        //         <ol key={index} className="list-decimal pl-5 space-y-4 mb-6 text-left">
-                        //             {Array.isArray(descItem.content) && descItem.content.map((point, pIndex) => {
-                        //                 if (typeof point === 'object') {
-                        //                     const displayTitle = (!point.title || (typeof point.title === 'string' && point.title.startsWith('http'))) ? point.value : point.title;
-                        //                     const isReferences = section.title && section.title.toLowerCase().includes('references');
-                        //                     const linkClass = isReferences
-                        //                         ? "text-blue-600 font-bold underline"
-                        //                         : "text-gray-900 font-bold hover:text-blue-600 hover:underline";
-
-                        //                     // Handle complex points like links
-                        //                     /*
-                        //                       {
-                        //                         "link": "...",
-                        //                         "title": "...",
-                        //                         "value": "...",
-                        //                         "Skills Developed": "..."
-                        //                       }
-                        //                     */
-                        //                     return (
-                        //                         <li key={pIndex} className="text-lg text-gray-700 text-left">
-                        //                             {point.link ? (
-                        //                                 <a href={point.link} target="_blank" rel="noopener noreferrer" className={linkClass}>
-                        //                                     {displayTitle}
-                        //                                 </a>
-                        //                             ) : (
-                        //                                 <span className="font-bold text-gray-900">{displayTitle}</span>
-                        //                             )}
-                        //                             {point.value && point.value !== displayTitle && <span className="block mt-1">{point.value}</span>}
-                        //                             {/* Display extra fields like Skills Developed if present */}
-                        //                             {Object.entries(point).map(([k, v]) => {
-                        //                                 if (k !== 'link' && k !== 'title' && k !== 'value' && k !== 'content_type') {
-                        //                                     return <div key={k} className="mt-1 text-sm text-gray-600"><span className="font-semibold">{k}:</span> {v}</div>
-                        //                                 }
-                        //                                 return null;
-                        //                             })}
-                        //                         </li>
-                        //                     );
-                        //                 }
-                        //                 return <li key={pIndex} className="text-lg text-gray-700 text-left">{point.value || point}</li>;
-                        //             })}
-                        //         </ol>
-                        //     );
-                        // }
-                        // return (
-                        //         <ul key={index} className="pl-5 space-y-4 mb-6 text-left">
-                        //             {Array.isArray(descItem.content) && descItem.content.map((point, pIndex) => {
-                        //                 if (typeof point === 'object') {
-                        //                     const displayTitle = (!point.title || (typeof point.title === 'string' && point.title.startsWith('http'))) ? point.value : point.title;
-                        //                     const isReferences = section.title && section.title.tulowerCase().includes('references');
-                        //                     const linkClass = isReferences
-                        //                         ? "text-blue-600 font-bold underline"
-                        //                         : "text-gray-900 font-bold hover:text-blue-600 hover:underline";
-
-                        //                     // Handle complex points like links
-                        //                     /*
-                        //                       {
-                        //                         "link": "...",
-                        //                         "title": "...",
-                        //                         "value": "...",
-                        //                         "Skills Developed": "..."
-                        //                       }
-                        //                     */
-                        //                     return (
-                        //                         <li key={pIndex} className="text-lg text-gray-700 text-left">
-                        //                             {point.link ? (
-                        //                                 <a href={point.link} target="_blank" rel="noopener noreferrer" className={linkClass}>
-                        //                                     {displayTitle}
-                        //                                 </a>
-                        //                             ) : (
-                        //                                 <span className="font-bold text-gray-900">{displayTitle}</span>
-                        //                             )}
-                        //                             {point.value && point.value !== displayTitle && <span className="block mt-1">{point.value}</span>}
-                        //                             {/* Display extra fields like Skills Developed if present */}
-                        //                             {Object.entries(point).map(([k, v]) => {
-                        //                                 if (k !== 'link' && k !== 'title' && k !== 'value' && k !== 'content_type') {
-                        //                                     return <div key={k} className="mt-1 text-sm text-gray-600"><span className="font-semibold">{k}:</span> {v}</div>
-                        //                                 }
-                        //                                 return null;
-                        //                             })}
-                        //                         </li>
-                        //                     );
-                        //                 }
-                        //                 return <li key={pIndex} className="text-lg text-gray-700 text-left">{point.value || point}</li>;
-                        //             })}
-                        //         </ul>
-                        //     );
-                        // }
-
-                        // Fallback for simple string in content array
-
                         if (descItem.content_type === 'points' || descItem.content_type === 'point') {
 
                             const isOrdered = Array.isArray(descItem.content) && descItem.content.length > 1;

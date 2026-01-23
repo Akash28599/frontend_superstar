@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { LayoutComponent } from './Layout';
+import { LayoutComponent } from './Layouts/Layout';
 
 function App() {
   const [settingsData, setSettingsData] = useState(null);

@@ -22,7 +22,8 @@ export default function PrintableGames() {
         const data = json?.data ?? [];
 
         const dataWithPrintable = data.map((item) => {
-          if (!item.printable) {
+          if (true) {          // if (!item.printable) {
+
             const fallback = sample.find((s) => s.name === item.name);
             return {
               ...item,
@@ -79,7 +80,7 @@ export default function PrintableGames() {
   return (
     <section className="bg-white py-16 px-6 overflow-hidden font-kelloggs">
       <div className="w-full max-w-[1600px] mx-auto">
-        
+
         {/* Title */}
         <div className="text-center mb-12">
           <h2 className="text-[3rem] tablet:text-[3.4rem] text-kelloggs-red font-medium tracking-normal leading-tight">
@@ -108,8 +109,8 @@ export default function PrintableGames() {
             const hasPdf = !!(printable || printable.url);
 
             return (
-              <div 
-                key={item.id} 
+              <div
+                key={item.id}
                 className="
                     flex-none snap-center
                     w-[280px] tablet:w-[320px] 
@@ -174,9 +175,9 @@ export default function PrintableGames() {
                       title={hasPdf ? "Download printable" : "Printable not available"}
                     >
                       {downloadingId === item.id ? "..." : (
-                         <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff">
-                            <polygon points="8,5 8,19 19,12" />
-                         </svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff">
+                          <polygon points="8,5 8,19 19,12" />
+                        </svg>
                       )}
                     </button>
                   </div>
