@@ -5,9 +5,10 @@
 }
 
 .about-container {
-    margin: 2%;
+    max-width: 1440px;
+    width: 95%;
+    margin: 10% auto 50px auto;
     display: flex;
-    margin-top: 10%;
 }
 
 .about-left {

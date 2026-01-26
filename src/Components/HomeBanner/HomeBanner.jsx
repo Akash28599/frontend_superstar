@@ -75,6 +75,14 @@ const HomeBanner = () => {
 
   return (
     <div className="relative min-h-screen bg-kelloggs-red overflow-visible w-full m-0 p-0 flex flex-col font-kelloggs pt-20 sm:pt-24 md:pt-28">
+      <style>{`
+        @media (min-width: 2600px) {
+            .hero-image-zoom-fix {
+                max-height: 850px !important;
+                max-width: 75% !important;
+            }
+        }
+      `}</style>
       
       {/* Logo - DESKTOP OPTIMIZED - z-50 to stay above navbar dropdown */}
       {logoImage && (
@@ -211,6 +219,7 @@ const HomeBanner = () => {
                 src={heroImage} 
                 alt="Hero" 
                 className={`
+                    hero-image-zoom-fix
                     relative object-contain object-bottom z-[10]
                     max-w-full lg:max-w-none
                     w-auto
