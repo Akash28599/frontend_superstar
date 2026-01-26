@@ -13,7 +13,8 @@ const OurProducts = () => {
   const isMacBook = screenWidth >= 1440 && screenWidth < 1920;
   const isSmallScreen = screenWidth < 1200;
   const isMediumScreen = screenWidth >= 1200 && screenWidth < 1400;
-  const is200Scale = screenWidth < 1000;
+  const is200Scale = screenWidth < 1200 && screenWidth >= 1024;
+  const isMobile = screenWidth < 1024; // Mobile & Tablet Breakpoint
   const isFirefox = typeof navigator !== "undefined" && navigator.userAgent.toLowerCase().includes("firefox");
 
   useEffect(() => {
@@ -119,18 +120,27 @@ const OurProducts = () => {
   const SVG_WIDTH = containerWidth;
   const centerX = containerWidth / 2;
 
-  const positions = {
-    product1: { x: containerWidth * 0.15, y: 158 },
-    product2: { x: containerWidth * 0.85, y: 279 },
-    coco: { x: centerX, y: 550 },
-    product3: { x: containerWidth * 0.18, y: 690 },
-    product4: { x: containerWidth * 0.78, y: 970 },
-    product5: { x: containerWidth * (is200Scale ? 0.22 : 0.16), y: 1115 },
+  // Vertical layout for mobile
+  const positions = isMobile ? {
+    product3: { x: centerX, y: 100 }, // Top
+    product2: { x: centerX, y: 210 }, 
+    coco: { x: centerX, y: 600 },     
+    product4: { x: centerX, y: 900 }, 
+    product5: { x: centerX, y: 1150 },
+    product1: { x: centerX, y: 1400 }, // Bottom
+  } : {
+    product1: { x: containerWidth * 0.21, y: 158 },
+    product2: { x: containerWidth * 0.83, y: 279 },
+    coco: { x: centerX, y: 400 },
+    product3: { x: containerWidth * 0.18, y: 790 },
+    product4: { x: containerWidth * 0.75, y: 756 },
+    product5: { x: containerWidth * (is200Scale ? 0.12 : 0.4), y: 806 },
   };
 
   const createTopCurve = () => {
+    if (isMobile) return "";
     const { product1, product2 } = positions;
-    const controlY = product1.y - 230;
+    const controlY = product1.y - 200;
     const cp1x = centerX * 0.5;
     const cp2x = centerX * 1.5;
     return `M ${product1.x + 3} ${product1.y + 11}
@@ -140,7 +150,12 @@ const OurProducts = () => {
   };
 
   const createMainPath = () => {
-    const { product1, coco, product4, product5 } = positions;
+    if (isMobile) {
+
+       return `M ${centerX} 100 L ${centerX} 1500`;
+    }
+
+    const { product1, coco, product3, product4, product5 } = positions;
 
     const s1 = is200Scale ?
                 `M ${product1.x} ${product1.y}
@@ -160,8 +175,8 @@ const OurProducts = () => {
 
     const s2 = screenWidth >= 1900 ?
                 `C ${coco.x + 80} ${coco.y + 40},
-                  ${product4.x +100} ${(coco.y + product4.y-10) / 2},
-                  ${product4.x+100} ${product4.y }`
+                  ${product4.x +80} ${(coco.y + product4.y-1) / 2},
+                  ${product4.x+50} ${product4.y }`
                   :
                 isSmallScreen ?
                 (screenWidth < 1000 ?
@@ -177,13 +192,13 @@ const OurProducts = () => {
                    ${product4.x} ${product4.y + 250}`
                 )
                 :
-                `C ${coco.x + 80} ${coco.y + 40},
-                  ${product4.x + 80} ${(coco.y + product4.y) / 2},
+                `C ${coco.x + 50} ${coco.y + 40},
+                  ${product4.x - 80} ${(coco.y + product4.y) / 2},
                   ${product4.x} ${product4.y + 50}`;
 
     const s3 = screenWidth >= 1900 ?
-                 `C ${product4.x - 100} ${product4.y + 50},
-                  ${product5.x + 20} ${product5.y - 57},
+                 `C ${product4.x +90} ${product4.y - 140},
+                  ${product5.x + 0} ${product5.y - 2},
                   ${product5.x-10 } ${product5.y }` 
                  : 
                  is200Scale ?
@@ -193,24 +208,25 @@ const OurProducts = () => {
                  :
                  isSmallScreen ?
                  // 175% Scale
-                 `C ${product4.x - 100} ${product4.y + 590},
-                  ${product5.x + 100} ${product5.y - 30},
-                  ${product5.x + 20} ${product5.y + 510}`
+                 `C ${product4.x - 100} ${product4.y - 50},
+                  ${product5.x + 100} ${product5.y - 250},
+                  ${product5.x + 20} ${product5.y + 0}`
                  :
                  isMediumScreen ?
-                 `C ${product4.x - 100} ${product4.y + 300},
-                  ${product5.x + 100} ${product5.y - 50},
-                  ${product5.x - 20} ${product5.y + 150}`
+                 `C ${product4.x - 100} ${product4.y - 120},
+                  ${product5.x + 100} ${product5.y - 300},
+                  ${product5.x - 20} ${product5.y - 20}`
                  :
-                 `C ${product4.x - 100} ${product4.y + 100},
-                  ${product5.x + 20} ${product5.y - 57},
-                  ${product5.x - 120} ${product5.y + 60}`;
+                 `C ${product4.x - 100} ${product4.y - 100},
+                  ${product5.x + 20} ${product5.y - 350},
+                  ${product5.x - 120} ${product5.y - 20}`;
+
 
     const s4 = //true?``:
     screenWidth >= 1900 ? 
-                  `${product4.x -950} ${product5.y +40},
-                  ${product4.x -900} ${product5.y +100},
-                  ${product4.x -900} ${product5.y +100}`
+                  `${product4.x -910} ${product5.y +40},
+                  ${product4.x -760} ${product5.y +100},
+                  ${product4.x -770} ${product5.y +100}`
                 :
                  ``;
 
@@ -218,6 +234,21 @@ const OurProducts = () => {
     //  return `${s1} ${s2} ${s3}`;
     return `${s1} ${s2} ${s3} ${s4}`;
 
+  };
+
+  const renderMobileProduct = (product) => {
+    if (!product) return null;
+    return (
+      <div style={{ position: 'relative', zIndex: 2, margin: '40px 0', textAlign: 'center', backgroundColor: '#fff', padding: '10px' }}>
+         <img 
+           src={imgUrl(product)} 
+           alt={product.title_description?.title}
+           style={{ maxWidth: 200, height: 'auto', marginBottom: 20 }}
+         />
+         <h2 style={{ ...productTitleStyle, fontSize: 24 }}>{product.title_description?.title}</h2>
+         <p style={paragraphStyle}>{product.title_description?.description}</p>
+      </div>
+    )
   };
 
   // reusable row component with custom text positioning
@@ -302,7 +333,7 @@ const OurProducts = () => {
   return (
     <>
       <div style={sectionHeadingWrapper}>
-        <h1 style={{ ...headingStyle, fontSize: 52 }}>Our products</h1>
+        <h1 style={{ ...headingStyle, fontSize: isMobile ? 42 : 52 }}>Our products</h1>
       </div>
       <section
         ref={containerRef}
@@ -310,28 +341,19 @@ const OurProducts = () => {
           position: "relative",
           background: "#fff",
           overflow: "hidden",
-          padding: "2rem 0 20rem",
+          padding: isMobile ? "2rem 1rem" : "2rem 0 20rem",
           minHeight: "100vh",
+          display: isMobile ? 'flex' : 'block',
+          flexDirection: 'column',
+          alignItems: 'center'
         }}
       >
-        {/* <svg
-          width="100%"
-          height={1200}
-          viewBox={`0 0 ${SVG_WIDTH} ${1200}`}
-          preserveAspectRatio="xMidYMin slice"
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            pointerEvents: "none",
-            zIndex: 0,
-          }}
-        > */}
+        { !isMobile && (
         <svg
           width="100%"
           height={1200}
           viewBox={`0 0 ${SVG_WIDTH} 1200`}
-          preserveAspectRatio="xMidYMin meet"   // ✅ IMPORTANT
+          preserveAspectRatio="xMidYMin meet"
           style={{
             position: "absolute",
             top: 0,
@@ -340,7 +362,6 @@ const OurProducts = () => {
             zIndex: 0,
           }}
         >
-
           <path
             d={createTopCurve()}
             fill="none"
@@ -358,7 +379,36 @@ const OurProducts = () => {
             strokeLinecap="round"
           />
         </svg>
+        )}
 
+        {isMobile ? (
+             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', position: 'relative' }}>
+                 {/* Dashed line background for mobile */}
+                 <div style={{
+                     position: 'absolute',
+                     left: '50%',
+                     top: 0,
+                     bottom: 0,
+                     width: 2,
+                     borderLeft: '2px dashed #d6d6d6',
+                     transform: 'translateX(-50%)',
+                     zIndex: 0
+                 }}/>
+                 
+                 {renderMobileProduct(product3)}
+                 {renderMobileProduct(product2)}
+                 
+                 {coco && (
+                    <div style={{ textAlign: 'center', position: 'relative', zIndex: 2, margin: '40px 0', backgroundColor: '#fff', padding: 10 }}>
+                         <img src={imgUrl(coco)} alt="Coco" style={{ maxWidth: 280, width: '100%', height: 'auto' }} />
+                    </div>
+                 )}
+                 
+                 {renderMobileProduct(product4)}
+                 {renderMobileProduct(product1)}
+                 {renderMobileProduct(product5)}
+             </div>
+        ) : (
         <div
           style={{
             maxWidth: 1400,
@@ -627,6 +677,7 @@ const OurProducts = () => {
             }}
           />
         </div>
+        )}
       </section>
     </>
   );
