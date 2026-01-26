@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import VideoThumbnail from './VideoThumbnail'
 import VideoPopup from './VideoPopup'
+import campaignThumb from './campaign_thumbnail.jpg'
 
 const sample = {
     mainVideoLink: "https://www.youtube.com/watch?v=odO24fa2AqA",
@@ -51,6 +52,8 @@ const YoutubeGallery = () => {
                     className="h-[100vh] w-full"
                     shouldBlur={true}
                     playIconSize='x-large'
+                    isScholarshipPage={true}
+                    customThumbnail={campaignThumb}
                 />
             </div>
 
@@ -91,12 +94,13 @@ const YoutubeGallery = () => {
                         ))}
                     </div>
 
-                    <div className="w-full gap-[2%]">
+                    <div className="flex-1 w-full gap-[2%]">
                         <VideoThumbnail
                             url={data.editionWinnersLink[0]}
                             onClick={setActiveVideo}
                             className="w-full h-full"
                             playIconSize='large'
+                            customThumbnail="https://kelloggsnigeria.ng/_nuxt/img/adeola.bbc7226.png"
                         />
                     </div>
                 </div>

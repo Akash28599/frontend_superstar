@@ -49,92 +49,53 @@ const QuizLandingPage = () => {
 
       <style>
         {`
-          .card-anim { transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-          .card-anim:hover { transform: translateY(-10px); }
-          
-          /* Super Playful Step Cards for Kids */
+          /* BIG ATTRACTIVE ANIMATIONS */
+          @keyframes elastic-appear {
+            0% { opacity: 0; transform: translateY(100px) scale(0.5); }
+            60% { opacity: 1; transform: translateY(-20px) scale(1.1); }
+            80% { transform: translateY(10px) scale(0.95); }
+            100% { transform: translateY(0) scale(1); }
+          }
+
+          @keyframes float-idle {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(1deg); }
+          }
+
           .step-card { 
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); 
-            cursor: pointer; 
             position: relative;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); /* Bouncy transition */
+            cursor: pointer; 
+            animation: elastic-appear 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) backwards;
           }
+
+          /* Continuous floating for "Alive" feel */
+          .step-card:nth-child(1) { animation: elastic-appear 0.8s 0.2s backwards, float-idle 4s ease-in-out 1s infinite; }
+          .step-card:nth-child(2) { animation: elastic-appear 0.8s 0.4s backwards, float-idle 5s ease-in-out 1.2s infinite ease-in; }
+          .step-card:nth-child(3) { animation: elastic-appear 0.8s 0.6s backwards, float-idle 4.5s ease-in-out 1.4s infinite reverse; }
+
+          /* DRAMATIC HOVER */
           .step-card:hover { 
-            transform: scale(1.08) translateY(-8px) rotate(1deg); 
-            box-shadow: 0 20px 50px rgba(255, 204, 0, 0.4);
-            animation: wiggle 0.5s ease-in-out;
+            z-index: 10;
+            transform: scale(1.15) translateY(-25px) rotate(-2deg) !important; /* Override float */
+            box-shadow: 0 30px 60px rgba(246, 9, 69, 0.3); /* Big Red/Pink Glow */
+            animation-play-state: paused;
           }
-          @keyframes wiggle {
-            0%, 100% { transform: scale(1.08) translateY(-8px) rotate(1deg); }
-            25% { transform: scale(1.08) translateY(-8px) rotate(-2deg); }
-            75% { transform: scale(1.08) translateY(-8px) rotate(2deg); }
-          }
-          
-          /* Multiple floating emojis on hover */
-          .step-card::before {
-            content: '⭐';
-            position: absolute;
-            top: -15px;
-            left: -10px;
-            font-size: 20px;
-            opacity: 0;
-            transition: all 0.3s ease;
-            transform: scale(0);
-          }
-          .step-card::after {
-            content: '✨';
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            font-size: 24px;
-            opacity: 0;
-            transition: all 0.3s ease;
-            transform: scale(0);
-          }
-          .step-card:hover::before {
-            opacity: 1;
-            transform: scale(1) rotate(-15deg) translateY(-10px);
-            animation: float 1s ease-in-out infinite;
-          }
-          .step-card:hover::after {
-            opacity: 1;
-            transform: scale(1) rotate(15deg);
-            animation: sparkle 0.6s ease-in-out infinite alternate;
-          }
-          @keyframes float {
-            0%, 100% { transform: scale(1) rotate(-15deg) translateY(-10px); }
-            50% { transform: scale(1.1) rotate(-20deg) translateY(-20px); }
-          }
-          @keyframes sparkle {
-            0% { transform: scale(1) rotate(0deg); }
-            100% { transform: scale(1.3) rotate(25deg); }
-          }
-          
-          /* Glowing animated border */
-          .step-card:hover > div:last-child {
-            box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.5), 0 0 20px rgba(255, 204, 0, 0.3);
-          }
-          
-          /* Bouncing number badge */
-          .step-badge { 
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); 
-          }
-          .step-card:hover .step-badge { 
-            transform: scale(1.4) rotate(-20deg); 
-            box-shadow: 0 10px 30px rgba(255, 204, 0, 0.6);
-            animation: bounce 0.6s ease infinite;
-          }
-          @keyframes bounce {
-            0%, 100% { transform: scale(1.4) rotate(-20deg) translateY(0); }
-            50% { transform: scale(1.4) rotate(-20deg) translateY(-8px); }
+
+          /* Inner card transform on hover */
+          .step-card:hover .step-card-inner {
+            background: linear-gradient(135deg, #fff 0%, #FFF0F3 100%); /* Reddish tint */
+            border-color: #F60945;
+            transform: skewX(-2deg);
           }
           
           .step-card-inner {
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            transform-origin: center;
           }
-          .step-card:hover .step-card-inner {
-            background: linear-gradient(135deg, #fff 0%, #fffbeb 100%);
-          }
-          
+
+          /* Gallery Image Styles */
           .gallery-image { transition: transform 0.3s ease; cursor: pointer; }
           .gallery-image:hover { transform: scale(1.03); }
           
@@ -201,6 +162,20 @@ const QuizLandingPage = () => {
             animation: swing 3s ease-in-out infinite;
             transform-origin: top center;
           }
+           @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          .step-card { 
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); 
+            cursor: pointer; 
+            position: relative;
+            animation: fadeInUp 0.8s ease-out backwards;
+          }
+          .step-card:nth-child(1) { animation-delay: 0.2s; }
+          .step-card:nth-child(2) { animation-delay: 0.4s; }
+          .step-card:nth-child(3) { animation-delay: 0.6s; }
+
           @media (min-width: 768px) {
             .hanging-monkey { width: clamp(220px, 20vw, 350px); left: -20px; }
           }
