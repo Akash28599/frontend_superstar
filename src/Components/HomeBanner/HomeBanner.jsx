@@ -130,7 +130,7 @@ const HomeBanner = () => {
             xxs:pb-8 xxs:pt-22
             sm:pb-10 sm:pt-26
             md:pb-12 md:pt-28
-            ${isEdge ? 'lg:pb-[10vh] lg:pt-[23vh]' : 'lg:pb-[12vh] lg:pt-[24vh]'}
+            ${isEdge ? 'md:pb-[10vh] md:pt-[23vh]' : 'md:pb-[12vh] md:pt-[24vh]'}
             ${isEdge ? 'tablet:pb-[10vh] tablet:pt-[23vh]' : 'tablet:pb-[10vh] tablet:pt-[25vh]'}
             ${isEdge ? 'wide:pb-[14vh] wide:pt-[27vh]' : 'wide:pb-[8vh] wide:pt-[12vh]'}
         `}>
@@ -204,7 +204,7 @@ const HomeBanner = () => {
         </div>
 
         {/* Right Section / Image Wrapper - DESKTOP OPTIMIZED (1920x1080) - Kid visible on mobile */}
-        <div className="flex-1 h-full flex justify-center md:justify-end items-end relative z-[5] w-full md:w-auto mt-4 sm:mt-0">
+        <div className="flex-1 h-full flex justify-center lg:justify-end items-end relative z-[5] w-full lg:w-auto mt-4 sm:mt-0">
           {heroImage && (
             <>
               <img 
@@ -212,26 +212,26 @@ const HomeBanner = () => {
                 alt="Hero" 
                 className={`
                     relative object-contain object-bottom
-                    max-w-full md:max-w-none
+                    max-w-full lg:max-w-none
                     w-auto
                     h-[35vh] xxs:h-[38vh] xs:h-[42vh] sm:h-[50vh] 
-                    ${isEdge ? 'md:h-[clamp(72vh,96vh,108vh)]' : 'md:h-[clamp(85vh,115vh,130vh)]'}
+                    ${isEdge ? 'lg:h-[clamp(72vh,96vh,108vh)]' : 'lg:h-[clamp(85vh,115vh,130vh)]'}
                     ${isEdge ? 'wide:h-[clamp(72vh,96vh,108vh)]' : 'wide:h-[clamp(75vh,100vh,115vh)]'}
                     min-w-[200px] xxs:min-w-[220px] xs:min-w-[250px]
-                    md:min-w-[300px]
+                    lg:min-w-[300px]
                     tablet:min-w-[500px]
-                    mr-0 md:mr-[5%] mb-0
+                    mr-0 lg:mr-[5%] mb-0
                 `} 
               />
               
               {/* Clouds - DESKTOP ONLY */}
               <Cloud className="
-                hidden md:block
+                hidden lg:block
                 top-[50%] right-[10%] w-[14%] z-[3] opacity-90
               " />
 
               <Cloud className="
-                hidden md:block
+                hidden lg:block
                 top-[20%] left-[5%] w-[8%] z-[4] opacity-90
               " />
             </>

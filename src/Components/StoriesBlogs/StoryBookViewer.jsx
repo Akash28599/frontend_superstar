@@ -132,7 +132,7 @@ const StoryBookViewer = ({ pdfUrl, title, onClose }) => {
 
   return (
     <div className={`
-      flex flex-col items-center rounded-xl transition-all duration-300
+      flex flex-col items-center rounded-xl transition-all duration-300 font-kelloggs
       ${isFullScreen 
           ? `fixed inset-0 z-50 p-0 bg-gray-900 ${shouldScroll ? 'overflow-y-auto' : 'overflow-hidden justify-center'}` 
           : 'relative w-full p-4 border border-white/20 shadow-xl bg-kelloggs-red overflow-hidden'

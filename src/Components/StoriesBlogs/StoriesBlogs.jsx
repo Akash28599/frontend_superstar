@@ -63,7 +63,7 @@ const StoriesBlogs = ({ type = 'blogs' }) => {
     const hasMore = visibleCount < posts.length;
 
     return (
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-12 font-sans">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-12 font-kelloggs">
             {/* Title */}
             <h1 className="text-4xl font-bold text-gray-900 mb-12 text-left">
                 {type === 'stories' ? 'Stories' : 'Blogs'}

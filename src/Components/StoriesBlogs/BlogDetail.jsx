@@ -315,7 +315,7 @@ const BlogDetail = ({ siteSettings }) => {
 
 
     return (
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-12 font-sans">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-12 font-kelloggs">
             {/* Header Info */}
             <div className="mb-8">
                 <div className="flex items-center space-x-3 mb-4">

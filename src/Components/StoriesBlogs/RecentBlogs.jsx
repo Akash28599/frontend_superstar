@@ -29,7 +29,7 @@ const RecentBlogs = ({ id, }) => {
                     `&populate=blog_thumbail` +
                     `&pagination[limit]=3` +
                     `&filters[documentId][$ne]=${id}` +
-                    `&filters[sub_title][$eq]=${type}` +
+                    `&filters[sub_title][${type === 'story' ? '$eq' : '$ne'}]=story` +
                     `&sort=post_date:desc`;
 
                 const response = await fetch(url);
@@ -60,7 +60,7 @@ const RecentBlogs = ({ id, }) => {
         return (
             <div
                 onClick={() => {
-                    navigate(`/blog/${documentId}`);
+                    navigate(type === 'story' ? `/stories/${documentId}` : `/blog/${documentId}`);
                     window.scrollTo({ top: 0, left: 0 });
                 }}
 
