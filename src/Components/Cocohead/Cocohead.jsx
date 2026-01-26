@@ -1,14 +1,12 @@
-
 import { useEffect, useState } from 'react';
+import { API_CONFIG } from '../../common/config';
 
 export const CocoHead = () => {
     const [items, setItems] = useState([]);
     const [head, setHead] = useState(null);
 
-    // const isEdge = /Edg|Edge/.test(navigator.userAgent); // Tailwind handles browser inconsistencies better, removing usage
-
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_STRAPI_URL}/api/coco-heads?populate=*`)
+        fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.COCO_HEADS}`)
             .then(res => res.json())
             .then(json => {
                 const data = json.data || [];
@@ -16,55 +14,57 @@ export const CocoHead = () => {
                 const iconItems = data.filter(d => d.icon_description && d.icon_description.title);
 
                 setHead(headItem || null);
-
                 setItems(iconItems);
             })
             .catch(() => {});
     }, []);
 
     return (
-        <div className="relative flex flex-col tablet:flex-row items-center justify-center w-full mt-20 mb-[10%] px-[2%] tablet:px-[5%] gap-4 font-kelloggs">
+        <div className="relative flex flex-col items-center justify-center w-full mt-12 md:mt-16 lg:mt-20 mb-12 md:mb-16 lg:mb-20 px-4 md:px-8 lg:px-[5%] gap-4 font-kelloggs overflow-visible">
             
-            {/* Star Section Removed */}
-
-            {/* Yellow Banner */}
+            {/* Yellow Banner - Fully Responsive with extra padding to prevent clipping */}
             <div className="
                 relative bg-kelloggs-gold 
-                w-[95%] tablet:w-[95%] desktop:w-[92%] wide:w-[90%] max-w-[1400px]
-                min-h-[220px] tablet:min-h-[260px] rounded-[32px] 
-                p-4 tablet:p-6 
-                flex flex-row items-center 
-                ml-[2%] tablet:ml-[5%] desktop:ml-[8%]
-                shadow-sm
+                w-full max-w-[95%] md:max-w-[92%] lg:max-w-[90%] xl:max-w-[1400px]
+                min-h-[320px] sm:min-h-[340px] md:min-h-[280px] lg:min-h-[300px]
+                rounded-2xl md:rounded-3xl lg:rounded-[32px]
+                p-6 sm:p-7 md:p-8 lg:p-10
+                flex flex-col md:flex-row items-center 
+                ml-0 md:ml-[5%] lg:ml-[8%]
+                shadow-lg
             ">
                 
-                {/* Coco Monkey Head - Desktop/Tablet */}
+                {/* Coco Monkey Head - Hidden on Mobile, Visible on Tablet+ */}
                 <div className="
-                    absolute -top-[50px] left-[-10px] w-[120px] z-30
-                    tablet:relative tablet:top-auto tablet:left-auto
-                    tablet:w-[40%] desktop:w-[38%] wide:w-[36%]
-                    tablet:-ml-[8%] desktop:-ml-[8%] wide:-ml-[6%]
-                    tablet:scale-[1.35] desktop:scale-[1.3] wide:scale-[1.4]
-                    tablet:flex-none origin-center
-                    hidden tablet:block
+                    hidden md:block
+                    relative
+                    w-[35%] lg:w-[38%] xl:w-[36%]
+                    -ml-[6%] lg:-ml-[8%] xl:-ml-[6%]
+                    -mt-[2%] -mb-[5%]
+                    scale-[1.2] lg:scale-[1.3] xl:scale-[1.4]
+                    flex-none origin-center
+                    z-30
                 ">
                     {head?.thumbnail && <img src={head.thumbnail.url} alt='coco monkey' className="w-full h-auto drop-shadow-lg block" />}
                 </div>
 
-                {/* Mobile/High Scale Monkey Head (Absolute positioned to save space) */}
-                 <div className="
-                    absolute -left-[5%] top-[50%] -translate-y-1/2 w-[22%] z-30
-                    tablet:hidden
+                {/* Mobile Monkey Head - Smaller, Top Positioned */}
+                <div className="
+                    block md:hidden
+                    absolute -top-14 left-1/2 -translate-x-1/2
+                    w-28 sm:w-32
+                    z-30
                 ">
-                    {head?.thumbnail && <img src={head.thumbnail.url} alt='coco monkey' className="w-full h-auto drop-shadow-lg block scale-150" />}
+                    {head?.thumbnail && <img src={head.thumbnail.url} alt='coco monkey' className="w-full h-auto drop-shadow-lg block" />}
                 </div>
 
-
-                {/* Content Box */}
+                {/* Content Box - Responsive Grid with Boxes around each section */}
                 <div className="
-                    flex flex-row flex-1 justify-between items-start gap-2 tablet:gap-4 
+                    grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3
+                    gap-4 sm:gap-5 md:gap-4 lg:gap-5
                     w-full 
-                    pl-[22%] tablet:pl-[12%] desktop:pl-[10%]
+                    pt-20 md:pt-0
+                    md:pl-[8%] lg:pl-[10%]
                 ">
                     {items.map((item, index) => {
                         const iconUrl = item.icons?.url || item.icon?.url || item.image?.url ||
@@ -73,44 +73,52 @@ export const CocoHead = () => {
                         const desc = item.icon_description?.description || item.description || '';
                         
                         return (
-                            <div className="flex flex-col flex-1 items-start justify-start text-left px-1 tablet:px-2" key={index}>
-                                {/* Icon */}
-                                <div className="h-[60px] tablet:h-[80px] w-full flex items-center justify-center mb-2">
+                            <div 
+                                className="
+                                    flex flex-col items-center md:items-start text-center md:text-left 
+                                    px-4 py-5 md:px-4 md:py-6 lg:px-5 lg:py-7
+                                    bg-white/20 backdrop-blur-sm rounded-xl
+                                    border border-white/30
+                                    hover:bg-white/30 transition-all duration-300
+                                " 
+                                key={index}
+                            >
+                                {/* Icon - Centered Mobile, Left Desktop */}
+                                <div className="h-14 sm:h-16 md:h-[60px] lg:h-[70px] w-full flex items-center justify-center md:justify-start mb-3">
                                     {iconUrl &&
-                                        <img src={iconUrl} alt='item icon' className="max-w-[45px] tablet:max-w-[60px] max-h-[60px] tablet:max-h-[80px] w-auto h-auto object-contain" />
+                                        <img src={iconUrl} alt='item icon' className="max-w-[45px] sm:max-w-[50px] md:max-w-[45px] lg:max-w-[55px] max-h-[55px] sm:max-h-[60px] md:max-h-[60px] lg:max-h-[70px] w-auto h-auto object-contain" />
                                     }
                                 </div>
                                 
-                                {/* Title */}
+                                {/* Title - Centered Mobile, Left Desktop */}
                                 <div className="
-                                    font-bold text-left w-full 
-                                    min-h-[2.5em] tablet:min-h-[3.5em] 
-                                    flex items-start justify-start
-                                    text-[clamp(0.75rem,1.1vw,1.3rem)]  
+                                    font-bold text-center md:text-left w-full 
+                                    min-h-[2em] md:min-h-[2.2em] lg:min-h-[2.5em]
+                                    flex items-center justify-center md:justify-start
+                                    text-sm sm:text-base md:text-[clamp(0.85rem,1.1vw,1.1rem)]
                                     leading-tight text-black
+                                    mb-2
                                 ">
                                     {title}
                                 </div>
                                 
-                                {/* Description */}
+                                {/* Description - Centered Mobile, Left Desktop */}
                                 <div 
                                     className="
-                                        text-left w-full 
-                                        text-[clamp(0.7rem,1vw,1.1rem)] 
-                                        leading-[1.4] text-[#333] mt-2
-                                        max-w-[98%] tablet:max-w-[95%]
-                                        coco-desc-clamp
+                                        text-center md:text-left w-full 
+                                        text-xs sm:text-sm md:text-[clamp(0.72rem,0.95vw,0.95rem)]
+                                        leading-relaxed md:leading-[1.45] text-[#333]
+                                        max-w-full
                                     "
-                                >
-                                    {desc}
-                                </div>
+                                    dangerouslySetInnerHTML={{ __html: desc }}
+                                />
                             </div>
-                        )
+                        );
                     })}
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default CocoHead;

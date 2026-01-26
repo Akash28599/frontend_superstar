@@ -22,23 +22,36 @@ const CocoBanner = () => {
     fetchBanner();
   }, []);
 
-  if (loading) return <div className="min-h-[500px] flex items-center justify-center text-white">Loading...</div>;
-  if (!data) return <div className="min-h-[500px] flex items-center justify-center text-white">No data available</div>;
+  if (loading) return <div className="min-h-[350px] flex items-center justify-center text-white">Loading...</div>;
+  if (!data) return <div className="min-h-[350px] flex items-center justify-center text-white">No data available</div>;
 
   const title = data.title;
   const description = data.description;
   const charImg = data.image?.url ?? null;
 
   return (
-    <div className="relative w-full h-auto min-h-[500px] overflow-visible font-kelloggs transform translate-y-[-1px]">
-      {/* Wave Background */}
-      <div className="relative w-full h-full"> 
-          <img
-            src={waveImage}
-            alt="wave background"
-            className="w-full h-auto min-h-[500px] object-cover block relative z-10"
-          />
-      
+    <div className="relative w-full overflow-visible font-kelloggs">
+      {/* SVG Wave - White area with curvy red coming in from bottom-left */}
+      <svg 
+        viewBox="0 0 1440 400" 
+        className="w-full h-auto block"
+        preserveAspectRatio="none"
+        style={{ marginBottom: '-2px' }}
+      >
+        {/* White background */}
+        <rect x="0" y="0" width="1440" height="400" fill="white" />
+        {/* Red wave - S-curve from bottom-left to top-right */}
+        <path 
+          fill="#F60945" 
+          d="M0,120 C100,180 200,280 400,300 C600,320 800,180 1000,120 C1200,60 1350,40 1440,80 L1440,400 L0,400 Z"
+        />
+      </svg>
+
+      {/* Red Background Container - seamlessly connects to wave */}
+      <div className="relative w-full bg-[#F60945]"> 
+        {/* Content padding - adjust py to control height below description */}
+        <div className="py-[4%] md:py-[3%] lg:py-[2%]">
+          
           {/* Character Image - Hanging Effect */}
           {charImg && (
             <img
@@ -47,7 +60,7 @@ const CocoBanner = () => {
               className="
                 absolute z-20 pointer-events-none
                 w-[30%] tablet:w-[28%] desktop:w-[30%] wide:w-[30%]
-                -top-[10%] tablet:-top-[12%] wide:-top-[15%]
+                -top-[80%] tablet:-top-[90%] wide:-top-[100%]
                 left-[-1%] tablet:left-[0%]
                 drop-shadow-2xl
               "
@@ -61,20 +74,19 @@ const CocoBanner = () => {
               alt="cloud"
               className="
                 absolute z-20 pointer-events-none
-                w-[25%] tablet:w-[15%]
-                top-[10%] right-[5%]
+                w-[12%] tablet:w-[10%]
+                -top-[30%] right-[8%]
                 opacity-90
               "
             />
           )}
 
-          {/* Text Content - Centered but shifted right slightly on small screens */}
+          {/* Text Content - shifted right to avoid Coco overlap */}
           <div className="
-            absolute top-1/2 left-[55%] tablet:left-1/2 -translate-x-1/2 -translate-y-1/2 
-            flex flex-col items-center justify-center text-center 
+            relative flex flex-col items-center justify-center text-center 
             w-full max-w-[85%] tablet:max-w-[70%] desktop:max-w-[60%] 
-            z-30 px-4 mt-[5%]
-            pl-[10%] tablet:pl-0
+            z-30 px-4 mx-auto
+            ml-[58%] tablet:ml-[53%] -translate-x-1/2
           ">
             <h1 className="
               font-bold text-white leading-[1.0] drop-shadow-md mb-6
@@ -91,6 +103,7 @@ const CocoBanner = () => {
               "
             />
           </div>
+        </div>
       </div>
     </div>
   );

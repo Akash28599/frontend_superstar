@@ -22,12 +22,23 @@ export default function HomePage({dpr}) {
                     <HomeBanner />
                 </div>
 
-                {/* Other components */}
-                <CocoHead dpr={dpr}/>
-                 <CocoBanner dpr={dpr}/>
-                <OurProducts />
+                {/* Other components with proper spacing */}
+                <div style={{ paddingTop: '80px' }}>
+                    <CocoHead dpr={dpr}/>
+                </div>
+                <div style={{ paddingTop: '60px' }}>
+                    <CocoBanner dpr={dpr}/>
+                </div>
+                {/* White separator for visual gap */}
+                <div style={{ height: '80px', backgroundColor: 'white' }}></div>
+                
+                <div style={{ paddingTop: '60px' }}>
+                    <OurProducts />
+                </div>
                 {/* <TrendingStories/> */}
-                <PrintableGames />
+                <div style={{ paddingTop: '80px', paddingBottom: '60px' }}>
+                    <PrintableGames />
+                </div>
                
             </div>
         </>

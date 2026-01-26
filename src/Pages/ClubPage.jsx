@@ -42,8 +42,11 @@ const ClubPage = () => {
             <TestimonialsSection data={pageData.testimonials_section} />
             <WaitlistSection data={pageData.waitlist_section} />
             <OpportunitiesSection data={pageData.opportunities_section} />
+            {/* White space before footer */}
+            <div className="h-16 bg-white"></div>
         </div>
     );
 };
 
 export default ClubPage;
+

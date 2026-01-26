@@ -15,22 +15,30 @@ import BlogDetail from './Components/StoriesBlogs/BlogDetail';
 
 export function LayoutComponent({ settingsData, dpr }) {
   const location = useLocation();
-  const hidePathsNav = ['/past-winners', '/student-register', '/exam-page', '/instructions','/']
+  const hidePathsNav = ['/past-winners', '/student-register', '/exam-page', '/instructions']
   const hideNavbar = hidePathsNav.includes(location.pathname);
-  const hidePathsFooter = ['/exam-page', '/instructions', '/club']
+  const hidePathsFooter = ['/exam-page', '/instructions']
   const hideFooter = hidePathsFooter.includes(location.pathname);
   const isClubPage = location.pathname === '/club';
+  const isHomePage = location.pathname === '/';
 
-  const isRedHeader = location.pathname.startsWith('/stories') || location.pathname.startsWith('/blog');
+  const isRedHeader = location.pathname.startsWith('/stories') || location.pathname.startsWith('/blog') || isHomePage;
 
   return (
     <>
       {!hideNavbar && (
         <div style={{ 
-          backgroundColor: isClubPage ? '#F60945' : '#E41F35', 
-          height: isClubPage ? '110px' : (isRedHeader ? '100px' : '0px'),
-          transition: 'height 0.3s ease'
-        }}>
+          backgroundColor: isHomePage ? 'transparent' : '#F60945', 
+          minHeight: isClubPage ? '110px' : (isRedHeader ? '100px' : '0px'),
+          height: 'auto',
+          paddingBottom: isClubPage ? '20px' : (isRedHeader ? '15px' : '0px'),
+          paddingTop: '10px',
+          transition: 'all 0.3s ease',
+          overflow: 'visible',
+          position: isHomePage ? 'absolute' : 'relative',
+          width: '100%',
+          zIndex: 100,
+        }} className="pl-0 md:pl-[180px]">
           <Navbar />
         </div>
       )}

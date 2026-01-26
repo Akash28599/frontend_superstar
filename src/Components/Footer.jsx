@@ -9,11 +9,11 @@ const FooterLayout = ({ settingsData }) => {
     <div className="w-full bg-kelloggs-red font-kelloggs text-white">
       {/* Main Content Area */}
       <div className="
-        max-w-[1400px] mx-auto 
-        px-6 py-10 tablet:px-12 tablet:py-16 wide:px-20 
+        max-w-full sm:max-w-[1400px] mx-auto 
+        px-4 py-8 xxs:px-5 xxs:py-9 sm:px-6 sm:py-10 tablet:px-12 tablet:py-16 wide:px-20 
         flex flex-col md:flex-row 
-        justify-between items-start 
-        gap-10
+        justify-between items-center md:items-start 
+        gap-6 sm:gap-8 md:gap-10
       ">
         
         {/* Logo Section */}

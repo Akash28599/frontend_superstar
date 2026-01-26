@@ -43,17 +43,17 @@ const PastMomentsSection = ({ data }) => {
         ];
 
   return (
-    <section className="py-20 bg-white">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl text-center flex flex-col items-center">
+    <section className="py-10 sm:py-16 lg:py-20 bg-white">
+      <div className="container mx-auto px-3 xxs:px-4 sm:px-6 lg:px-8 max-w-full sm:max-w-7xl text-center flex flex-col items-center">
 
-        <div className="mb-12 text-center w-full">
-          <h2 className="font-kelloggs text-2xl sm:text-3xl font-bold text-gray-900 mb-2 uppercase">
+        <div className="mb-6 sm:mb-8 lg:mb-12 text-center w-full">
+          <h2 className="font-kelloggs text-xl xxs:text-2xl sm:text-3xl font-bold text-gray-900 mb-2 uppercase">
             {title.toUpperCase()}
           </h2>
-          <h3 className="text-xl text-kelloggs-red font-bold mb-4">
+          <h3 className="text-base sm:text-lg lg:text-xl text-kelloggs-red font-bold mb-2 sm:mb-4">
             {sub_title}
           </h3>
-          <p className="text-gray-600 max-w-3xl mx-auto">
+          <p className="text-sm sm:text-base text-gray-600 max-w-full sm:max-w-3xl mx-auto">
             {description}
           </p>
         </div>

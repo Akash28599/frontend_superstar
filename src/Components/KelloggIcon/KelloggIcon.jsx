@@ -19,7 +19,6 @@ const KelloggIcon = ({ IconImage, isBlack }) => {
 
                 }}
             />
-            aada
 
             {/* <img
                 src='assetss/kelloggH1.png'
@@ -42,7 +41,7 @@ const KelloggIcon = ({ IconImage, isBlack }) => {
 
                 }}
             >
-                <div className="prize-amount">Win N150,000</div>
+                <div className="prize-amount">Win <span style={{ color: '#FBCA05' }}>N150,000</span></div>
                 <div className="prize-sub">as educational expense</div>
             </div>
         </div>

@@ -18,21 +18,21 @@ const WaitlistSection = ({ data }) => {
   };
 
   return (
-    <section className="py-24 bg-white relative">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-4xl text-center flex flex-col items-center">
+    <section className="py-12 sm:py-16 lg:py-24 bg-white relative">
+      <div className="container mx-auto px-3 xxs:px-4 sm:px-6 lg:px-8 relative z-10 max-w-full sm:max-w-4xl text-center flex flex-col items-center">
         
-        <div className="mb-10 text-center w-full">
-          <h2 className="font-kelloggs text-2xl sm:text-3xl font-bold text-kelloggs-red mb-4 uppercase tracking-wide">
+        <div className="mb-6 sm:mb-8 lg:mb-10 text-center w-full">
+          <h2 className="font-kelloggs text-xl xxs:text-2xl sm:text-3xl font-bold text-kelloggs-red mb-2 sm:mb-4 uppercase tracking-wide">
             {title.toUpperCase()}
           </h2>
-          <p className="text-gray-600 text-lg">
+          <p className="text-gray-600 text-sm sm:text-base lg:text-lg">
             {description}
           </p>
         </div>
 
         {/* Form Container with Border */}
-        <form onSubmit={handleSubmit} className="bg-white border-4 border-kelloggs-red p-8 sm:p-12 text-left w-full shadow-xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 mb-10">
+        <form onSubmit={handleSubmit} className="bg-white border-2 sm:border-4 border-kelloggs-red p-4 xxs:p-6 sm:p-8 md:p-12 text-left w-full shadow-lg sm:shadow-xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 sm:gap-x-8 gap-y-4 sm:gap-y-6 mb-6 sm:mb-8 lg:mb-10">
             {label_texts?.map((label, index) => {
               const isFullWidth = label.toLowerCase().includes('email') || label.toLowerCase().includes('name') || label.toLowerCase().includes('school');
               const labelLower = label.toLowerCase();

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { API_CONFIG } from '../common/config';
 
 const sample = [
   { name: "Game1", thumbnail: '', printable: '/assetss/BrainGameVol1.pdf' },
@@ -14,7 +15,8 @@ export default function PrintableGames() {
   const [downloadingId, setDownloadingId] = useState(null);
 
   useEffect(() => {
-    const url = `${process.env.REACT_APP_STRAPI_URL}/api/games?populate=*`;
+    const url = `${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.GAMES}`;
+
 
     fetch(url)
       .then((r) => r.json())
@@ -77,24 +79,25 @@ export default function PrintableGames() {
   }
 
   return (
-    <section className="bg-white py-16 px-6 overflow-hidden font-kelloggs">
-      <div className="w-full max-w-[1600px] mx-auto">
+    <section className="bg-white py-8 xxs:py-10 sm:py-12 lg:py-16 px-3 xxs:px-4 sm:px-6 overflow-hidden font-kelloggs mt-12 md:mt-16 lg:mt-20">
+      <div className="w-full max-w-full sm:max-w-[1600px] mx-auto">
         
         {/* Title */}
-        <div className="text-center mb-12">
-          <h2 className="text-[3rem] tablet:text-[3.4rem] text-kelloggs-red font-medium tracking-normal leading-tight">
+        <div className="text-center mb-6 sm:mb-8 lg:mb-12">
+          <h2 className="text-[1.75rem] xxs:text-[2rem] sm:text-[2.5rem] lg:text-[3rem] tablet:text-[3.4rem] text-kelloggs-red font-medium tracking-normal leading-tight">
             Printable games
           </h2>
         </div>
 
         {/* Games Grid - Horizontal Scrollable Row */}
         <div className="
-            flex flex-nowrap gap-6 
-            overflow-x-auto 
-            pb-10 pt-4 px-4
-            snap-x snap-mandatory
+            flex flex-wrap lg:flex-nowrap gap-4 sm:gap-6 
+            overflow-visible lg:overflow-x-auto 
+            justify-center lg:justify-start wide:justify-center
+            lg:snap-x lg:snap-mandatory
+            pb-6 sm:pb-10 pt-2 sm:pt-4 
+            pl-0 lg:pl-16 pr-0 lg:pr-8
             scrollbar-hide
-            justify-start wide:justify-center
         ">
           {items.map((item) => {
             const thumb =
@@ -112,9 +115,9 @@ export default function PrintableGames() {
                 key={item.id} 
                 className="
                     flex-none snap-center
-                    w-[280px] tablet:w-[320px] 
-                    bg-white border-[6px] border-[#f0f0f0] rounded-lg 
-                    p-3 
+                    w-[220px] xxs:w-[240px] xs:w-[260px] sm:w-[280px] tablet:w-[320px] 
+                    bg-white border-[4px] sm:border-[6px] border-[#f0f0f0] rounded-lg 
+                    p-2 sm:p-3 
                     flex flex-col items-center 
                     shadow-[0_4px_12px_rgba(0,0,0,0.06)]
                     group hover:shadow-lg transition-shadow duration-300
@@ -139,11 +142,11 @@ export default function PrintableGames() {
                   )}
                 </div>
 
-                {/* Download Area */}
+                {/* Download Area - Centered */}
                 <div
                   className="
-                    w-full flex items-center justify-between gap-2 mt-auto relative cursor-pointer
-                    py-3 px-2 rounded-[22px]
+                    w-full flex items-center justify-center gap-3 mt-auto relative cursor-pointer
+                    py-3 px-4 rounded-[22px]
                     transition-all duration-300
                     hover:bg-kelloggs-gold/10
                   "
@@ -153,8 +156,8 @@ export default function PrintableGames() {
                   <div className="absolute inset-0 rounded-[22px] bg-transparent group-hover:bg-kelloggs-gold transition-colors duration-300 -z-0" />
 
                   {/* Text */}
-                  <div className="text-left flex-1 min-w-0 z-10 pl-2">
-                    <div className="text-[20px] tablet:text-[22px] text-kelloggs-red font-extrabold capitalize truncate">
+                  <div className="text-center z-10">
+                    <div className="text-[20px] tablet:text-[22px] text-kelloggs-red font-extrabold capitalize">
                       Download
                     </div>
                   </div>
@@ -166,7 +169,7 @@ export default function PrintableGames() {
                         w-[46px] h-[46px] tablet:w-[50px] tablet:h-[50px]
                         rounded-full border-none outline-none flex items-center justify-center
                         text-white text-[16px] tablet:text-[18px]
-                        shadow-[2px_3px_0px_#E41F35,0_6px_18px_rgba(0,0,0,0.18)]
+                        shadow-[2px_3px_0px_#F60945,0_6px_18px_rgba(0,0,0,0.18)]
                         transition-transform duration-300
                         ${hasPdf ? 'bg-gradient-to-b from-[#ffb366] to-[#ff8a2b] cursor-pointer group-hover:scale-110' : 'bg-[#eee] cursor-not-allowed'}
                       `}
@@ -201,7 +204,7 @@ export default function PrintableGames() {
                 w-9 h-9 rounded-full 
                 bg-gradient-to-b from-[#ffb366] to-[#ff8a2b] 
                 flex items-center justify-center 
-                shadow-[2px_3px_0px_#E41F35,0_4px_12px_rgba(0,0,0,0.1)]
+                shadow-[2px_3px_0px_#F60945,0_4px_12px_rgba(0,0,0,0.1)]
                 group-hover:scale-110 transition-transform duration-300
             ">
               <svg width="16" height="16" fill="#FFFFFF" viewBox="0 0 24 24">
