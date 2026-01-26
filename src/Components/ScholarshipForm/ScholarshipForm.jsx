@@ -26,6 +26,22 @@ const ScholarshipForm = ({ data }) => {
 
     return (
         <section className="scholarship">
+            {/* Top Left Logo */}
+            <div className="absolute top-0 left-2 md:left-6 z-[9999]">
+                 <div
+                    style={{
+                        width: '120px',
+                        height: '40px',
+                        backgroundColor: 'white',
+                        WebkitMaskImage: `url(/assetss/kelloggH1.png)`,
+                        WebkitMaskRepeat: 'no-repeat',
+                        WebkitMaskSize: 'contain',
+                        maskImage: `url(/assetss/kelloggH1.png)`,
+                        maskRepeat: 'no-repeat',
+                        maskSize: 'contain',
+                    }}
+                />
+            </div>
             <div className="container">
                 <div className="hang-monkey"><img src={data.hangingMonkey.url} alt='' /></div>
                 {/* LEFT BRAND COLUMN */}
