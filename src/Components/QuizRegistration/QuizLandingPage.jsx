@@ -235,8 +235,8 @@ const QuizLandingPage = () => {
       <header style={headerStyle}>
         <div style={headerInner}>
           <div style={headerTextContainer}>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[46px] m-0 font-extrabold">{data.heading}</h1>
-            <p className="text-sm sm:text-base md:text-lg lg:text-[20px] mt-4 md:mt-5 opacity-90 leading-[1.5]">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[46px] m-0 font-extrabold leading-tight">{data.heading}</h1>
+            <p className="text-sm sm:text-base md:text-lg lg:text-[20px] mt-3 opacity-90 leading-[1.5]">
               {data.sub_heading}
             </p>
           </div>

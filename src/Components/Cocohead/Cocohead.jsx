@@ -75,7 +75,7 @@ export const CocoHead = () => {
                         return (
                             <div 
                                 className="
-                                    flex flex-col items-center md:items-start text-center md:text-left 
+                                    flex flex-col items-center text-center 
                                     px-4 py-5 md:px-4 md:py-6 lg:px-5 lg:py-7
                                     bg-white/20 backdrop-blur-sm rounded-xl
                                     border border-white/30
@@ -84,7 +84,7 @@ export const CocoHead = () => {
                                 key={index}
                             >
                                 {/* Icon - Centered Mobile, Left Desktop */}
-                                <div className="h-14 sm:h-16 md:h-[60px] lg:h-[70px] w-full flex items-center justify-center md:justify-start mb-3">
+                                <div className="h-14 sm:h-16 md:h-[60px] lg:h-[70px] w-full flex items-center justify-center mb-3">
                                     {iconUrl &&
                                         <img src={iconUrl} alt='item icon' className="max-w-[45px] sm:max-w-[50px] md:max-w-[45px] lg:max-w-[55px] max-h-[55px] sm:max-h-[60px] md:max-h-[60px] lg:max-h-[70px] w-auto h-auto object-contain" />
                                     }
@@ -92,9 +92,9 @@ export const CocoHead = () => {
                                 
                                 {/* Title - Centered Mobile, Left Desktop */}
                                 <div className="
-                                    font-bold text-center md:text-left w-full 
+                                    font-bold text-center w-full 
                                     min-h-[2em] md:min-h-[2.2em] lg:min-h-[2.5em]
-                                    flex items-center justify-center md:justify-start
+                                    flex items-center justify-center
                                     text-sm sm:text-base md:text-[clamp(0.85rem,1.1vw,1.1rem)]
                                     leading-tight text-black
                                     mb-2
@@ -105,7 +105,7 @@ export const CocoHead = () => {
                                 {/* Description - Centered Mobile, Left Desktop */}
                                 <div 
                                     className="
-                                        text-center md:text-left w-full 
+                                        text-left w-fit mx-auto 
                                         text-xs sm:text-sm md:text-[clamp(0.72rem,0.95vw,0.95rem)]
                                         leading-relaxed md:leading-[1.45] text-[#333]
                                         max-w-full

@@ -1,11 +1,11 @@
 import React from 'react';
+import summerCampVideo from '../../assets/videos/summer_camp_intro.mp4';
 
 const SummerCampSection = ({ data }) => {
   if (!data) return null;
   const { title, description, block_text } = data;
   
-  // Placeholder image as requested (1200x600)
-  const imageUrl = "https://images.unsplash.com/photo-1489710437720-ebb67ec84dd2?auto=format&fit=crop&q=80&w=2000";
+
 
   return (
     <section className="py-10 sm:py-16 lg:py-20 bg-white">
@@ -15,13 +15,16 @@ const SummerCampSection = ({ data }) => {
             {title.toUpperCase()}
         </h2>
 
-        {/* 2. Image (1200x600) */}
-        <div className="w-full bg-gray-100 mb-6 sm:mb-8 lg:mb-10 shadow-lg border-2 sm:border-4 border-kelloggs-gold rounded-lg sm:rounded-xl overflow-hidden">
-             <img 
-                src={data.image||imageUrl} 
-                alt="Summer Camp" 
-                className="w-full h-auto object-cover aspect-[2/1]"
-            />
+        {/* 2. Video - Replaces Image */}
+        <div className="w-full bg-gray-100 mb-6 sm:mb-8 lg:mb-10 shadow-lg border-2 sm:border-4 border-kelloggs-gold rounded-lg sm:rounded-xl overflow-hidden bg-black">
+             <video 
+                src={summerCampVideo} 
+                className="w-full h-full object-contain aspect-video"
+                controls
+                playsInline
+            >
+                Your browser does not support the video tag.
+            </video>
         </div>
 
         {/* 3. Description */}

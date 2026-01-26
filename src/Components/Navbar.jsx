@@ -52,12 +52,13 @@ const Navbar = ({ customStyle = {} }) => {
     boxShadow: '0 6px 25px rgba(0,0,0,0.08)',
     display: 'flex',
     alignItems: 'center',
-    flexWrap: isConstrained && !isMobile ? 'nowrap' : 'wrap', // Allow wrapping on very constrained screens
-    gap: isMobile ? '0' : isVerySmall ? '4px' : isHighScale ? '8px' : isConstrained ? '12px' : '20px',
+    justifyContent: 'center',
+    flexWrap: 'wrap', // Always allow wrapping to prevent overflow
+    gap: isMobile ? '0' : isVerySmall ? '4px' : isHighScale ? '6px' : isConstrained ? '8px' : '20px',
     zIndex: 1000,
     backdropFilter: 'blur(10px)',
     width: 'fit-content', // Always fit content, even on mobile
-    maxWidth: isMobile ? '95vw' : '90vw',
+    maxWidth: isMobile ? '95vw' : '95vw', // Increased max-width for better fit
     transition: 'all 0.3s ease',
     paddingLeft: isMobile ? '16px' : isVerySmall ? '12px' : isHighScale ? '20px' : isConstrained ? '28px' : '40px',
     paddingRight: isMobile ? '16px' : isVerySmall ? '12px' : isHighScale ? '20px' : isConstrained ? '28px' : '40px',
