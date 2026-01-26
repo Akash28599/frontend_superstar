@@ -10,7 +10,7 @@ module.exports = {
         'kelloggs-gold': '#FBCA05',
       },
       fontFamily: {
-        'kelloggs': ['"Kellogg\'s Sans"', 'Arial', 'sans-serif'],
+        'kelloggs': ['"KelloggsSans"', 'Arial', 'sans-serif'],
       },
       screens: {
         // Mobile first approach - smallest to largest

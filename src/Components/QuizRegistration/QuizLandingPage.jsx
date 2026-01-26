@@ -210,7 +210,13 @@ const QuizLandingPage = () => {
       <header style={headerStyle}>
         <div style={headerInner}>
           <div style={headerTextContainer}>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[46px] m-0 font-extrabold leading-tight">{data.heading}</h1>
+            <h1 
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-[46px] m-0 font-extrabold"
+              style={{ lineHeight: 1.3 }}
+              dangerouslySetInnerHTML={{ 
+                __html: data.heading?.replace(/Where/g, 'Where <br class="hidden md:block" />') || '' 
+              }}
+            />
             <p className="text-sm sm:text-base md:text-lg lg:text-[20px] mt-3 opacity-90 leading-[1.5]">
               {data.sub_heading}
             </p>
@@ -416,7 +422,7 @@ const headerInner = {
 const headerTextContainer = {
   textAlign: 'center',
   flex: 1,
-  maxWidth: '800px',
+  maxWidth: '1000px',
   margin: '0 auto'
 };
 

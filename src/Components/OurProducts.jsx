@@ -78,7 +78,7 @@ const OurProducts = () => {
     it?.image?.formats?.medium?.url ||
     it?.image?.formats?.thumbnail?.url ||
     "";
-  const constants = { gold: "#f3c720", red: "#dd2120", font: '"KelloggsSans", Arial, sans-serif' }
+  const constants = { gold: "#f3c720", red: "#F60945", font: '"KelloggsSans", Arial, sans-serif' }
   const headingStyle = {
     fontFamily: constants.font,
     color: constants.red,

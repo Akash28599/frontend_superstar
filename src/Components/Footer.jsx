@@ -23,10 +23,11 @@ const FooterLayout = ({ settingsData }) => {
               src={settingsData.logo.url}
               alt={settingsData.sitename}
               className="
-                w-[180px] tablet:w-[200px] wide:w-[220px] 
+                w-[234px] 
                 h-auto object-cover 
-                rounded-lg p-2 
+                rounded-lg 
                 bg-transparent
+                md:-mt-6 md:-ml-5
               "
             />
           ) : (

@@ -68,7 +68,7 @@ const Navbar = ({ customStyle = {} }) => {
   };
 
   const navItemStyle = {
-    fontFamily: "'Kellogg's Sans', sans-serif",
+    fontFamily: "'KelloggsSans', sans-serif",
     fontWeight: 400,
     fontSize: isMobile ? '14px' : isVerySmall ? '11px' : isHighScale ? '11px' : isOlderLaptop ? '13px' : isConstrained ? '14px' : '16px',
     lineHeight: '100%',
@@ -93,7 +93,7 @@ const Navbar = ({ customStyle = {} }) => {
   };
 
   const ButtonStyle = {
-    fontFamily: "'Kellogg's Sans', sans-serif",
+    fontFamily: "'KelloggsSans', sans-serif",
     fontWeight: 700,
     fontSize: isMobile ? '14px' : isVerySmall ? '10px' : isHighScale ? '11px' : isOlderLaptop ? '12px' : isConstrained ? '13px' : '14px',
     lineHeight: '100%',
