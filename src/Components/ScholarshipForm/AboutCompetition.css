@@ -168,10 +168,9 @@
     }
 
     .about-left {
-        width: 45%;
-        /* Slightly smaller to fit */
-        margin-right: 20px;
-        /* Reduced margin */
+        width: 50%;
+        /* Increased to fill vertical space */
+        margin-right: 0;
         display: block;
     }
 
@@ -202,6 +201,10 @@
         width: 100%;
         /* Use full width of right col */
         font-size: 14px;
+    }
+
+    .img2 {
+        margin-top: 15%;
     }
 }
 

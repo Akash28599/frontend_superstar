@@ -458,17 +458,7 @@ const redBtn = {
   fontFamily: FONTS.primary 
 };
 
-const goldBtn = {
-  backgroundColor: COLORS.gold,
-  color: COLORS.red,
-  border: 'none', 
-  padding: '14px', 
-  borderRadius: '12px', 
-  fontWeight: '800', 
-  cursor: 'pointer', 
-  fontFamily: FONTS.primary,
-  boxShadow: '0 4px 15px rgba(0,0,0,0.1)'
-};
+
 
 const roadmapSection = { marginTop: '0', textAlign: 'center', position: 'relative' };
 const stepNumberBadge = { 

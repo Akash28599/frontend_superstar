@@ -73,7 +73,7 @@ export const ROUTES = {
     contact: '/contact',
 };
 
-export default {
+const config = {
     API_CONFIG,
     COLORS,
     FONTS,
@@ -82,3 +82,5 @@ export default {
     ASSETS,
     ROUTES,
 };
+
+export default config;

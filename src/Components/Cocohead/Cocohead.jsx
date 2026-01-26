@@ -93,7 +93,7 @@ export const CocoHead = () => {
                                 {/* Title - Centered Mobile, Left Desktop */}
                                 <div className="
                                     font-bold text-center w-full 
-                                    min-h-[2em] md:min-h-[2.2em] lg:min-h-[2.5em]
+                                    min-h-[2.4em] md:min-h-[2.8em] lg:min-h-[2.8em]
                                     flex items-center justify-center
                                     text-sm sm:text-base md:text-[clamp(0.85rem,1.1vw,1.1rem)]
                                     leading-tight text-black
@@ -104,12 +104,13 @@ export const CocoHead = () => {
                                 
                                 {/* Description - Centered Mobile, Left Desktop */}
                                 <div 
-                                    className="
+                                    className={`
                                         text-left w-fit mx-auto 
+                                        ${index !== 0 ? 'md:pl-4 lg:pl-6' : ''}
                                         text-xs sm:text-sm md:text-[clamp(0.72rem,0.95vw,0.95rem)]
                                         leading-relaxed md:leading-[1.45] text-[#333]
                                         max-w-full
-                                    "
+                                    `}
                                     dangerouslySetInnerHTML={{ __html: desc }}
                                 />
                             </div>

@@ -211,28 +211,37 @@ const HomeBanner = () => {
                 src={heroImage} 
                 alt="Hero" 
                 className={`
-                    relative object-contain object-bottom
+                    relative object-contain object-bottom z-[10]
                     max-w-full lg:max-w-none
                     w-auto
-                    h-[35vh] xxs:h-[38vh] xs:h-[42vh] sm:h-[50vh] 
+                    h-[35vh] xxs:h-[38vh] xs:h-[42vh] sm:h-[50vh] md:h-[60vh]
+                    min-h-[280px] sm:min-h-[350px]
                     ${isEdge ? 'lg:h-[clamp(72vh,96vh,108vh)]' : 'lg:h-[clamp(85vh,115vh,130vh)]'}
                     ${isEdge ? 'wide:h-[clamp(72vh,96vh,108vh)]' : 'wide:h-[clamp(75vh,100vh,115vh)]'}
                     min-w-[200px] xxs:min-w-[220px] xs:min-w-[250px]
                     lg:min-w-[300px]
-                    tablet:min-w-[500px]
+                    tablet:min-w-[400px]
                     mr-0 lg:mr-[5%] mb-0
                 `} 
               />
               
               {/* Clouds - DESKTOP ONLY */}
               <Cloud className="
-                hidden lg:block
-                top-[50%] right-[10%] w-[14%] z-[3] opacity-90
+                block
+                top-[5%] right-[10%] w-[18%] 
+                sm:top-[40%] sm:right-[10%] sm:w-[18%]
+                md:top-[30%] md:right-[2%]
+                tablet:top-[20%] tablet:right-[5%] tablet:w-[15%]
+                lg:top-[50%] lg:right-[10%] lg:w-[14%] 
+                z-[3] opacity-90
               " />
 
               <Cloud className="
-                hidden lg:block
-                top-[20%] left-[5%] w-[8%] z-[4] opacity-90
+                block
+                top-[15%] left-[-5%] w-[15%]
+                sm:top-[40%] sm:left-[2%] sm:w-[18%]
+                lg:top-[20%] lg:left-[5%] lg:w-[8%]
+                z-[4] opacity-90
               " />
             </>
           )}
@@ -246,7 +255,7 @@ const HomeBanner = () => {
                 bottom-[-10%] left-[-5%]
                 sm:bottom-[-15%] sm:left-[-3%]
                 md:bottom-[-20%] md:left-[-5%]
-                tablet:bottom-[-30%] tablet:left-[0%]
+                tablet:bottom-[-30%] tablet:left-[-0%]
                 w-[12vw] min-w-[120px] max-w-[250px]
                 md:w-[15vw] md:min-w-[180px] md:max-w-[350px]
             ">

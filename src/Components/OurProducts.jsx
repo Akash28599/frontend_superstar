@@ -155,7 +155,7 @@ const OurProducts = () => {
        return `M ${centerX} 100 L ${centerX} 1500`;
     }
 
-    const { product1, coco, product3, product4, product5 } = positions;
+    const { product1, coco, product4, product5 } = positions;
 
     const s1 = is200Scale ?
                 `M ${product1.x} ${product1.y}

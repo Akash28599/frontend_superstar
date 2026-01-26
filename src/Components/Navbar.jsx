@@ -16,7 +16,7 @@ const Navbar = ({ customStyle = {} }) => {
   }, []);
 
   const isMobile = screenWidth < 768;
-  const isTablet = screenWidth >= 768 && screenWidth < 1024;
+
   const isConstrained = screenWidth < 1350;
   const isHighScale = screenWidth < 1050;
   const isVerySmall = screenWidth < 480; // Very small phones
