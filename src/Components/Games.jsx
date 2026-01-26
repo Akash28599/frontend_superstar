@@ -79,7 +79,7 @@ export default function PrintableGames() {
   }
 
   return (
-    <section className="bg-white py-8 xxs:py-10 sm:py-12 lg:py-16 px-3 xxs:px-4 sm:px-6 overflow-hidden font-kelloggs mt-12 md:mt-16 lg:mt-20">
+    <section className="bg-white py-8 xxs:py-10 sm:py-12 lg:py-16 px-3 xxs:px-4 sm:px-6 overflow-hidden font-kelloggs mt-6 md:mt-8">
       <div className="w-full max-w-full sm:max-w-[1600px] mx-auto">
         
         {/* Title */}

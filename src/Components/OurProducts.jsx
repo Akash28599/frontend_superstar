@@ -341,7 +341,7 @@ const OurProducts = () => {
           position: "relative",
           background: "#fff",
           overflow: "hidden",
-          padding: isMobile ? "2rem 1rem" : "2rem 0 20rem",
+          padding: isMobile ? "2rem 1rem" : "2rem 0 13rem",
           minHeight: "100vh",
           display: isMobile ? 'flex' : 'block',
           flexDirection: 'column',
@@ -416,7 +416,7 @@ const OurProducts = () => {
             position: "relative",
             zIndex: 1,
             padding: "0 28px",
-            height: 1200,
+            height: 1240,
           }}
         >
           {/* PRODUCT 3 at TOP position */}
