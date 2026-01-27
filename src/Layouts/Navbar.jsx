@@ -23,7 +23,7 @@ const Navbar = ({ customStyle = {} }) => {
   const isOlderLaptop = screenWidth >= 800 && screenWidth < 1024; // 800x600, 1024x768
 
   useEffect(() => {
-    fetch(`${API_CONFIG.BASE_URL}/api/navbars?populate=*`)
+    fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.NAVBAR}`)
       .then(res => res.json())
       .then(data => {
         if (data.data && data.data[0] && data.data[0].menu) {

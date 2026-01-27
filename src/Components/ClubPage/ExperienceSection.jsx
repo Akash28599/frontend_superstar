@@ -1,8 +1,4 @@
-import React from 'react';
-import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates';
-import StarIcon from '@mui/icons-material/Star';
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import { Calendar, Lightbulb, Star, Trophy } from 'lucide-react';
 
 const ExperienceSection = ({ data }) => {
   if (!data) return null;
@@ -60,11 +56,11 @@ const ExperienceSection = ({ data }) => {
 
 const getIcon = (iconName) => {
     switch (iconName) {
-        case 'TipsAndUpdatesIcon': return <TipsAndUpdatesIcon fontSize="large" />;
-        case 'StarIcon': return <StarIcon fontSize="large" />;
-        case 'CalendarTodayIcon': return <CalendarTodayIcon fontSize="large" />;
-        case 'EmojiEventsIcon': return <EmojiEventsIcon fontSize="large" />;
-        default: return <StarIcon fontSize="large" />;
+        case 'TipsAndUpdatesIcon': return <Lightbulb fontSize="large" />;
+        case 'StarIcon': return <Star fontSize="large" />;
+        case 'CalendarTodayIcon': return <Calendar fontSize="large" />;
+        case 'EmojiEventsIcon': return <Trophy fontSize="large" />;
+        default: return <Star fontSize="large" />;
     }
 }
 

@@ -1,5 +1,5 @@
 import React from "react";
-import SocialIcons from "./SocialIcons/SocialIcons";
+import SocialIcons from "../Components/SocialIcons/SocialIcons";
 
 
 const FooterLayout = ({ settingsData }) => {

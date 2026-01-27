@@ -13,6 +13,7 @@ export const API_CONFIG = {
         PRODUCTS: '/api/products?populate=*',
         GAMES: '/api/games?populate=*',
         FOOTER: '/api/footer?populate=*',
+        NAVBAR:'/api/navbars?populate=*'
     }
 };
 

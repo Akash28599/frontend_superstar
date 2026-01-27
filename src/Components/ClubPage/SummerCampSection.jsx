@@ -1,4 +1,3 @@
-import React from 'react';
 import summerCampVideo from '../../assets/videos/summer_camp_intro.mp4';
 
 const SummerCampSection = ({ data }) => {
@@ -16,7 +15,7 @@ const SummerCampSection = ({ data }) => {
         </h2>
 
         {/* 2. Video - Replaces Image */}
-        <div className="w-full bg-gray-100 mb-6 sm:mb-8 lg:mb-10 shadow-lg border-2 sm:border-4 border-kelloggs-gold rounded-lg sm:rounded-xl overflow-hidden bg-black">
+        <div className="w-full mb-6 sm:mb-8 lg:mb-10 shadow-lg border-2 sm:border-4 border-kelloggs-gold rounded-lg sm:rounded-xl overflow-hidden bg-black">
              <video 
                 src={summerCampVideo} 
                 className="w-full h-full object-contain aspect-video"

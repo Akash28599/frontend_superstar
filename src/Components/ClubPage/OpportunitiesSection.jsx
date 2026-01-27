@@ -1,5 +1,4 @@
-import React from 'react';
-import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
+import { Sparkle } from 'lucide-react';
 
 const OpportunitiesSection = ({ data }) => {
   if (!data) return null;
@@ -18,7 +17,7 @@ const OpportunitiesSection = ({ data }) => {
         </p>
         
         <button className="bg-white text-gray-900 font-bold py-3 px-6 sm:py-4 sm:px-10 rounded-sm hover:bg-gray-200 transition-all duration-300 text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2 sm:gap-3 mx-auto">
-          <AutoAwesomeIcon fontSize="small" />
+          <Sparkle fontSize="small" />
           {button_data?.button_text || "Explore the Universe"}
         </button>
 
