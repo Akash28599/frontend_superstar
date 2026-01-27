@@ -1,8 +1,6 @@
-import summerCampVideo from '../../assets/videos/summer_camp_intro.mp4';
-
 const SummerCampSection = ({ data }) => {
   if (!data) return null;
-  const { title, description, block_text } = data;
+  const { title, description, block_text,video } = data;
   
 
 
@@ -17,7 +15,7 @@ const SummerCampSection = ({ data }) => {
         {/* 2. Video - Replaces Image */}
         <div className="w-full mb-6 sm:mb-8 lg:mb-10 shadow-lg border-2 sm:border-4 border-kelloggs-gold rounded-lg sm:rounded-xl overflow-hidden bg-black">
              <video 
-                src={summerCampVideo} 
+                src={video} 
                 className="w-full h-full object-contain aspect-video"
                 controls
                 playsInline

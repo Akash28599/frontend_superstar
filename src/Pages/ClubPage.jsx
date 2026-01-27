@@ -6,6 +6,7 @@ import PastMomentsSection from '../Components/ClubPage/PastMomentsSection';
 import TestimonialsSection from '../Components/ClubPage/TestimonialsSection';
 import WaitlistSection from '../Components/ClubPage/WaitlistSection';
 import OpportunitiesSection from '../Components/ClubPage/OpportunitiesSection';
+import { API_CONFIG } from '../common/config';
 
 const ClubPage = () => {
     const [pageData, setPageData] = useState(null);
@@ -14,7 +15,7 @@ const ClubPage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await fetch(`${process.env.REACT_APP_STRAPI_URL}/api/clubs-landing-page?populate=*`);
+                const res = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.CLUB_LANDING}`);
                 if (res.ok) {
                     const json = await res.json();
                     setPageData(json.data);
@@ -49,4 +50,3 @@ const ClubPage = () => {
 };
 
 export default ClubPage;
-
