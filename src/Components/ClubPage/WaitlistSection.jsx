@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Send } from 'lucide-react';
+import { IoMdSend } from "react-icons/io";
 
 const WaitlistSection = ({ data }) => {
   const [formData, setFormData] = useState({});
@@ -85,7 +85,7 @@ const WaitlistSection = ({ data }) => {
               className="w-full bg-kelloggs-red text-white font-bold text-lg py-4 px-8 hover:bg-red-700 transition-all flex items-center justify-center gap-3 uppercase tracking-wider rounded-lg shadow-lg"
             >
               <span>{button_data?.button_text || "JOIN NOW"}</span>
-              <Send fontSize="small" className="-rotate-45 mb-1" />
+              <IoMdSend className="text-2xl mb-1" />
             </button>
           </div>
         </form>

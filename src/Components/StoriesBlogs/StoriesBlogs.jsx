@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Heart } from 'lucide-react';
+import { FaRegHeart } from "react-icons/fa";
 
 const StoriesBlogs = ({ type = 'blogs' }) => {
     const [posts, setPosts] = useState([]);
@@ -121,7 +121,7 @@ const StoriesBlogs = ({ type = 'blogs' }) => {
                                         </div>
                                         <div className="flex items-center space-x-1">
                                             <span>{post.likes}</span>
-                                            <Heart size={16} className="text-red-500" />
+                                            <FaRegHeart fontSize={'large'} className="text-red-500" />
                                         </div>
                                     </div>
                                 </div>

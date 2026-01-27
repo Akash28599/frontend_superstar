@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import AuthModal from './AuthModal';
-import { LogIn, UserPen } from 'lucide-react';
+import {FiLogIn} from "react-icons/fi";
+import {MdOutlinePersonAddAlt1} from "react-icons/md";
 
 const HeroSection = ({ data }) => {
   const [modalType, setModalType] = useState(null);
@@ -16,9 +17,9 @@ const HeroSection = ({ data }) => {
   const getIcon = (iconName) => {
     switch (iconName) {
       case 'person_add':
-      case 'PersonAddAltIcon': return <UserPen />;
+      case 'PersonAddAltIcon': return <MdOutlinePersonAddAlt1 />;
       case 'login':
-      case 'LoginIcon': return <LogIn />;
+      case 'LoginIcon': return <FiLogIn />;
       default: return null;
     }
   };

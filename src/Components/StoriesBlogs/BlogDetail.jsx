@@ -1,6 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Heart, Facebook, Twitter, Linkedin, Link as LinkIcon } from 'lucide-react';
+import { FaRegHeart } from "react-icons/fa";
+import { FiFacebook } from "react-icons/fi";
+import { RiTwitterXFill } from "react-icons/ri";
+import { AiFillLinkedin } from "react-icons/ai";
+import { IoIosLink } from "react-icons/io";
+
 import Episode1 from '../../assets/pdfs/Episode1.pdf';
 import Episode2 from '../../assets/pdfs/Episode2.pdf';
 import Episode4 from '../../assets/pdfs/Episode4.pdf';
@@ -341,10 +346,10 @@ const BlogDetail = ({ siteSettings }) => {
             {/* Social Share (Placeholder) */}
             <div className="flex items-center justify-between border-t border-b border-gray-100 py-4 mb-10">
                 <div className="flex space-x-4">
-                    <button className="text-gray-400 hover:text-gray-600" onClick={() => openUrl(siteSettings?.facebookurl)}><Facebook size={20} /></button>
-                    <button className="text-gray-400 hover:text-gray-600" onClick={() => openUrl(siteSettings?.twitterurl)}><Twitter size={20} /></button>
-                    <button className="text-gray-400 hover:text-gray-600" ><Linkedin size={20} /></button>
-                    <button className="text-gray-400 hover:text-gray-600 relative" onClick={handleCopy}><LinkIcon size={20} />
+                    <button className="text-gray-400 hover:text-gray-600" onClick={() => openUrl(siteSettings?.facebookurl)}><FiFacebook size={20} /></button>
+                    <button className="text-gray-400 hover:text-gray-600" onClick={() => openUrl(siteSettings?.twitterurl)}><RiTwitterXFill size={20} /></button>
+                    <button className="text-gray-400 hover:text-gray-600" ><AiFillLinkedin size={20} /></button>
+                    <button className="text-gray-400 hover:text-gray-600 relative" onClick={handleCopy}><IoIosLink size={20} />
                         {copied && (
                             <span className="absolute -top-8 left-1/2 -translate-x-1/2 text-xs bg-black text-white px-2 py-1 rounded">
                                 Copied!
@@ -370,7 +375,7 @@ const BlogDetail = ({ siteSettings }) => {
                 </div>
                 <div className="flex items-center space-x-2">
                     <span>{blog.likes}</span>
-                    <Heart className="text-red-500 cursor-pointer hover:fill-current" />
+                    <FaRegHeart className="text-red-500 cursor-pointer hover:fill-current" />
                 </div>
             </div>
             <div className='mt-12'>
@@ -416,7 +421,7 @@ const BlogDetail = ({ siteSettings }) => {
                                 <p className="text-gray-700 text-left">{comment.text}</p>
                                 <div className="flex items-center space-x-4 mt-2 text-sm text-gray-500">
                                     <button className="flex items-center space-x-1 hover:text-red-600 transition-colors">
-                                        <Heart size={14} />
+                                        <FaRegHeart size={14} />
                                         <span>Like</span>
                                     </button>
                                     <button className="hover:text-blue-600 transition-colors">Reply</button>

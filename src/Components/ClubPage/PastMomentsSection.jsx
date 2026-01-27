@@ -1,6 +1,8 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
-import { ArrowLeft, ArrowRight, X } from 'lucide-react';
+import {FaArrowLeft} from "react-icons/fa";
+import {FaArrowRight} from "react-icons/fa";
+import {IoCloseSharp} from "react-icons/io5";
 
 const PastMomentsSection = ({ data }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'center' });
@@ -124,14 +126,14 @@ const PastMomentsSection = ({ data }) => {
               className="absolute left-4 top-1/2 -translate-y-1/2 z-20 hidden lg:flex w-16 h-16 rounded-full bg-white/90 backdrop-blur border-2 border-kelloggs-red text-kelloggs-red hover:bg-kelloggs-red hover:text-white transition-all shadow-xl items-center justify-center transform hover:scale-105"
               onClick={scrollPrev}
           >
-             <ArrowLeft size={32} strokeWidth={2.5} />
+             <FaArrowLeft size={32} strokeWidth={2.5} />
           </button>
           
           <button
               className="absolute right-4 top-1/2 -translate-y-1/2 z-20 hidden lg:flex w-16 h-16 rounded-full bg-white/90 backdrop-blur border-2 border-kelloggs-red text-kelloggs-red hover:bg-kelloggs-red hover:text-white transition-all shadow-xl items-center justify-center transform hover:scale-105"
               onClick={scrollNext}
           >
-             <ArrowRight size={32} strokeWidth={2.5} />
+             <FaArrowRight size={32} strokeWidth={2.5} />
           </button>
 
           {/* Pagination Dots & Navigation (Mobile/Tablet Friendly) */}
@@ -149,9 +151,9 @@ const PastMomentsSection = ({ data }) => {
             
             {/* Mobile Arrows */}
             <div className="flex lg:hidden items-center gap-8">
-                <button onClick={scrollPrev} className="p-3 rounded-full bg-white border border-gray-200 shadow-lg active:scale-95"><ArrowLeft className="text-kelloggs-red"/></button>
+                <button onClick={scrollPrev} className="p-3 rounded-full bg-white border border-gray-200 shadow-lg active:scale-95"><FaArrowLeft className="text-kelloggs-red"/></button>
                 <div className="font-bold text-gray-400 text-sm tracking-widest">{currentIndex + 1} / {count}</div>
-                <button onClick={scrollNext} className="p-3 rounded-full bg-white border border-gray-200 shadow-lg active:scale-95"><ArrowRight className="text-kelloggs-red"/></button>
+                <button onClick={scrollNext} className="p-3 rounded-full bg-white border border-gray-200 shadow-lg active:scale-95"><FaArrowRight className="text-kelloggs-red"/></button>
             </div>
           </div>
 
@@ -167,7 +169,7 @@ const PastMomentsSection = ({ data }) => {
               className="absolute top-6 right-6 p-3 bg-white/10 rounded-full text-white hover:bg-kelloggs-red hover:text-white transition-all transform hover:rotate-90"
               onClick={() => setSelectedImage(null)}
             >
-              <X size={32} />
+              <IoCloseSharp size={32} />
             </button>
             <img 
               src={selectedImage} 

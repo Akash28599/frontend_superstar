@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { X } from 'lucide-react';
+import {IoCloseSharp} from "react-icons/io5";
 
 const AuthModal = ({ isOpen, onClose, type }) => {
   const [formData, setFormData] = useState({
@@ -43,7 +43,7 @@ const AuthModal = ({ isOpen, onClose, type }) => {
                     onClick={onClose} 
                     className="absolute top-2 right-2 2xl:top-4 2xl:right-4 text-white/80 hover:text-white transition-colors"
                 >
-                    <X />
+                    <IoCloseSharp />
                 </button>
                 <h2 className="font-kelloggs text-lg 2xl:text-3xl mb-0.5">{title}</h2>
                 <p className="text-red-100 text-[10px] 2xl:text-sm">{subTitle}</p>

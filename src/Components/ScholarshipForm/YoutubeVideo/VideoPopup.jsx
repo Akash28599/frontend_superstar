@@ -1,4 +1,4 @@
-import { Close } from '@mui/icons-material'
+import {IoCloseSharp} from "react-icons/io5";
 
 const VideoPopup = ({ url, onClose }) => {
   if (!url) return null
@@ -15,7 +15,7 @@ const VideoPopup = ({ url, onClose }) => {
       className="fixed inset-0 bg-black/80 flex items-center justify-center z-[9999]"
       onClick={onClose} // close when clicking outside
     >
-      <Close
+      <IoCloseSharp
         onClick={onClose} // close button
         className="absolute top-2 right-2 text-white text-2xl cursor-pointer z-10"
       />

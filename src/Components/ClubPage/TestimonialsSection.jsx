@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
-import { Quote } from 'lucide-react';
+import { FaQuoteRight } from "react-icons/fa";
 
 const TestimonialsSection = ({ data }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'center' });
@@ -77,7 +77,7 @@ const TestimonialsSection = ({ data }) => {
 
           <div className="border-2 sm:border-4 border-kelloggs-gold p-4 xxs:p-6 sm:p-8 md:p-12 lg:p-16 relative bg-white shadow-xl sm:shadow-2xl rounded-sm flex flex-col items-center">
                <div className="mb-4 sm:mb-6 lg:mb-8 flex justify-center text-kelloggs-red">
-                  <Quote sx={{ fontSize: { xs: 36, sm: 48, md: 60 } }} className="p-1" />
+                  <FaQuoteRight sx={{ fontSize: { xs: 36, sm: 48, md: 60 } }} className="p-1" />
                </div>
 
                <div className="overflow-hidden w-full" ref={emblaRef}>
