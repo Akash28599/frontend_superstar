@@ -1,8 +1,9 @@
-import  QuizLandingPage  from "../Components/QuizRegistration/QuizLandingPage";
+import QuizLandingPage from "../Components/QuizRegistration/QuizLandingPage";
 function QuizPage() {
     return (
         <>
-            <QuizLandingPage/>
+            {/* textpush comment */}
+            <QuizLandingPage />
         </>
     );
 }
