@@ -23,3 +23,69 @@
     /* 🔴 red text */
     border: 2px solid #F60945;
 }
+
+
+/* =========================
+   MOBILE ONLY FIXES
+   ========================= */
+@media (max-width: 768px) {
+
+  .thank-you {
+    padding-bottom: 80px !important;
+    min-height: auto !important;
+  }
+
+  /* main flex container -> column */
+  .thank-you .container {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  /* first parent (text block) */
+  .thank-you .container > div:first-child {
+    max-width: 100% !important;
+    min-height: auto !important;
+    margin-top: -200px;
+  }
+
+  /* text wrapper */
+  .thank-you .container > div:first-child > div {
+    margin-left: 0 !important;
+    padding-top: 40px !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .thank-you h1,
+  .thank-you p {
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  /* social + share row */
+  .thank-you .container p + div {
+    justify-content: center;
+  }
+
+  /* monkey parent */
+  .monkey-parent {
+    max-width: 100% !important;
+    height: 380px !important;
+    margin-top: 70px;
+  }
+
+  /* monkey image */
+
+
+  /* left floating coco — hide on mobile */
+  .thank-you > div[style*="left: 0"] {
+    top: 60% !important;
+  }
+
+  /* button full width */
+  .thank-you .btn {
+    width: 100% !important;
+    max-width: 320px;
+  }
+}

@@ -10,8 +10,6 @@ const AboutCompetition = ({ data,siteSettings }) => {
         <div className='about-container'>
             <div className='about-left'>
                 <div className="about-bg">
-                    
-
                         <div className='bg-img' style={{ position: data?.shouldShowForm ? 'none' : 'absolute' }}>
                             <img src={data.bg?.url} className='img1' alt="background" />
 
@@ -56,11 +54,6 @@ const AboutCompetition = ({ data,siteSettings }) => {
                     ))}
                 </div>
                 <div className='abt-follow'>{data.socialLinkText}
-                    {/* <div className='abt-social-media'>
-                        <FaInstagram className='abt-social-icon ' onClick={() => openUrl(data.siteSettings?.instagramurl)} />
-                        <FaTwitter className='abt-social-icon ' onClick={() => openUrl(data.siteSettings?.twitterurl)} />
-                        <LuFacebook className='abt-social-icon ' onClick={() => openUrl(data.siteSettings?.facebookurl)} />
-                    </div> */}
                     <SocialIcons siteSettings={data.siteSettings} />
                 </div>
 

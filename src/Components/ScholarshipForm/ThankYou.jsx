@@ -379,7 +379,7 @@ const ThankYou = ({ siteSettings }) => {
             style={{
                 position: "relative",
                 width: "100%",
-                padding: `40px 0px ${screenWidth > 1600 ? '350px' : screenWidth > 1350 ? '250px' : '150px'} 0px`, overflow: "hidden",
+                padding: `40px 0px ${screenWidth > 1600 ? '350px' : screenWidth > 1350 ? '250px' : '150px'} 0px`,
                 // height: "auto", 
                 minHeight: "800px",
                 margin: "0px",
