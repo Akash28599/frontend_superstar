@@ -1,6 +1,6 @@
 import HomePage from '../Pages/HomePage';
 import ScholarshipPage from '../Pages/ScholarshipPage';
-import Navbar from "../Components/Navbar"
+import Navbar from "./Navbar"
 import { Route, Routes, useLocation } from 'react-router-dom';
 import QuizPage from '../Pages/QuizPage';
 import { PastWinners } from '../Pages/PastWinners/PastWinners';
