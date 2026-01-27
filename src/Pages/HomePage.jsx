@@ -1,10 +1,10 @@
-import HomeBanner from "../Components/HomeBanner/HomeBanner"
+import HomeBanner from "../Components/HomePageSections/HomeBanner/HomeBanner"
 // import TrendingStories from "../Components/TrendingStories"
 
-import PrintableGames from "../Components/Games"
-import OurProducts from "../Components/OurProducts"
-import CocoBanner from "../Components/Cocobanner"
-import { CocoHead } from "../Components/Cocohead/Cocohead"
+import PrintableGames from "../Components/HomePageSections/Games"
+import OurProducts from "../Components/HomePageSections/OurProducts"
+import CocoBanner from "../Components/HomePageSections/Cocobanner"
+import { CocoHead } from "../Components/HomePageSections/Cocohead/Cocohead"
 import { constants } from "../Utils/constants"
 
 export default function HomePage({dpr}) {

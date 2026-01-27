@@ -6,6 +6,7 @@ export const API_CONFIG = {
     ENDPOINTS: {
         HOME_BANNERS: '/api/homebanners?populate=*',
         COCO_HEADS: '/api/coco-heads?populate=*',
+        OUR_PRODUCTS:'/api/our-products?populate=*',
         QUIZ_LANDING: '/api/quiz-landing-page?populate=*',
         CLUB_LANDING: '/api/clubs-landing-page?populate=*',
         STORIES: '/api/stories?populate=*',
