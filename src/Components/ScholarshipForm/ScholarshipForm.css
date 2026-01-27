@@ -23,13 +23,13 @@
 
 .hang-monkey {
     position: absolute;
-    left: -5px;
+    left: -30px;
     top: auto;
     right: auto;
     bottom: -130px;
     z-index: 1;
-    width: 10%;
-    height: 60%;
+    width: 20%;
+    height: 80%;
 
 }
 
@@ -286,6 +286,7 @@ textarea:focus {
     .hang-monkey {
         width: 8%;
         /* Smaller monkey */
+        left: -20px;
         height: auto;
         /* Fix aspect ratio stretching */
         bottom: -50px;
@@ -317,6 +318,11 @@ textarea:focus {
 
     .counter {
         top: 17px;
+    }
+
+    .hang-monkey {
+        left: -45px;
+
     }
 }
 
@@ -406,6 +412,8 @@ textarea:focus {
     .hang-monkey {
         width: 12%;
         bottom: -80px;
+        left: -20px;
+
     }
 
     .submit-btn img {

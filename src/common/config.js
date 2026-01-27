@@ -13,7 +13,7 @@ export const API_CONFIG = {
         BLOGS: '/api/blogs?populate=*',
         PRODUCTS: '/api/products?populate=*',
         GAMES: '/api/games?populate=*',
-        FOOTER: '/api/footer?populate=*',
+        FOOTER: '/api/sitesettings?populate=*',
         NAVBAR:'/api/navbars?populate=*'
     }
 };

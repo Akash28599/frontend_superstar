@@ -3,7 +3,7 @@ import KelloggIcon from '../KelloggIcon/KelloggIcon'
 import './AboutCompetition.css'
 import SocialIcons from '../SocialIcons/SocialIcons';
 
-const AboutCompetition = ({ data }) => {
+const AboutCompetition = ({ data,siteSettings }) => {
 
 
     return (
@@ -18,7 +18,7 @@ const AboutCompetition = ({ data }) => {
                         </div> 
                         {!data?.shouldShowForm &&
                         <div className='abt-kg'>
-                            <KelloggIcon IconImage={data?.IconImage?.url} isBlack={true} />
+                            <KelloggIcon data={siteSettings} isBlack={true} />
 
                         </div>}
                 </div>

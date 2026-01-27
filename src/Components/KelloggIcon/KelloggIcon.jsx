@@ -1,37 +1,14 @@
 import React from 'react'
 import './KelloggIcon.css'
-const KelloggIcon = ({ IconImage, isBlack }) => {
-
+const KelloggIcon = ({ isBlack,data }) => {
+    console.log(data)
     const redCode = '#dd2120'
     return (
         <div className="brand">
             {/* Logo Container - Matching ref dimensions */}
             <div className="relative w-[280px] h-[280px] flex flex-col items-center justify-center">
-                 {/* 1. Kellogg's Script Logo (White Mask) */}
-                <div
-                    style={{
-                        position: 'absolute',
-                        top: '0',
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        width: '100%',
-                        height: '120px',
-                        backgroundColor: isBlack ? redCode : 'white',
-                        WebkitMaskImage: `url(/assetss/kelloggH1.png)`,
-                        WebkitMaskRepeat: 'no-repeat',
-                        WebkitMaskSize: 'contain',
-                        WebkitMaskPosition: 'center',
-                        maskImage: `url(/assetss/kelloggH1.png)`,
-                        maskRepeat: 'no-repeat',
-                        maskSize: 'contain',
-                        maskPosition: 'center',
-                        zIndex: 1
-                    }}
-                />
-
-                {/* 2. Super Stars Badge Icon */}
                 <img
-                    src="https://kelloggsnigeria.ng/_nuxt/img/super-stars.a47ecf0.png"
+                    src={isBlack?data?.logos?.[0]?.url:data?.logos?.[1]?.url}
                     alt="icon"
                     className="brand-image relative z-10"
                     style={{ 

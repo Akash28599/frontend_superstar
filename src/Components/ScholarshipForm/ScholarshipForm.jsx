@@ -3,7 +3,7 @@ import "./ScholarshipForm.css";
 import { intArrayBuilder } from "../../Utils/Array";
 import KelloggIcon from "../KelloggIcon/KelloggIcon";
 
-const ScholarshipForm = ({ data }) => {
+const ScholarshipForm = ({ data,siteSettings }) => {
     const fileRef = useRef(null);
     const [wordCount, setWordCount] = useState(100)
     const [showTooltip, setShowTooltip] = useState(false)
@@ -26,26 +26,11 @@ const ScholarshipForm = ({ data }) => {
 
     return (
         <section className="scholarship">
-            {/* Top Left Logo */}
-            <div className="absolute top-0 left-2 md:left-6 z-[9999]">
-                 <div
-                    style={{
-                        width: '120px',
-                        height: '40px',
-                        backgroundColor: 'white',
-                        WebkitMaskImage: `url(/assetss/kelloggH1.png)`,
-                        WebkitMaskRepeat: 'no-repeat',
-                        WebkitMaskSize: 'contain',
-                        maskImage: `url(/assetss/kelloggH1.png)`,
-                        maskRepeat: 'no-repeat',
-                        maskSize: 'contain',
-                    }}
-                />
-            </div>
+
             <div className="container">
                 <div className="hang-monkey"><img src={data.hangingMonkey.url} alt='' /></div>
                 {/* LEFT BRAND COLUMN */}
-                <KelloggIcon IconImage={data.IconImage.url} />
+                <KelloggIcon data={siteSettings} />
 
                 {/* FORM + CONTENT */}
                 <div className="content">

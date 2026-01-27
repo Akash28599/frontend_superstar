@@ -4,7 +4,7 @@ import SocialIcons from "../Components/SocialIcons/SocialIcons";
 
 const FooterLayout = ({ settingsData }) => {
   const addressLines = settingsData?.address?.split("\n") ?? [];
-
+  console.log(settingsData)
   return (
     <div className="w-full bg-kelloggs-red font-kelloggs text-white">
       {/* Main Content Area */}
@@ -18,9 +18,9 @@ const FooterLayout = ({ settingsData }) => {
         
         {/* Logo Section */}
         <div className="w-full md:w-[25%] flex justify-center md:justify-start">
-          {settingsData?.logo?.url ? (
+          {settingsData?.logos?.[1]?.url ? (
             <img
-              src={settingsData.logo.url}
+              src={settingsData.logos?.[1].url}
               alt={settingsData.sitename}
               className="
                 w-[234px] 
