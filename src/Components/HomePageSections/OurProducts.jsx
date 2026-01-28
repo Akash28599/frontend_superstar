@@ -170,8 +170,8 @@ const OurProducts = () => {
         :
         `M ${product1.x} ${product1.y}
                  C ${product1.x} ${coco.y + 200},
-                   ${coco.x+10} ${coco.y +40},
-                   ${coco.x+10} ${coco.y+120}`;
+                   ${coco.x + 10} ${coco.y + 40},
+                   ${coco.x + 10} ${coco.y + 120}`;
 
     const s2 = screenWidth >= 1900 ?
       `C ${coco.x + 80} ${coco.y + 40},
@@ -209,8 +209,8 @@ const OurProducts = () => {
                   ${product5.x + 20} ${product5.y + 0}`
           :
           isMediumScreen ?
-            `C ${product4.x } ${product4.y + 550},
-                  ${product5.x + 100} ${product5.y-50 },
+            `C ${product4.x} ${product4.y + 550},
+                  ${product5.x + 100} ${product5.y - 50},
                   ${product5.x - 140} ${product5.y + 120}`
             :
             `C ${product4.x - 100} ${product4.y - 100},
@@ -218,12 +218,16 @@ const OurProducts = () => {
                   ${product5.x - 20} ${product5.y - 20}`;
 
 
-    const s4 = screenWidth >= 1900 ?
-      `${product4.x - 910} ${product5.y + 40},
-                  ${product4.x - 760} ${product5.y + 100},
-                  ${product4.x - 770} ${product5.y + 100}`
-      :isMediumScreen?`${product4.x - 770} ${product5.y + 100}`:
-      ``
+    const s4 = screenWidth >= 1900
+      ? `C ${product4.x - 910} ${product5.y + 40},
+       ${product4.x - 760} ${product5.y + 100},
+       ${product4.x - 770} ${product5.y + 100}`
+      : isMediumScreen
+        ? `C ${product5.x - 310} ${product5.y + 240},
+       ${product5.x-100} ${product5.y + 300},
+       ${product5.x-300 } ${product5.y + 200}`
+        : ``;
+
 
     return `${s1} ${s2} ${s3} ${s4}`;
 
@@ -232,7 +236,7 @@ const OurProducts = () => {
   const renderMobileProduct = (product) => {
     if (!product) return null;
     return (
-      <div style={{ position: 'relative', zIndex: 2, margin: '40px 0', display: 'flex',flexDirection:'column', justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff', padding: '10px', }}>
+      <div style={{ position: 'relative', zIndex: 2, margin: '40px 0', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff', padding: '10px', }}>
         <img
           src={imgUrl(product)}
           alt={product.title_description?.title}
@@ -332,10 +336,10 @@ const OurProducts = () => {
         ref={containerRef}
         style={{
           position: "relative",
-          background: "#fff",
-          overflow: "hidden",
+          //background: "#fff",
+          // overflow: "hidden",
           padding: isMobile ? "2rem 1rem" : "2rem 0 13rem",
-          minHeight: "100vh",
+          minHeight: "240vh",
           display: isMobile ? 'flex' : 'block',
           flexDirection: 'column',
           alignItems: 'center'
@@ -344,8 +348,8 @@ const OurProducts = () => {
         {!isMobile && (
           <svg
             width="100%"
-            height={1200}
-            viewBox={`0 0 ${SVG_WIDTH} 1200`}
+            height={1500}
+            viewBox={`0 0 ${SVG_WIDTH} 1500`}
             preserveAspectRatio="xMidYMin meet"
             style={{
               position: "absolute",
@@ -471,7 +475,7 @@ const OurProducts = () => {
                 style={{
                   position: "absolute",
                   right: "6%",
-                  top: is200Scale ? 110 : 150, // Moved up to align with Product 3 (Visual #1)
+                  top: is200Scale ? 110 : 70, // Moved up to align with Product 3 (Visual #1)
                   width: "44%",
                   display: "flex",
                   flexDirection: "row",
@@ -485,7 +489,7 @@ const OurProducts = () => {
                     textAlign: "left",
                     maxWidth: is200Scale ? 200 : 320, // Reduced width to force wrapping ("add more lines")
                     position: "absolute",
-                    bottom: is200Scale ? "10%" : "60%", // Moved down significantly
+                    bottom: is200Scale ? "10%" : "30%",
                     left: is200Scale ? "4%" : (isMacBook ? "6%" : isMediumScreen ? "-2%" : isSmallScreen ? "2%" : "8%"), // Moved way left for 200% scale
                   }}
                 >
