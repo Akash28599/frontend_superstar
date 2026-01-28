@@ -45,7 +45,7 @@ const Rewatch = ({ data }) => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 mb-8 md:mb-10">
                     {data.third_component.videos.map((video, i) => (
                         <VideoThumbnail
-                            thumbnail={video.thumbnail}
+                            customThumbnail={video.thumbnail}
                             key={i}
                             url={video.url}
                             onClick={setActiveVideo}

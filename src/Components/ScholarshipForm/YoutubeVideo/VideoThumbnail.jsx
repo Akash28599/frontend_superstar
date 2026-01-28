@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-const VideoThumbnail = ({ thumbnail, url, onClick, className, overlayText, shouldBlur = false, playIconSize = 'mid', isScholarshipPage = false, customThumbnail }) => {
+const VideoThumbnail = ({ url, onClick, className, overlayText, shouldBlur = false, playIconSize = 'mid', isScholarshipPage = false, customThumbnail }) => {
     const [thumb, setThumb] = useState(null)
     const playIcon = '/assetss/youtube-icon.png' // can rename to generic play icon if you want
 
@@ -54,9 +54,9 @@ const VideoThumbnail = ({ thumbnail, url, onClick, className, overlayText, shoul
             className={`relative cursor-pointer ${className}`}
             onClick={() => onClick(url)}
         >
-            {thumbnail || thumbnailSrc ? (
+            {thumbnailSrc ? (
                 <img
-                    src={thumbnail || thumbnailSrc}
+                    src={thumbnailSrc}
                     alt="video thumbnail"
                     className="w-full h-full object-contain bg-black rounded-2xl"
                 />
