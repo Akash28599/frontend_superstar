@@ -130,7 +130,7 @@ const OurProducts = () => {
   } :is200Scale? {
     product1: { x: containerWidth * 0.12, y: 190 },
     product2: { x: containerWidth * 0.9, y: 179 },
-    coco: { x: centerX, y: 400 },
+    coco: { x: centerX, y: 500 },
     product3: { x: containerWidth * 0.28, y: 1000 },
     product4: { x: containerWidth * 0.8, y: 850 },
     product5: { x: containerWidth * (is200Scale ? 0.12 : 0.3), y: 1100 },
@@ -138,7 +138,7 @@ const OurProducts = () => {
   {
     product1: { x: containerWidth * 0.15, y: 170 },
     product2: { x: containerWidth * 0.9, y: 179 },
-    coco: { x: centerX, y: 400 },
+    coco: { x: centerX, y: 500 },
     product3: { x: containerWidth * 0.28, y: 1000 },
     product4: { x: containerWidth * 0.85, y: 850 },
     product5: { x: containerWidth * (is200Scale ? 0.12 : 0.3), y: 1100 },
@@ -161,7 +161,7 @@ const OurProducts = () => {
 :{
     product1: { x: containerWidth * 0.18, y: 160 },
     product2: { x: containerWidth * 0.8, y: 179 },
-    coco: { x: centerX, y: 300 },
+    coco: { x: centerX, y: 400 },
     product3: { x: containerWidth * 0.28, y: 0 },
     product4: { x: containerWidth * 0.82, y: 850 },
     product5: { x: containerWidth *  0.4, y: 1050 },
