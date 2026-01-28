@@ -128,14 +128,22 @@ const OurProducts = () => {
     product4: { x: centerX, y: 900 },
     product5: { x: centerX, y: 1150 },
     product1: { x: centerX, y: 1400 }, // Bottom
-  } : {
-    product1: { x: containerWidth * 0.18, y: 180 },
-    product2: { x: containerWidth * 0.85, y: 179 },
+  } :is200Scale? {
+    product1: { x: containerWidth * 0.21, y: 160 },
+    product2: { x: containerWidth * 0.8, y: 179 },
     coco: { x: centerX, y: 400 },
     product3: { x: containerWidth * 0.28, y: 1000 },
     product4: { x: containerWidth * 0.85, y: 850 },
     product5: { x: containerWidth * (is200Scale ? 0.12 : 0.3), y: 1100 },
-  };
+  }:
+  {
+    product1: { x: containerWidth * 0.15, y: 170 },
+    product2: { x: containerWidth * 0.9, y: 179 },
+    coco: { x: centerX, y: 400 },
+    product3: { x: containerWidth * 0.28, y: 1000 },
+    product4: { x: containerWidth * 0.85, y: 850 },
+    product5: { x: containerWidth * (is200Scale ? 0.12 : 0.3), y: 1100 },
+  }
 
   const createTopCurve = () => {
     if (isMobile) return "";
@@ -213,9 +221,9 @@ const OurProducts = () => {
                   ${product5.x + 100} ${product5.y - 50},
                   ${product5.x - 140} ${product5.y + 120}`
             :
-            `C ${product4.x - 100} ${product4.y - 100},
-                  ${product5.x + 20} ${product5.y - 350},
-                  ${product5.x - 20} ${product5.y - 20}`;
+            `C ${product4.x - 60} ${product4.y - 100},
+                  ${product5.x + 30} ${product5.y - 120},
+                  ${product5.x - 170} ${product5.y - 50}`;
 
 
     const s4 = screenWidth >= 1900
@@ -226,7 +234,9 @@ const OurProducts = () => {
         ? `C ${product5.x - 310} ${product5.y + 240},
        ${product5.x-100} ${product5.y + 300},
        ${product5.x-300 } ${product5.y + 200}`
-        : ``;
+        : isSmallScreen?`C ${product5.x - 310} ${product5.y + 240},
+       ${product5.x-100} ${product5.y + 300},
+       ${product5.x-300 } ${product5.y + 200}`:``;
 
 
     return `${s1} ${s2} ${s3} ${s4}`;
