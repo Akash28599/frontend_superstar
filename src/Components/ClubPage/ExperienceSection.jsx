@@ -27,7 +27,7 @@ const ExperienceSection = ({ data }) => {
 
                 {/* 2x2 Grid */}
                 <div className="max-w-full sm:max-w-6xl mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
                         {card_details?.map((card, index) => (
                             <div
                                 key={index}

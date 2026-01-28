@@ -284,9 +284,8 @@ textarea:focus {
     }
 
     .hang-monkey {
-        width: 8%;
-        /* Smaller monkey */
-        left: -20px;
+        width: 12%;
+        left: -10px;
         height: auto;
         /* Fix aspect ratio stretching */
         bottom: -50px;
@@ -383,8 +382,12 @@ textarea:focus {
     }
 
     .hang-monkey {
-        display: none;
-        /* Hide on very small screens */
+        display: block;
+        width: 18%;
+        left: -10px;
+        bottom: -60px;
+        height: auto;
+        /* Fix aspect ratio */
     }
 
     .counter {
@@ -410,9 +413,11 @@ textarea:focus {
     }
 
     .hang-monkey {
-        width: 12%;
+        width: 15%;
         bottom: -80px;
-        left: -20px;
+        left: -15px;
+        height: auto;
+        /* Fix aspect ratio */
 
     }
 

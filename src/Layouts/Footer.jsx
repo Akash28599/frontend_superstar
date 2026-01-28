@@ -11,13 +11,13 @@ const FooterLayout = ({ settingsData }) => {
       <div className="
         max-w-full sm:max-w-[1400px] mx-auto 
         px-4 py-8 xxs:px-5 xxs:py-9 sm:px-6 sm:py-10 tablet:px-12 tablet:py-16 wide:px-20 
-        flex flex-col md:flex-row 
-        justify-between items-center md:items-start 
-        gap-6 sm:gap-8 md:gap-10
+        flex flex-col lg:flex-row 
+        justify-between items-center lg:items-start 
+        gap-6 sm:gap-8 lg:gap-10
       ">
         
         {/* Logo Section */}
-        <div className="w-full md:w-[25%] flex justify-center md:justify-start">
+        <div className="w-full lg:w-[25%] flex justify-center lg:justify-start">
           {settingsData?.logos?.[1]?.url ? (
             <img
               src={settingsData.logos?.[1].url}
@@ -44,9 +44,9 @@ const FooterLayout = ({ settingsData }) => {
 
         {/* Links Grid Section */}
         <div className="
-            flex flex-col md:flex-row flex-1 w-full 
+            flex flex-col lg:flex-row flex-1 w-full 
             justify-between gap-10 tablet:gap-4 
-            text-center md:text-left
+            text-center lg:text-left
         ">
           
           {/* Company Column */}
@@ -70,7 +70,7 @@ const FooterLayout = ({ settingsData }) => {
           </div>
 
           {/* Location Column */}
-          <div className="flex flex-col flex-1 gap-2 text-center md:text-left">
+          <div className="flex flex-col flex-1 gap-2 text-center lg:text-left">
             <h3 className="text-[20px] wide:text-[22px] font-bold mb-2">Location</h3>
             <ul className="text-[16px] wide:text-[18px] leading-[2.2] space-y-1">
               <li>{settingsData?.contactemail ?? "—"}</li>
@@ -79,7 +79,7 @@ const FooterLayout = ({ settingsData }) => {
             </ul>
 
             {/* Social Icons */}
-            <div className="mt-6 flex justify-center md:justify-start">
+            <div className="mt-6 flex justify-center lg:justify-start">
               <SocialIcons siteSettings={settingsData} />
             </div>
           </div>

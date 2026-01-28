@@ -37,7 +37,7 @@ export function LayoutComponent({ settingsData, dpr }) {
           position: isHomePage ? 'absolute' : 'relative',
           width: '100%',
           zIndex: 100,
-        }} className="pl-0 md:pl-[180px]">
+        }} className="pl-0 lg:pl-[180px]">
           <Navbar />
         </div>
       )}

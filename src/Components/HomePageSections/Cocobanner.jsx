@@ -49,19 +49,17 @@ const CocoBanner = () => {
 
       {/* Red Background Container - seamlessly connects to wave */}
       <div className="relative w-full bg-[#F60945]"> 
-        {/* Content padding - adjust py to control height below description */}
-        <div className="py-[4%] md:py-[3%] lg:py-[2%]">
+        <div className="py-12 md:py-16 lg:py-[2%]">
           
-          {/* Character Image - Hanging Effect */}
           {charImg && (
             <img
               src={charImg}
               alt="character"
               className="
                 absolute z-20 pointer-events-none
-                w-[30%] tablet:w-[28%] desktop:w-[30%] wide:w-[30%]
-                -top-[80%] tablet:-top-[90%] wide:-top-[100%]
-                left-[-1%] tablet:left-[0%]
+                w-[160px] md:w-[200px] lg:w-[30%] tablet:w-[28%] desktop:w-[30%] wide:w-[30%]
+                -top-[90px] md:-top-[110px] lg:-top-[80%] tablet:-top-[90%] wide:-top-[100%]
+                left-[-10px] md:left-[-10px] lg:left-[-1%] tablet:left-[0%]
                 drop-shadow-2xl
               "
             />
@@ -74,23 +72,24 @@ const CocoBanner = () => {
               alt="cloud"
               className="
                 absolute z-20 pointer-events-none
-                w-[12%] tablet:w-[10%]
-                -top-[30%] right-[8%]
+                w-[15%] md:w-[12%] lg:w-[12%] tablet:w-[10%]
+                -top-[10%] lg:-top-[30%] right-[5%] lg:right-[8%]
                 opacity-90
               "
             />
           )}
 
-          {/* Text Content - shifted right to avoid Coco overlap */}
+          {/* Text Content - Shifted to avoid overlap */}
           <div className="
             relative flex flex-col items-center justify-center text-center 
-            w-full max-w-[85%] tablet:max-w-[70%] desktop:max-w-[60%] 
+            w-full max-w-[90%] md:max-w-[80%] lg:max-w-[55%] 
             z-30 px-4 mx-auto
-            ml-[58%] tablet:ml-[53%] -translate-x-1/2
+            mt-[80px] md:mt-[100px] lg:mt-0 
+            lg:ml-[50%] lg:-translate-x-1/2
           ">
             <h1 className="
               font-bold text-white leading-[1.0] drop-shadow-md mb-6
-              text-[clamp(2rem,5vw,6rem)]
+              text-[2rem] md:text-[2.8rem] lg:text-[clamp(2rem,5vw,6rem)]
             ">
               {title}
             </h1>
@@ -99,7 +98,7 @@ const CocoBanner = () => {
               dangerouslySetInnerHTML={{ __html: description }}
               className="
                 text-white font-normal italic opacity-95 leading-[1.3]
-                text-[clamp(0.9rem,2vw,2.2rem)]
+                text-[1rem] md:text-[1.2rem] lg:text-[clamp(0.9rem,2vw,2.2rem)]
               "
             />
           </div>

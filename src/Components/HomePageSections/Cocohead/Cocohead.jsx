@@ -60,11 +60,11 @@ export const CocoHead = () => {
 
                 {/* Content Box - Responsive Grid with Boxes around each section */}
                 <div className="
-                    grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3
-                    gap-4 sm:gap-5 md:gap-4 lg:gap-5
+                    grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3
+                    gap-8 md:gap-6 lg:gap-8
                     w-full 
-                    pt-20 md:pt-0
-                    md:pl-[8%] lg:pl-[10%]
+                    pt-16 md:pt-0
+                    md:pl-[5%] lg:pl-[8%]
                 ">
                     {items.map((item, index) => {
                         const iconUrl = item.icons?.url || item.icon?.url || item.image?.url ||

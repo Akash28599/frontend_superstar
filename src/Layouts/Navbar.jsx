@@ -15,7 +15,7 @@ const Navbar = ({ customStyle = {} }) => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const isMobile = screenWidth < 768;
+  const isMobile = screenWidth < 1024;
 
   const isConstrained = screenWidth < 1350;
   const isHighScale = screenWidth < 1050;
@@ -63,7 +63,7 @@ const Navbar = ({ customStyle = {} }) => {
     paddingLeft: isMobile ? '16px' : isVerySmall ? '12px' : isHighScale ? '20px' : isConstrained ? '28px' : '40px',
     paddingRight: isMobile ? '16px' : isVerySmall ? '12px' : isHighScale ? '20px' : isConstrained ? '28px' : '40px',
     flexDirection: isMobile ? 'column' : 'row',
-    marginBottom: isMobile ? '20px' : '0', // Add margin to prevent overlap with content
+    marginBottom: '0', // Removed margin to prevent white gap issues, handled by Layout padding
     ...customStyle
   };
 

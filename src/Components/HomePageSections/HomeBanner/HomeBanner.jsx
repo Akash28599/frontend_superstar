@@ -114,33 +114,31 @@ const HomeBanner = () => {
         </div>
       )}
 
-      {/* Main Content Area - DESKTOP OPTIMIZED (1920x1080) */}
+      {/* Main Content Area - RESPONSIVE LAYOUT */}
       <div className="
         h-auto flex-1 
-        flex flex-col-reverse md:flex-row 
-        items-center md:items-end 
+        flex flex-col-reverse lg:flex-row 
+        items-center lg:items-end 
         justify-between 
         relative mx-auto w-full
-        px-4 md:px-0
+        px-4 lg:px-0
         max-w-full xl-wide:max-w-[1920px]
       ">
         
-        {/* Left Section - Text Content - DESKTOP OPTIMIZED with improved mobile spacing */}
+        {/* Left Section - Text Content */}
         <div className={`
             flex-1 z-[20] 
             flex flex-col justify-center items-start
-            w-full md:w-auto
-            px-3 xxs:px-4 sm:px-6 
-            md:pl-[8%]
-            tablet:pl-[10%]
-            wide:pl-[15%]
-            pb-6 pt-20
-            xxs:pb-8 xxs:pt-22
-            sm:pb-10 sm:pt-26
-            md:pb-12 md:pt-28
-            ${isEdge ? 'md:pb-[10vh] md:pt-[23vh]' : 'md:pb-[12vh] md:pt-[24vh]'}
-            ${isEdge ? 'tablet:pb-[10vh] tablet:pt-[23vh]' : 'tablet:pb-[10vh] tablet:pt-[25vh]'}
-            ${isEdge ? 'wide:pb-[14vh] wide:pt-[27vh]' : 'wide:pb-[8vh] wide:pt-[12vh]'}
+            w-full lg:w-auto
+            px-4 sm:px-6 
+            lg:pl-[8%]
+            xl:pl-[10%]
+            wide:pl-[12%]
+            pb-8 pt-10
+            sm:pb-12 sm:pt-14
+            md:pb-16 md:pt-16
+            lg:pb-12 lg:pt-28
+            ${isEdge ? 'lg:pb-[10vh] lg:pt-[23vh]' : 'lg:pb-[12vh] lg:pt-[24vh]'}
         `}>
               {/* Badge - reduced bottom margin */}
               <div className="mb-3 xxs:mb-4 sm:mb-5 md:mb-6 lg:mb-[1.5rem] bg-kelloggs-gold py-1.5 xxs:py-2 px-3 xxs:px-4 md:py-[0.6rem] md:px-[1.5rem] tablet:py-[0.8rem] tablet:px-[2rem] rounded-full inline-flex items-center justify-center shadow-md">
@@ -211,8 +209,8 @@ const HomeBanner = () => {
               </button>
         </div>
 
-        {/* Right Section / Image Wrapper - DESKTOP OPTIMIZED (1920x1080) - Kid visible on mobile */}
-        <div className="flex-1 h-full flex justify-center lg:justify-end items-end relative z-[5] w-full lg:w-auto mt-4 sm:mt-0">
+        {/* Right Section / Image Wrapper - RESPONSIVE */}
+        <div className="flex-1 h-full flex justify-center lg:justify-end items-end relative z-[5] w-full lg:w-auto mt-4 lg:mt-0">
           {heroImage && (
             <>
               <img 
@@ -221,36 +219,34 @@ const HomeBanner = () => {
                 className={`
                     hero-image-zoom-fix
                     relative object-contain object-bottom z-[10]
-                    max-w-full lg:max-w-none
+                    max-w-[95%] lg:max-w-none
                     w-auto
-                    h-[35vh] xxs:h-[38vh] xs:h-[42vh] sm:h-[50vh] md:h-[60vh]
+                    h-[40vh] sm:h-[50vh] md:h-[70vh]
                     min-h-[280px] sm:min-h-[350px]
-                    ${isEdge ? 'lg:h-[clamp(72vh,96vh,108vh)]' : 'lg:h-[clamp(85vh,115vh,130vh)]'}
-                    ${isEdge ? 'wide:h-[clamp(72vh,96vh,108vh)]' : 'wide:h-[clamp(75vh,100vh,115vh)]'}
-                    min-w-[200px] xxs:min-w-[220px] xs:min-w-[250px]
-                    lg:min-w-[300px]
-                    tablet:min-w-[400px]
+                    ${isEdge ? 'lg:h-[clamp(72vh,96vh,108vh)]' : 'lg:h-[clamp(80vh,115vh,130vh)]'}
+                    min-w-[200px] sm:min-w-[300px]
+                    lg:min-w-[400px]
                     mr-0 lg:mr-[5%] mb-0
                 `} 
               />
               
               {/* Clouds - DESKTOP ONLY */}
+              {/* Clouds - RESPONSIVE */}
               <Cloud className="
                 block
-                top-[5%] right-[10%] w-[18%] 
-                sm:top-[40%] sm:right-[10%] sm:w-[18%]
-                md:top-[30%] md:right-[2%]
-                tablet:top-[20%] tablet:right-[5%] tablet:w-[15%]
+                top-[10%] right-[5%] w-[18%] 
+                sm:top-[15%] sm:right-[10%] sm:w-[15%]
                 lg:top-[50%] lg:right-[10%] lg:w-[14%] 
                 z-[3] opacity-90
               " />
 
               <Cloud className="
                 block
-                top-[15%] left-[-5%] w-[15%]
-                sm:top-[40%] sm:left-[2%] sm:w-[18%]
+                top-[20%] left-[5%] w-[15%]
+                sm:top-[25%] sm:left-[8%] sm:w-[12%]
                 lg:top-[20%] lg:left-[5%] lg:w-[8%]
                 z-[4] opacity-90
+                hidden sm:block
               " />
             </>
           )}
