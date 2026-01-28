@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-const VideoThumbnail = ({ url, onClick, className, overlayText, shouldBlur = false, playIconSize = 'mid', isScholarshipPage = false, customThumbnail }) => {
+const VideoThumbnail = ({ thumbnail, url, onClick, className, overlayText, shouldBlur = false, playIconSize = 'mid', isScholarshipPage = false, customThumbnail }) => {
     const [thumb, setThumb] = useState(null)
     const playIcon = '/assetss/youtube-icon.png' // can rename to generic play icon if you want
 
@@ -54,9 +54,9 @@ const VideoThumbnail = ({ url, onClick, className, overlayText, shouldBlur = fal
             className={`relative cursor-pointer ${className}`}
             onClick={() => onClick(url)}
         >
-            {thumbnailSrc ? (
+            {thumbnail || thumbnailSrc ? (
                 <img
-                    src={thumbnailSrc}
+                    src={thumbnail || thumbnailSrc}
                     alt="video thumbnail"
                     className="w-full h-full object-contain bg-black rounded-2xl"
                 />
@@ -70,16 +70,16 @@ const VideoThumbnail = ({ url, onClick, className, overlayText, shouldBlur = fal
             <span className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
                 {isScholarshipPage ? (
                     <div className="kelloggs-superstar" style={{
-                         width: '230px',
-                         height: '230px',
-                         marginBottom: '10px',
-                         backgroundImage: "url('/assetss/kelloggH1.png'), url('https://kelloggsnigeria.ng/_nuxt/img/super-stars.a47ecf0.png')",
-                         backgroundPosition: '50% 0, 50% 100%',
-                         backgroundSize: 'contain, 80%',
-                         backgroundRepeat: 'no-repeat'
+                        width: '230px',
+                        height: '230px',
+                        marginBottom: '10px',
+                        backgroundImage: "url('/assetss/kelloggH1.png'), url('https://kelloggsnigeria.ng/_nuxt/img/super-stars.a47ecf0.png')",
+                        backgroundPosition: '50% 0, 50% 100%',
+                        backgroundSize: 'contain, 80%',
+                        backgroundRepeat: 'no-repeat'
                     }}>
                         {/* Centered Play Button for usability */}
-                         <img src={playIcon} alt="play" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 opacity-80" />
+                        <img src={playIcon} alt="play" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 opacity-80" />
                     </div>
                 ) : (
                     <img src={playIcon} alt="play icon" className={iconTailwind} />

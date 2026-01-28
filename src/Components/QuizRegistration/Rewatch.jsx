@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { COLORS ,FONTS} from '../../common/config';
+import { COLORS, FONTS } from '../../common/config';
 import VideoPopup from "../ScholarshipForm/YoutubeVideo/VideoPopup"
 import VideoThumbnail from "../ScholarshipForm/YoutubeVideo/VideoThumbnail"
 
@@ -45,8 +45,9 @@ const Rewatch = ({ data }) => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 mb-8 md:mb-10">
                     {data.third_component.videos.map((video, i) => (
                         <VideoThumbnail
+                            thumbnail={video.thumbnail}
                             key={i}
-                            url={video}
+                            url={video.url}
                             onClick={setActiveVideo}
                             className="h-[200px] md:h-[250px]"
                             playIconSize='large'
