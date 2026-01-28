@@ -24,7 +24,9 @@ function App() {
     const getFooterData = async () => {
       try {
         const res = await fetch(
-          `${process.env.REACT_APP_STRAPI_URL}/api/sitesettings?populate=*`
+                    `https://dev-kelloggs-superstar.tolaram.com/backend/api/sitesettings?populate=*`
+
+          // `${process.env.REACT_APP_STRAPI_URL}/api/sitesettings?populate=*`
         );
         const json = await res.json();
         setSettingsData(json?.data?.[0]);
