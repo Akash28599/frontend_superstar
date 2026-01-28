@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-const VideoThumbnail = ({ url, onClick, className, overlayText, shouldBlur = false, playIconSize = 'mid' }) => {
+const VideoThumbnail = ({ url, onClick, className, overlayText, shouldBlur = false, playIconSize = 'mid', isScholarshipPage = false, customThumbnail }) => {
     const [thumb, setThumb] = useState(null)
     const playIcon = '/assetss/youtube-icon.png' // can rename to generic play icon if you want
 
@@ -45,9 +45,9 @@ const VideoThumbnail = ({ url, onClick, className, overlayText, shouldBlur = fal
         }
     }, [url, isYouTube])
 
-    const thumbnailSrc = isYouTube
+    const thumbnailSrc = customThumbnail || (isYouTube
         ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
-        : thumb
+        : thumb)
 
     return (
         <div
@@ -58,7 +58,7 @@ const VideoThumbnail = ({ url, onClick, className, overlayText, shouldBlur = fal
                 <img
                     src={thumbnailSrc}
                     alt="video thumbnail"
-                    className="w-full h-full object-cover rounded-2xl"
+                    className="w-full h-full object-contain bg-black rounded-2xl"
                 />
             ) : (
                 <div className="w-full h-full bg-gray-800 flex items-center justify-center rounded-2xl text-white">
@@ -66,9 +66,24 @@ const VideoThumbnail = ({ url, onClick, className, overlayText, shouldBlur = fal
                 </div>
             )}
 
-            {/* Play icon for any video type */}
+            {/* Play icon or Custom Scholarship Icon */}
             <span className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
-                <img src={playIcon} alt="play icon" className={iconTailwind} />
+                {isScholarshipPage ? (
+                    <div className="kelloggs-superstar" style={{
+                         width: '230px',
+                         height: '230px',
+                         marginBottom: '10px',
+                         backgroundImage: "url('/assetss/kelloggH1.png'), url('https://kelloggsnigeria.ng/_nuxt/img/super-stars.a47ecf0.png')",
+                         backgroundPosition: '50% 0, 50% 100%',
+                         backgroundSize: 'contain, 80%',
+                         backgroundRepeat: 'no-repeat'
+                    }}>
+                        {/* Centered Play Button for usability */}
+                         <img src={playIcon} alt="play" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 opacity-80" />
+                    </div>
+                ) : (
+                    <img src={playIcon} alt="play icon" className={iconTailwind} />
+                )}
             </span>
 
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import VideoThumbnail from './VideoThumbnail'
 import VideoPopup from './VideoPopup'
+import campaignThumb from './campaign_thumbnail.jpg'
 
 const sample = {
     mainVideoLink: "https://www.youtube.com/watch?v=odO24fa2AqA",
@@ -51,6 +52,8 @@ const YoutubeGallery = () => {
                     className="h-[100vh] w-full"
                     shouldBlur={true}
                     playIconSize='x-large'
+                    isScholarshipPage={true}
+                    customThumbnail={campaignThumb}
                 />
             </div>
 
@@ -73,34 +76,28 @@ const YoutubeGallery = () => {
             </div>
 
             {/* Edition Winners */}
-            <div>
+            <div className='mb-48'>
                 <h1 className="text-kelloggs-red text-[35px] leading-[45px] font-bold mt-[5%] mb-[2%] ml-[10%] text-left">
                     {`${data.editionName} Edition Winners`}
                 </h1>
-                <div className="flex flex-row justify-end gap-[2%] mx-[10%]">
-                    <div className="w-[40%] flex flex-col gap-4 border-l border-r border-kelloggs-red px-[2%]">
-                        {data.editionWinnersLink.slice(1).map((url, i) => (
+
+                <div className="mx-[10%] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 items-center ji">
+                    {data.editionWinnersLink.map((url, i) => (
+                        <div
+                            key={i}
+                            className="border-2 border-kelloggs-red rounded-xl overflow-hidden aspect-video"
+                        >
                             <VideoThumbnail
-                                key={i}
                                 url={url}
                                 onClick={setActiveVideo}
-                                className="w-full flex-1 min-h-0 overflow-hidden"
-                                playIconSize='mid'
-
+                                className="w-full h-full"
+                                playIconSize="mid"
                             />
-                        ))}
-                    </div>
-
-                    <div className="w-full gap-[2%]">
-                        <VideoThumbnail
-                            url={data.editionWinnersLink[0]}
-                            onClick={setActiveVideo}
-                            className="w-full h-full"
-                            playIconSize='large'
-                        />
-                    </div>
+                        </div>
+                    ))}
                 </div>
             </div>
+
 
             {/* Video Popup */}
             <VideoPopup

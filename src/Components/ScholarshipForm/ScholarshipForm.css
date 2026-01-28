@@ -23,13 +23,13 @@
 
 .hang-monkey {
     position: absolute;
-    left: -5px;
+    left: -30px;
     top: auto;
     right: auto;
     bottom: -130px;
     z-index: 1;
-    width: 10%;
-    height: 60%;
+    width: 20%;
+    height: 80%;
 
 }
 
@@ -187,7 +187,8 @@ textarea:focus {
     max-width: 100%;
     resize: vertical;
     font-family: var(--font);
-    min-width: 380px;
+    min-width: 0;
+    /* Removed fixed min-width to prevent overflow */
     padding: 40px 30px 12px;
     border: 1px solid #ebebeb;
     border-radius: 30px;
@@ -195,7 +196,8 @@ textarea:focus {
     transition: all .4s ease-in-out;
     font-size: 15px;
     line-height: 20px;
-
+    box-sizing: border-box;
+    /* Ensure padding doesn't cause overflow */
 }
 
 /* SUBMIT */
@@ -219,8 +221,12 @@ textarea:focus {
 
 .submit-btn {
     display: flex;
-    width: 120%;
+    width: 100%;
+    /* Fixed from 120% which caused overflow */
     justify-content: space-between;
+    flex-wrap: wrap;
+    /* Allow wrapping on smaller screens */
+    gap: 16px;
 }
 
 .submit-btn button {
@@ -278,8 +284,8 @@ textarea:focus {
     }
 
     .hang-monkey {
-        width: 8%;
-        /* Smaller monkey */
+        width: 12%;
+        left: -10px;
         height: auto;
         /* Fix aspect ratio stretching */
         bottom: -50px;
@@ -311,5 +317,131 @@ textarea:focus {
 
     .counter {
         top: 17px;
+    }
+
+    .hang-monkey {
+        left: -45px;
+
+    }
+}
+
+/* Mobile Phones (320px - 480px) */
+@media (max-width: 480px) {
+    .scholarship {
+        padding: 20% 4% 8%;
+    }
+
+    .form h1 {
+        font-size: 24px;
+        line-height: 28px;
+        margin-bottom: 16px;
+    }
+
+    .form input,
+    .form select {
+        font-size: 14px;
+        margin-bottom: 20px;
+        padding: 8px 0;
+    }
+
+    .row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .row select {
+        width: 100%;
+        margin-top: 0;
+    }
+
+    .upload {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    .essay textarea {
+        padding: 32px 16px 10px;
+        font-size: 14px;
+        border-radius: 20px;
+    }
+
+    .submit-btn {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .submit-btn button {
+        width: 100%;
+        max-width: 200px;
+    }
+
+    .submit-btn img {
+        width: 100%;
+        max-width: 250px;
+        margin-top: 20px;
+    }
+
+    .hang-monkey {
+        display: block;
+        width: 18%;
+        left: -10px;
+        bottom: -60px;
+        height: auto;
+        /* Fix aspect ratio */
+    }
+
+    .counter {
+        font-size: 10px;
+        padding: 5px 8px;
+        right: 4%;
+    }
+}
+
+/* Small Tablets and Phablets (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+    .scholarship {
+        padding: 15% 3% 6%;
+    }
+
+    .form h1 {
+        font-size: 32px;
+        line-height: 36px;
+    }
+
+    .content {
+        gap: 24px;
+    }
+
+    .hang-monkey {
+        width: 15%;
+        bottom: -80px;
+        left: -15px;
+        height: auto;
+        /* Fix aspect ratio */
+
+    }
+
+    .submit-btn img {
+        width: 50%;
+    }
+}
+
+/* Older Laptops (800x600, 1024x768) */
+@media (min-width: 800px) and (max-width: 1024px) {
+    .scholarship {
+        padding: 10% 2% 4%;
+    }
+
+    .form {
+        flex: 0 0 45%;
+    }
+
+    .form h1 {
+        font-size: 36px;
+        line-height: 40px;
+    }
+
+    .right {
+        width: 50%;
     }
 }

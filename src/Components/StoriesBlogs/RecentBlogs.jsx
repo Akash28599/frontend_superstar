@@ -1,7 +1,8 @@
-import { CommentOutlined, VisibilityOutlined } from "@mui/icons-material";
-import { Heart } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { FaRegHeart } from "react-icons/fa";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { MdComment } from "react-icons/md";
 
 const RecentBlogs = ({ id, }) => {
     const [posts, setPosts] = useState([]);
@@ -29,7 +30,7 @@ const RecentBlogs = ({ id, }) => {
                     `&populate=blog_thumbail` +
                     `&pagination[limit]=3` +
                     `&filters[documentId][$ne]=${id}` +
-                    `&filters[sub_title][$eq]=${type}` +
+                    `&filters[sub_title][${type === 'story' ? '$eq' : '$ne'}]=story` +
                     `&sort=post_date:desc`;
 
                 const response = await fetch(url);
@@ -60,7 +61,7 @@ const RecentBlogs = ({ id, }) => {
         return (
             <div
                 onClick={() => {
-                    navigate(`/blog/${documentId}`);
+                    navigate(type === 'story' ? `/stories/${documentId}` : `/blog/${documentId}`);
                     window.scrollTo({ top: 0, left: 0 });
                 }}
 
@@ -93,15 +94,15 @@ const RecentBlogs = ({ id, }) => {
                     <div className="mt-3 flex justify-between text-xs text-gray-600">
                         <div className="flex gap-3">
                             <span className="flex items-center gap-1">
-                                <VisibilityOutlined fontSize="small" /> {views}
+                                <MdOutlineRemoveRedEye fontSize="large" /> {views}
                             </span>
                             <span className="flex items-center gap-1">
-                                <CommentOutlined fontSize="small" /> {comments}
+                                <MdComment fontSize="large" /> {comments}
                             </span>
                         </div>
 
                         <span className="flex items-center gap-1">
-                            <Heart size={14} /> {likes}
+                            <FaRegHeart fontSize="large" /> {likes}
                         </span>
                     </div>
                 </div>

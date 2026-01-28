@@ -379,7 +379,7 @@ const ThankYou = ({ siteSettings }) => {
             style={{
                 position: "relative",
                 width: "100%",
-                padding: `40px 0px ${screenWidth > 1600 ? '350px' : screenWidth > 1350 ? '250px' : '150px'} 0px`, overflow: "hidden",
+                padding: `40px 0px ${screenWidth > 1600 ? '350px' : screenWidth > 1350 ? '250px' : '150px'} 0px`,
                 // height: "auto", 
                 minHeight: "800px",
                 margin: "0px",
@@ -472,7 +472,7 @@ const ThankYou = ({ siteSettings }) => {
                                 }}>
 
                                     <h1 style={{
-                                        height: positions.titleHeight, width: positions.titleWidth, color: "#E41F35",
+                                        height: positions.titleHeight, width: positions.titleWidth, color: "#F60945",
                                         lineHeight: positions.titleLineHeight, textAlign: "left", fontWeight: 600,
                                         fontSize: positions.titleFontSize,
                                         margin: 0, marginTop: positions.titleMarginTop

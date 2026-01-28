@@ -3,22 +3,20 @@ import KelloggIcon from '../KelloggIcon/KelloggIcon'
 import './AboutCompetition.css'
 import SocialIcons from '../SocialIcons/SocialIcons';
 
-const AboutCompetition = ({ data }) => {
+const AboutCompetition = ({ data,siteSettings }) => {
 
 
     return (
         <div className='about-container'>
             <div className='about-left'>
                 <div className="about-bg">
-                    
-
                         <div className='bg-img' style={{ position: data?.shouldShowForm ? 'none' : 'absolute' }}>
                             <img src={data.bg?.url} className='img1' alt="background" />
 
                         </div> 
                         {!data?.shouldShowForm &&
                         <div className='abt-kg'>
-                            <KelloggIcon IconImage={data?.IconImage?.url} isBlack={true} />
+                            <KelloggIcon data={siteSettings} isBlack={true} />
 
                         </div>}
                 </div>
@@ -56,11 +54,6 @@ const AboutCompetition = ({ data }) => {
                     ))}
                 </div>
                 <div className='abt-follow'>{data.socialLinkText}
-                    {/* <div className='abt-social-media'>
-                        <FaInstagram className='abt-social-icon ' onClick={() => openUrl(data.siteSettings?.instagramurl)} />
-                        <FaTwitter className='abt-social-icon ' onClick={() => openUrl(data.siteSettings?.twitterurl)} />
-                        <LuFacebook className='abt-social-icon ' onClick={() => openUrl(data.siteSettings?.facebookurl)} />
-                    </div> */}
                     <SocialIcons siteSettings={data.siteSettings} />
                 </div>
 

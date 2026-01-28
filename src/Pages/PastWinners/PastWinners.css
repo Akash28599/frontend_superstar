@@ -119,10 +119,38 @@
     right: 0;
 }
 
-.pw-top>button {
-    border: none;
-    background: none;
-    cursor: pointer;
-    margin: 10px;
-    font-size: 50px;
+
+@media (max-width: 768px) {
+    .pw-banner {
+        height: 300px;
+    }
+
+    .pw-monkey {
+        left: -50px;
+        width: 300px;
+        height: 280px;
+    }
+
+    .pw-banner h1 {
+        font-size: 3rem;
+    }
+
+    .pw-milkDecor {
+        opacity: 0.5;
+    }
+}
+
+@media (max-width: 480px) {
+    .pw-banner {
+        height: 250px;
+    }
+
+    .pw-monkey {
+        display: none;
+        /* Hide monkey on very small screens to focus on text */
+    }
+
+    .pw-banner h1 {
+        font-size: 2.5rem;
+    }
 }

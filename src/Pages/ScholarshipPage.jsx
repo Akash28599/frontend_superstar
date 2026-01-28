@@ -85,8 +85,8 @@ if(isLoading)return(<div>Loading...</div>)
 
     return (
         <>
-            {data.shouldShowForm && <ScholarshipForm data={data} />}
-            <AboutCompetition data={data} />
+            {data.shouldShowForm && <ScholarshipForm data={data} siteSettings={settingsData} />}
+            <AboutCompetition data={data} siteSettings={settingsData}/>
             <YoutubeGallery />
             <ThankYou siteSettings={data.siteSettings} />
             {!data.shouldShowForm && <ScholarshipWishlist groupKellogs={data.groupKellogs} />}

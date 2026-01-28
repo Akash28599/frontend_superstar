@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import SendIcon from '@mui/icons-material/Send';
+import { useState } from 'react';
+import { IoMdSend } from "react-icons/io";
 
 const WaitlistSection = ({ data }) => {
   const [formData, setFormData] = useState({});
@@ -14,41 +14,41 @@ const WaitlistSection = ({ data }) => {
   };
 
   const handleChange = (e) => {
-     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   return (
-    <section className="py-24 bg-white relative">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-4xl text-center flex flex-col items-center">
-        
-        <div className="mb-10 text-center w-full">
-          <h2 className="font-kelloggs text-2xl sm:text-3xl font-bold text-kelloggs-red mb-4 uppercase tracking-wide">
+    <section className="py-12 sm:py-16 lg:py-24 bg-white relative">
+      <div className="container mx-auto px-3 xxs:px-4 sm:px-6 lg:px-8 relative z-10 max-w-full sm:max-w-4xl text-center flex flex-col items-center">
+
+        <div className="mb-6 sm:mb-8 lg:mb-10 text-center w-full">
+          <h2 className="font-kelloggs text-xl xxs:text-2xl sm:text-3xl font-bold text-kelloggs-red mb-2 sm:mb-4 uppercase tracking-wide">
             {title.toUpperCase()}
           </h2>
-          <p className="text-gray-600 text-lg">
+          <p className="text-gray-600 text-sm sm:text-base lg:text-lg">
             {description}
           </p>
         </div>
 
         {/* Form Container with Border */}
-        <form onSubmit={handleSubmit} className="bg-white border-4 border-kelloggs-red p-8 sm:p-12 text-left w-full shadow-xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 mb-10">
+        <form onSubmit={handleSubmit} className="bg-white border-2 sm:border-4 border-kelloggs-red p-4 xxs:p-6 sm:p-8 md:p-12 text-left w-full shadow-lg sm:shadow-xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 sm:gap-x-8 gap-y-4 sm:gap-y-6 mb-6 sm:mb-8 lg:mb-10">
             {label_texts?.map((label, index) => {
               const isFullWidth = label.toLowerCase().includes('email') || label.toLowerCase().includes('name') || label.toLowerCase().includes('school');
               const labelLower = label.toLowerCase();
               const isAge = labelLower.includes('age');
-              
+
               const displayLabel = isAge ? "Date of Birth" : label;
-              const inputType = labelLower.includes('email') ? 'email' : 
-                                isAge ? 'date' : 'text';
-              
+              const inputType = labelLower.includes('email') ? 'email' :
+                isAge ? 'date' : 'text';
+
               return (
                 <div key={index} className={`flex flex-col ${isFullWidth ? 'md:col-span-2' : ''}`}>
                   <label className="text-xs font-bold uppercase tracking-wider mb-2 text-gray-700">
                     {displayLabel} *
                   </label>
                   {labelLower.includes('state') ? (
-                     <select
+                    <select
                       name={displayLabel}
                       required
                       defaultValue=""
@@ -57,9 +57,9 @@ const WaitlistSection = ({ data }) => {
                     >
                       <option value="" disabled>Select State</option>
                       {[
-                        "Abia", "Adamawa", "Akwa Ibom", "Anambra", "Bauchi", "Bayelsa", "Benue", "Borno", 
-                        "Cross River", "Delta", "Ebonyi", "Edo", "Ekiti", "Enugu", "Gombe", "Imo", "Jigawa", 
-                        "Kaduna", "Kano", "Katsina", "Kebbi", "Kogi", "Kwara", "Lagos", "Nasarawa", "Niger", 
+                        "Abia", "Adamawa", "Akwa Ibom", "Anambra", "Bauchi", "Bayelsa", "Benue", "Borno",
+                        "Cross River", "Delta", "Ebonyi", "Edo", "Ekiti", "Enugu", "Gombe", "Imo", "Jigawa",
+                        "Kaduna", "Kano", "Katsina", "Kebbi", "Kogi", "Kwara", "Lagos", "Nasarawa", "Niger",
                         "Ogun", "Ondo", "Osun", "Oyo", "Plateau", "Rivers", "Sokoto", "Taraba", "Yobe", "Zamfara", "FCT"
                       ].map((state) => (
                         <option key={state} value={state}>{state}</option>
@@ -80,12 +80,12 @@ const WaitlistSection = ({ data }) => {
           </div>
 
           <div className="w-full">
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               className="w-full bg-kelloggs-red text-white font-bold text-lg py-4 px-8 hover:bg-red-700 transition-all flex items-center justify-center gap-3 uppercase tracking-wider rounded-lg shadow-lg"
             >
               <span>{button_data?.button_text || "JOIN NOW"}</span>
-              <SendIcon fontSize="small" className="-rotate-45 mb-1" />
+              <IoMdSend className="text-2xl mb-1" />
             </button>
           </div>
         </form>

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import CloseIcon from '@mui/icons-material/Close';
+import { useState } from 'react';
+import {IoCloseSharp} from "react-icons/io5";
 
 const AuthModal = ({ isOpen, onClose, type }) => {
   const [formData, setFormData] = useState({
@@ -38,12 +38,12 @@ const AuthModal = ({ isOpen, onClose, type }) => {
         <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-xs 2xl:max-w-md overflow-hidden animate-fade-in-up max-h-[95vh] overflow-y-auto custom-scrollbar">
             
             {/* Header */}
-            <div className="bg-kelloggs-red px-4 py-3 2xl:p-6 text-white text-center relative sticky top-0 z-10">
+            <div className="bg-kelloggs-red px-4 py-3 2xl:p-6 text-white text-center sticky top-0 z-10">
                 <button 
                     onClick={onClose} 
                     className="absolute top-2 right-2 2xl:top-4 2xl:right-4 text-white/80 hover:text-white transition-colors"
                 >
-                    <CloseIcon />
+                    <IoCloseSharp />
                 </button>
                 <h2 className="font-kelloggs text-lg 2xl:text-3xl mb-0.5">{title}</h2>
                 <p className="text-red-100 text-[10px] 2xl:text-sm">{subTitle}</p>

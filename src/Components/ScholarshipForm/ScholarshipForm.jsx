@@ -3,7 +3,7 @@ import "./ScholarshipForm.css";
 import { intArrayBuilder } from "../../Utils/Array";
 import KelloggIcon from "../KelloggIcon/KelloggIcon";
 
-const ScholarshipForm = ({ data }) => {
+const ScholarshipForm = ({ data,siteSettings }) => {
     const fileRef = useRef(null);
     const [wordCount, setWordCount] = useState(100)
     const [showTooltip, setShowTooltip] = useState(false)
@@ -26,10 +26,11 @@ const ScholarshipForm = ({ data }) => {
 
     return (
         <section className="scholarship">
+
             <div className="container">
                 <div className="hang-monkey"><img src={data.hangingMonkey.url} alt='' /></div>
                 {/* LEFT BRAND COLUMN */}
-                <KelloggIcon IconImage={data.IconImage.url} />
+                <KelloggIcon data={siteSettings} />
 
                 {/* FORM + CONTENT */}
                 <div className="content">

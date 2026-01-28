@@ -1,49 +1,37 @@
 import React from 'react'
 import './KelloggIcon.css'
-const KelloggIcon = ({ IconImage, isBlack }) => {
-
+const KelloggIcon = ({ isBlack,data }) => {
+    console.log(data)
     const redCode = '#dd2120'
     return (
         <div className="brand">
-            <div
-                style={{
-                    width: '80%',
-                    height: '150px',
-                    backgroundColor: isBlack ? redCode : 'white',
-                    WebkitMaskImage: `url(assetss/kelloggH1.png)`,
-                    WebkitMaskRepeat: 'no-repeat',
-                    WebkitMaskSize: 'contain',
-                    maskImage: `url(assetss/kelloggH1.png)`,
-                    maskRepeat: 'no-repeat',
-                    maskSize: 'contain',
+            {/* Logo Container - Matching ref dimensions */}
+            <div className="relative w-[280px] h-[280px] flex flex-col items-center justify-center">
+                <img
+                    src={isBlack?data?.logos?.[0]?.url:data?.logos?.[1]?.url}
+                    alt="icon"
+                    className="brand-image relative z-10"
+                    style={{ 
+                        marginTop: '95px', 
+                        width: '65%',
+                        height: 'auto',
+                        objectFit: 'contain'
+                    }}
+                />
+            </div>
 
-                }}
-            />
-            aada
+            <div className="brand-title" style={{ color: isBlack ? redCode : 'white', marginTop: '-10px' }}>Scholarship</div>
 
-            {/* <img
-                src='assetss/kelloggH1.png'
-                alt="icon"
-                className="brand-image"
-            /> */}
-            <img
-                src={IconImage}
-                alt="icon"
-                className="brand-image"
-
-            />
-
-            <div className="brand-title" style={{ color: isBlack ? redCode : 'white' }}>Scholarship</div>
-
-            <div className="prize-box"
+            <div className="prize-box mt-4"
                 style={{
                     color: isBlack ? redCode : 'white',
-                    border: `2px solid ${isBlack ? redCode : 'white'}`
-
+                    border: `2px solid ${isBlack ? redCode : 'white'}`,
+                    padding: '8px 24px',
+                    textAlign: 'center'
                 }}
             >
-                <div className="prize-amount">Win N150,000</div>
-                <div className="prize-sub">as educational expense</div>
+                <div className="prize-amount leading-none mb-1">Win <span style={{ color: '#FBCA05' }}>N150,000</span></div>
+                <div className="prize-sub leading-none">as educational expense</div>
             </div>
         </div>
     )

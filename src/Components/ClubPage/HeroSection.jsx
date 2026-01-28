@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-
-import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
-import LoginIcon from '@mui/icons-material/Login';
 import AuthModal from './AuthModal';
+import {FiLogIn} from "react-icons/fi";
+import {MdOutlinePersonAddAlt1} from "react-icons/md";
 
 const HeroSection = ({ data }) => {
   const [modalType, setModalType] = useState(null);
@@ -18,9 +17,9 @@ const HeroSection = ({ data }) => {
   const getIcon = (iconName) => {
     switch (iconName) {
       case 'person_add':
-      case 'PersonAddAltIcon': return <PersonAddAltIcon />;
+      case 'PersonAddAltIcon': return <MdOutlinePersonAddAlt1 />;
       case 'login':
-      case 'LoginIcon': return <LoginIcon />;
+      case 'LoginIcon': return <FiLogIn />;
       default: return null;
     }
   };
@@ -29,13 +28,13 @@ const HeroSection = ({ data }) => {
   const { mainHeading, mainSubHeading, mainDescription, mainButtonData } = data;
 
   return (
-    <section className="py-10 2xl:pb-20 bg-kelloggs-red text-center relative overflow-hidden min-h-[80vh] flex flex-col items-center">
+    <section className="py-6 xxs:py-8 sm:py-10 2xl:pb-20 bg-kelloggs-red text-center relative overflow-hidden min-h-[60vh] sm:min-h-[70vh] lg:min-h-[80vh] flex flex-col items-center">
 
 
       {/* Decorative Blob for depth */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-white opacity-10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
+      <div className="absolute top-0 right-0 w-48 sm:w-64 lg:w-96 h-48 sm:h-64 lg:h-96 bg-white opacity-10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1800px] relative z-10 w-full h-full grid grid-cols-1 lg:grid-cols-12 items-center gap-4 lg:gap-8 pt-10 lg:pt-0">
+      <div className="container mx-auto px-3 xxs:px-4 sm:px-6 lg:px-8 max-w-full lg:max-w-[1800px] relative z-10 w-full h-full grid grid-cols-1 lg:grid-cols-12 items-center gap-4 lg:gap-8 pt-6 sm:pt-10 lg:pt-0">
 
         {/* SECTION 1: Logo (Left - 2 Cols) */}
         <div className="lg:col-span-2 flex justify-center lg:justify-start w-full min-w-0">
@@ -90,18 +89,38 @@ const HeroSection = ({ data }) => {
           </div>
 
           {/* Buttons */}
-          <div className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center items-center">
             {mainButtonData?.map((btn, index) => (
-              <button
-                key={index}
-                onClick={() => handleOpenModal(index === 0 ? 'join' : 'login')}
-                className={`
-                   flex items-center justify-center gap-3 px-8 py-3 2xl:px-10 2xl:py-4 font-bold text-lg 2xl:text-xl transition-all duration-300 rounded-full shadow-lg bg-white text-kelloggs-red hover:bg-kelloggs-gold hover:text-kelloggs-red hover:-translate-y-1 hover:shadow-2xl min-w-[200px] 2xl:min-w-[220px]
-                 `}
-              >
-                {getIcon(btn.icon)}
-                <span>{btn.button_text}</span>
-              </button>
+              index === 0 ? (
+                <button
+                  key={index}
+                  onClick={() => handleOpenModal('join')}
+                  className="
+                    flex items-center justify-center gap-3 px-8 py-3 2xl:px-10 2xl:py-4 
+                    font-bold text-lg 2xl:text-xl transition-all duration-300 rounded-full 
+                    shadow-lg bg-white text-kelloggs-red 
+                    hover:bg-kelloggs-gold hover:text-kelloggs-red hover:-translate-y-1 hover:shadow-2xl 
+                    min-w-[200px] 2xl:min-w-[220px]
+                  "
+                >
+                  {getIcon(btn.icon)}
+                  <span>{btn.button_text}</span>
+                </button>
+              ) : (
+                <button
+                  key={index}
+                  onClick={() => handleOpenModal('login')}
+                  className="
+                    flex items-center justify-center gap-2 px-4 py-2
+                    font-medium text-base 2xl:text-lg transition-all duration-300
+                    text-white/90 hover:text-white underline underline-offset-4
+                    hover:scale-105
+                  "
+                >
+                  {getIcon(btn.icon)}
+                  <span>{btn.button_text}</span>
+                </button>
+              )
             ))}
           </div>
 
