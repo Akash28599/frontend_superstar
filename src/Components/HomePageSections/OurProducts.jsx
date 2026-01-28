@@ -116,7 +116,6 @@ const OurProducts = () => {
     letterSpacing: "0%",
   };
 
-  // SVG dimensions and product anchor positions
   const SVG_WIDTH = containerWidth;
   const centerX = containerWidth / 2;
 
@@ -129,11 +128,11 @@ const OurProducts = () => {
     product5: { x: centerX, y: 1150 },
     product1: { x: centerX, y: 1400 }, // Bottom
   } :is200Scale? {
-    product1: { x: containerWidth * 0.21, y: 160 },
-    product2: { x: containerWidth * 0.8, y: 179 },
+    product1: { x: containerWidth * 0.12, y: 190 },
+    product2: { x: containerWidth * 0.9, y: 179 },
     coco: { x: centerX, y: 400 },
     product3: { x: containerWidth * 0.28, y: 1000 },
-    product4: { x: containerWidth * 0.85, y: 850 },
+    product4: { x: containerWidth * 0.8, y: 850 },
     product5: { x: containerWidth * (is200Scale ? 0.12 : 0.3), y: 1100 },
   }:isMediumScreen?
   {
@@ -143,7 +142,7 @@ const OurProducts = () => {
     product3: { x: containerWidth * 0.28, y: 1000 },
     product4: { x: containerWidth * 0.85, y: 850 },
     product5: { x: containerWidth * (is200Scale ? 0.12 : 0.3), y: 1100 },
-  }:
+  }:isSmallScreen?
   {
     product1: { x: containerWidth * 0.2, y: 180 },
     product2: { x: containerWidth * 0.8, y: 179 },
@@ -151,6 +150,21 @@ const OurProducts = () => {
     product3: { x: containerWidth * 0.28, y: 0 },
     product4: { x: containerWidth * 0.7, y: 650 },
     product5: { x: containerWidth *  0.4, y: 800 },
+  } :       (screenWidth >1900) ?{
+    product1: { x: containerWidth * 0.2, y: 180 },
+    product2: { x: containerWidth * 0.8, y: 179 },
+    coco: { x: centerX, y: 300 },
+    product3: { x: containerWidth * 0.28, y: 0 },
+    product4: { x: containerWidth * 0.82, y: 850 },
+    product5: { x: containerWidth *  0.4, y: 1050 },
+  }
+:{
+    product1: { x: containerWidth * 0.2, y: 180 },
+    product2: { x: containerWidth * 0.8, y: 179 },
+    coco: { x: centerX, y: 300 },
+    product3: { x: containerWidth * 0.28, y: 0 },
+    product4: { x: containerWidth * 0.82, y: 850 },
+    product5: { x: containerWidth *  0.4, y: 1050 },
   }
 
   const createTopCurve = () => {
@@ -191,8 +205,8 @@ const OurProducts = () => {
 
     const s2 = screenWidth >= 1900 ?
       `C ${coco.x + 80} ${coco.y + 40},
-                  ${product4.x + 80} ${(coco.y + product4.y - 1) / 2},
-                  ${product4.x + 50} ${product4.y}`
+                  ${product4.x + 0} ${(coco.y + product4.y - 1) / 2},
+                  ${product4.x-50} ${product4.y-120}`
       :
       isSmallScreen ?
         (screenWidth < 1000 ?
@@ -210,19 +224,19 @@ const OurProducts = () => {
                   ${product4.x} ${product4.y + 50}`;
 
     const s3 = screenWidth >= 1900 ?
-      `C ${product4.x + 90} ${product4.y - 140},
-                  ${product5.x + 0} ${product5.y - 2},
-                  ${product5.x - 10} ${product5.y}`
+      `C ${product4.x + 0} ${product4.y -140},
+                  ${product5.x + 0} ${product4.y - 50},
+                  ${product5.x - 20} ${product4.y-100}`
       :
       is200Scale ?
-        `C ${product4.x - 100} ${product4.y + 820},
-                  ${product5.x + 100} ${product5.y - 60},
+        `C ${product4.x - 100} ${product4.y + 720},
+                  ${product5.x +100} ${product5.y -320},
                   ${product5.x + 20} ${product5.y + 700}`
         :
         isSmallScreen ?
           `C ${product4.x - 100} ${product4.y - 50},
                   ${product5.x + 100} ${product5.y - 250},
-                  ${product5.x + 20} ${product5.y + 0}`
+                  ${product5.x + 20} ${product5.y +-10}`
           :
           isMediumScreen ?
             `C ${product4.x} ${product4.y + 550},
@@ -235,9 +249,9 @@ const OurProducts = () => {
 
 
     const s4 = screenWidth >= 1900
-      ? `C ${product4.x - 910} ${product5.y + 40},
-       ${product4.x - 760} ${product5.y + 100},
-       ${product4.x - 770} ${product5.y + 100}`
+      ? `C ${product4.x - 900} ${product5.y-70},
+       ${product4.x -900} ${product5.y -100},
+       ${product4.x - 880} ${product5.y - 180}`
       : isMediumScreen
         ? `C ${product5.x - 310} ${product5.y + 240},
        ${product5.x-100} ${product5.y + 300},
