@@ -151,7 +151,7 @@ const OurProducts = () => {
     product4: { x: containerWidth * 0.7, y: 650 },
     product5: { x: containerWidth *  0.4, y: 800 },
   } :       (screenWidth >1900) ?{
-    product1: { x: containerWidth * 0.2, y: 180 },
+    product1: { x: containerWidth * 0.21, y: 160 },
     product2: { x: containerWidth * 0.8, y: 179 },
     coco: { x: centerX, y: 300 },
     product3: { x: containerWidth * 0.28, y: 0 },
@@ -159,7 +159,7 @@ const OurProducts = () => {
     product5: { x: containerWidth *  0.4, y: 1050 },
   }
 :{
-    product1: { x: containerWidth * 0.2, y: 180 },
+    product1: { x: containerWidth * 0.18, y: 160 },
     product2: { x: containerWidth * 0.8, y: 179 },
     coco: { x: centerX, y: 300 },
     product3: { x: containerWidth * 0.28, y: 0 },
@@ -224,9 +224,9 @@ const OurProducts = () => {
                   ${product4.x} ${product4.y + 50}`;
 
     const s3 = screenWidth >= 1900 ?
-      `C ${product4.x + 0} ${product4.y -140},
+      `C ${product4.x -10} ${product4.y -140},
                   ${product5.x + 0} ${product4.y - 50},
-                  ${product5.x - 20} ${product4.y-100}`
+                  ${product5.x - 50} ${product4.y-90}`
       :
       is200Scale ?
         `C ${product4.x - 100} ${product4.y + 720},
@@ -245,22 +245,24 @@ const OurProducts = () => {
             :
             `C ${product4.x - 60} ${product4.y +100},
                   ${product5.x-20} ${product5.y - 170},
-                  ${product5.x - 170} ${product5.y - 30}`;
+                  ${product5.x - 320} ${product5.y +30}`;
 
 
     const s4 = screenWidth >= 1900
-      ? `C ${product4.x - 900} ${product5.y-70},
-       ${product4.x -900} ${product5.y -100},
+      ? `C ${product4.x - 690} ${product4.y-100},
+       ${product4.x -800} ${product4.y -100},
        ${product4.x - 880} ${product5.y - 180}`
       : isMediumScreen
         ? `C ${product5.x - 310} ${product5.y + 240},
        ${product5.x-100} ${product5.y + 300},
        ${product5.x-300 } ${product5.y + 200}`
-        : isSmallScreen?`C ${product5.x - 310} ${product5.y + 240},
+        : isSmallScreen?
+        `C ${product5.x - 310} ${product5.y + 240},
        ${product5.x-100} ${product5.y + 300},
-       ${product5.x-300 } ${product5.y + 200}`:``;
+       ${product5.x-300 } ${product5.y + 200}`
+       :``;
 
-
+        console.log(`${s1} ${s2} ${s3} ${s4}`)
     return `${s1} ${s2} ${s3} ${s4}`;
 
   };
@@ -371,7 +373,7 @@ const OurProducts = () => {
           //background: "#fff",
           // overflow: "hidden",
           padding: isMobile ? "2rem 1rem" : "2rem 0 13rem",
-          minHeight: "240vh",
+          minHeight: "120vh",
           display: isMobile ? 'flex' : 'block',
           flexDirection: 'column',
           alignItems: 'center'
