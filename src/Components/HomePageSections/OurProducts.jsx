@@ -129,12 +129,12 @@ const OurProducts = () => {
     product5: { x: centerX, y: 1150 },
     product1: { x: centerX, y: 1400 }, // Bottom
   } : {
-    product1: { x: containerWidth * 0.21, y: 158 },
-    product2: { x: containerWidth * 0.83, y: 279 },
+    product1: { x: containerWidth * 0.18, y: 180 },
+    product2: { x: containerWidth * 0.85, y: 179 },
     coco: { x: centerX, y: 400 },
-    product3: { x: containerWidth * 0.18, y: 790 },
-    product4: { x: containerWidth * 0.75, y: 756 },
-    product5: { x: containerWidth * (is200Scale ? 0.12 : 0.4), y: 806 },
+    product3: { x: containerWidth * 0.28, y: 1000 },
+    product4: { x: containerWidth * 0.85, y: 850 },
+    product5: { x: containerWidth * (is200Scale ? 0.12 : 0.3), y: 1100 },
   };
 
   const createTopCurve = () => {
@@ -169,9 +169,9 @@ const OurProducts = () => {
                    ${coco.x} ${coco.y + 200}`
         :
         `M ${product1.x} ${product1.y}
-                 C ${product1.x} ${coco.y - 200},
-                   ${coco.x - 80} ${coco.y - 40},
-                   ${coco.x} ${coco.y}`;
+                 C ${product1.x} ${coco.y + 200},
+                   ${coco.x+10} ${coco.y +40},
+                   ${coco.x+10} ${coco.y+120}`;
 
     const s2 = screenWidth >= 1900 ?
       `C ${coco.x + 80} ${coco.y + 40},
@@ -209,21 +209,21 @@ const OurProducts = () => {
                   ${product5.x + 20} ${product5.y + 0}`
           :
           isMediumScreen ?
-            `C ${product4.x - 100} ${product4.y - 120},
-                  ${product5.x + 100} ${product5.y - 300},
-                  ${product5.x - 20} ${product5.y - 20}`
+            `C ${product4.x } ${product4.y + 550},
+                  ${product5.x + 100} ${product5.y-50 },
+                  ${product5.x - 140} ${product5.y + 120}`
             :
             `C ${product4.x - 100} ${product4.y - 100},
                   ${product5.x + 20} ${product5.y - 350},
-                  ${product5.x - 120} ${product5.y - 20}`;
+                  ${product5.x - 20} ${product5.y - 20}`;
 
 
     const s4 = screenWidth >= 1900 ?
       `${product4.x - 910} ${product5.y + 40},
                   ${product4.x - 760} ${product5.y + 100},
                   ${product4.x - 770} ${product5.y + 100}`
-      :
-      ``;
+      :isMediumScreen?`${product4.x - 770} ${product5.y + 100}`:
+      ``
 
     return `${s1} ${s2} ${s3} ${s4}`;
 
