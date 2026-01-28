@@ -135,7 +135,7 @@ const OurProducts = () => {
     product3: { x: containerWidth * 0.28, y: 1000 },
     product4: { x: containerWidth * 0.85, y: 850 },
     product5: { x: containerWidth * (is200Scale ? 0.12 : 0.3), y: 1100 },
-  }:
+  }:isMediumScreen?
   {
     product1: { x: containerWidth * 0.15, y: 170 },
     product2: { x: containerWidth * 0.9, y: 179 },
@@ -143,6 +143,14 @@ const OurProducts = () => {
     product3: { x: containerWidth * 0.28, y: 1000 },
     product4: { x: containerWidth * 0.85, y: 850 },
     product5: { x: containerWidth * (is200Scale ? 0.12 : 0.3), y: 1100 },
+  }:
+  {
+    product1: { x: containerWidth * 0.2, y: 180 },
+    product2: { x: containerWidth * 0.8, y: 179 },
+    coco: { x: centerX, y: 300 },
+    product3: { x: containerWidth * 0.28, y: 0 },
+    product4: { x: containerWidth * 0.7, y: 650 },
+    product5: { x: containerWidth *  0.4, y: 800 },
   }
 
   const createTopCurve = () => {
