@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import AuthModal from './AuthModal';
-import {FiLogIn} from "react-icons/fi";
-import {MdOutlinePersonAddAlt1} from "react-icons/md";
+import { FiLogIn } from "react-icons/fi";
+import { MdOutlinePersonAddAlt1 } from "react-icons/md";
 
 const HeroSection = ({ data }) => {
   const [modalType, setModalType] = useState(null);
@@ -25,7 +25,7 @@ const HeroSection = ({ data }) => {
   };
 
   if (!data) return null;
-  const { mainHeading, mainSubHeading, mainDescription, mainButtonData } = data;
+  const { mainHeading, mainSubHeading, mainDescription, mainButtonData, mainLogo, mainCoco } = data;
 
   return (
     <section className="py-6 xxs:py-8 sm:py-10 2xl:pb-20 bg-kelloggs-red text-center relative overflow-hidden min-h-[60vh] sm:min-h-[70vh] lg:min-h-[80vh] flex flex-col items-center">
@@ -40,12 +40,12 @@ const HeroSection = ({ data }) => {
         <div className="lg:col-span-2 flex justify-center lg:justify-start w-full min-w-0">
           <div className="relative w-48 h-48 sm:w-56 sm:h-56 lg:w-48 lg:h-48 xl:w-64 xl:h-64 2xl:w-80 2xl:h-80 transition-transform hover:scale-105 duration-300">
             <img
-              src="https://res.cloudinary.com/dogdsavuf/image/upload/v1767182080/large_Kellogg_s_superstars_red_1_78e77d51bc.png"
+              src={mainLogo.url}
               alt="Kelloggs Superstars Club Logo"
               className="w-full h-full object-contain drop-shadow-2xl"
             />
             <img
-              src="https://res.cloudinary.com/dogdsavuf/image/upload/v1767182080/large_Kellogg_s_superstars_red_1_78e77d51bc.png"
+              src={mainLogo.url}
               alt=""
               className="absolute inset-0 w-full h-full object-contain pointer-events-none"
               style={{
@@ -131,9 +131,9 @@ const HeroSection = ({ data }) => {
           {/* Background Glow */}
 
           <img
-            src="https://static.wixstatic.com/media/2bc50d_b973282d09b64a5887aab8ba319849af~mv2.png/v1/fill/w_355,h_530,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/cocoo.png"
+            src={mainCoco?.url}
             alt="Coco Monkey"
-           className="
+            className="
   block
   w-[clamp(28vh,44vh,60vh)]
   max-w-none
