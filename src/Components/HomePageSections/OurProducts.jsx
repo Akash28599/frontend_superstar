@@ -221,9 +221,9 @@ const OurProducts = () => {
                   ${product5.x + 100} ${product5.y - 50},
                   ${product5.x - 140} ${product5.y + 120}`
             :
-            `C ${product4.x - 60} ${product4.y - 100},
-                  ${product5.x + 30} ${product5.y - 120},
-                  ${product5.x - 170} ${product5.y - 50}`;
+            `C ${product4.x - 60} ${product4.y +100},
+                  ${product5.x-20} ${product5.y - 170},
+                  ${product5.x - 170} ${product5.y - 30}`;
 
 
     const s4 = screenWidth >= 1900
