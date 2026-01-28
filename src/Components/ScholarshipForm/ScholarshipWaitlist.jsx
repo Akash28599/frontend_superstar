@@ -1,26 +1,26 @@
-import "./ScholarshipWishlist.css";
+import "./ScholarshipWaitlist.css";
 
-const ScholarshipWishlist = ({ groupKellogs }) => {
+const ScholarshipWaitlist = ({data }) => {
     return (
         <section style={{
-            backgroundImage: "url('/assetss/cloud.png')"
+            backgroundImage: `url('${data?.waitlistBackground.url}')`
         }}>
             <div className="sub-stars">
-                <img src="/assetss/stars.png" alt="stars decoration" />
+                <img src={data?.waitlistImage.url} alt="stars decoration" />
             </div>
             <div className="sub-container">
                 <div className="sub-content">
                     <div className="sub-form">
-                        <h1>Join the Wishlist</h1>
+                        <h1>{data?.waitlistTitle}</h1>
 
                         <input type="text" placeholder="Name" />
                         <input type="text" placeholder="Contact Number" />
                         <input type="email" placeholder="Email" />
                         <div className="sub-submit-btn">
                             <button className="sub-submit">
-                                Submit
+                                {data?.waitlistButtonText}
                             </button>
-                            <div><img src={groupKellogs?.url} alt="group" /></div>
+                            <div><img src={data?.groupKellogs?.url} alt="group" /></div>
 
                         </div>
                     </div>
@@ -33,4 +33,4 @@ const ScholarshipWishlist = ({ groupKellogs }) => {
     );
 };
 
-export default ScholarshipWishlist;
+export default ScholarshipWaitlist;
